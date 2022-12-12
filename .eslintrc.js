@@ -24,6 +24,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    'no-unused-vars': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
@@ -40,6 +41,7 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
+        useTabs: false,
         jsxSingleQuote: true,
         singleQuote: true,
         endOfLine: 'auto',
