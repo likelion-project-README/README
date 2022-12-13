@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './Comment.Style';
 
 const Comment = () => {
@@ -15,14 +15,15 @@ const Comment = () => {
         <S.CommentInp
           type='text'
           placeholder='댓글을 입력해 주세요.'
-          onChange={handleChange}
+          // onChange={handleChange}
           required
         />
-        {InpValue.length > 0 ? (
+        {/* {InpValue.length > 0 ? (
           <S.PostBtn color='var(--main-color)'>게시</S.PostBtn>
         ) : (
           <S.PostBtn>게시</S.PostBtn>
-        )}
+        )} */}
+        <S.PostBtn>게시</S.PostBtn>
       </S.CommentForm>
     </S.CommentCont>
   );
