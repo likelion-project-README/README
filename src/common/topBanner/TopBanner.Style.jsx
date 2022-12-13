@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import imgSprite from '../assets/css_sprites.png';
+import imgSprite from '../../assets/css_sprites.png';
 
 const BannerCont = styled.div`
   width: 390px;
