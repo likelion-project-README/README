@@ -11,17 +11,17 @@ export const CommentForm = styled.form`
   padding: 13px 16px 12px 16px;
 `;
 
-export const UserImg = styled.img`
-  background-image: url('https://images.unsplash.com/photo-1606425271394-c3ca9aa1fc06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
+export const UserImg = styled.img.attrs({
+  alt: '유저 프로필 이미지',
+  src: 'https://images.unsplash.com/photo-1606425271394-c3ca9aa1fc06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
+})`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-size: contain;
+  object-fit: cover;
 `;
 
-export const CommentInp = styled.input.attrs({
-  placeholderTextColor: '#c4c4c4',
-})`
+export const CommentInp = styled.input`
   width: 260px;
   height: 18px;
   margin-left: 18px;
@@ -29,6 +29,9 @@ export const CommentInp = styled.input.attrs({
   color: var(--main-text-color);
   border: none;
   text-overflow: ellipsis;
+  &::placeholder {
+    color: #c4c4c4;
+  }
 `;
 
 export const PostBtn = styled.button`
