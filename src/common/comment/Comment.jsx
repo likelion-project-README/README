@@ -13,7 +13,6 @@ const Comment = () => {
       <S.CommentForm>
         <S.UserImg />
         <S.CommentInp
-          type='text'
           placeholder='댓글을 입력해 주세요.'
           // onChange={handleChange}
           required
