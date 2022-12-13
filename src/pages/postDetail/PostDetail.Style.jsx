@@ -1,13 +1,31 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
-export const PostDetail = styled.div`
+export const PostDetail = styled.section`
   width: 390px;
+  max-height: calc(100vh - 61px);
+  overflow-y: scroll;
+`;
+
+export const PostDetailTit = styled.h2`
+  /* ir */
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+`;
+
+export const TopBannerCont = styled.div`
+  position: fixed;
+  top: 0;
+  border-bottom: 1px solid #dbdbdb;
 `;
 
 export const PostCont = styled.div`
-  padding: 20px 16px 24px;
-  border-top: 1px solid #dbdbdb;
+  margin-top: 48px;
+  padding: 20px 16px 42px;
   border-bottom: 1px solid #dbdbdb;
   overflow: hidden;
 `;
@@ -16,10 +34,7 @@ export const CommentUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 236px;
-  padding: 20px 16px 0 16px;
-  border-bottom: 1px solid #dbdbdb;
-  overflow-y: scroll;
+  padding: 20px 16px;
 `;
 
 export const CommentUserInfo = styled.div`
@@ -68,4 +83,11 @@ export const CommentContents = styled.div`
   font-size: 14px;
   line-height: 17px;
   color: var(--main-text-color);
+`;
+
+export const CommentInpWrapper = styled.div`
+  position: fixed;
+  bottom: 0px;
+  border-top: 1px solid #dbdbdb;
+  background-color: white;
 `;

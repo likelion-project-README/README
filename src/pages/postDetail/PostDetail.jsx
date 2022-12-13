@@ -7,7 +7,10 @@ import * as S from './PostDetail.Style';
 const PostDetail = () => {
   return (
     <S.PostDetail>
-      <TopBanner type='top-basic-nav' />
+      <S.PostDetailTit>게시글 상세 페이지</S.PostDetailTit>
+      <S.TopBannerCont>
+        <TopBanner type='top-basic-nav' />
+      </S.TopBannerCont>
       <S.PostCont>
         <PostUserInfo />
         <PostContents />
@@ -30,7 +33,9 @@ const PostDetail = () => {
           <S.CommentContents>게시글 답글 ~~ !! 최고최고</S.CommentContents>
         </li>
       </S.CommentUl>
-      <Comment />
+      <S.CommentInpWrapper>
+        <Comment />
+      </S.CommentInpWrapper>
     </S.PostDetail>
   );
 };
