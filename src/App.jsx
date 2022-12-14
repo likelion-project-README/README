@@ -1,7 +1,6 @@
-import EmailLoginPage from './pages/emailLogin/EmailLogin';
 
 const App = () => {
-  return <EmailLoginPage />;
+  return <div></div>;
 };
 
 export default App;
