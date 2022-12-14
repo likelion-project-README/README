@@ -1,16 +1,33 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
-export const PostUpload = styled.div`
+export const PostUpload = styled.section`
   width: 390px;
-  height: 820px;
+  max-height: 100vh;
+  overflow-y: scroll;
+`;
+
+export const PostUploadTit = styled.h2`
+  /* ir */
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+`;
+
+export const TopBannerCont = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 10;
 `;
 
 export const UploadCont = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px 16px 0;
-  border-top: 1px solid #dbdbdb;
+  margin-top: 48px;
+  padding: 20px 16px;
 `;
 
 export const UserProfileImg = styled.img`
@@ -43,7 +60,7 @@ export const UploadedImgCont = styled.div`
   position: relative;
   width: 304px;
   height: 228px;
-  border: 0.5px solid #dbdbdb;
+  border: 0.5px solid var(--sub2-text-color);
   border-radius: 10px;
   overflow: hidden;
 `;

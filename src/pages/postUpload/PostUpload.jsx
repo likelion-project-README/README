@@ -11,7 +11,10 @@ const PostUpload = () => {
 
   return (
     <S.PostUpload>
-      <TopBanner type='top-upload-nav' />
+      <S.PostUploadTit>게시글 업로드 페이지</S.PostUploadTit>
+      <S.TopBannerCont>
+        <TopBanner type='top-upload-nav' />
+      </S.TopBannerCont>
       <S.UploadCont>
         <S.UserProfileImg
           src='https://cdn.pixabay.com/photo/2022/12/02/14/13/desert-7630943__340.jpg'
