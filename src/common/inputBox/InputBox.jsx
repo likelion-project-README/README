@@ -1,11 +1,11 @@
 import React from 'react';
-import * as S from './inputBox.Style';
+import * as S from './InputBox.Style';
 
-const InputBox = ({ label, placeholder }) => {
+const InputBox = ({ label, placeholder, id }) => {
   return (
     <S.Box>
-      <S.BoxTit>{label}</S.BoxTit>
-      <S.BoxInp placeholder={placeholder} />
+      <S.BoxTit htmlFor={id}>{label}</S.BoxTit>
+      <S.BoxInp id={id} placeholder={placeholder} />
     </S.Box>
   );
 };
