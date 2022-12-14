@@ -42,7 +42,7 @@ const TopBanner = ({ type, tit }) => {
   if (type === 'top-main-nav') {
     return (
       <S.BannerCont>
-        <S.TitleDiv>{tit}</S.TitleDiv>
+        <S.TitleDiv fontSize='18px'>{tit}</S.TitleDiv>
         <S.SearchBtn />
       </S.BannerCont>
     );
@@ -59,7 +59,7 @@ const TopBanner = ({ type, tit }) => {
     return (
       <S.BannerCont>
         <S.BackBtn />
-        <S.TitleDiv>{tit}</S.TitleDiv>
+        <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
         <S.MoreBtn />
       </S.BannerCont>
     );
