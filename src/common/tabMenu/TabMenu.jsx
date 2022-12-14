@@ -21,23 +21,23 @@ const TabMenu = () => {
     <S.TabMenuCont>
       <S.TabMenuUl>
         <S.TabMenuLi>
-          {/* <S.IconImg position='-89.5px -117.5px' /> */}
-          <S.IconImg backgroundPosition={position[0]} />
+          <S.IconImg backgroundPosition='-89.5px -117.5px' />
+          {/* <S.IconImg backgroundPosition={position[0]} /> */}
           <S.IconTit>홈</S.IconTit>
         </S.TabMenuLi>
         <S.TabMenuLi>
-          {/* <S.IconImg position='-2.5px -88.5px' /> */}
-          <S.IconImg backgroundPosition={position[1]} />
+          <S.IconImg backgroundPosition='-2.5px -88.5px' />
+          {/* <S.IconImg backgroundPosition={position[1]} /> */}
           <S.IconTit>채팅</S.IconTit>
         </S.TabMenuLi>
         <S.TabMenuLi>
-          {/* <S.IconImg position='-60.5px -117.5px' /> */}
-          <S.IconImg backgroundPosition={position[2]} />
+          <S.IconImg backgroundPosition='-60.5px -117.5px' />
+          {/* <S.IconImg backgroundPosition={position[2]} /> */}
           <S.IconTit>게시물 작성</S.IconTit>
         </S.TabMenuLi>
         <S.TabMenuLi>
-          {/* <S.IconImg position='-89.5px -88.5px' /> */}
-          <S.IconImg backgroundPosition={position[3]} />
+          <S.IconImg backgroundPosition='-89.5px -88.5px' />
+          {/* <S.IconImg backgroundPosition={position[3]} /> */}
           <S.IconTit>프로필</S.IconTit>
         </S.TabMenuLi>
       </S.TabMenuUl>

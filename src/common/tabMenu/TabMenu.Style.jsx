@@ -4,6 +4,7 @@ import sprite from '../../assets/css_sprites.png';
 export const TabMenuCont = styled.div`
   width: 390px;
   height: 60px;
+  border-top: 0.5px solid var(--sub2-text-color);
 `;
 
 export const TabMenuUl = styled.ul`

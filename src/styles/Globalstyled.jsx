@@ -30,6 +30,7 @@ const GlobalStyled = createGlobalStyle`
     --main-disabled-color: #D7CBBD;
     --main-text-color : #333333;
     --sub-text-color : #767676;
+    --sub2-text-color : #dbdbdb;
   }
 
   *{
