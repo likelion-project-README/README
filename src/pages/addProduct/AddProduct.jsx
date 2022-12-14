@@ -1,5 +1,6 @@
 import React from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
+import InputBox from '../../common/inputBox/InputBox';
 import * as S from './AddProduct.Style';
 
 const AddProduct = () => {
@@ -16,27 +17,21 @@ const AddProduct = () => {
           <S.ImgUploadLab htmlFor='productImg' />
           <S.ImgUploadInp type='file' id='productImg' />
         </S.ImgWrap>
-        <S.InputBox>
-          <S.InputBoxTit htmlFor='productName'>상품명</S.InputBoxTit>
-          <S.InputBoxInp
-            placeholder='2~15자 이내여야 합니다.'
-            id='productName'
-            minLength='2'
-            maxLength='15'
-          />
-        </S.InputBox>
-        <S.InputBox>
-          <S.InputBoxTit htmlFor='productPrice'>가격</S.InputBoxTit>
-          <S.InputBoxInp
-            placeholder='숫자만 입력 가능합니다.'
-            id='productPrice'
-            type='number'
-          />
-        </S.InputBox>
-        <S.InputBox>
-          <S.InputBoxTit htmlFor='productURL'>판매 링크</S.InputBoxTit>
-          <S.InputBoxInp placeholder='URL을 입력해 주세요.' id='productURL' />
-        </S.InputBox>
+        <InputBox
+          label='상품명'
+          id='productName'
+          placeholder='2~15자 이내여야 합니다.'
+        />
+        <InputBox
+          label='가격'
+          id='productPrice'
+          placeholder='숫자만 입력 가능합니다.'
+        />
+        <InputBox
+          label='판매 링크'
+          id='productURL'
+          placeholder='URL을 입력해 주세요.'
+        />
       </form>
     </S.AddProductWrap>
   );
