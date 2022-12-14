@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const UserBannerWrapper = styled.article`
+export const UserBannerWrapper = styled.div`
   max-width: 358px;
-  position: relative;
   display: flex;
-  background-color: #fff;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const UserImg = styled.img`
@@ -15,35 +15,23 @@ export const UserImg = styled.img`
 `;
 
 export const UserInfo = styled.div`
-  height: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding: 5px 0;
   margin-left: 12px;
+  margin-right: auto;
+  gap: 6px;
 `;
 
 export const UserNickName = styled.p`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  margin-bottom: 6px;
-  color: #000000;
+  color: #000;
 `;
 
 export const UserId = styled.p`
   font-size: 12px;
   line-height: 15px;
   color: var(--sub-text-color);
-`;
-
-export const FollowBtn = styled.button`
-  width: 56px;
-  height: 28px;
-  margin-top: 11px;
-  margin-left: auto;
-  background-color: var(--main-color);
-  border-radius: 30px;
-  font-size: 12px;
-  color: #fff;
-  cursor: pointer;
 `;
