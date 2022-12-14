@@ -1,14 +1,14 @@
 import React from 'react';
-import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
-import * as S from './ProfileEdit.Style';
+import Button from '../../common/button/Button';
+import * as S from './ProfileSetting.Style';
 
-const ProfileEdit = () => {
+const ProfileSetting = () => {
   return (
-    <S.ProfileEditWrap>
-      <S.ProfileEditTit>프로필 수정 페이지</S.ProfileEditTit>
-      {/* 업로드 -> 저장으로 텍스트 바꿔야함 */}
-      <TopBanner type='top-upload-nav' />
+    <S.ProfileSettingWrap>
+      <S.ProfileSettingTit>프로필 설정 페이지</S.ProfileSettingTit>
+      <S.Title>프로필 설정</S.Title>
+      <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
       <form>
         <S.ImgWrap>
           <S.UserImg />
@@ -20,8 +20,6 @@ const ProfileEdit = () => {
           label='사용자 이름'
           id='userName'
           placeholder='2~10자 이내여야 합니다.'
-          min='2'
-          max='10'
         />
         <InputBox
           label='계정 ID'
@@ -34,8 +32,11 @@ const ProfileEdit = () => {
           placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
         />
       </form>
-    </S.ProfileEditWrap>
+      <S.BtnWrap>
+        <Button size='lg' tit='README 시작하기' state='disabled' />
+      </S.BtnWrap>
+    </S.ProfileSettingWrap>
   );
 };
 
-export default ProfileEdit;
+export default ProfileSetting;

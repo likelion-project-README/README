@@ -21,6 +21,8 @@ const ProductEdit = () => {
           label='상품명'
           id='productName'
           placeholder='2~15자 이내여야 합니다.'
+          min='2'
+          max='15'
         />
         <InputBox
           label='가격'

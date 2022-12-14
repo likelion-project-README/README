@@ -7,7 +7,7 @@ import * as S from './FollowingList.Style';
 const FollowingList = () => {
   return (
     <S.FollowingListWrap>
-      <S.FollowingListTit>팔로워 리스트 페이지</S.FollowingListTit>
+      <S.FollowingListTit>팔로잉 리스트 페이지</S.FollowingListTit>
       <TopBanner type='top-chat-nav' tit='Followings' />
       <S.ListCont>
         <S.List>
