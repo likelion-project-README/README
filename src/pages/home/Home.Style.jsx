@@ -44,16 +44,6 @@ export const SearchTxt = styled.p`
   color: var(--sub-text-color);
 `;
 
-export const SearchBtn = styled.button`
-  padding: 13px 34px;
-  border-radius: 44px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  color: #ffffff;
-  background-color: var(--main-color);
-`;
-
 export const FeedPage = styled.div`
   margin-top: 48px;
 `;
