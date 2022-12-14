@@ -1,6 +1,7 @@
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
 import Post from '../../common/post/Post';
+import Button from '../../common/button/Button';
 import * as S from './Home.Style';
 
 const Home = () => {
@@ -15,11 +16,11 @@ const Home = () => {
         <div>
           <S.LogoImg src='' alt='' />
           <S.SearchTxt>유저를 검색해 팔로우 해보세요!</S.SearchTxt>
-          <S.SearchBtn type='button'>검색하기</S.SearchBtn>
+          <Button tit='검색하기' state='active' />
         </div>
       </S.NoPostsPage>
-      {/* 게시글이 있을 경우 보여지는 페이지입니다
-      <S.FeedPage>
+      {/* 게시글이 있을 경우 보여지는 페이지입니다 */}
+      {/* <S.FeedPage>
         <S.PostsCont>
           <Post />
         </S.PostsCont>
