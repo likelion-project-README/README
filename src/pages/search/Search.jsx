@@ -1,5 +1,6 @@
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
+import UserBanner from '../../common/userBanner/UserBanner';
 import * as S from './Search.Style';
 
 const Search = () => {
@@ -10,13 +11,9 @@ const Search = () => {
         <TopBanner type='top-search-nav' />
       </S.TopBannerCont>
       <S.SearchedUserUl>
-        <S.SearchedUserLi>
-          <S.UserProfileImg src='' alt='' />
-          <div>
-            <S.UserName>유저이름</S.UserName>
-            <S.AccountName>계정명</S.AccountName>
-          </div>
-        </S.SearchedUserLi>
+        <li>
+          <UserBanner state='btn-disabled' />
+        </li>
       </S.SearchedUserUl>
       <S.TabMenuCont>
         <TabMenu />

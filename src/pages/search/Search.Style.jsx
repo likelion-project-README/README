@@ -29,35 +29,6 @@ export const SearchedUserUl = styled.ul`
   padding: 20px 16px;
 `;
 
-export const SearchedUserLi = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-`;
-
-export const UserProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 0.5px solid var(--sub2-text-color);
-`;
-
-export const UserName = styled.strong`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-text-color);
-`;
-
-export const AccountName = styled.p`
-  margin-top: 6px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: var(--sub-text-color);
-`;
-
 export const TabMenuCont = styled.div`
   position: fixed;
   bottom: 0px;
