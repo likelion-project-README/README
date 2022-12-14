@@ -7,20 +7,22 @@ const BannerCont = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 0.5px solid #dbdbdb;
+  padding: 0 16px;
 `;
 const BackBtn = styled.button`
   width: 22px;
   height: 22px;
   background: url(${imgSprite}) no-repeat -158px -59px / 183px 144px;
-  margin: 13px 0px 13px 16px;
+  margin: 13px 10px 13px 0px;
   cursor: pointer;
 `;
 const MoreBtn = styled.button`
   width: 24px;
   height: 24px;
   background: url(${imgSprite}) no-repeat -31px -117px / 183px 144px;
-  margin: 12px;
+  margin: 0px;
   cursor: pointer;
 `;
 
@@ -31,7 +33,7 @@ const SearchInp = styled.input.attrs({
   width: 316px;
   height: 32px;
   border-radius: 32px;
-  margin: 8px 16px;
+  margin: 8px 0px;
   border: none;
   background-color: var(--main-disabled-color);
   opacity: 0.4;
@@ -43,7 +45,7 @@ const SearchBtn = styled.button`
   width: 24px;
   height: 24px;
   background: url(${imgSprite}) no-repeat -60px -88px / 183px 144px;
-  margin: 12px 16px;
+  margin: 12px 0px;
 `;
 
 const SaveBtn = styled.button`
@@ -52,7 +54,7 @@ const SaveBtn = styled.button`
   height: 32px;
   color: white;
   border-radius: 1rem;
-  margin: 8px 16px;
+  margin: 8px 0px;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
@@ -66,7 +68,7 @@ const TitleDiv = styled.div`
   color: var(--main-text-color);
   font-weight: 700;
   line-height: 16px;
-  margin: 15px auto 15px 10px;
+  margin: 15px auto 15px 0px;
 `;
 
 export {

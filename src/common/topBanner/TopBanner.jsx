@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../button/Button';
 import * as S from './TopBanner.Style';
 
 /*
@@ -51,7 +52,7 @@ const TopBanner = ({ type, tit }) => {
     return (
       <S.BannerCont>
         <S.BackBtn />
-        <S.SaveBtn>업로드</S.SaveBtn>
+        <Button size='sm' state='active' tit='업로드' />
       </S.BannerCont>
     );
   }
