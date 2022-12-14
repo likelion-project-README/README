@@ -1,5 +1,7 @@
+import SnsLogin from './pages/snsLogin/SnsLogin';
+
 const App = () => {
-  return <div></div>;
+  return <SnsLogin />;
 };
 
 export default App;
