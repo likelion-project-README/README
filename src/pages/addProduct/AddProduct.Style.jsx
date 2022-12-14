@@ -3,6 +3,7 @@ import sprite from '../../assets/css_sprites.png';
 
 export const AddProductWrap = styled.section`
   width: 390px;
+  height: 820px;
 `;
 
 export const AddProductTit = styled.h2`
@@ -62,32 +63,4 @@ export const ImgUploadInp = styled.input`
   width: 1px;
   height: 1px;
   overflow: hidden;
-`;
-
-export const InputBox = styled.div`
-  width: 322px;
-  height: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0 34px 16px 34px;
-`;
-
-export const InputBoxTit = styled.label`
-  margin-left: 2px;
-  font-weight: 500;
-  font-size: 12px;
-  color: var(--sub-text-color);
-`;
-
-export const InputBoxInp = styled.input`
-  font-size: 14px;
-  color: var(--main-text-color);
-  padding-bottom: 8px;
-  border: none;
-  border-bottom: 1px solid #dbdbdb;
-  text-overflow: ellipsis;
-  &::placeholder {
-    color: #dbdbdb;
-  }
 `;
