@@ -20,13 +20,12 @@ export const PostDetailTit = styled.h2`
 export const TopBannerCont = styled.div`
   position: fixed;
   top: 0;
-  border-bottom: 1px solid #dbdbdb;
 `;
 
 export const PostCont = styled.div`
   margin-top: 48px;
   padding: 20px 16px 42px;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid var(--sub2-text-color);
   overflow: hidden;
 `;
 
@@ -88,6 +87,6 @@ export const CommentContents = styled.div`
 export const CommentInpWrapper = styled.div`
   position: fixed;
   bottom: 0px;
-  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--sub2-text-color);
   background-color: white;
 `;
