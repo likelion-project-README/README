@@ -12,49 +12,49 @@ const FollowingList = () => {
       <S.ListCont>
         <S.List>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
           <li>
-            <UserBanner />
+            <UserBanner state='btn-active' />
           </li>
         </S.List>
       </S.ListCont>
