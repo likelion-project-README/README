@@ -7,6 +7,7 @@ const BannerCont = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+  border-bottom: 0.5px solid #dbdbdb;
 `;
 const BackBtn = styled.button`
   width: 22px;
@@ -58,12 +59,13 @@ const SaveBtn = styled.button`
 `;
 
 const TitleDiv = styled.div`
+  font-family: 'Pretendard-Medium';
   width: auto;
   height: 18px;
-  font-size: 14px;
+  font-size: ${(props) => props.fontSize};
   color: var(--main-text-color);
-  font-weight: 500;
-  line-height: 18px;
+  font-weight: 700;
+  line-height: 16px;
   margin: 15px auto 15px 10px;
 `;
 
