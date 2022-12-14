@@ -3,6 +3,7 @@ import sprite from '../../assets/css_sprites.png';
 
 export const ProfileEditWrap = styled.section`
   width: 390px;
+  height: 820px;
 `;
 
 export const ProfileEditTit = styled.h2`
