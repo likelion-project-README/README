@@ -19,8 +19,8 @@ export const BoxTit = styled.label`
 export const BoxInp = styled.input`
   font-size: 14px;
   color: var(--main-text-color);
-  padding-bottom: 8px;
   border: none;
+  padding-bottom: 8px;
   border-bottom: 1px solid #dbdbdb;
   text-overflow: ellipsis;
   &::placeholder {
