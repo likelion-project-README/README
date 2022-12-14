@@ -1,7 +1,7 @@
-import SnsLogin from './pages/snsLogin/SnsLogin';
+import EmailLoginPage from './pages/emailLogin/EmailLogin';
 
 const App = () => {
-  return <SnsLogin />;
+  return <EmailLoginPage />;
 };
 
 export default App;
