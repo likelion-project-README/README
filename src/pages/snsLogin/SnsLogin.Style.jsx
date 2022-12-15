@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from './READMEWHITE.svg';
+import logo from '../../assets/logo-profile.svg';
 import sprite from '../../assets/css_sprites.png';
 
 export const SnsLoginSec = styled.section`
@@ -12,8 +12,8 @@ export const SnsLoginSec = styled.section`
 `;
 
 export const LogoImg = styled.img`
-  width: 246px;
-  height: 188px;
+  width: 218px;
+  height: 275px;
   position: fixed;
   margin-bottom: 94px;
   background: url(${logo}) no-repeat;
