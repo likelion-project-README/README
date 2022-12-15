@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import logo from '../../assets/logo-profile-splash.svg';
+import logo from '../../assets/logo-splash.svg';
 
 const fadeInOut = keyframes`
   0% {

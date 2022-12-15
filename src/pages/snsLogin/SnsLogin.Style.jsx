@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../../assets/logo-profile.svg';
+import logo from '../../assets/logo-login.svg';
 import sprite from '../../assets/css_sprites.png';
 
 export const SnsLoginSec = styled.section`
