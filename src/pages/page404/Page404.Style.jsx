@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo-404.svg';
 
 export const PageWrap = styled.section`
   width: 390px;
