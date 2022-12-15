@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
+// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 export const ChatRoom = styled.section`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   width: 390px;
-  min-height: calc(100vh - 61px);
-  overflow-y: scroll;
+  height: 820px;
+  /* min-height: calc(100vh - 61px);
+  overflow-y: scroll; */
   background-color: #f2f2f2;
 `;
 
@@ -29,8 +32,13 @@ export const TopBannerCont = styled.div`
 export const ChatCont = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: end;
   gap: 10px;
-  max-height: calc(100vh - 110px);
+  height: 820px;
+  margin-top: 48px;
+  margin-bottom: 61px;
+  /* max-height: calc(100vh - 110px); */
+  /* overflow-y: scroll; */
   padding: 20px 16px;
 `;
 
@@ -101,7 +109,8 @@ export const CreatedTime = styled.p`
 `;
 
 export const ChatForm = styled.form`
-  position: fixed;
+  position: absolute;
+  /* position: fixed; */
   bottom: 0;
   display: flex;
   align-items: center;
