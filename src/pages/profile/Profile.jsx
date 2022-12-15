@@ -2,6 +2,7 @@ import TopBanner from '../../common/topBanner/TopBanner';
 import Product from '../../common/product/Product';
 import Post from '../../common/post/Post';
 import Button from '../../common/button/Button';
+import TabMenu from '../../common/tabMenu/TabMenu';
 import * as S from './Profile.Style';
 
 const YourProfile = () => {
@@ -88,7 +89,9 @@ const YourProfile = () => {
           </S.ListWrap>
         )}
       </S.PostsDiv>
-      <S.FooterWrap>여기들어갈겨 탭메뉴</S.FooterWrap>
+      <S.FooterWrap>
+        <TabMenu />
+      </S.FooterWrap>
     </S.ProfileWrap>
   );
 };

@@ -5,10 +5,14 @@ import sprite from '../../assets/css_sprites.png';
 // 전체 프로필 페이지 wrapper
 export const ProfileWrap = styled.div`
   width: 390px;
-  height: auto;
+  height: 820px;
   display: flex;
   flex-direction: column;
   background-color: #d4d4d4;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 // 프로필 페이지 프로필 부분
@@ -149,6 +153,7 @@ export const PostsDiv = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
+  padding-bottom: 60px;
 `;
 
 export const ProductSpan = styled.span`
@@ -201,6 +206,7 @@ export const ListWrap = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
   padding: 16px;
+  padding-bottom: 76px;
 `;
 
 export const PostImg = styled.a.attrs({})`
@@ -223,8 +229,9 @@ export const PostImg = styled.a.attrs({})`
 `;
 
 export const FooterWrap = styled.div`
+  background-color: white;
+  position: fixed;
   width: 390px;
   height: 60px;
-  background-color: pink;
-  top: 100%;
+  top: 760px;
 `;
