@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import profileImg from '../../assets/basic-profile-img.png';
+import profileImg from '../../assets/logo-profile.svg';
 import sprite from '../../assets/css_sprites.png';
 
 // 전체 프로필 페이지 wrapper
