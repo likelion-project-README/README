@@ -12,19 +12,19 @@ const Home = () => {
         <TopBanner type='top-main-nav' tit='READEME' />
       </S.TopBannerCont>
       {/* 게시글 혹은 팔로잉이 없을 경우 보여지는 페이지입니다 */}
-      <S.NoPostsPage>
+      {/* <S.NoPostsPage>
         <div>
           <S.LogoImg src='' alt='' />
           <S.SearchTxt>유저를 검색해 팔로우 해보세요!</S.SearchTxt>
           <Button tit='검색하기' state='active' />
         </div>
-      </S.NoPostsPage>
+      </S.NoPostsPage> */}
       {/* 게시글이 있을 경우 보여지는 페이지입니다 */}
-      {/* <S.FeedPage>
-        <S.PostsCont>
+      <S.FeedPage>
+        <S.PostsContUl>
           <Post />
-        </S.PostsCont>
-      </S.FeedPage> */}
+        </S.PostsContUl>
+      </S.FeedPage>
       <S.TabMenuCont>
         <TabMenu />
       </S.TabMenuCont>

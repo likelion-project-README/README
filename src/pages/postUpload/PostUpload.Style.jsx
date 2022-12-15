@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
+// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 export const PostUpload = styled.section`
+  position: relative;
   width: 390px;
   max-height: 100vh;
+  /* height: 820px; */
   overflow-y: scroll;
 `;
 
@@ -83,6 +86,7 @@ export const DeleteImgBtn = styled.button`
 export const AddFileLab = styled.label`
   display: block;
   position: fixed;
+  /* position: absolute; */
   left: 324px;
   bottom: 30px;
   width: 36px;
