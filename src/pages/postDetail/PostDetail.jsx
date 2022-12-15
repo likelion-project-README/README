@@ -1,6 +1,5 @@
 import TopBanner from '../../common/topBanner/TopBanner';
-import PostUserInfo from '../../common/post/postUserInfo/PostUserInfo';
-import PostContents from '../../common/post/postContents/PostContents';
+import Post from '../../common/post/Post';
 import Comment from '../../common/comment/Comment';
 import * as S from './PostDetail.Style';
 
@@ -13,8 +12,7 @@ const PostDetail = () => {
       </S.TopBannerCont>
       <S.ScrollWrapper>
         <S.PostCont>
-          <PostUserInfo />
-          <PostContents />
+          <Post />
         </S.PostCont>
         <S.CommentUl>
           <li>
