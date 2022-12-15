@@ -42,7 +42,7 @@ export const KakaoBtn = styled.button`
   line-height: 18px;
 `;
 
-export const KakaoImg = styled.image`
+export const KakaoImg = styled.img`
   position: absolute;
   top: 10px;
   left: 14px;
@@ -64,7 +64,7 @@ export const GoogleBtn = styled.button`
   line-height: 18px;
 `;
 
-export const GoogleImg = styled.image`
+export const GoogleImg = styled.img`
   position: absolute;
   top: 10px;
   left: 14px;
@@ -85,7 +85,7 @@ export const FacebookBtn = styled.button`
   line-height: 18px;
 `;
 
-export const FacebookImg = styled.image`
+export const FacebookImg = styled.img`
   position: absolute;
   top: 10px;
   left: 14px;
