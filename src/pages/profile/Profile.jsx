@@ -9,7 +9,7 @@ const YourProfile = () => {
   const type = 'top-basic-nav';
   const tit = '프로필';
   // postType = 'list' ,'album'
-  const postType = 'album';
+  const postType = 'list';
   const isMine = true;
 
   // 판매중인 상품 보유 여부
