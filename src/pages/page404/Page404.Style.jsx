@@ -5,6 +5,7 @@ export const PageWrap = styled.section`
   width: 390px;
   height: 820px;
   text-align: center;
+  background-color: var(--main-color);
 `;
 
 export const PageTit = styled.h2`
@@ -20,9 +21,9 @@ export const PageTit = styled.h2`
 export const LogoImg = styled.div`
   display: inline-block;
   background: url(${logo});
-  width: 196px;
-  height: 171px;
-  margin: 212px 0 15px 0;
+  width: 202px;
+  height: 187px;
+  margin: 212px 0 20px 0;
 `;
 
 export const Message = styled.p`
