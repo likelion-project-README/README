@@ -8,7 +8,7 @@ const Page404 = () => {
       <S.PageTit>404 페이지</S.PageTit>
       <S.LogoImg />
       <S.Message>페이지를 찾을 수 없습니다. :(</S.Message>
-      <Button tit='이전 페이지' state='active' />
+      <Button tit='이전 페이지' txtcolor='black' />
     </S.PageWrap>
   );
 };
