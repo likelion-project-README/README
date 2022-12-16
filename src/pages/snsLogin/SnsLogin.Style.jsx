@@ -7,32 +7,28 @@ export const SnsLoginSec = styled.section`
   height: 820px;
   background-color: var(--main-color);
   display: flex;
-  align-items: center;
   justify-content: center;
 `;
 
-export const LogoImg = styled.img`
+export const LogoImg = styled.div`
   width: 218px;
   height: 275px;
   position: fixed;
-  margin-bottom: 94px;
-  background: url(${logo}) no-repeat;
+  margin-top: 176px;
+  background: url(${logo});
 `;
 
 export const SnsLoginWrapper = styled.div`
-  width: 390px;
   height: 319px;
   display: flex;
   flex-direction: column;
   margin-top: 526px;
   border-radius: 20px;
   background-color: #fff;
-  z-index: 10px;
 `;
 
 export const KakaoBtn = styled.button`
   margin: 50px 34px 0;
-  width: 322px;
   height: 44px;
   position: relative;
   border: #f2c94c solid 1px;
@@ -42,7 +38,7 @@ export const KakaoBtn = styled.button`
   line-height: 18px;
 `;
 
-export const KakaoImg = styled.img`
+export const KakaoImg = styled.div`
   position: absolute;
   top: 10px;
   left: 14px;
@@ -53,10 +49,8 @@ export const KakaoImg = styled.img`
 
 export const GoogleBtn = styled.button`
   margin: 10px 34px 0;
-  width: 322px;
   height: 44px;
   position: relative;
-  align-items: center;
   border: var(--sub-text-color) solid 1px;
   border-radius: 44px;
   color: var(--sub-text-color);
@@ -64,7 +58,7 @@ export const GoogleBtn = styled.button`
   line-height: 18px;
 `;
 
-export const GoogleImg = styled.img`
+export const GoogleImg = styled.div`
   position: absolute;
   top: 10px;
   left: 14px;
@@ -85,7 +79,7 @@ export const FacebookBtn = styled.button`
   line-height: 18px;
 `;
 
-export const FacebookImg = styled.img`
+export const FacebookImg = styled.div`
   position: absolute;
   top: 10px;
   left: 14px;
