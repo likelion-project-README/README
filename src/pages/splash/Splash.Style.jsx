@@ -15,17 +15,15 @@ const fadeInOut = keyframes`
 export const SplashPageWrapper = styled.section`
   width: 390px;
   height: 820px;
-  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const LogoImg = styled.img`
-  width: 196px;
-  height: 216px;
-  border: 0;
-  align-items: center;
-  background: url(${logo}) no-repeat;
+export const LogoImg = styled.div`
+  display: inline-block;
+  background: url(${logo});
+  width: 218px;
+  height: 275px;
   animation: ${fadeInOut} 0.5s linear forwards;
 `;
