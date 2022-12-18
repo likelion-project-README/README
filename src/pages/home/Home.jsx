@@ -3,6 +3,7 @@ import TabMenu from '../../common/tabMenu/TabMenu';
 import Post from '../../common/post/Post';
 import Button from '../../common/button/Button';
 import * as S from './Home.Style';
+import UserBanner from '../../common/userBanner/UserBanner';
 
 const Home = () => {
   return (
