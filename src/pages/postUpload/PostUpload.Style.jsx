@@ -80,7 +80,7 @@ export const DeleteImgBtn = styled.button`
   right: 6px;
   width: 22px;
   height: 22px;
-  background: url(${sprite}) -158.5px -2.5px / 183px 144px;
+  background: url(${sprite}) -122px -48px / 146px 132px;
 `;
 
 export const AddFileLab = styled.label`
@@ -91,6 +91,6 @@ export const AddFileLab = styled.label`
   bottom: 30px;
   width: 36px;
   height: 36px;
-  background: url(${sprite}) -2px -1.9px / 130.7px 103.8px;
+  background: url(${sprite}) -36px -0px / 146px 132px;
   cursor: pointer;
 `;

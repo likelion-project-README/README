@@ -19,19 +19,13 @@ export const HomeTit = styled.h2`
   overflow: hidden;
 `;
 
-export const TopBannerCont = styled.div`
-  position: fixed;
-  top: 0;
-`;
-
 export const NoPostsPage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  height: 820px;
+  height: 760px;
   /* min-height: calc(100vh - 110px); */
-  margin-top: 48px;
 `;
 
 export const LogoImg = styled.img`
@@ -49,8 +43,7 @@ export const SearchTxt = styled.p`
 `;
 
 export const FeedPage = styled.div`
-  margin-top: 48px;
-  height: 820px;
+  height: 760px;
   overflow-y: scroll;
 `;
 

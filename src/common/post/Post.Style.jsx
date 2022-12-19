@@ -35,7 +35,7 @@ export const MoreBtn = styled.button`
   height: 18px;
   margin-top: 4px;
   margin-left: auto;
-  background: url(${sprite}) no-repeat -118.5px -117.5px / 183px 144px;
+  background: url(${sprite}) no-repeat -102px -110px / 146px 132px;
 `;
 
 export const PostContents = styled.div`
@@ -69,13 +69,13 @@ export const ActionBtns = styled.div`
 export const LikeBtn = styled.button`
   width: 20px;
   height: 20px;
-  background: url(${sprite}) no-repeat -98.5px -62.5px / 183px 144px;
+  background: url(${sprite}) no-repeat -22px -110px / 146px 132px;
 `;
 
 export const CommentBtn = styled.button`
   width: 20px;
   height: 20px;
-  background: url(${sprite}) no-repeat -158.5px -86px / 183px 144px;
+  background: url(${sprite}) no-repeat -62px -110px / 146px 132px;
 `;
 
 export const CountNum = styled.span`
