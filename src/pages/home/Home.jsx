@@ -9,15 +9,13 @@ const Home = () => {
   return (
     <S.Home>
       <S.HomeTit>리드미 피드</S.HomeTit>
-      <S.TopBannerCont>
-        <TopBanner type='top-main-nav' tit='READEME' />
-      </S.TopBannerCont>
+      <TopBanner type='top-main-nav' tit='READEME' />
       {/* 게시글 혹은 팔로잉이 없을 경우 보여지는 페이지입니다 */}
       {/* <S.NoPostsPage>
         <div>
           <S.LogoImg src='' alt='' />
           <S.SearchTxt>유저를 검색해 팔로우 해보세요!</S.SearchTxt>
-          <Button tit='검색하기' state='active' />
+          <Button tit='검색하기' isActive />
         </div>
       </S.NoPostsPage> */}
       {/* 게시글이 있을 경우 보여지는 페이지입니다 */}

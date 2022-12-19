@@ -116,15 +116,15 @@ export const ChatForm = styled.form`
   align-items: center;
   gap: 18px;
   width: 390px;
-  padding: 13px 16px 12px;
-  border-top: 0.5 solid var(--sub2-text-color);
+  padding: 12px 16px;
+  border-top: 0.5px solid var(--sub2-text-color);
   background-color: #ffffff;
 `;
 
 export const FileInpLab = styled.label`
   width: 36px;
   height: 36px;
-  background: url(${sprite}) -57.5px -2.5px / 183px 144px;
+  background: url(${sprite}) -36px -0px / 146px 132px;
   cursor: pointer;
 `;
 
