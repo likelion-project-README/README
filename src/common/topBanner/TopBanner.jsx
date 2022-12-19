@@ -1,7 +1,6 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import * as S from './TopBanner.Style';
-
 /*
 TopBanner 사용 명세
 TopBanner(type, tit) 
@@ -21,13 +20,25 @@ type 종류 (피그마 이름 기준)
 import { useHistory } from "react-router-dom";
 onClick={() => history.goBack() } 이용
 
+
+postModal 먼저 작성 후, 아래 조건문 작성
+
+MoreBtn의 경우 4가지 type이 존재
+프로필, 게시글, 댓글, 채팅방
+componentType = prifle, post, comment, chatRoom
+
  */
 
-const TopBanner = ({ type, tit }) => {
+const TopBanner = ({ type, tit, componentType }) => {
+  const navigate = useNavigate();
   if (type === 'top-basic-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <S.MoreBtn />
       </S.BannerCont>
     );
@@ -35,7 +46,11 @@ const TopBanner = ({ type, tit }) => {
   if (type === 'top-search-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <S.SearchInp />
       </S.BannerCont>
     );
@@ -44,14 +59,18 @@ const TopBanner = ({ type, tit }) => {
     return (
       <S.BannerCont>
         <S.TitleDiv fontSize='18px'>{tit}</S.TitleDiv>
-        <S.SearchBtn />
+        <S.SearchBtn to='/search' />
       </S.BannerCont>
     );
   }
   if (type === 'top-upload-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <Button size='sm' state='active' tit='업로드' />
       </S.BannerCont>
     );
@@ -59,7 +78,11 @@ const TopBanner = ({ type, tit }) => {
   if (type === 'top-chat-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
         <S.MoreBtn />
       </S.BannerCont>

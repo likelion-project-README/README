@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import imgSprite from '../../assets/css_sprites.png';
 
 const BannerCont = styled.div`
@@ -41,7 +42,7 @@ const SearchInp = styled.input.attrs({
   font-size: 14px;
 `;
 
-const SearchBtn = styled.button`
+const SearchBtn = styled(Link)`
   width: 24px;
   height: 24px;
   background: url(${imgSprite}) no-repeat -60px -88px / 183px 144px;
