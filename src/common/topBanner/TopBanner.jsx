@@ -26,9 +26,18 @@ componentType = profile, post, comment, chatRoom
 
  */
 
-const TopBanner = ({ type, tit, componentType, isActive }) => {
+const TopBanner = ({
+  type,
+  tit,
+  componentType,
+  isActive,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
   const navigate = useNavigate();
-  const testHandle = () => {};
+  const testHandle = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   if (type === 'top-basic-nav') {
     return (
       <S.BannerCont>

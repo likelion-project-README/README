@@ -1,11 +1,21 @@
 import styled from 'styled-components';
 
 export const ModalWrap = styled.div`
+  position: relative;
   background-color: white;
   display: flex;
   flex-direction: column;
   width: 390px;
-  border-radius: 10px;
+`;
+export const ModalOverlay = styled.div`
+  position: absolute;
+  width: 390px;
+  background-color: white;
+  bottom: 0;
+  z-index: 10;
+  box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
 export const ModalCancleBtn = styled.div`
   width: 50px;
