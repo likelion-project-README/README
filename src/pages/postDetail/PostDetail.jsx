@@ -11,16 +11,12 @@ const PostDetail = () => {
   return (
     <S.PostDetail>
       <S.PostDetailTit>게시글 상세 페이지</S.PostDetailTit>
-
-      <S.TopBannerCont>
-        <TopBanner
-          type='top-basic-nav'
-          tit='프로필'
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
-      </S.TopBannerCont>
-
+      <TopBanner
+        type='top-basic-nav'
+        tit='프로필'
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
       <S.ScrollWrapper>
         <S.PostCont>
           <Post />
