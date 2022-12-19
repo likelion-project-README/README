@@ -1,13 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
+import PostModal from '../../common/postModal/PostModal';
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
 import * as S from './ChatList.Style';
 
 const ChatList = () => {
+  // 모달창 상태값 + 모달타입 상태값
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
   return (
     <S.ChatListWrap>
       <S.ChatListTit>채팅 리스트 페이지</S.ChatListTit>
-      <TopBanner type='top-basic-nav' />
+      <TopBanner
+        type='top-basic-nav'
+        tit='프로필'
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        setModalType={setModalType}
+      />
       <S.ListCont>
         <S.List>
           <S.ChatWrap>
@@ -46,6 +56,9 @@ const ChatList = () => {
       </S.ListCont>
       <S.TabMenuWrap>
         <TabMenu />
+        {isModalOpen ? (
+          <PostModal modalType={modalType} setIsModalOpen={setIsModalOpen} />
+        ) : null}
       </S.TabMenuWrap>
     </S.ChatListWrap>
   );

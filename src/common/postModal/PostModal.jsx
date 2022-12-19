@@ -66,12 +66,14 @@ const PostModal = ({ modalType, setIsModalOpen }) => {
     );
   }
   if (modalType === 'chatRoom') {
-    <S.ModalWrap>
-      <S.ModalOverlay>
-        <S.ModalCancleBtn />
-        <S.ModalTxt>채팅방 나가기</S.ModalTxt>
-      </S.ModalOverlay>
-    </S.ModalWrap>;
+    return (
+      <S.ModalWrap>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>채팅방 나가기</S.ModalTxt>
+        </S.ModalOverlay>
+      </S.ModalWrap>
+    );
   }
   return <div>오류</div>;
 };
