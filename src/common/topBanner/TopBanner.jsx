@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import * as S from './TopBanner.Style';
@@ -15,22 +16,19 @@ type 종류 (피그마 이름 기준)
 'top-chat-nav'
 
 
-
-*** 이전페이지 돌아가기버튼 (페이지 작성 및 Link 연결 후 추가작성)
-import { useHistory } from "react-router-dom";
-onClick={() => history.goBack() } 이용
-
-
 postModal 먼저 작성 후, 아래 조건문 작성
 
 MoreBtn의 경우 4가지 type이 존재
+MoreBtn 클릭시 PostModal
 프로필, 게시글, 댓글, 채팅방
-componentType = prifle, post, comment, chatRoom
+componentType = profile, post, comment, chatRoom
+
 
  */
 
-const TopBanner = ({ type, tit, componentType }) => {
+const TopBanner = ({ type, tit, componentType, isActive }) => {
   const navigate = useNavigate();
+  const testHandle = () => {};
   if (type === 'top-basic-nav') {
     return (
       <S.BannerCont>
@@ -39,7 +37,7 @@ const TopBanner = ({ type, tit, componentType }) => {
             navigate(-1);
           }}
         />
-        <S.MoreBtn />
+        <S.MoreBtn onClick={testHandle} />
       </S.BannerCont>
     );
   }
@@ -71,7 +69,7 @@ const TopBanner = ({ type, tit, componentType }) => {
             navigate(-1);
           }}
         />
-        <Button size='sm' state='active' tit='업로드' />
+        <Button size='sm' isActive={isActive} tit={tit} />
       </S.BannerCont>
     );
   }

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './InputBox.Style';
 
-const InputBox = ({ label, placeholder, id, type, min, max }) => {
+const InputBox = ({ label, placeholder, id, type, min, max, setInput }) => {
+  const inputHandle = (e) => {
+    setInput(e.target.value);
+  };
+
   return (
     <S.Box>
       <S.BoxTit htmlFor={id}>{label}</S.BoxTit>
@@ -11,6 +15,7 @@ const InputBox = ({ label, placeholder, id, type, min, max }) => {
         type={type}
         minLength={min}
         maxLength={max}
+        onChange={inputHandle}
       />
     </S.Box>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
 import * as S from './PostUpload.Style';
 
@@ -9,11 +9,23 @@ const PostUpload = () => {
     txtRef.current.style.height = `${txtRef.current.scrollHeight}px`;
   }, []);
 
+  const [btnActive, setBtnActive] = useState(false);
+  const [userPost, setUserPost] = useState('');
+  useEffect(() => {
+    if (userPost) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  }, [userPost]);
+  const textHandle = (e) => {
+    setUserPost(e.target.value);
+  };
   return (
     <S.PostUpload>
       <S.PostUploadTit>게시글 업로드 페이지</S.PostUploadTit>
       <S.TopBannerCont>
-        <TopBanner type='top-upload-nav' />
+        <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
       </S.TopBannerCont>
       <form action=''>
         <S.UploadCont>
@@ -26,6 +38,7 @@ const PostUpload = () => {
               placeholder='게시글 입력하기...'
               ref={txtRef}
               onInput={handleResizeTextarea}
+              onChange={textHandle}
             />
             <S.UploadedImgCont>
               <S.UploadedImg
