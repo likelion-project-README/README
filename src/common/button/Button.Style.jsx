@@ -49,10 +49,10 @@ const Btn = styled.button`
   font-size: ${(props) => (props.size === 'xs' ? '12px' : '14px')};
   line-height: ${(props) => (props.size === 'xs' ? '15px' : '18px')};
   background-color: ${(props) => {
-    switch (props.state) {
-      case 'active':
+    switch (props.isActive) {
+      case true:
         return 'var(--main-color)';
-      case 'disabled':
+      case false:
         return 'var(--main-disabled-color)';
       default:
         return '#ffffff';
