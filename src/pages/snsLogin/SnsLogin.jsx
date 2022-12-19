@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import * as S from './SnsLogin.Style';
 
@@ -21,8 +22,12 @@ const SnsLogin = () => {
         </S.FacebookBtn>
         {/* 이메일로그인 회원가입 링크 */}
         <S.LoginLink>
-          <S.Email>이메일로 로그인</S.Email>
-          <S.SignUp>회원가입</S.SignUp>
+          <S.Email>
+            <Link to='/login/emailLogin'>이메일로 로그인</Link>
+          </S.Email>
+          <S.SignUp>
+            <Link to='/signUp'>회원가입</Link>
+          </S.SignUp>
         </S.LoginLink>
       </S.SnsLoginWrapper>
     </S.SnsLoginSec>
