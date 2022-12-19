@@ -11,11 +11,19 @@ import Btn from './Button.Style';
  *
  * txtcolor - black
  *          - 작성하지 않을 경우 기본값인 흰색으로 들어갑니다
+ * isActive - true, false
+ *          - 작성하지 않을 경우 기본값인 흰색으로 들어갑니다
  */
 
-const Button = ({ size, tit, state, txtcolor }) => {
+const Button = ({ size, tit, type, isActive, txtcolor, onClick }) => {
   return (
-    <Btn type='button' state={state} size={size} txtcolor={txtcolor}>
+    <Btn
+      type={type}
+      isActive={isActive}
+      size={size}
+      txtcolor={txtcolor}
+      onClick={onClick}
+    >
       <span>{tit}</span>
     </Btn>
   );
