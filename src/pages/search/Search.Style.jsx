@@ -19,18 +19,11 @@ export const SearchTit = styled.h2`
   overflow: hidden;
 `;
 
-export const TopBannerCont = styled.div`
-  position: fixed;
-  top: 0;
-`;
-
 export const SearchedUserUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 760px;
-  margin-top: 48px;
-  margin-bottom: 60px;
+  height: 712px;
   padding: 20px 16px;
   overflow-y: scroll;
 `;
