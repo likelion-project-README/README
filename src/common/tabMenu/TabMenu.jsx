@@ -1,43 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate, useMatch } from 'react-router-dom';
 import * as S from './TabMenu.Style';
 
 const TabMenu = () => {
-  // atom으로 분리할 것
-  // const [position, setPosition] = useState([
-  //   '-89.5px -117.5px',
-  //   '-2.5px -88.5px',
-  //   '-60.5px -117.5px',
-  //   '-89.5px -88.5px',
-  // ]);
+  const navigate = useNavigate();
 
-  // 테스트용
-  // const handleClick = (index, value) => {
-  //   const copy = [...position];
-  //   copy[index] = value;
-  //   setPosition(copy);
-  // }
+  const home = useMatch('/');
+  const chat = useMatch('/chat');
+  const profile = useMatch('/profile/:id');
 
   return (
     <S.TabMenuCont>
       <S.TabMenuUl>
-        <S.TabMenuLi>
-          <S.IconImg backgroundPosition='-89.5px -117.5px' />
-          {/* <S.IconImg backgroundPosition={position[0]} /> */}
+        <S.TabMenuLi
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          <S.IconImg
+            backgroundPosition={home === null ? '-98px 0px' : '-98px -24px'}
+          />
           <S.IconTit>홈</S.IconTit>
         </S.TabMenuLi>
-        <S.TabMenuLi>
-          <S.IconImg backgroundPosition='-2.5px -88.5px' />
-          {/* <S.IconImg backgroundPosition={position[1]} /> */}
+        <S.TabMenuLi
+          onClick={() => {
+            navigate('/chat');
+          }}
+        >
+          <S.IconImg
+            backgroundPosition={chat === null ? '-24px -86px' : '-98px -48px'}
+          />
           <S.IconTit>채팅</S.IconTit>
         </S.TabMenuLi>
-        <S.TabMenuLi>
-          <S.IconImg backgroundPosition='-60.5px -117.5px' />
-          {/* <S.IconImg backgroundPosition={position[2]} /> */}
+        <S.TabMenuLi
+          onClick={() => {
+            navigate('/post/upload');
+          }}
+        >
+          <S.IconImg backgroundPosition='-24px -62px' />
           <S.IconTit>게시물 작성</S.IconTit>
         </S.TabMenuLi>
-        <S.TabMenuLi>
-          <S.IconImg backgroundPosition='-89.5px -88.5px' />
-          {/* <S.IconImg backgroundPosition={position[3]} /> */}
+        <S.TabMenuLi
+          onClick={() => {
+            navigate('/profile/:id');
+          }}
+        >
+          <S.IconImg
+            backgroundPosition={
+              profile === null ? '-48px -86px' : '-72px -86px'
+            }
+          />
           <S.IconTit>프로필</S.IconTit>
         </S.TabMenuLi>
       </S.TabMenuUl>

@@ -28,6 +28,6 @@ export const LogoImg = styled.div`
 
 export const Message = styled.p`
   font-size: 14px;
-  color: var(--sub-text-color);
+  color: #ffffff;
   margin-bottom: 36px;
 `;

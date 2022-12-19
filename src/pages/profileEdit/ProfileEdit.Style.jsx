@@ -33,11 +33,10 @@ export const ImgUploadBtn = styled.button`
   position: relative;
   top: -40px;
   left: 73px;
-  /* 스프라이트 수정 후 width, height 36px로 고칠 예정 */
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: url(${sprite}) -36px 0px / 146px 132px;
+  background: url(${sprite}) 0px 0px / 146px 132px;
 `;
 
 export const ImgUploadLab = styled.label`
