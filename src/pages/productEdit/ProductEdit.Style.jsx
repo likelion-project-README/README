@@ -45,7 +45,7 @@ export const ImgUploadBtn = styled.button`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: url(${sprite}) -57.5px -2.5px / 183px 144px;
+  background: url(${sprite}) 0px 0px / 146px 132px;
 `;
 
 export const ImgUploadLab = styled.label`

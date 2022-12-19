@@ -12,7 +12,7 @@ const FollowingList = () => {
       <S.ListCont>
         <S.List>
           <li>
-            <UserBanner state='btn-active' />
+            <UserBanner btntxt='btn-follow' />
           </li>
           <li>
             <UserBanner state='btn-active' />

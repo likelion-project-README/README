@@ -20,15 +20,8 @@ export const PostDetailTit = styled.h2`
   overflow: hidden;
 `;
 
-export const TopBannerCont = styled.div`
-  position: fixed;
-  top: 0;
-`;
-
 export const ScrollWrapper = styled.div`
   height: 760px;
-  margin-top: 48px;
-  margin-bottom: 60px;
   overflow-y: scroll;
 `;
 
@@ -43,6 +36,7 @@ export const CommentUl = styled.ul`
   flex-direction: column;
   gap: 16px;
   padding: 20px 16px;
+  margin-bottom: 60px;
 `;
 
 export const CommentUserInfo = styled.div`
@@ -82,7 +76,7 @@ export const MoreBtn = styled.button`
   width: 24px;
   height: 24px;
   margin-left: auto;
-  background: url(${sprite}) -31.5px -117.5px / 183px 144px;
+  background: url(${sprite}) -48px -62px / 146px 132px;
 `;
 
 export const CommentContents = styled.div`

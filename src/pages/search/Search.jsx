@@ -7,9 +7,7 @@ const Search = () => {
   return (
     <S.Search>
       <S.SearchTit>사용자 검색 페이지</S.SearchTit>
-      <S.TopBannerCont>
-        <TopBanner type='top-search-nav' />
-      </S.TopBannerCont>
+      <TopBanner type='top-search-nav' />
       <S.SearchedUserUl>
         <li>
           <UserBanner state='btn-disabled' />

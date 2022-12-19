@@ -33,7 +33,7 @@ const ProfileSetting = () => {
         />
       </form>
       <S.BtnWrap>
-        <Button size='lg' tit='README 시작하기' state='disabled' />
+        <Button size='lg' tit='README 시작하기' isActive={false} />
       </S.BtnWrap>
     </S.ProfileSettingWrap>
   );

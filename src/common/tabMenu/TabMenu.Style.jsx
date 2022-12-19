@@ -28,7 +28,7 @@ export const TabMenuLi = styled.li`
 export const IconImg = styled.div`
   width: 24px;
   height: 24px;
-  background: url(${sprite}) ${(p) => p.backgroundPosition} / 183px 144px;
+  background: url(${sprite}) ${(p) => p.backgroundPosition} / 146px 132px;
 `;
 
 export const IconTit = styled.span`
