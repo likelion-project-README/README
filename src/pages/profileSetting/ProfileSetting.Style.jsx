@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
+import logoProfile from '../../assets/logo-profile.svg';
 
 export const ProfileSettingWrap = styled.section`
   width: 390px;
@@ -34,24 +35,23 @@ export const ImgWrap = styled.div`
   margin: 30px 140px;
 `;
 
-export const UserImg = styled.img`
+export const UserImg = styled.div`
   width: 110px;
   height: 110px;
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
-  background-image: url('https://images.unsplash.com/photo-1606425271394-c3ca9aa1fc06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
-  background-size: contain;
+  background: url(${logoProfile});
+  background-size: 110px 110px;
 `;
 
 export const ImgUploadBtn = styled.button`
   position: relative;
-  top: -53px;
-  left: 70px;
-  /* 스프라이트 수정 후 width, height 36px로 고칠 예정 */
-  width: 50px;
-  height: 50px;
+  top: -40px;
+  left: 73px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: url(${sprite}) -2.5px -2.5px / 183px 144px;
+  background: url(${sprite}) 0px 0px / 146px 132px;
 `;
 
 export const ImgUploadLab = styled.label`

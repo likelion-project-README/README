@@ -31,13 +31,12 @@ export const UserImg = styled.img`
 
 export const ImgUploadBtn = styled.button`
   position: relative;
-  top: -53px;
-  left: 70px;
-  /* 스프라이트 수정 후 width, height 36px로 고칠 예정 */
-  width: 50px;
-  height: 50px;
+  top: -40px;
+  left: 73px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: url(${sprite}) -2.5px -2.5px / 183px 144px;
+  background: url(${sprite}) 0px 0px / 146px 132px;
 `;
 
 export const ImgUploadLab = styled.label`
