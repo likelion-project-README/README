@@ -33,9 +33,11 @@ const TopBanner = ({
   isActive,
   isModalOpen,
   setIsModalOpen,
+  setModalType,
 }) => {
   const navigate = useNavigate();
   const testHandle = () => {
+    setModalType('profile');
     setIsModalOpen(!isModalOpen);
   };
   if (type === 'top-basic-nav') {
