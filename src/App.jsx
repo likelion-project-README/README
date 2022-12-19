@@ -16,58 +16,55 @@ import AddProduct from './pages/addProduct/AddProduct';
 import FollowerList from './pages/followerList/FollowerList';
 import FollowingList from './pages/followingList/FollowingList';
 import ProfileEdit from './pages/profileEdit/ProfileEdit';
-import PostModal from './common/postModal/PostModal';
 
 const App = () => {
   return (
-    <PostModal modalType='profile' />
+    <BrowserRouter>
+      <Routes>
+        {/* 메인페이지  */}
+        <Route path='/' element={<Home />} />
+        {/* 로그인 */}
+        <Route path='/login/*' element={<Outlet />}>
+          <Route path='' element={<SnsLogin />} />
+          <Route path='emailLogin' element={<EmailLogin />} />
+        </Route>
+        {/* 회원가입 */}
+        <Route path='/signUp/*' element={<Outlet />}>
+          <Route path='' element={<JoinPage />} />
+          <Route path='profileSetting' element={<ProfileSetting />} />
+        </Route>
+        {/* 검색 */}
+        <Route path='/search' element={<Search />} />
+        {/* 프로필페이지  */}
+        <Route path='/profile/*' element={<Outlet />}>
+          <Route path=':id' element={<Profile />} />
+          <Route path=':id/editProfile' element={<ProfileEdit />} />
+          <Route path=':id/followings' element={<FollowingList />} />
+          <Route path=':id/followers' element={<FollowerList />} />
+          <Route path=':id/addProduct' element={<AddProduct />} />
+          <Route path=':id/editProduct/:productId' element={<ProductEdit />} />
+          <Route path='*' element={<Page404 />} />
+        </Route>
+        {/* 포스트페이지 */}
+        <Route path='/post/*' element={<Outlet />}>
+          {/*  */}
+          <Route path='upload' element={<PostUpload />} />
+          {/*  */}
+          <Route path=':id' element={<PostDetail />} />
+          {/*  */}
+          <Route path='*' element={<Page404 />} />
+        </Route>
 
-    // <BrowserRouter>
-    //   <Routes>
-    //     {/* 메인페이지  */}
-    //     <Route path='/' element={<Home />} />
-    //     {/* 로그인 */}
-    //     <Route path='/login/*' element={<Outlet />}>
-    //       <Route path='' element={<SnsLogin />} />
-    //       <Route path='emailLogin' element={<EmailLogin />} />
-    //     </Route>
-    //     {/* 회원가입 */}
-    //     <Route path='/signUp/*' element={<Outlet />}>
-    //       <Route path='' element={<JoinPage />} />
-    //       <Route path='profileSetting' element={<ProfileSetting />} />
-    //     </Route>
-    //     {/* 검색 */}
-    //     <Route path='/search' element={<Search />} />
-    //     {/* 프로필페이지  */}
-    //     <Route path='/profile/*' element={<Outlet />}>
-    //       <Route path=':id' element={<Profile />} />
-    //       <Route path=':id/editProfile' element={<ProfileEdit />} />
-    //       <Route path=':id/followings' element={<FollowingList />} />
-    //       <Route path=':id/followers' element={<FollowerList />} />
-    //       <Route path=':id/addProduct' element={<AddProduct />} />
-    //       <Route path=':id/editProduct/:productId' element={<ProductEdit />} />
-    //       <Route path='*' element={<Page404 />} />
-    //     </Route>
-    //     {/* 포스트페이지 */}
-    //     <Route path='/post/*' element={<Outlet />}>
-    //       {/*  */}
-    //       <Route path='upload' element={<PostUpload />} />
-    //       {/*  */}
-    //       <Route path=':id' element={<PostDetail />} />
-    //       {/*  */}
-    //       <Route path='*' element={<Page404 />} />
-    //     </Route>
+        {/* 채팅페이지 */}
+        <Route path='/chat' element={<ChatList />} />
 
-    //     {/* 채팅페이지 */}
-    //     <Route path='/chat' element={<ChatList />} />
+        {/* id = 채팅 상대방 아이디 */}
+        <Route path='/chat/:id' element={<ChatRoom />} />
 
-    //     {/* id = 채팅 상대방 아이디 */}
-    //     <Route path='/chat/:id' element={<ChatRoom />} />
-
-    //     {/* 404페이지 */}
-    //     <Route path='/*' element={<Page404 />} />
-    //   </Routes>
-    // </BrowserRouter>
+        {/* 404페이지 */}
+        <Route path='/*' element={<Page404 />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
