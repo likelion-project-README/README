@@ -37,7 +37,12 @@ const TopBanner = ({
 }) => {
   const navigate = useNavigate();
   const testHandle = () => {
-    setModalType('profile');
+    if (type === 'top-basic-nav') {
+      setModalType('profile');
+    }
+    if (type === 'top-chat-nav') {
+      setModalType('chatRoom');
+    }
     setIsModalOpen(!isModalOpen);
   };
   if (type === 'top-basic-nav') {
@@ -93,7 +98,7 @@ const TopBanner = ({
           }}
         />
         <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
-        <S.MoreBtn />
+        <S.MoreBtn onClick={testHandle} />
       </S.BannerCont>
     );
   }
