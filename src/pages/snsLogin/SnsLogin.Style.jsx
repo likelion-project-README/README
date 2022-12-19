@@ -39,12 +39,12 @@ export const KakaoBtn = styled.button`
 `;
 
 export const KakaoImg = styled.div`
+  background: url(${sprite}) no-repeat -96px -86px / 146px 132px;
   position: absolute;
   top: 10px;
   left: 14px;
   width: 24px;
   height: 24px;
-  background: url(${sprite}) -129.5px -31.5px / 183px 144px;
 `;
 
 export const GoogleBtn = styled.button`
@@ -64,7 +64,7 @@ export const GoogleImg = styled.div`
   left: 14px;
   width: 24px;
   height: 24px;
-  background: url(${sprite}) -129.5px -60.5px / 183px 144px;
+  background: url(${sprite}) -122px 0px / 146px 132px;
 `;
 
 export const FacebookBtn = styled.button`
@@ -85,7 +85,7 @@ export const FacebookImg = styled.div`
   left: 14px;
   width: 24px;
   height: 24px;
-  background: url(${sprite}) -2.5px -117.5px / 183px 144px;
+  background: url(${sprite}) -122px -24px / 146px 132px;
 `;
 
 export const LoginLink = styled.ul`
@@ -106,4 +106,8 @@ export const Email = styled.p`
 
 export const SignUp = styled.p`
   color: var(--sub-text-color);
+`;
+
+const StyledLink = styled.link`
+  text-decoration: none;
 `;
