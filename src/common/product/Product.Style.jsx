@@ -4,6 +4,7 @@ export const ProductWrapper = styled.article`
   width: 140px;
   height: 132px;
   background-color: #fff;
+  cursor: pointer;
 `;
 
 export const ProductImage = styled.div`
