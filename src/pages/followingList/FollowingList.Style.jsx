@@ -18,7 +18,11 @@ export const FollowingListTit = styled.h2`
 
 export const ListCont = styled.div`
   padding: 24px 0;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
   height: 712px;
 `;
 

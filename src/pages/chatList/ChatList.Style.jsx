@@ -18,7 +18,11 @@ export const ChatListTit = styled.h2`
 
 export const ListCont = styled.div`
   padding: 24px 0;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
   height: 712px;
 `;
 
@@ -40,6 +44,14 @@ export const UserImg = styled.img`
   height: 42px;
   border-radius: 50%;
   background-color: #dbdbdb;
+`;
+
+export const UnreadCircle = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  position: absolute;
 `;
 
 export const UserInfo = styled.div`
@@ -76,6 +88,7 @@ export const ChatDate = styled.span`
   align-self: flex-end;
   text-align: right;
   color: var(--sub2-text-color);
+  margin-left: 20px;
 `;
 
 export const TabMenuWrap = styled.div`

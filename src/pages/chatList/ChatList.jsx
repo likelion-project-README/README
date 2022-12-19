@@ -12,6 +12,7 @@ const ChatList = () => {
         <S.List>
           <S.ChatWrap>
             <S.UserImg />
+            <S.UnreadCircle />
             <S.UserInfo>
               <S.UserNickName>숨참고딥다이브</S.UserNickName>
               <S.ChatInfo>
@@ -22,6 +23,7 @@ const ChatList = () => {
           </S.ChatWrap>
           <S.ChatWrap>
             <S.UserImg />
+            <S.UnreadCircle />
             <S.UserInfo>
               <S.UserNickName>꼬부기</S.UserNickName>
               <S.ChatInfo>
