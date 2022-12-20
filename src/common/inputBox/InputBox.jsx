@@ -25,13 +25,11 @@ const InputBox = ({
   bottomColor,
   display,
   message,
-  setInput
+  setInput,
 }) => {
-
-const inputHandle = (e) => {
+  const inputHandle = (e) => {
     setInput(e.target.value);
   };
-  
   return (
     <>
       <S.Box>
