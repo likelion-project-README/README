@@ -4,6 +4,12 @@ import InputBox from '../../common/inputBox/InputBox';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
+  const tokenstr =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTAyMmFmMTdhZTY2NjU4MWM5ZWQ3ZCIsImV4cCI6MTY3NjYyMzMxMywiaWF0IjoxNjcxNDM5MzEzfQ.OX9sGjYFvVza6NkceeVbNsnudli_KopZeAhEkgbtTBM';
+
+  localStorage.setItem('token', tokenstr);
+  const token = localStorage.getItem('token');
+
   return (
     <S.ProfileEditWrap>
       <S.ProfileEditTit>프로필 수정 페이지</S.ProfileEditTit>

@@ -21,9 +21,23 @@ export const BoxInp = styled.input`
   color: var(--main-text-color);
   padding-bottom: 8px;
   border: none;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: ${(p) =>
+    p.bottomColor === 'red'
+      ? '1px solid #EB5757'
+      : '1px solid var(--sub2-text-color)'};
   text-overflow: ellipsis;
   &::placeholder {
     color: #dbdbdb;
   }
+  :focus {
+    outline: none;
+    border-bottom: 1px solid var(--main-color);
+  }
+`;
+
+export const InpMessage = styled.p`
+  font-size: 12px;
+  color: #eb5757;
+  margin: -10px 0 16px 34px;
+  display: ${(p) => (p.display === 'yes' ? 'block' : 'none')};
 `;
