@@ -36,7 +36,8 @@ export const MoreBtn = styled.button`
   height: 18px;
   margin-top: 4px;
   margin-left: auto;
-  background: url(${sprite}) no-repeat -102px -110px / 146px 132px;
+  /* margin-right: 2px; */
+  background: url(${sprite}) no-repeat -104.5px -110px / 146px 132px;
 `;
 
 export const PostContents = styled.div`

@@ -1,10 +1,30 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
+import likeAPI from '../../api/likeAPI';
+import unlikeAPI from '../../api/unlikeAPI';
 import * as S from './Post.Style';
 
 const Post = ({ data }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+  const isMatchProfile = useMatch('/profile/:id');
+
+  const [isHearted, setIsHearted] = useState(data.hearted);
+  const [heartCount, setHeartCount] = useState(data.heartCount);
+
+  const clickToLike = async (e) => {
+    e.stopPropagation();
+    const postData = await likeAPI(data.id, token);
+    setIsHearted(postData.hearted);
+    setHeartCount(postData.heartCount);
+  };
+
+  const clickToUnlike = async (e) => {
+    e.stopPropagation();
+    const postData = await unlikeAPI(data.id, token);
+    setIsHearted(postData.hearted);
+    setHeartCount(postData.heartCount);
+  };
 
   const generateCreatedDate = () => {
     const year = data.updatedAt.split('-')[0];
@@ -14,50 +34,10 @@ const Post = ({ data }) => {
     return `${year}년 ${month}월 ${date}일`;
   };
 
-  const [isHearted, setIsHearted] = useState(data.hearted);
-
-  const toHearted = async (e) => {
-    e.stopPropagation();
-    try {
-      const res = await fetch(
-        `https://mandarin.api.weniv.co.kr/post/${data.id}/heart`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json',
-          },
-        },
-      );
-      const json = await res.json();
-      setIsHearted(json?.post?.hearted);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const toUnhearted = async (e) => {
-    e.stopPropagation();
-    try {
-      const res = await fetch(
-        `https://mandarin.api.weniv.co.kr/post/${data.id}/unheart`,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json',
-          },
-        },
-      );
-      const json = await res.json();
-      setIsHearted(json?.post?.hearted);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const goToPostDetail = () => {
-    navigate(`/post/${data.id}`);
+    if (isMatchProfile) {
+      navigate(`/post/${data.id}`);
+    }
   };
 
   return (
@@ -80,11 +60,11 @@ const Post = ({ data }) => {
             <S.LikeBtn
               type='button'
               isHearted={isHearted}
-              onClick={isHearted ? toUnhearted : toHearted}
+              onClick={isHearted ? clickToUnlike : clickToLike}
             >
               <span className='hidden'>좋아요 버튼</span>
             </S.LikeBtn>
-            <S.CountNum>{isHearted ? '1' : '0'}</S.CountNum>
+            <S.CountNum>{heartCount}</S.CountNum>
           </div>
           <div>
             <S.CommentBtn type='button'>
