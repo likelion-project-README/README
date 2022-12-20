@@ -15,7 +15,7 @@ import Btn from './Button.Style';
  *          - 작성하지 않을 경우 기본값인 흰색으로 들어갑니다
  */
 
-const Button = ({ size, tit, type, isActive, txtcolor, onClick }) => {
+const Button = ({ size, tit, type, isActive, txtcolor, onClick, disabled }) => {
   return (
     <Btn
       type={type}
@@ -23,6 +23,7 @@ const Button = ({ size, tit, type, isActive, txtcolor, onClick }) => {
       size={size}
       txtcolor={txtcolor}
       onClick={onClick}
+      disabled={disabled}
     >
       <span>{tit}</span>
     </Btn>
