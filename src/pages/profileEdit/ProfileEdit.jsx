@@ -4,6 +4,7 @@ import InputBox from '../../common/inputBox/InputBox';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
+
   const [btnActive, setBtnActive] = useState(false);
   const [username, setUsername] = useState('');
   const [userId, setUserId] = useState('');
@@ -15,6 +16,7 @@ const ProfileEdit = () => {
       setBtnActive(false);
     }
   }, [username, userId, userIntro]);
+
   return (
     <S.ProfileEditWrap>
       <S.ProfileEditTit>프로필 수정 페이지</S.ProfileEditTit>
