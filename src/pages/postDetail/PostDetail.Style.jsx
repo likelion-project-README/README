@@ -76,7 +76,7 @@ export const MoreBtn = styled.button`
   width: 24px;
   height: 24px;
   margin-left: auto;
-  background: url(${sprite}) -48px -62px / 146px 132px;
+  background: url(${sprite}) -0px -62px / 146px 132px;
 `;
 
 export const CommentContents = styled.div`
