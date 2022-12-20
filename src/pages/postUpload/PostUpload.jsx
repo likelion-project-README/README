@@ -1,54 +1,81 @@
-import { useCallback, useRef, useState, useEffect } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
+import uploadImgAPI from '../../api/uploadImgAPI';
+import uploadPostAPI from '../../api/uploadPostAPI';
 import * as S from './PostUpload.Style';
 
 const PostUpload = () => {
-  const txtRef = useRef();
-  const handleResizeTextarea = useCallback(() => {
-    txtRef.current.style.height = 'auto';
-    txtRef.current.style.height = `${txtRef.current.scrollHeight}px`;
-  }, []);
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
+  const [imgSrc, setImgSrc] = useState('');
+  const [textareaVal, setTextareaVal] = useState('');
   const [btnActive, setBtnActive] = useState(false);
-  const [userPost, setUserPost] = useState('');
-  useEffect(() => {
-    if (userPost) {
-      setBtnActive(true);
-    } else {
+
+  const testareaRef = useRef();
+  const fileInputRef = useRef();
+
+  const handleChangeTextarea = useCallback(
+    (e) => {
+      testareaRef.current.style.height = 'auto';
+      testareaRef.current.style.height = `${testareaRef.current.scrollHeight}px`;
+      setTextareaVal(e.target.value);
+    },
+    [textareaVal],
+  );
+
+  const activeUploadBtn = () => {
+    return textareaVal || imgSrc ? setBtnActive(true) : setBtnActive(false);
+  };
+
+  const uploadImg = async (e) => {
+    const imgFile = e.target.files[0];
+    const imgUrl = await uploadImgAPI(imgFile);
+    setImgSrc(imgUrl);
+    setBtnActive(true);
+  };
+
+  const deleteImg = () => {
+    setImgSrc(null);
+    fileInputRef.current.value = '';
+    if (!textareaVal) {
       setBtnActive(false);
     }
-  }, [userPost]);
-  const textHandle = (e) => {
-    setUserPost(e.target.value);
   };
+
+  const uploadPost = async (e) => {
+    e.preventDefault();
+    const postId = await uploadPostAPI(token, textareaVal, imgSrc);
+    if (postId) {
+      navigate(`/post/${postId}`, { replace: true });
+    }
+  };
+
   return (
     <S.PostUpload>
       <S.PostUploadTit>게시글 업로드 페이지</S.PostUploadTit>
-      <S.TopBannerCont>
-        <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
-      </S.TopBannerCont>
-      <form action=''>
+      <form onSubmit={uploadPost}>
+        <S.TopBannerCont>
+          <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
+        </S.TopBannerCont>
         <S.UploadCont>
-          <S.UserProfileImg
-            src='https://cdn.pixabay.com/photo/2022/12/02/14/13/desert-7630943__340.jpg'
-            alt=''
-          />
+          <S.UserProfileImg src='' alt='' />
           <S.ContentsArea>
             <S.Textarea
               placeholder='게시글 입력하기...'
-              ref={txtRef}
-              onInput={handleResizeTextarea}
-              onChange={textHandle}
+              ref={testareaRef}
+              onInput={handleChangeTextarea}
+              onKeyUp={activeUploadBtn}
             />
-            <S.UploadedImgCont>
-              <S.UploadedImg
-                src='https://cdn.pixabay.com/photo/2022/12/02/14/13/desert-7630943__340.jpg'
-                alt=''
-              />
-              <S.DeleteImgBtn type='button'>
-                <span className='hidden'>이미지 업로드 취소</span>
-              </S.DeleteImgBtn>
-            </S.UploadedImgCont>
+            {imgSrc && (
+              <S.UploadedImgCont>
+                <S.UploadedImg src={imgSrc} alt='' />
+                <S.DeleteImgBtn type='button' onClick={deleteImg}>
+                  <span className='hidden'>이미지 업로드 취소</span>
+                </S.DeleteImgBtn>
+              </S.UploadedImgCont>
+            )}
           </S.ContentsArea>
         </S.UploadCont>
         <S.AddFileLab htmlFor='uploadImg'>
@@ -57,6 +84,8 @@ const PostUpload = () => {
             id='uploadImg'
             accept='image/*'
             className='hidden'
+            ref={fileInputRef}
+            onChange={uploadImg}
           />
         </S.AddFileLab>
       </form>
