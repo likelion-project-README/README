@@ -21,6 +21,16 @@ export const UserImg = styled.img.attrs({
   object-fit: cover;
 `;
 
+export const CommentLab = styled.label`
+  /* ir */
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+`;
+
 export const CommentInp = styled.input`
   width: 260px;
   height: 18px;
