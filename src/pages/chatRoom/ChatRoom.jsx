@@ -1,12 +1,23 @@
+import { useState } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
+import PostModal from '../../common/postModal/PostModal';
 import * as S from './ChatRoom.Style';
 
 const ChatRoom = () => {
+  // 모달창 상태값 + 모달타입 상태값
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
   return (
     <S.ChatRoom>
       <S.ChatRoomTit>채팅방 페이지</S.ChatRoomTit>
       <S.TopBannerCont>
-        <TopBanner type='top-chat-nav' tit='서귀포 책벌레' />
+        <TopBanner
+          type='top-chat-nav'
+          tit='서귀포 책벌레'
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          setModalType={setModalType}
+        />
       </S.TopBannerCont>
       <S.ChatCont>
         {/* 상대 메세지 - 텍스트 */}
@@ -51,8 +62,11 @@ const ChatRoom = () => {
         <S.TxtInp type='text' placeholder='메시지 입력하기...' id='txtInp' />
         <S.SubmitBtn type='button'>전송</S.SubmitBtn>
       </S.ChatForm>
+      {isModalOpen ? (
+        <PostModal modalType={modalType} setIsModalOpen={setIsModalOpen} />
+      ) : null}
     </S.ChatRoom>
-    // 아래에 모달이 들어갑니다(채팅방 나가기)
+    // 아래에 모달이 들어갑니다(채팅방 나가기) r감사합니다
   );
 };
 

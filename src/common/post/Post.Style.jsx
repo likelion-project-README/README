@@ -4,6 +4,7 @@ import sprite from '../../assets/css_sprites.png';
 export const UserInfo = styled.div`
   display: flex;
   margin-bottom: 11px;
+  cursor: pointer;
 `;
 
 export const ProfileImg = styled.img`
@@ -44,6 +45,7 @@ export const PostContents = styled.div`
   gap: 16px;
   width: 304px;
   float: right;
+  cursor: pointer;
 `;
 
 export const PostTxt = styled.p`
@@ -69,7 +71,10 @@ export const ActionBtns = styled.div`
 export const LikeBtn = styled.button`
   width: 20px;
   height: 20px;
-  background: url(${sprite}) no-repeat -22px -110px / 146px 132px;
+  background: ${(props) =>
+    props.isHearted
+      ? `url(${sprite}) no-repeat -42px -110px / 146px 132px`
+      : `url(${sprite}) no-repeat -22px -110px / 146px 132px`};
 `;
 
 export const CommentBtn = styled.button`

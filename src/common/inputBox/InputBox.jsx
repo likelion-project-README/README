@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './InputBox.Style';
 
 /* InputBox 사용 명세
@@ -25,7 +25,13 @@ const InputBox = ({
   bottomColor,
   display,
   message,
+  setInput
 }) => {
+
+const inputHandle = (e) => {
+    setInput(e.target.value);
+  };
+  
   return (
     <>
       <S.Box>
@@ -37,6 +43,7 @@ const InputBox = ({
           minLength={min}
           maxLength={max}
           bottomColor={bottomColor}
+          onChange={inputHandle}
         />
       </S.Box>
       <S.InpMessage display={display}>{message}</S.InpMessage>

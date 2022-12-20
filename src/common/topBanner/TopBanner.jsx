@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import * as S from './TopBanner.Style';
-
 /*
 TopBanner 사용 명세
 TopBanner(type, tit) 
@@ -16,26 +16,55 @@ type 종류 (피그마 이름 기준)
 'top-chat-nav'
 
 
+postModal 먼저 작성 후, 아래 조건문 작성
 
-*** 이전페이지 돌아가기버튼 (페이지 작성 및 Link 연결 후 추가작성)
-import { useHistory } from "react-router-dom";
-onClick={() => history.goBack() } 이용
+MoreBtn의 경우 4가지 type이 존재
+MoreBtn 클릭시 PostModal
+프로필, 게시글, 댓글, 채팅방
+componentType = profile, post, comment, chatRoom
+
 
  */
 
-const TopBanner = ({ type, tit }) => {
+const TopBanner = ({
+  type,
+  tit,
+  componentType,
+  isActive,
+  isModalOpen,
+  setIsModalOpen,
+  setModalType,
+}) => {
+  const navigate = useNavigate();
+  const testHandle = () => {
+    if (type === 'top-basic-nav') {
+      setModalType('profile');
+    }
+    if (type === 'top-chat-nav') {
+      setModalType('chatRoom');
+    }
+    setIsModalOpen(!isModalOpen);
+  };
   if (type === 'top-basic-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
-        <S.MoreBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+        <S.MoreBtn onClick={testHandle} />
       </S.BannerCont>
     );
   }
   if (type === 'top-search-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <S.SearchInp />
       </S.BannerCont>
     );
@@ -44,24 +73,32 @@ const TopBanner = ({ type, tit }) => {
     return (
       <S.BannerCont>
         <S.TitleDiv fontSize='18px'>{tit}</S.TitleDiv>
-        <S.SearchBtn />
+        <S.SearchBtn to='/search' />
       </S.BannerCont>
     );
   }
   if (type === 'top-upload-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
-        <Button size='sm' state='active' tit='업로드' />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+        <Button size='sm' isActive={isActive} tit={tit} />
       </S.BannerCont>
     );
   }
   if (type === 'top-chat-nav') {
     return (
       <S.BannerCont>
-        <S.BackBtn />
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
         <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
-        <S.MoreBtn />
+        <S.MoreBtn onClick={testHandle} />
       </S.BannerCont>
     );
   }

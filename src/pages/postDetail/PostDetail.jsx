@@ -1,13 +1,22 @@
+import { useState } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
 import Post from '../../common/post/Post';
 import Comment from '../../common/comment/Comment';
+import PostModal from '../../common/postModal/PostModal';
 import * as S from './PostDetail.Style';
 
 const PostDetail = () => {
+  // 모달창 상태값
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <S.PostDetail>
       <S.PostDetailTit>게시글 상세 페이지</S.PostDetailTit>
-      <TopBanner type='top-basic-nav' />
+      <TopBanner
+        type='top-basic-nav'
+        tit='프로필'
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
       <S.ScrollWrapper>
         <S.PostCont>
           <Post />
@@ -33,6 +42,9 @@ const PostDetail = () => {
       </S.ScrollWrapper>
       <S.CommentInpWrapper>
         <Comment />
+        {isModalOpen ? (
+          <PostModal modalType='profile' setIsModalOpen={setIsModalOpen} />
+        ) : null}
       </S.CommentInpWrapper>
     </S.PostDetail>
   );

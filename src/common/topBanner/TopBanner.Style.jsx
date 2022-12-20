@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import imgSprite from '../../assets/css_sprites.png';
 
 const BannerCont = styled.div`
@@ -14,14 +15,14 @@ const BannerCont = styled.div`
 const BackBtn = styled.button`
   width: 22px;
   height: 22px;
-  background: url(${imgSprite}) no-repeat -158px -59px / 183px 144px;
+  background: url(${imgSprite}) no-repeat -122px -72.5px / 146px 132px;
   margin: 13px 10px 13px 0px;
   cursor: pointer;
 `;
 const MoreBtn = styled.button`
   width: 24px;
   height: 24px;
-  background: url(${imgSprite}) no-repeat -31px -117px / 183px 144px;
+  background: url(${imgSprite}) no-repeat -0px -62px / 146px 132px;
   margin: 0px;
   cursor: pointer;
 `;
@@ -41,10 +42,10 @@ const SearchInp = styled.input.attrs({
   font-size: 14px;
 `;
 
-const SearchBtn = styled.button`
+const SearchBtn = styled(Link)`
   width: 24px;
   height: 24px;
-  background: url(${imgSprite}) no-repeat -60px -88px / 183px 144px;
+  background: url(${imgSprite}) no-repeat 0px -86px / 146px 132px;
   margin: 12px 0px;
 `;
 

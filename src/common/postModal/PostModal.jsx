@@ -1,4 +1,5 @@
 import * as S from './PostModal.Style';
+import Alert from '../alert/Alert';
 
 /**
  * 1. 프로필
@@ -10,40 +11,69 @@ import * as S from './PostModal.Style';
  * profile, post, comment, chatRoom 입력
  */
 
-const PostModal = ({ modalType }) => {
+const PostModal = ({ modalType, setIsModalOpen }) => {
   if (modalType === 'profile') {
     return (
       <S.ModalWrap>
-        <S.ModalCancleBtn />
-        <S.ModalTxt>설정 및 개인정보</S.ModalTxt>
-        <S.ModalTxt>로그아웃</S.ModalTxt>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>설정 및 개인정보</S.ModalTxt>
+          <S.ModalTxt>로그아웃</S.ModalTxt>
+        </S.ModalOverlay>
       </S.ModalWrap>
     );
   }
-  if (modalType === 'post') {
+  if (modalType === 'myProduct') {
     return (
       <S.ModalWrap>
-        <S.ModalCancleBtn />
-        <S.ModalTxt>설정 및 개인정보</S.ModalTxt>
-        <S.ModalTxt>로그아웃</S.ModalTxt>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>삭제</S.ModalTxt>
+          <S.ModalTxt>수정</S.ModalTxt>
+          <S.ModalTxt>웹사이트에서 상품 보기</S.ModalTxt>
+        </S.ModalOverlay>
       </S.ModalWrap>
     );
   }
-  if (modalType === 'comment') {
+  if (modalType === 'yourPost') {
     return (
       <S.ModalWrap>
-        <S.ModalCancleBtn />
-        <S.ModalTxt>삭제</S.ModalTxt>
-        <S.ModalTxt>수정</S.ModalTxt>
-        <S.ModalTxt>웹사이트에서 상품 보기</S.ModalTxt>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>신고하기</S.ModalTxt>
+        </S.ModalOverlay>
+      </S.ModalWrap>
+    );
+  }
+  if (modalType === 'myComment') {
+    return (
+      <S.ModalWrap>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>삭제</S.ModalTxt>
+        </S.ModalOverlay>
+      </S.ModalWrap>
+    );
+  }
+  if (modalType === 'yourComment') {
+    return (
+      <S.ModalWrap>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>신고하기</S.ModalTxt>
+        </S.ModalOverlay>
       </S.ModalWrap>
     );
   }
   if (modalType === 'chatRoom') {
-    <S.ModalWrap>
-      <S.ModalCancleBtn />
-      <S.ModalTxt>채팅방 나가기</S.ModalTxt>
-    </S.ModalWrap>;
+    return (
+      <S.ModalWrap>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>채팅방 나가기</S.ModalTxt>
+        </S.ModalOverlay>
+      </S.ModalWrap>
+    );
   }
   return <div>오류</div>;
 };
