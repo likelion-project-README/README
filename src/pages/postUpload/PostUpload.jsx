@@ -13,13 +13,13 @@ const PostUpload = () => {
   const [textareaVal, setTextareaVal] = useState('');
   const [btnActive, setBtnActive] = useState(false);
 
-  const testareaRef = useRef();
+  const textareaRef = useRef();
   const fileInputRef = useRef();
 
   const handleChangeTextarea = useCallback(
     (e) => {
-      testareaRef.current.style.height = 'auto';
-      testareaRef.current.style.height = `${testareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       setTextareaVal(e.target.value);
     },
     [textareaVal],
@@ -64,7 +64,7 @@ const PostUpload = () => {
           <S.ContentsArea>
             <S.Textarea
               placeholder='게시글 입력하기...'
-              ref={testareaRef}
+              ref={textareaRef}
               onInput={handleChangeTextarea}
               onKeyUp={activeUploadBtn}
             />
