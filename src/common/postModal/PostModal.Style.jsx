@@ -1,4 +1,24 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const modalFade = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);}
+`;
+const modalUp = keyframes`
+  from{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+`;
 
 export const ModalWrap = styled.div`
   position: relative;
@@ -6,6 +26,7 @@ export const ModalWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 390px;
+  animation: ${modalUp} 0.5s;
 `;
 export const ModalOverlay = styled.div`
   position: absolute;
@@ -13,9 +34,10 @@ export const ModalOverlay = styled.div`
   background-color: white;
   bottom: 0;
   z-index: 10;
-  box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
+  //box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 1);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.0975));
 `;
 export const ModalCancleBtn = styled.div`
   width: 50px;
