@@ -19,18 +19,17 @@ const PostDetail = () => {
   const handleModalOpen = (e) => {
     e.stopPropagation();
     setIsModalOpen(!isModalOpen);
-    console.log(isModalOpen);
   };
 
   const handleModalClose = (e) => {
-    console.log(e.target);
     if (e.target !== modalRef.current) {
       setIsModalOpen(false);
     }
   };
 
   const [postDetailData, setPostDetailData] = useState();
-  const [commentArr, setCommentArr] = useState([]);
+  const [commentDataArr, setCommentDataArr] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
 
   useEffect(() => {
     const getPostDetail = async () => {
@@ -41,12 +40,12 @@ const PostDetail = () => {
 
     const getCommentList = async () => {
       const commentList = await getCommentListAPI(id, token);
-      setCommentArr(commentList);
+      setCommentDataArr(commentList);
+      setCommentCount(commentList.length);
     };
     getCommentList();
   }, []);
 
-  console.log('렌더링');
   return (
     <>
       <S.PostDetail onClick={handleModalClose} ref={backgroundRef}>
@@ -60,11 +59,11 @@ const PostDetail = () => {
         {postDetailData && (
           <S.ScrollWrapper>
             <S.PostCont>
-              <Post data={postDetailData} />
+              <Post data={postDetailData} commentCount={commentCount} />
             </S.PostCont>
-            {commentArr?.length > 0 && (
+            {commentDataArr?.length > 0 && (
               <S.CommentUl>
-                {commentArr?.map((data) => (
+                {commentDataArr?.map((data) => (
                   <li key={data.id}>
                     <S.CommentUserInfo>
                       <S.CommentUserImg src={data.author.image} alt='' />
@@ -86,7 +85,11 @@ const PostDetail = () => {
           </S.ScrollWrapper>
         )}
         <S.CommentInpWrapper>
-          <Comment postId={id} setCommentArr={setCommentArr} />
+          <Comment
+            postId={id}
+            setCommentDataArr={setCommentDataArr}
+            setCommentCount={setCommentCount}
+          />
         </S.CommentInpWrapper>
       </S.PostDetail>
       {isModalOpen ? (

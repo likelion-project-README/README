@@ -4,7 +4,7 @@ import likeAPI from '../../api/likeAPI';
 import unlikeAPI from '../../api/unlikeAPI';
 import * as S from './Post.Style';
 
-const Post = ({ data }) => {
+const Post = ({ data, commentCount }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const isMatchProfile = useMatch('/profile/:id');
@@ -70,7 +70,7 @@ const Post = ({ data }) => {
             <S.CommentBtn type='button'>
               <span className='hidden'>댓글 보기</span>
             </S.CommentBtn>
-            <S.CountNum>0</S.CountNum>
+            <S.CountNum>{commentCount || data.commentCount}</S.CountNum>
           </div>
         </S.ActionBtns>
         <S.CreatedDate>{generateCreatedDate()}</S.CreatedDate>

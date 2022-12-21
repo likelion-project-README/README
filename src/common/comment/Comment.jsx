@@ -3,7 +3,7 @@ import leaveCommentAPI from '../../api/leaveCommentAPI';
 import getCommentListAPI from '../../api/getCommentListAPI';
 import * as S from './Comment.Style';
 
-const Comment = ({ postId, setCommentArr }) => {
+const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
   const token = localStorage.getItem('token');
 
   const inpRef = useRef();
@@ -17,7 +17,8 @@ const Comment = ({ postId, setCommentArr }) => {
     e.preventDefault();
     await leaveCommentAPI(inpValue, postId, token);
     const updatedCommentList = await getCommentListAPI(postId, token);
-    setCommentArr(updatedCommentList);
+    setCommentDataArr(updatedCommentList);
+    setCommentCount(updatedCommentList.length);
     inpRef.current.value = '';
     setInpValue('');
   };
