@@ -11,36 +11,30 @@ import loadPostsAPI from '../../api/loadPostsAPI';
 import loadProductsAPI from '../../api/loadProductsAPI';
 import loadProfileAPI from '../../api/loadProfileAPI';
 import Page404 from '../page404/Page404';
+import profileImg from '../../assets/logo-profile.svg';
 
 const YourProfile = () => {
   console.log('화면 렌더링');
   //  'list' ,'album'
   const [isList, setIsList] = useState(false);
-
   // 프로필 사용자 유무 확인 및 데이터
   const [isProfile, setIsProfile] = useState(null);
-
   // 내 프로필 여부
   const [isMine, setIsMine] = useState(null);
-
   // 모달창 상태값 + 모달타입 상태값
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   // follow 여부
   const [isFollow, setIsFollow] = useState(false);
-
   // 사용자 게시물 유무 확인 및 데이터
   const [isPostLoad, setIsPostLoad] = useState(null);
-
   // 사용자 판매상품 유무 확인 및 데이터
   const [isProductLoad, setIsProductLoad] = useState(null);
-
   // 현재 프로필페이지 id확인
   const accountName = useParams().id;
 
   const loadPost = async () => {
     await loadPostsAPI(accountName).then((data) => {
-      console.log(data);
       setIsPostLoad(data.post);
     });
   };
@@ -51,7 +45,6 @@ const YourProfile = () => {
       }
     });
   };
-
   const loadProfile = async () => {
     await loadProfileAPI(accountName).then((data) => {
       if (data.profile) {
@@ -85,27 +78,6 @@ const YourProfile = () => {
       console.error(err);
     }
   };
-  /*
-  const loadPost = async () => {
-    try {
-      const res = await fetch(
-        `https://mandarin.api.weniv.co.kr/post/${accountName}/userpost`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-type': 'application/json',
-          },
-        },
-      );
-      const resJson = await res.json();
-      return resJson;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  };
-*/
 
   useEffect(() => {
     // login();
@@ -140,20 +112,25 @@ const YourProfile = () => {
         <S.ProfileDiv>
           <S.FollowNPicDiv>
             <S.FollowersLink to={`${window.location.pathname}/followers`}>
-              2950
+              {isProfile.followerCount || 0}
               <S.FollowSpan>followers</S.FollowSpan>
             </S.FollowersLink>
-            <S.ProfileImg />
+            {isProfile.image === 'http://146.56.183.55:5050/Ellipse.png' ? (
+              <S.ProfileImg src={profileImg} />
+            ) : (
+              <S.ProfileImg src={isProfile.image} />
+            )}
+
             <S.FollowingsLink to={`${window.location.pathname}/followings`}>
-              128
+              {isProfile.followingCount || 0}
               <S.FollowSpan>followings</S.FollowSpan>
             </S.FollowingsLink>
           </S.FollowNPicDiv>
           <S.TextsCont>
-            <S.TitSpan>애월읍 위니브 감귤농장</S.TitSpan>
-            <S.IdSpan>@ weniv_Mandarin</S.IdSpan>
+            <S.TitSpan>{isProfile ? isProfile.username : '위니브'}</S.TitSpan>
+            <S.IdSpan>@ {isProfile ? isProfile.accountname : 'weniv'}</S.IdSpan>
             <S.ContentSpan>
-              애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장
+              {isProfile.intro ? isProfile.intro : '소개글을 입력해주세요'}
             </S.ContentSpan>
           </S.TextsCont>
           <S.BtnsCont>
@@ -235,18 +212,12 @@ const YourProfile = () => {
             </S.PostWrap>
           ) : (
             <S.ListWrap>
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
-              <S.PostImg />
+              {isPostLoad &&
+                isPostLoad
+                  .filter((item) => item.image !== '')
+                  .map((item) => (
+                    <S.PostImg key={item.id} image={item.image} />
+                  ))}
             </S.ListWrap>
           )}
         </S.PostsDiv>

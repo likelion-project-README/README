@@ -51,9 +51,7 @@ export const FollowSpan = styled.span`
   margin-top: 6px;
 `;
 
-export const ProfileImg = styled.img.attrs({
-  src: profileImg,
-})`
+export const ProfileImg = styled.img`
   width: 110px;
   height: 110px;
 `;
@@ -218,11 +216,12 @@ export const ListWrap = styled.div`
   padding-bottom: 76px;
 `;
 
-export const PostImg = styled.a.attrs({})`
+export const PostImg = styled.a`
   position: relative;
   width: 114px;
   height: 114px;
-  background-color: wheat;
+  background: url(${(props) => props.image}) no-repeat;
+  background-size: cover;
   /* 이미지 받아와서 추가하기 */
 
   cursor: pointer;
