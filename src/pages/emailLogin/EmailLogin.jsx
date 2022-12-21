@@ -4,7 +4,7 @@ import * as S from './EmailLogin.Style';
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
-// import getEmailLoginAPI from '../../api/emailLoginAPI';
+import loginAPI from '../../api/emailLoginAPI';
 
 // const loginData = {
 //   user: {
@@ -83,51 +83,53 @@ const EmailLoginPage = () => {
       : setBtnActive(true);
   };
   // 버튼 활성화
-  // useEffect(() => {
-  //   emailValid && passwordValid ? setBtnActive(false) : setBtnActive(true);
-  // if (email && password) {
-  //   setBtnActive(true);
-  // } else {
-  //   setBtnActive(false);
-  // }
-  // , [email, password]
-  // });
+  useEffect(() => {
+    // emailValid && passwordValid ? setBtnActive(false) : setBtnActive(true);
+    if (email && password) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  }, [email, password]);
 
   // getEmailLoginAPI api폴더 내의 내용
-  const getEmailLoginAPI = async (event) => {
-    event.preventDefault();
-    try {
-      const res = await fetch('https://mandarin.api.weniv.co.kr/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      });
-      const json = await res.json();
-      console.log(json);
-      // const token = data.user('token');
-      // localStorage.setItem('token', token);
-      // return data;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  };
+  // const getEmailLoginAPI = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const res = await fetch('https://mandarin.api.weniv.co.kr/user/login', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(loginData),
+  //     });
+  //     const json = await res.json();
+  //     console.log(json);
+  //     // const token = data.user('token');
+  //     // localStorage.setItem('token', token);
+  //     // return data;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  //   return null;
+  // };
 
   return (
     <S.LoginSec>
       <S.LoginTit>로그인</S.LoginTit>
-      <S.EmailLoginForm onSubmit={getEmailLoginAPI}>
+      <S.EmailLoginForm onSubmit={loginAPI}>
         <InputBox
           label='이메일'
+          placeholder='이메일 주소를 입력해주세요'
           id='email'
           type='email'
           // required
           // value={email}
-          setInput={setEmail}
-          placeholder='이메일 주소를 입력해주세요'
+          buttonColor='red'
+          display='yes'
           message={emailError}
+          setInput={setEmail}
           onKeyUp={goProfileSetting}
         />
         <InputBox
@@ -139,6 +141,7 @@ const EmailLoginPage = () => {
           setInput={setPassword}
           minLength='6'
           placeholder='비밀번호를 입력해주세요'
+          display='yes'
         />
       </S.EmailLoginForm>
       <Button
