@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
 import * as S from './ProfileSetting.Style';
 
 const ProfileSetting = () => {
+  const [inputValue, setInputValue] = useState({
+    username: '',
+    accountname: '',
+    intro: '',
+  });
+
+  const { username, accountname, intro } = inputValue;
+  const email = location.state.email;
+  const password = location.state.password;
+
+  const handleData = (event) => {
+    const { name, value } = event.target;
+    setInputValue({ ...inputValue, [name]: value });
+  };
+
+  useEffect(() => {
+    if (!username) {
+      setUsernameError('* 필수 입력 항목입니다.');
+      setUsernameValid(false);
+    } else if (username);
+
+    return () => {
+      second;
+    };
+  }, [third]);
+
   return (
     <S.ProfileSettingWrap>
       <S.ProfileSettingTit>프로필 설정 페이지</S.ProfileSettingTit>
@@ -17,7 +43,9 @@ const ProfileSetting = () => {
           <S.ImgUploadInp type='file' id='userImg' />
         </S.ImgWrap>
         <InputBox
-          label='사용자 이름'
+          name={username}
+          value={username}
+          label={username}
           id='userName'
           placeholder='2~10자 이내여야 합니다.'
         />
