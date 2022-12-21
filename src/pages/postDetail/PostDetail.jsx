@@ -12,6 +12,7 @@ const PostDetail = () => {
   const { id } = useParams();
   const token = localStorage.getItem('token');
 
+  // 모달창 온오프
   const modalRef = useRef();
   const backgroundRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,6 +28,7 @@ const PostDetail = () => {
     }
   };
 
+  // 게시글 상세, 댓글 목록, 댓글 카운트 표시
   const [postDetailData, setPostDetailData] = useState();
   const [commentDataArr, setCommentDataArr] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
@@ -45,6 +47,38 @@ const PostDetail = () => {
     };
     getCommentList();
   }, []);
+
+  // 댓글 작성시간 계산
+  const calCreatedTime = (createdAt) => {
+    const differenceMilliseconds = new Date() - new Date(createdAt);
+    const seconds = Math.floor(differenceMilliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(weeks / 30);
+    const years = Math.floor(months / 365);
+
+    if (seconds < 60) {
+      return '방금 전';
+    }
+    if (minutes < 60) {
+      return `${minutes}분 전`;
+    }
+    if (hours < 24) {
+      return `${hours}분 전`;
+    }
+    if (days < 7) {
+      return `${days}일 전`;
+    }
+    if (weeks < 5) {
+      return `${weeks}주 전`;
+    }
+    if (months < 12) {
+      return `${months}달 전`;
+    }
+    return `${years}년 전`;
+  };
 
   return (
     <>
@@ -70,7 +104,8 @@ const PostDetail = () => {
                       <S.CommentUserName>
                         {data.author.username}
                         <S.CommentCreatedTime>
-                          &middot; 방금 전
+                          &middot;
+                          {`\t${calCreatedTime(data.createdAt)}`}
                         </S.CommentCreatedTime>
                       </S.CommentUserName>
                       <S.MoreBtn type='button' onClick={handleModalOpen}>
