@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
+import leaveCommentAPI from '../../api/leaveCommentAPI';
+import getCommentListAPI from '../../api/getCommentListAPI';
 import * as S from './Comment.Style';
 
-const Comment = () => {
-  const [InpValue, setInpValue] = useState('');
+const Comment = ({ postId, setCommentArr }) => {
+  const token = localStorage.getItem('token');
+
+  const inpRef = useRef();
+  const [inpValue, setInpValue] = useState('');
+
   const handleChange = (e) => {
     setInpValue(e.target.value);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await leaveCommentAPI(inpValue, postId, token);
+    const updatedCommentList = await getCommentListAPI(postId, token);
+    setCommentArr(updatedCommentList);
+    inpRef.current.value = '';
+    setInpValue('');
+  };
+
   return (
     <S.CommentCont>
-      <S.CommentForm>
+      <S.CommentForm onSubmit={handleSubmit}>
         <S.UserImg />
         <S.CommentLab htmlFor='comment' />
         <S.CommentInp
@@ -17,12 +32,10 @@ const Comment = () => {
           onChange={handleChange}
           required
           id='comment'
+          value={inpValue}
+          ref={inpRef}
         />
-        {InpValue.length > 0 ? (
-          <S.PostBtn color='var(--main-color)'>게시</S.PostBtn>
-        ) : (
-          <S.PostBtn>게시</S.PostBtn>
-        )}
+        <S.PostBtn inpValue={inpValue}>게시</S.PostBtn>
       </S.CommentForm>
     </S.CommentCont>
   );
