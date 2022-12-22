@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import followAPI from '../../api/followAPI';
+import unfollowAPI from '../../api/unfollowAPI';
 import Button from '../button/Button';
 import * as S from './UserBanner.Style';
 
@@ -9,21 +11,50 @@ UserBanner(btntxt)
 btntxt - btn-cancel, btn-follow, btn-null
 */
 
-const UserBanner = ({ btntxt }) => {
+const UserBanner = ({ data }) => {
+  const URL = window.location.origin;
+  const [isFollow, setIsFollow] = useState(data.isfollow);
+  const clickFollow = () => {
+    if (isFollow) {
+      unfollowAPI(data.accountname);
+      setIsFollow(false);
+    } else {
+      followAPI(data.accountname);
+      setIsFollow(true);
+    }
+  };
   return (
     <S.UserBannerWrapper>
-      <S.UserImg />
-      <S.UserInfo>
-        <S.UserNickName>애월읍 위니브 감귤농장</S.UserNickName>
-        <S.UserId>@ weniv_Mandarin</S.UserId>
+      <S.UserImg src={data.image} />
+      <S.UserInfo
+        // 이거 상위 경로로 한번에 보내고싶은데 방법없나 ?
+        to={`../../../../profile/${data.accountname}`}
+        relative='path'
+      >
+        <S.UserNickName>
+          {data.username || '애월읍 위니브 감귤농장'}
+        </S.UserNickName>
+        <S.UserId>@ {data.accountname || '애월읍 위니브 감귤농장'}</S.UserId>
       </S.UserInfo>
-      {btntxt === 'btn-cancel' && (
-        <Button state='disabled' size='xs' tit='취소' />
+      {isFollow === true && (
+        <Button
+          size='xs'
+          tit='취소'
+          isActive={false}
+          txtcolor='white'
+          onClick={clickFollow}
+        />
       )}
-      {btntxt === 'btn-follow' && (
-        <Button state='active' size='xs' tit='팔로우' />
+      {isFollow === false && (
+        <Button
+          size='xs'
+          tit='팔로우'
+          isActive={!!true}
+          txtcolor='white'
+          onClick={clickFollow}
+        />
       )}
-      {btntxt === 'btn-null' && null}
+      {isFollow === null && null}
     </S.UserBannerWrapper>
   );
 };

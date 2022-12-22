@@ -4,14 +4,19 @@ import likeAPI from '../../api/likeAPI';
 import unlikeAPI from '../../api/unlikeAPI';
 import * as S from './Post.Style';
 
-const Post = ({ data, commentCount }) => {
+const Post = ({
+  data,
+  commentCount,
+  isModalOpen,
+  setIsModalOpen,
+  setModalType,
+}) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const isMatchProfile = useMatch('/profile/:id');
 
   const [isHearted, setIsHearted] = useState(data.hearted);
   const [heartCount, setHeartCount] = useState(data.heartCount);
-
   const clickToLike = async (e) => {
     e.stopPropagation();
     const postData = await likeAPI(data.id, token);
@@ -40,6 +45,12 @@ const Post = ({ data, commentCount }) => {
     }
   };
 
+  const clickMoreBtn = () => {
+    // 현재 로그인된 accountname 과 data.author.accountname을 비교하여
+    // modalType 변경
+    setModalType('yourPost');
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <>
       <S.UserInfo>
@@ -48,7 +59,7 @@ const Post = ({ data, commentCount }) => {
           <S.UserName>{data.author.username}</S.UserName>
           <S.AccountName>{data.author.accountname}</S.AccountName>
         </div>
-        <S.MoreBtn type='button'>
+        <S.MoreBtn type='button' onClick={clickMoreBtn}>
           <span className='hidden'>더보기</span>
         </S.MoreBtn>
       </S.UserInfo>
