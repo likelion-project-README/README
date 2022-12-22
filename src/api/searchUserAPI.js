@@ -11,7 +11,7 @@ const searchUserAPI = async (token, keyword) => {
       },
     );
     const json = await res.json();
-    return json?.splice(0, 10);
+    return json;
   } catch (error) {
     console.log(error);
     return null;

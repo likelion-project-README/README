@@ -1,38 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
-import UserBanner from '../../common/userBanner/UserBanner';
 import searchUserAPI from '../../api/searchUserAPI';
 import * as S from './Search.Style';
 
 const Search = () => {
   const token = localStorage.getItem('token');
-  const navigate = useNavigate();
 
   const [searchVal, setSearchVal] = useState('');
-  const [userList, setUserList] = useState();
+  const [resultList, setResultList] = useState([]);
 
   const searchUser = async () => {
-    const userListData = await searchUserAPI(token, searchVal);
-    setUserList(userListData);
+    const resultListData = await searchUserAPI(token, searchVal);
+    setResultList(resultListData.splice(0, 10));
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchVal !== '') {
+      if (searchVal !== '' && !searchVal.startsWith(' ')) {
         searchUser();
       }
-    }, 500);
+    }, 300);
 
     return () => {
       clearTimeout(timer);
     };
   }, [searchVal]);
-
-  const goToProfile = (accountname) => {
-    navigate(`/profile/${accountname}`);
-  };
 
   return (
     <S.Search>
@@ -40,16 +33,37 @@ const Search = () => {
       <TopBanner type='top-search-nav' setSearchVal={setSearchVal} />
       {searchVal && (
         <S.SearchedUserUl>
-          {userList?.length > 0 &&
-            userList?.map((item) => (
-              <li
-                role='presentation'
-                key={item.id}
-                onClick={() => {
-                  goToProfile(item?.accountname);
-                }}
-              >
-                <UserBanner state='btn-disabled' data={item} />
+          {resultList?.length > 0 &&
+            resultList.map((item) => (
+              <li key={item.id}>
+                {(item.username.includes(searchVal) ||
+                  item.accountname.includes(searchVal)) && (
+                  <S.UserBannerLink to={`/profile/${item.accountname}`}>
+                    <S.SearchedUser>
+                      <S.UserImg src={item.image} />
+                      <S.UserInfo>
+                        {item.username.includes(searchVal) ? (
+                          <S.UserName>
+                            {item.username.split(searchVal)[0]}
+                            <S.MatchedSpan>{searchVal}</S.MatchedSpan>
+                            {item.username.split(searchVal)[1]}
+                          </S.UserName>
+                        ) : (
+                          <S.UserName>{item.username}</S.UserName>
+                        )}
+                        {item.accountname.includes(searchVal) ? (
+                          <S.AccountName>
+                            @{item.accountname.split(searchVal)[0]}
+                            <S.MatchedSpan>{searchVal}</S.MatchedSpan>
+                            {item.accountname.split(searchVal)[1]}
+                          </S.AccountName>
+                        ) : (
+                          <S.AccountName>@ {item.accountname}</S.AccountName>
+                        )}
+                      </S.UserInfo>
+                    </S.SearchedUser>
+                  </S.UserBannerLink>
+                )}
               </li>
             ))}
         </S.SearchedUserUl>
