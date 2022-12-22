@@ -27,12 +27,7 @@ const FollowerList = () => {
         <S.List>
           {isFollwer &&
             isFollwer.map((item) => (
-              <UserBanner
-                key={item.accountname}
-                data={item}
-                state='btn-active'
-                isFollow={item.isfollow}
-              />
+              <UserBanner key={item.accountname} data={item} />
             ))}
         </S.List>
       </S.ListCont>

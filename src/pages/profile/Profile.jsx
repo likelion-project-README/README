@@ -12,8 +12,10 @@ import loadProductsAPI from '../../api/loadProductsAPI';
 import loadProfileAPI from '../../api/loadProfileAPI';
 import Page404 from '../page404/Page404';
 import profileImg from '../../assets/logo-profile.svg';
+import unfollowAPI from '../../api/unfollowAPI';
+import followAPI from '../../api/followAPI';
 
-const YourProfile = () => {
+const Profile = () => {
   console.log('화면 렌더링');
   //  'list' ,'album'
   const [isList, setIsList] = useState(false);
@@ -33,6 +35,15 @@ const YourProfile = () => {
   // 현재 프로필페이지 id확인
   const accountName = useParams().id;
 
+  const clickFollow = () => {
+    if (isFollow) {
+      unfollowAPI(accountName);
+      setIsFollow(false);
+    } else {
+      followAPI(accountName);
+      setIsFollow(true);
+    }
+  };
   const loadPost = async () => {
     await loadPostsAPI(accountName).then((data) => {
       setIsPostLoad(data.post);
@@ -49,11 +60,12 @@ const YourProfile = () => {
     await loadProfileAPI(accountName).then((data) => {
       if (data.profile) {
         setIsProfile(data.profile);
+        setIsFollow(data.profile.isfollow);
       }
     });
   };
 
-  const login = async () => {
+  const loginAPI = async () => {
     try {
       const res = await fetch(`https://mandarin.api.weniv.co.kr/user/login`, {
         method: 'POST',
@@ -69,21 +81,25 @@ const YourProfile = () => {
       });
       const resJson = await res.json();
       localStorage.setItem('token', resJson.user.token);
-      if (accountName === resJson.user.accountname) {
-        setIsMine(true);
-      } else {
-        setIsMine(false);
-      }
+      return resJson;
     } catch (err) {
       console.error(err);
+      return null;
     }
   };
 
   useEffect(() => {
-    // login();
+    loginAPI().then((data) => {
+      if (accountName === data.user.accountname) {
+        setIsMine(true);
+      } else {
+        setIsMine(false);
+      }
+    });
     loadProfile();
     loadProduct();
     loadPost();
+    console.log();
   }, []);
 
   /*
@@ -155,14 +171,14 @@ const YourProfile = () => {
                       size='md'
                       tit='언팔로우'
                       isActive={false}
-                      onClick={() => setIsFollow(!isFollow)}
+                      onClick={clickFollow}
                     />
                   ) : (
                     <Button
                       size='md'
                       tit='팔로우'
                       isActive={!!true}
-                      onClick={() => setIsFollow(!isFollow)}
+                      onClick={clickFollow}
                     />
                   )}
                   <S.BtnOverlay>
@@ -243,4 +259,4 @@ const YourProfile = () => {
   return <Page404 />;
 };
 
-export default YourProfile;
+export default Profile;
