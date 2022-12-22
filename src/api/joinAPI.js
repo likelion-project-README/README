@@ -24,7 +24,8 @@ const goJoinAPI = async (
       },
       body: JSON.stringify(joinData),
     });
-    return null;
+    const json = await res.json();
+    return json;
   } catch (error) {
     console.log(error);
     return null;
