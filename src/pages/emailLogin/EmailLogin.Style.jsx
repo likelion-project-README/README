@@ -6,7 +6,6 @@ export const LoginSec = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
 `;
 
 export const LoginTit = styled.p`
@@ -16,11 +15,6 @@ export const LoginTit = styled.p`
   line-height: 29px;
   display: flex;
   margin: 55px 161px 40px 163px;
-`;
-
-export const EmailLoginForm = styled.form`
-  height: 112px;
-  margin-bottom: 30px;
 `;
 
 export const SignUpTxt = styled.p`
