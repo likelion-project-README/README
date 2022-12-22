@@ -45,6 +45,19 @@ const ProfileEdit = () => {
     setBtnActive(true);
   };
 
+  // 사용자 이름 공백으로 시작 방지
+  const handleUserName = (e) => {
+    const NameVal = e.target.value;
+    const regex = /^[\s]+/;
+    if (regex.test(NameVal)) {
+      e.preventDefault();
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+    } else {
+      setUserName(NameVal);
+      setBtnActive(true);
+    }
+  };
+
   // onChange : 계정ID 유효성 검사
   const handleUserIdValid = (e) => {
     const testUserId = e.target.value;
@@ -74,14 +87,17 @@ const ProfileEdit = () => {
     }
   };
 
-  const handleUserName = (e) => {
-    setUserName(e.target.value);
-    setBtnActive(true);
-  };
-
+  // 소개 공백으로 시작 방지
   const handleUserIntro = (e) => {
-    setUserIntro(e.target.value);
-    setBtnActive(true);
+    const IntroVal = e.target.value;
+    const regex = /^[\s]+/;
+    if (regex.test(IntroVal)) {
+      e.preventDefault();
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+    } else {
+      setUserIntro(IntroVal);
+      setBtnActive(true);
+    }
   };
 
   // 프로필 수정 데이터 전송
@@ -89,11 +105,11 @@ const ProfileEdit = () => {
     e.preventDefault();
     if (validId === true) {
       await editProfileAPI(token, userName, userId, userIntro, imgSrc);
-      alert('프로필 수정이 완료되었습니다.');
+      alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
       // 유저 프로필 페이지로 이동
       navigate('/profile/:id');
     } else {
-      alert('프로필 수정에 실패했습니다.');
+      alert('프로필 수정에 실패했습니다.'); // eslint-disable-line no-alert
     }
   };
 

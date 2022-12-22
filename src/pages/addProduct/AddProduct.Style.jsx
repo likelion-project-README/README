@@ -27,32 +27,24 @@ export const ImgUploadTit = styled.p`
   margin-bottom: 18px;
 `;
 
-export const ImgBox = styled.div`
+export const ImgBox = styled.img`
   width: 322px;
   height: 204px;
   border-radius: 10px;
-  background-color: #f2f2f2;
   border: 0.5px solid #dbdbdb;
+  object-fit: cover;
 `;
 
-export const ImgUploadBtn = styled.button`
+export const ImgUploadLab = styled.label`
+  display: inline-block;
   position: relative;
-  top: -46px;
-  left: 274px;
+  top: -48px;
+  left: 276px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   background: url(${sprite}) 0px 0px / 146px 132px;
-`;
-
-export const ImgUploadLab = styled.label`
-  /* ir */
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+  cursor: pointer;
 `;
 
 export const ImgUploadInp = styled.input`

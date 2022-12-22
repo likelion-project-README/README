@@ -9,8 +9,8 @@ type : input의 type입니다.
 min : input의 minLength입니다.
 max : input의 maxLength입니다.
 value : input의 value입니다.
-onChange : input의 value가 변경될 때의 이벤트를 입력해주세요.
-onBlur : input에서 포커스가 해제될 때의 이벤트를 입력해주세요.
+onChange : input의 value가 변경될 때의 이벤트를 입력해 주세요.
+onBlur : input에서 포커스가 해제될 때의 이벤트를 입력해 주세요.
 
 <유효성 검사 관련>
 bottomColor : 'red'를 입력하면 border-bottom이 빨간색으로 나타나며, 미입력시 기본 회색이 들어갑니다.
