@@ -10,25 +10,25 @@ const ProfileSetting = () => {
     intro: '',
   });
 
-  const { username, accountname, intro } = inputValue;
-  const email = location.state.email;
-  const password = location.state.password;
+  // const { username, accountname, intro } = inputValue;
+  // const email = location.state.email;
+  // const password = location.state.password;
 
-  const handleData = (event) => {
-    const { name, value } = event.target;
-    setInputValue({ ...inputValue, [name]: value });
-  };
+  // const handleData = (event) => {
+  //   const { name, value } = event.target;
+  //   setInputValue({ ...inputValue, [name]: value });
+  // };
 
-  useEffect(() => {
-    if (!username) {
-      setUsernameError('* 필수 입력 항목입니다.');
-      setUsernameValid(false);
-    } else if (username);
+  // useEffect(() => {
+  //   if (!username) {
+  //     setUsernameError('* 필수 입력 항목입니다.');
+  //     setUsernameValid(false);
+  //   } else if (username);
 
-    return () => {
-      second;
-    };
-  }, [third]);
+  //   return () => {
+  //     second;
+  //   };
+  // }, [third]);
 
   return (
     <S.ProfileSettingWrap>
@@ -43,9 +43,9 @@ const ProfileSetting = () => {
           <S.ImgUploadInp type='file' id='userImg' />
         </S.ImgWrap>
         <InputBox
-          name={username}
-          value={username}
-          label={username}
+          // name={username}
+          // value={username}
+          // label={username}
           id='userName'
           placeholder='2~10자 이내여야 합니다.'
         />
