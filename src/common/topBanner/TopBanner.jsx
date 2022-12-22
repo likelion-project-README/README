@@ -14,7 +14,7 @@ type 종류 (피그마 이름 기준)
 'top-main-nav'
 'top-upload-nav'
 'top-chat-nav'
-
+'top-follow-nav'
 
 postModal 먼저 작성 후, 아래 조건문 작성
 
@@ -90,6 +90,18 @@ const TopBanner = ({
           }}
         />
         <Button size='sm' isActive={isActive} tit={tit} />
+      </S.BannerCont>
+    );
+  }
+  if (type === 'top-follow-nav') {
+    return (
+      <S.BannerCont>
+        <S.BackBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+        <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
       </S.BannerCont>
     );
   }
