@@ -200,6 +200,8 @@ const YourProfile = () => {
             </S.ProductCaro>
           </S.ProductDiv>
         ) : null}
+
+        {/* 게시글 ! */}
         <S.PostsDiv>
           <S.PostBtns>
             <S.ListBtn onClick={() => setIsList(true)} isList={isList} />
@@ -208,7 +210,15 @@ const YourProfile = () => {
           {isList ? (
             <S.PostWrap>
               {isPostLoad &&
-                isPostLoad.map((item) => <Post key={item.id} data={item} />)}
+                isPostLoad.map((item) => (
+                  <Post
+                    key={item.id}
+                    data={item}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    setModalType={setModalType}
+                  />
+                ))}
             </S.PostWrap>
           ) : (
             <S.ListWrap>
