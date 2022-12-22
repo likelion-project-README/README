@@ -18,6 +18,8 @@ export const ProfileEditTit = styled.h2`
 
 export const ImgWrap = styled.div`
   margin: 30px 140px;
+  width: 110px;
+  height: 110px;
 `;
 
 export const UserImg = styled.img`
@@ -25,11 +27,11 @@ export const UserImg = styled.img`
   height: 110px;
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
-  background-image: url('https://images.unsplash.com/photo-1606425271394-c3ca9aa1fc06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
-  background-size: contain;
+  object-fit: cover;
 `;
 
-export const ImgUploadBtn = styled.button`
+export const ImgUploadLab = styled.label`
+  display: inline-block;
   position: relative;
   top: -40px;
   left: 73px;
@@ -37,15 +39,6 @@ export const ImgUploadBtn = styled.button`
   height: 36px;
   border-radius: 50%;
   background: url(${sprite}) 0px 0px / 146px 132px;
-`;
-
-export const ImgUploadLab = styled.label`
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
 `;
 
 export const ImgUploadInp = styled.input`

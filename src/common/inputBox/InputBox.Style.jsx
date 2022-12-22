@@ -33,6 +33,15 @@ export const BoxInp = styled.input`
     outline: none;
     border-bottom: 1px solid var(--main-color);
   }
+  /* type이 number일 때 화살표 제거 */
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const InpMessage = styled.p`
