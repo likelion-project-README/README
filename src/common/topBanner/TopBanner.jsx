@@ -34,6 +34,7 @@ const TopBanner = ({
   isModalOpen,
   setIsModalOpen,
   setModalType,
+  setSearchVal,
 }) => {
   const navigate = useNavigate();
   const testHandle = () => {
@@ -44,6 +45,9 @@ const TopBanner = ({
       setModalType('chatRoom');
     }
     setIsModalOpen(!isModalOpen);
+  };
+  const handleChangeInp = (e) => {
+    setSearchVal(e.target.value);
   };
   if (type === 'top-basic-nav') {
     return (
@@ -65,7 +69,7 @@ const TopBanner = ({
             navigate(-1);
           }}
         />
-        <S.SearchInp />
+        <S.SearchInp onChange={handleChangeInp} />
       </S.BannerCont>
     );
   }

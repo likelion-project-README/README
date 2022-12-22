@@ -9,13 +9,13 @@ UserBanner(btntxt)
 btntxt - btn-cancel, btn-follow, btn-null
 */
 
-const UserBanner = ({ btntxt }) => {
+const UserBanner = ({ btntxt, data }) => {
   return (
     <S.UserBannerWrapper>
-      <S.UserImg />
+      <S.UserImg src={data.image} />
       <S.UserInfo>
-        <S.UserNickName>애월읍 위니브 감귤농장</S.UserNickName>
-        <S.UserId>@ weniv_Mandarin</S.UserId>
+        <S.UserNickName>{data.username}</S.UserNickName>
+        <S.UserId>@ {data.accountname}</S.UserId>
       </S.UserInfo>
       {btntxt === 'btn-cancel' && (
         <Button state='disabled' size='xs' tit='취소' />
