@@ -35,6 +35,17 @@ const PostModal = ({ modalType, setIsModalOpen }) => {
       </S.ModalWrap>
     );
   }
+  if (modalType === 'myPost') {
+    return (
+      <S.ModalWrap>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
+          <S.ModalTxt>삭제</S.ModalTxt>
+          <S.ModalTxt>수정</S.ModalTxt>
+        </S.ModalOverlay>
+      </S.ModalWrap>
+    );
+  }
   if (modalType === 'yourPost') {
     return (
       <S.ModalWrap>

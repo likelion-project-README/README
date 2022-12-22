@@ -66,7 +66,7 @@ const PostDetail = () => {
       return `${minutes}분 전`;
     }
     if (hours < 24) {
-      return `${hours}분 전`;
+      return `${hours}시간 전`;
     }
     if (days < 7) {
       return `${days}일 전`;
