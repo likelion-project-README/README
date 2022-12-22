@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const UserBannerWrapper = styled.div`
@@ -14,13 +15,14 @@ export const UserImg = styled.img`
   background-color: #dbdbdb;
 `;
 
-export const UserInfo = styled.div`
+export const UserInfo = styled(Link)`
   display: flex;
   flex-direction: column;
   padding: 5px 0;
   margin-left: 12px;
   margin-right: auto;
   gap: 6px;
+  text-decoration: none;
 `;
 
 export const UserNickName = styled.p`
