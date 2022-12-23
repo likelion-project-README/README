@@ -181,16 +181,15 @@ export const PostBtns = styled.div`
 export const ListBtn = styled.button`
   width: 26px;
   height: 26px;
-  background: url(${sprite}) no-repeat 0px -36px / 146px 132px;
-  background-position: ${(props) => (!props.isList ? '-26px -36px' : 'none')};
+  background: url(${sprite}) no-repeat -72px 0px / 146px 132px;
+  background-position: ${(props) => (props.isList ? 'none' : '-72px -26px')};
 `;
 
 export const AlbumBtn = styled.button`
   width: 26px;
   height: 26px;
-  /* 백그라운드 이미지는  */
-  background: url(${sprite}) no-repeat -72px 0px / 146px 132px;
-  background-position: ${(props) => (props.isList ? '-72px -26px' : 'none')};
+  background: url(${sprite}) no-repeat 0px -36px / 146px 132px;
+  background-position: ${(props) => (!props.isList ? 'none' : '-26px -36px')};
 `;
 
 // Posts 리스트형
