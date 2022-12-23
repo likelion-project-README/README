@@ -1,4 +1,4 @@
-const goJoinAPI = async (
+const JoinAPI = async (
   username,
   email,
   password,
@@ -6,8 +6,12 @@ const goJoinAPI = async (
   intro,
   image,
 ) => {
-  try {
-    const joinData = {
+  const res = await fetch('https://mandarin.api.weniv.co.kr/user', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({
       user: {
         username: 'username',
         email: 'email',
@@ -16,20 +20,10 @@ const goJoinAPI = async (
         intro: 'intro',
         image: '..src/assets/logo-profile.svg',
       },
-    };
-    const res = await fetch('https://mandarin.api.weniv.co.kr/user', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(joinData),
-    });
-    const json = await res.json();
-    return json;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
+    }),
+  });
+  const json = res.json();
+  console.log(json);
+  return json;
 };
-
-export default goJoinAPI;
+export default JoinAPI;

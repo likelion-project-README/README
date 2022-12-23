@@ -50,12 +50,12 @@ const EmailLoginPage = () => {
     const handlePasswordValid = () => {
       // const passwordInputValue = e.target.value;
       // setPassword(passwordInputValue);
-      if (password.length >= 6) {
-        setPasswordValid(true);
-        setPasswordError('');
-      } else {
+      if (password.length < 6) {
         setPasswordValid(false);
         setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+      } else if (password.length >= 6) {
+        setPasswordValid(true);
+        setPasswordError('');
       }
     };
     handlePasswordValid();
@@ -90,18 +90,6 @@ const EmailLoginPage = () => {
     <S.LoginSec>
       <S.LoginTit>로그인</S.LoginTit>
       <form onSubmit={handleSubmit}>
-        {/* {emailValid ? (
-          <InputBox
-            label='이메일'
-            placeholder='이메일 주소를 입력해주세요'
-            id='email'
-            type='email'
-            // 여기 바꿨음 valid 였음
-            onChange={handleData}
-            onBlur={handleButtonActive}
-            value={email}
-          />
-        ) : ( */}
         <InputBox
           label='이메일'
           placeholder='이메일 주소를 입력해주세요'
@@ -114,35 +102,20 @@ const EmailLoginPage = () => {
           display={emailValid ? null : 'yes'}
           message={emailError}
         />
-        {/* )} */}
-        {passwordValid ? (
-          <InputBox
-            label='비밀번호'
-            placeholder='비밀번호를 입력해주세요'
-            id='password'
-            type='password'
-            // minLength='6'
-            // 여기도 바꿨음 밸리드였음
-            onChange={handleData}
-            onBlur={handleButtonActive}
-            value={password}
-          />
-        ) : (
-          <InputBox
-            label='비밀번호'
-            placeholder='비밀번호를 입력해주세요'
-            id='password'
-            type='password'
-            // minLength='6'
-            buttonColor='red'
-            display='yes'
-            message={passwordError}
-            onChange={handleData}
-            // onBlur={handleButtonActive}
-            value={password}
-          />
-        )}
+        <InputBox
+          label='비밀번호'
+          placeholder='비밀번호를 입력해주세요'
+          id='password'
+          type='password'
+          onChange={handleData}
+          onBlur={handleButtonActive}
+          value={password}
+          display={passwordValid ? null : 'yes'}
+          buttonColor={passwordValid ? null : 'red'}
+          message={passwordError}
+        />
         <Button
+          className='loginBtn'
           type='submit'
           size='lg'
           tit='로그인'
