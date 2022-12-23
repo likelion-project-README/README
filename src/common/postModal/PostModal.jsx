@@ -11,7 +11,11 @@ import Alert from '../alert/Alert';
  * profile, post, comment, chatRoom 입력
  */
 
-const PostModal = ({ modalType, setIsModalOpen }) => {
+const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
+  const clickOepnProduct = () => {
+    setIsModalOpen(!isModalOpen);
+    window.open(modalData.link, '_blank');
+  };
   if (modalType === 'profile') {
     return (
       <S.ModalWrap>
@@ -30,7 +34,9 @@ const PostModal = ({ modalType, setIsModalOpen }) => {
           <S.ModalCancleBtn />
           <S.ModalTxt>삭제</S.ModalTxt>
           <S.ModalTxt>수정</S.ModalTxt>
-          <S.ModalTxt>웹사이트에서 상품 보기</S.ModalTxt>
+          <S.ModalTxt onClick={clickOepnProduct}>
+            웹사이트에서 상품 보기
+          </S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );

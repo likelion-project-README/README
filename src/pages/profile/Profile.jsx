@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import Product from '../../common/product/Product';
 import Post from '../../common/post/Post';
@@ -14,11 +14,13 @@ import Page404 from '../page404/Page404';
 import profileImg from '../../assets/logo-profile.svg';
 import unfollowAPI from '../../api/unfollowAPI';
 import followAPI from '../../api/followAPI';
+import SplashPage from '../splash/Splash';
 
+// 로딩중 화면 및, 기능 구현 필요
 const Profile = () => {
   console.log('화면 렌더링');
   //  'list' ,'album'
-  const [isList, setIsList] = useState(false);
+  const [isList, setIsList] = useState(true);
   // 프로필 사용자 유무 확인 및 데이터
   const [isProfile, setIsProfile] = useState(null);
   // 내 프로필 여부
@@ -32,8 +34,12 @@ const Profile = () => {
   const [isPostLoad, setIsPostLoad] = useState(null);
   // 사용자 판매상품 유무 확인 및 데이터
   const [isProductLoad, setIsProductLoad] = useState(null);
+  // 모달창데이터
+  const [modalData, setModalData] = useState(null);
+
   // 현재 프로필페이지 id확인
   const accountName = useParams().id;
+  const navigate = useNavigate();
 
   const clickFollow = () => {
     if (isFollow) {
@@ -99,9 +105,7 @@ const Profile = () => {
     loadProfile();
     loadProduct();
     loadPost();
-    console.log();
   }, []);
-
   /*
   const [products, setProducts] = useState(null);
   useContext(callProducts()).then((data) => {
@@ -158,8 +162,19 @@ const Profile = () => {
                     tit='프로필 수정'
                     state=''
                     txtcolor='black'
+                    onClick={() =>
+                      navigate(`/profile/${accountName}/editProfile`)
+                    }
                   />
-                  <Button size='md' tit='상품 등록' state='' txtcolor='black' />
+                  <Button
+                    size='md'
+                    tit='상품 등록'
+                    state=''
+                    txtcolor='black'
+                    onClick={() =>
+                      navigate(`/profile/${accountName}/addProduct`)
+                    }
+                  />
                 </>
               ) : (
                 <>
@@ -194,25 +209,15 @@ const Profile = () => {
             <S.ProductSpan>판매중인 상품</S.ProductSpan>
             <S.ProductCaro>
               {isProductLoad.map((item) => (
-                <Product key={item.id} data={item} />
+                <Product
+                  key={item.id}
+                  data={item}
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                  setModalType={setModalType}
+                  setModalData={setModalData}
+                />
               ))}
-              {/*
-              <Product
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-                setModalType={setModalType}
-              />
-              <Product
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-                setModalType={setModalType}
-              />
-              <Product
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-                setModalType={setModalType}
-              />
-               */}
             </S.ProductCaro>
           </S.ProductDiv>
         ) : null}
@@ -242,7 +247,11 @@ const Profile = () => {
                 isPostLoad
                   .filter((item) => item.image !== '')
                   .map((item) => (
-                    <S.PostImg key={item.id} image={item.image} />
+                    <S.PostImg
+                      key={item.id}
+                      image={item.image}
+                      onClick={() => navigate(`/post/${item.id}`)}
+                    />
                   ))}
             </S.ListWrap>
           )}
@@ -250,13 +259,18 @@ const Profile = () => {
         <S.FooterWrap>
           <TabMenu />
           {isModalOpen ? (
-            <PostModal modalType={modalType} setIsModalOpen={setIsModalOpen} />
+            <PostModal
+              modalType={modalType}
+              setIsModalOpen={setIsModalOpen}
+              isModalOpen={isModalOpen}
+              modalData={modalData}
+            />
           ) : null}
         </S.FooterWrap>
       </S.ProfileWrap>
     );
   }
-  return <Page404 />;
+  return <SplashPage />;
 };
 
 export default Profile;

@@ -11,9 +11,10 @@ export const ProductImage = styled.div`
   width: 140px;
   height: 90px;
   margin-bottom: 6px;
-  background: url(.jpg) black;
+  background: url(${(props) => props.imageURL}) no-repeat center;
   border: 0.5px solid #dbdbdb;
   border-radius: 8px;
+  background-size: cover;
 `;
 
 export const ProductName = styled.p`
