@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as S from './Join.Style';
-import JoinAPI from '../../api/joinAPI';
+import joinAPI from '../../api/joinAPI';
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
 
 const JoinPage = () => {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
@@ -23,13 +24,16 @@ const JoinPage = () => {
     }
   };
 
-  // 이메일 유효성 검사
+  // 이메일 검증(이메일 주소의 형식이 유효하지 않거나 이미 가입된 이메일일 경우)
   const handleEmailValid = () => {
     const reg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
     if (!reg.test(email)) {
-      setEmailError('*이미 가입된 이메일 주소입니다.');
+      setEmailError('올바른 이메일 형식이 아닙니다.');
+      setEmailValid(false);
+    } else if (email.length === 0) {
+      setEmailError('입력해주세요.');
       setEmailValid(false);
     } else {
       setEmailError('');
@@ -37,7 +41,8 @@ const JoinPage = () => {
     }
   };
 
-  // 비밀번호 유효성 검사
+  // 계정 검증
+
   useEffect(() => {
     const handlePasswordValid = () => {
       // const passwordInputValue = e.target.value;
@@ -54,9 +59,9 @@ const JoinPage = () => {
   }, [password]);
 
   // console.log(email, password);
-  console.log(emailValid, passwordValid);
+  // console.log(emailValid, passwordValid);
   // console.log(emailError, passwordError);
-  console.log(password.length);
+  // console.log(password.length);
 
   // 회원가입 버튼 활성화
   const handleButtonActive = () => {
@@ -75,7 +80,7 @@ const JoinPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    JoinAPI(email, password)
+    joinAPI(email, password)
       .then((data) => {
         localStorage.setItem('token', data.user.token);
         localStorage.setItem('accountname', data.user.accountname);
@@ -98,6 +103,7 @@ const JoinPage = () => {
   //     },
   //   });
   // };
+
   return (
     <S.JoinSec>
       <S.JoinTit>이메일로 회원가입</S.JoinTit>
