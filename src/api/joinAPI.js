@@ -1,4 +1,4 @@
-const JoinAPI = async (
+const joinAPI = async (
   username,
   email,
   password,
@@ -26,4 +26,4 @@ const JoinAPI = async (
   console.log(json);
   return json;
 };
-export default JoinAPI;
+export default joinAPI;
