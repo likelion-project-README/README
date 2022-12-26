@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import Product from '../../common/product/Product';
 import Post from '../../common/post/Post';
@@ -15,6 +16,7 @@ import profileImg from '../../assets/logo-profile.svg';
 import unfollowAPI from '../../api/unfollowAPI';
 import followAPI from '../../api/followAPI';
 import SplashPage from '../splash/Splash';
+import LoginAccountState from '../../atoms/LoginState';
 
 // 로딩중 화면 및, 기능 구현 필요
 const Profile = () => {
@@ -36,7 +38,7 @@ const Profile = () => {
   const [isProductLoad, setIsProductLoad] = useState(null);
   // 모달창데이터
   const [modalData, setModalData] = useState(null);
-
+  const [accountState, setAccountState] = useRecoilState(LoginAccountState);
   // 현재 프로필페이지 id확인
   const accountName = useParams().id;
   const navigate = useNavigate();
@@ -96,6 +98,7 @@ const Profile = () => {
 
   useEffect(() => {
     loginAPI().then((data) => {
+      setAccountState(data.user.accountname);
       if (accountName === data.user.accountname) {
         setIsMine(true);
       } else {
@@ -213,6 +216,7 @@ const Profile = () => {
                   key={item.id}
                   data={item}
                   isModalOpen={isModalOpen}
+                  isMine={isMine}
                   setIsModalOpen={setIsModalOpen}
                   setModalType={setModalType}
                   setModalData={setModalData}
@@ -236,8 +240,10 @@ const Profile = () => {
                     key={item.id}
                     data={item}
                     isModalOpen={isModalOpen}
+                    isMine={isMine}
                     setIsModalOpen={setIsModalOpen}
                     setModalType={setModalType}
+                    setModalData={setModalData}
                   />
                 ))}
             </S.PostWrap>
@@ -261,9 +267,9 @@ const Profile = () => {
           {isModalOpen ? (
             <PostModal
               modalType={modalType}
-              setIsModalOpen={setIsModalOpen}
-              isModalOpen={isModalOpen}
               modalData={modalData}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
             />
           ) : null}
         </S.FooterWrap>

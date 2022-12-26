@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import Post from '../../common/post/Post';
 import Comment from '../../common/comment/Comment';
@@ -7,6 +8,7 @@ import PostModal from '../../common/postModal/PostModal';
 import getPostDetailAPI from '../../api/getPostDetailAPI';
 import getCommentListAPI from '../../api/getCommentListAPI';
 import * as S from './PostDetail.Style';
+import LoginAccountState from '../../atoms/LoginState';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -16,10 +18,19 @@ const PostDetail = () => {
   const modalRef = useRef();
   const backgroundRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
+  // 게시글 상세, 댓글 목록, 댓글 카운트 표시
+  const [postDetailData, setPostDetailData] = useState();
+  const [commentDataArr, setCommentDataArr] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
+  const [accountState, setAccountState] = useRecoilState(LoginAccountState);
+  const [isMine, setIsMine] = useState(false);
 
+  // 아래 두개 이벤트 함수 일단보류
   const handleModalOpen = (e) => {
     e.stopPropagation();
     setIsModalOpen(!isModalOpen);
+    console.log(modalRef.current);
   };
 
   const handleModalClose = (e) => {
@@ -28,18 +39,29 @@ const PostDetail = () => {
     }
   };
 
-  // 게시글 상세, 댓글 목록, 댓글 카운트 표시
-  const [postDetailData, setPostDetailData] = useState();
-  const [commentDataArr, setCommentDataArr] = useState([]);
-  const [commentCount, setCommentCount] = useState(0);
+  // isMine ?
+  // accountState,
+
+  const clickMoreBtn = (accountname) => {
+    console.log(accountState);
+    setModalType('yourComment');
+    if (accountState === accountname) {
+      setModalType('myComment');
+    }
+    setIsModalOpen(!isModalOpen);
+  };
 
   useEffect(() => {
     const getPostDetail = async () => {
       const postData = await getPostDetailAPI(id, token);
       setPostDetailData(postData);
+
+      if (postData.author.accountname === accountState) {
+        console.log('htest');
+        setIsMine(true);
+      }
     };
     getPostDetail();
-
     const getCommentList = async () => {
       const commentList = await getCommentListAPI(id, token);
       setCommentDataArr(commentList);
@@ -82,7 +104,7 @@ const PostDetail = () => {
 
   return (
     <>
-      <S.PostDetail onClick={handleModalClose} ref={backgroundRef}>
+      <S.PostDetail ref={backgroundRef}>
         <S.PostDetailTit>게시글 상세 페이지</S.PostDetailTit>
         <TopBanner
           type='top-basic-nav'
@@ -93,7 +115,16 @@ const PostDetail = () => {
         {postDetailData && (
           <S.ScrollWrapper>
             <S.PostCont>
-              <Post data={postDetailData} commentCount={commentCount} />
+              <Post
+                key={postDetailData.id}
+                data={postDetailData}
+                commentCount={commentCount}
+                isMine={isMine}
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                setModalType={setModalType}
+                setModalData={setPostDetailData}
+              />
             </S.PostCont>
             {commentDataArr?.length > 0 && (
               <S.CommentUl>
@@ -108,7 +139,12 @@ const PostDetail = () => {
                           {`\t${calCreatedTime(data.createdAt)}`}
                         </S.CommentCreatedTime>
                       </S.CommentUserName>
-                      <S.MoreBtn type='button' onClick={handleModalOpen}>
+                      <S.MoreBtn
+                        type='button'
+                        onClick={() => {
+                          clickMoreBtn(data.author.accountname);
+                        }}
+                      >
                         <span className='hidden'>더보기 버튼</span>
                       </S.MoreBtn>
                     </S.CommentUserInfo>
@@ -129,7 +165,12 @@ const PostDetail = () => {
       </S.PostDetail>
       {isModalOpen ? (
         <div ref={modalRef}>
-          <PostModal modalType='profile' setIsModalOpen={setIsModalOpen} />
+          <PostModal
+            modalType={modalType}
+            modalData={postDetailData}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
         </div>
       ) : null}
     </>
