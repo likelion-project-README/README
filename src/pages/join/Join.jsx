@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import {
+  usernameData,
+  emailData,
+  passwordData,
+  accountnameData,
+  introData,
+  profileImageData,
+} from '../../atoms/LoginData';
 import * as S from './Join.Style';
 
 import joinAPI from '../../api/joinAPI';
-import accountnameValidAPI from '../../api/accountnameValidAPI';
-import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
+import InputBox from '../../common/inputBox/InputBox';
+import emailDuplicateAPI from '../../api/emailDuplicateAPI';
 
 const JoinPage = () => {
   const navigate = useNavigate();
@@ -20,11 +29,14 @@ const JoinPage = () => {
   const [passwordError, setPasswordError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-
   const [btnActive, setBtnActive] = useState('');
-  // const [userId, setUserId] = useState('');
-  // const [userIdValid, setUserIdValid] = useState(true);
-  // const [userIdMsg, setUserIdMsg] = useState('');
+
+  const setUsernameData = useSetRecoilState(usernameData);
+  const setEmailData = useSetRecoilState(emailData);
+  const setPasswordData = useSetRecoilState(passwordData);
+  const setAccountNameData = useSetRecoilState(accountnameData);
+  const setIntroData = useSetRecoilState(introData);
+  const setProfileImageData = useSetRecoilState(profileImageData);
 
   const handleData = (e) => {
     if (e.target.type === 'email') {
@@ -36,7 +48,7 @@ const JoinPage = () => {
 
   // 이메일 검증(이메일 주소의 형식이 유효하지 않거나 이미 가입된 이메일일 경우)
   useEffect(() => {
-    const handleEmailValid = () => {
+    const handleEmailValid = (res) => {
       const reg =
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
       if (email.length === 0) {
@@ -53,14 +65,34 @@ const JoinPage = () => {
     handleEmailValid();
   }, [email]);
 
-  // 계정 검증
-  // const handleUserIdDuplicate = async (e) => {
-  //   const userId = e.target.value;
-  //   setUserId(userId);
-  //   const userIdValid = await accountnameValidAPI(userId);
-  //   if (userIdValid.message === '이미 가입된 계정ID 입니다.') {
-  //     setValidId(false);
-  //     setUserIdMsg('*이미 사용 중인 ID입니다.');
+  // } else if (res.test !== null) {
+  //   setEmailError('이미 가입된 이메일 주소 입니다.');
+  //   setEmailValid(false);
+  // }
+  // console.log(email, password);
+  // console.log(emailValid, passwordValid);
+
+  // const handleEmailDuplicate = async (e) => {
+  //   e.preventDefault();
+  //   await emailDuplicateAPI(email).then(res => {
+  //     if(res.data === email) {
+
+  //     }
+  //   })
+  //     await AuthActions.handleEmailDuplicate(email);
+  //     if (this.props.exists.get('email')) {
+  //       this.setError('이미 가입된 이메일 주소 입니다.');
+  //     } else {
+  //       this.setError(null);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+
+  //   await emailDuplicateAPI(email);
+  //   if (test.message === emailDuplicateAPI(email)) {
+  //     setEmailError('이미 가입된 이메일 주소 입니다.');
+  //     setEmailValid(false);
   //   }
   // };
 
@@ -89,15 +121,15 @@ const JoinPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    joinAPI(username, email, password, accountname, intro, image)
+    joinAPI(email, password, accountname, username, intro, image)
       .then((data) => {
         localStorage.setItem('token', data.user.token);
-        localStorage.setItem('accountname', data.user.accountname);
-        localStorage.setItem('profileImg', data.user.image);
-        localStorage.setItem('username', data.user.username);
-        localStorage.setItem('email', data.user.email);
-        localStorage.setItem('password', data.user.password);
-        localStorage.setItem('intro', data.user.intro);
+        setUsernameData(data.user.username);
+        setEmailData(data.user.email);
+        setPasswordData(data.user.password);
+        setAccountNameData(data.user.accountname);
+        setIntroData(data.user.intro);
+        setProfileImageData(data.user.profileImageData);
       })
       .catch((error) => {
         console.log(error);

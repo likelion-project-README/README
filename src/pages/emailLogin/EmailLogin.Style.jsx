@@ -18,14 +18,6 @@ export const LoginTit = styled.p`
   margin: 55px 161px 40px 163px;
 `;
 
-export const SignUpTxt = styled.p`
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  margin-top: 20px;
-  color: var(--sub-text-color);
-`;
-
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -34,3 +26,11 @@ export const LoginForm = styled.form`
 export const div = styled.div`
   margin: auto;
 `;
+
+// export const SignUpPage = styled(Link)`
+//   color: var(--sub-text-color);
+//   font-size: 12px;
+//   line-height: 15px;
+//   text-align: center;
+//   margin-top: 20px;
+// `;
