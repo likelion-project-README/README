@@ -72,6 +72,7 @@ const ProductEdit = () => {
   const handleProductPriceValid = (e) => {
     if (productPrice === '0') {
       setValidPrice(false);
+      setBtnActive(false);
     } else {
       setValidPrice(true);
       setBtnActive(true);
@@ -94,7 +95,7 @@ const ProductEdit = () => {
   // 상품 수정 데이터 전송
   const editProduct = async (e) => {
     e.preventDefault();
-    if (validPrice === true) {
+    if (btnActive === true) {
       await editProductAPI(
         '63a45f9217ae666581efea86',
         productName,
@@ -105,8 +106,6 @@ const ProductEdit = () => {
       alert('상품 수정이 완료되었습니다.'); // eslint-disable-line no-alert
       // accountname 받아서 유저 프로필 페이지로 이동
       // navigate('/profile/:id');
-    } else {
-      alert('상품 수정에 실패했습니다.'); // eslint-disable-line no-alert
     }
   };
 
@@ -116,13 +115,7 @@ const ProductEdit = () => {
       <form onSubmit={editProduct}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
         <S.ImgWrap>
-          <S.ImgUploadTit
-            onClick={() => {
-              console.log(productID);
-            }}
-          >
-            이미지 등록
-          </S.ImgUploadTit>
+          <S.ImgUploadTit>이미지 등록</S.ImgUploadTit>
           <S.ImgBox src={productImg} alt='유저 상품 이미지' />
           <S.ImgUploadLab htmlFor='productImg' />
           <S.ImgUploadInp

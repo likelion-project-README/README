@@ -53,6 +53,7 @@ const TopBanner = ({
     return (
       <S.BannerCont>
         <S.BackBtn
+          type='button'
           onClick={() => {
             navigate(-1);
           }}
@@ -65,6 +66,7 @@ const TopBanner = ({
     return (
       <S.BannerCont>
         <S.BackBtn
+          type='button'
           onClick={() => {
             navigate(-1);
           }}
@@ -85,6 +87,7 @@ const TopBanner = ({
     return (
       <S.BannerCont>
         <S.BackBtn
+          type='button'
           onClick={() => {
             navigate(-1);
           }}
@@ -97,6 +100,7 @@ const TopBanner = ({
     return (
       <S.BannerCont>
         <S.BackBtn
+          type='button'
           onClick={() => {
             navigate(-1);
           }}
@@ -109,6 +113,7 @@ const TopBanner = ({
     return (
       <S.BannerCont>
         <S.BackBtn
+          type='button'
           onClick={() => {
             navigate(-1);
           }}

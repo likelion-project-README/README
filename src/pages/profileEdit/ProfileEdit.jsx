@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
 import loadProfileAPI from '../../api/loadProfileAPI';
@@ -9,39 +9,37 @@ import editProfileAPI from '../../api/editProfileAPI';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
-  const token = localStorage.getItem('token');
   const navigate = useNavigate();
+  const accountName = useParams().id;
+  const fileInputRef = useRef();
 
   const [btnActive, setBtnActive] = useState(false);
   const [userName, setUserName] = useState('');
   const [userId, setUserId] = useState('');
   const [userIntro, setUserIntro] = useState('');
-  const [imgSrc, setImgSrc] = useState('');
+  const [userImg, setUserImg] = useState('');
   const [validId, setValidId] = useState(true);
   const [userIdMsg, setUserIdMsg] = useState('');
 
   // 기존 프로필 정보 불러오기
   useEffect(() => {
     const getProfile = async () => {
-      const result = await loadProfileAPI('chzhello');
+      const result = await loadProfileAPI(accountName);
       setUserName(result.profile.username);
       setUserId(result.profile.accountname);
       setUserIntro(result.profile.intro);
       if (result.profile.image) {
-        setImgSrc(result.profile.image);
+        setUserImg(result.profile.image);
       }
     };
     getProfile();
   }, []);
 
-  // useRef를 이용해 input태그에 접근
-  const fileInputRef = useRef();
-
   // 이미지 업로드
   const uploadImg = async (e) => {
     const imgFile = e.target.files[0];
     const imgUrl = await uploadImgAPI(imgFile);
-    setImgSrc(imgUrl);
+    setUserImg(imgUrl);
     setBtnActive(true);
   };
 
@@ -68,6 +66,7 @@ const ProfileEdit = () => {
       setBtnActive(true);
     } else {
       setValidId(false);
+      setBtnActive(false);
       setUserIdMsg('*영문, 숫자, 밑줄, 마침표만 입력할 수 있습니다.');
     }
   };
@@ -82,8 +81,9 @@ const ProfileEdit = () => {
       setUserIdMsg('*이미 사용 중인 ID입니다.');
     }
     // 유저 자신의 아이디는 중복 검사 제외
-    if (testUserId === 'chzhello') {
+    if (testUserId === accountName) {
       setValidId(true);
+      setBtnActive(true);
     }
   };
 
@@ -103,13 +103,10 @@ const ProfileEdit = () => {
   // 프로필 수정 데이터 전송
   const editProfile = async (e) => {
     e.preventDefault();
-    if (validId === true) {
-      await editProfileAPI(token, userName, userId, userIntro, imgSrc);
+    if (btnActive === true) {
+      await editProfileAPI(userName, userId, userIntro, userImg);
       alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
-      // 유저 프로필 페이지로 이동
-      navigate('/profile/:id');
-    } else {
-      alert('프로필 수정에 실패했습니다.'); // eslint-disable-line no-alert
+      navigate(`/profile/${accountName}`);
     }
   };
 
@@ -119,7 +116,13 @@ const ProfileEdit = () => {
       <form onSubmit={editProfile}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
         <S.ImgWrap>
-          <S.UserImg src={imgSrc} alt='유저 프로필 이미지' />
+          <S.UserImg
+            src={userImg}
+            alt='유저 프로필 이미지'
+            onClick={() => {
+              console.log(accountName);
+            }}
+          />
           <S.ImgUploadLab htmlFor='userImg' />
           <S.ImgUploadInp
             type='file'
