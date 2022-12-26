@@ -35,7 +35,6 @@ const EmailLoginPage = () => {
     const handleEmailValid = () => {
       const reg =
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
       if (email.length === 0) {
         setEmailError('입력해주세요.');
         setEmailValid(false);
@@ -55,7 +54,6 @@ const EmailLoginPage = () => {
   // setEmail(emailValue);
   // const reg =
   //   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
   // if (!reg.test(email)) {
   //   setEmailError('올바른 이메일 형식이 아닙니다.');
   //   setEmailValid(false);
@@ -84,11 +82,6 @@ const EmailLoginPage = () => {
     handlePasswordValid();
   }, [password]);
 
-  console.log(email, password);
-  console.log(emailValid, passwordValid);
-  console.log(emailError, passwordError);
-  console.log(password.length);
-
   // 로그인 버튼 활성화
   useEffect(() => {
     if (emailValid && passwordValid) {
@@ -116,6 +109,15 @@ const EmailLoginPage = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleClick = () => {
+    navigate('/', {
+      state: {
+        email,
+        password,
+      },
+    });
   };
 
   return (
@@ -148,10 +150,10 @@ const EmailLoginPage = () => {
         />
         <S.div>
           <Button
-            className='loginBtn'
             type='submit'
             size='lg'
             tit='로그인'
+            onClick={handleClick}
             isActive={btnActive}
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
