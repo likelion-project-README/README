@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: 0 */
 import { useState } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import likeAPI from '../../api/likeAPI';
@@ -8,8 +9,10 @@ const Post = ({
   data,
   commentCount,
   isModalOpen,
+  isMine,
   setIsModalOpen,
   setModalType,
+  setModalData,
 }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
@@ -56,7 +59,12 @@ const Post = ({
     e.stopPropagation();
     // 현재 로그인된 accountname 과 data.author.accountname을 비교하여
     // modalType 변경
+
     setModalType('yourPost');
+    if (isMine) {
+      setModalType('myPost');
+    }
+    setModalData(data);
     setIsModalOpen(!isModalOpen);
   };
   return (
