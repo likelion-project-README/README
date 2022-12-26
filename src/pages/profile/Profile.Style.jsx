@@ -54,6 +54,8 @@ export const FollowSpan = styled.span`
 export const ProfileImg = styled.img`
   width: 110px;
   height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
 `;
 export const FollowingsLink = styled(Link)`
   font-size: 18px;
@@ -151,6 +153,7 @@ export const ProductCaro = styled.div`
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
+  gap: 10px;
 `;
 
 export const PostsDiv = styled.div`
