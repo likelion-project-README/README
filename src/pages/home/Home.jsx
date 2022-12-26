@@ -25,10 +25,10 @@ const Home = () => {
     <S.Home>
       <S.HomeTit>리드미 피드</S.HomeTit>
       <TopBanner type='top-main-nav' tit='READEME' />
-      {feedData?.length > 0 ? (
+      {feedData.length > 0 ? (
         <S.FeedPage>
           <S.PostsContUl>
-            {feedData?.map((item) => (
+            {feedData.map((item) => (
               <li key={item.id}>
                 <Post data={item} />
               </li>

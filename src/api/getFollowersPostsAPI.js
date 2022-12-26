@@ -8,7 +8,7 @@ const getFollowersPostsAPI = async (token) => {
       },
     });
     const json = await res.json();
-    return json?.post;
+    return json.posts;
   } catch (error) {
     console.log(error);
     return null;
