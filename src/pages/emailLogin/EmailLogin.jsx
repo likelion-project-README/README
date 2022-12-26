@@ -103,8 +103,6 @@ const EmailLoginPage = () => {
         localStorage.setItem('token', data.user.token);
         setAccountNameData(data.user.accountname);
         setProfileImageData(data.user.profileImageData);
-        // localStorage.setItem('accountname', data.user.accountname);
-        // localStorage.setItem('profileImg', data.user.image);
       })
       .catch((error) => {
         console.log(error);
@@ -160,9 +158,10 @@ const EmailLoginPage = () => {
           />
         </S.div>
       </S.LoginForm>
-      <S.SignUpTxt type='button'>
-        <Link to='/signUp'>이메일로 회원가입</Link>
-      </S.SignUpTxt>
+      {/* <Link to='/signUp'> */}
+      {/* <S.SignUpPage>이메일로 회원가입</S.SignUpPage> */}
+      {/* </Link> */}
+      {/* </S.SignUpTxt> */}
     </S.LoginSec>
   );
 };
