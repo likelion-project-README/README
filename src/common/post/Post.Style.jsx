@@ -1,3 +1,4 @@
+import Slider from 'react-slick';
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
@@ -41,11 +42,12 @@ export const MoreBtn = styled.button`
 `;
 
 export const PostContents = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
   width: 304px;
-  float: right;
+  margin-left: auto;
   cursor: pointer;
 `;
 
@@ -56,8 +58,14 @@ export const PostTxt = styled.p`
   color: var(--main-text-color);
 `;
 
-export const PostImg = styled.img`
+export const PostImgUl = styled.ul`
+  display: flex;
   width: 100%;
+  overflow: hidden;
+`;
+
+export const PostImg = styled.img`
+  width: 304px;
   height: 228px;
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
@@ -97,4 +105,29 @@ export const CreatedDate = styled.p`
   font-size: 10px;
   line-height: 12px;
   color: var(--sub-text-color);
+`;
+
+export const StyledSlider = styled(Slider)`
+  .slick-list {
+    position: relative;
+    width: 304px;
+  }
+  .slick-dots {
+    position: absolute;
+    bottom: 8px;
+    li {
+      margin-left: -7px;
+    }
+    button::before {
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .slick-active {
+      button::before {
+        opacity: 1;
+        color: var(--main-color);
+      }
+    }
+  }
 `;

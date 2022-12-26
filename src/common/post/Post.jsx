@@ -18,6 +18,9 @@ const Post = ({
   const navigate = useNavigate();
   const isMatchProfile = useMatch('/profile/:id');
   const isMatchHome = useMatch('/');
+  const isMatchPostDetail = useMatch(`/post/:id`);
+
+  const imgSrcArr = data.image.split(',');
 
   const [isHearted, setIsHearted] = useState(data.hearted);
   const [heartCount, setHeartCount] = useState(data.heartCount);
@@ -44,7 +47,7 @@ const Post = ({
   };
 
   const goToProfile = () => {
-    if (isMatchHome) {
+    if (isMatchHome || isMatchPostDetail) {
       navigate(`/profile/${data.author.accountname}`);
     }
   };
@@ -67,6 +70,7 @@ const Post = ({
     setModalData(data);
     setIsModalOpen(!isModalOpen);
   };
+
   return (
     <>
       <S.UserInfo onClick={goToProfile}>
@@ -81,7 +85,15 @@ const Post = ({
       </S.UserInfo>
       <S.PostContents onClick={goToPostDetail}>
         <S.PostTxt>{data.content}</S.PostTxt>
-        {data.image && <S.PostImg src={data.image} alt='' />}
+        {imgSrcArr.length > 1 ? (
+          <S.StyledSlider dots arrows={false}>
+            {imgSrcArr.map((item) => (
+              <S.PostImg src={item} alt='' key={item} />
+            ))}
+          </S.StyledSlider>
+        ) : (
+          <S.PostImg src={imgSrcArr[0]} alt='' />
+        )}
         <S.ActionBtns>
           <div>
             <S.LikeBtn
