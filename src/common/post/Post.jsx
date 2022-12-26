@@ -14,6 +14,7 @@ const Post = ({
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const isMatchProfile = useMatch('/profile/:id');
+  const isMatchHome = useMatch('/');
 
   const [isHearted, setIsHearted] = useState(data.hearted);
   const [heartCount, setHeartCount] = useState(data.heartCount);
@@ -39,13 +40,20 @@ const Post = ({
     return `${year}년 ${month}월 ${date}일`;
   };
 
+  const goToProfile = () => {
+    if (isMatchHome) {
+      navigate(`/profile/${data.author.accountname}`);
+    }
+  };
+
   const goToPostDetail = () => {
-    if (isMatchProfile) {
+    if (isMatchProfile || isMatchHome) {
       navigate(`/post/${data.id}`);
     }
   };
 
-  const clickMoreBtn = () => {
+  const clickMoreBtn = (e) => {
+    e.stopPropagation();
     // 현재 로그인된 accountname 과 data.author.accountname을 비교하여
     // modalType 변경
     setModalType('yourPost');
@@ -53,7 +61,7 @@ const Post = ({
   };
   return (
     <>
-      <S.UserInfo>
+      <S.UserInfo onClick={goToProfile}>
         <S.ProfileImg src={data.author.image} alt='' />
         <div>
           <S.UserName>{data.author.username}</S.UserName>
