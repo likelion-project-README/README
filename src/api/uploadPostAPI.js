@@ -1,9 +1,9 @@
-const uploadPostAPI = async (token, textVal, imgSrc) => {
+const uploadPostAPI = async (token, textVal, imgSrcArr) => {
   try {
     const data = {
       post: {
         content: textVal,
-        image: imgSrc,
+        image: imgSrcArr.join(','),
       },
     };
     const res = await fetch('https://mandarin.api.weniv.co.kr/post', {
