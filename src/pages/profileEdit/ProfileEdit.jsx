@@ -116,13 +116,7 @@ const ProfileEdit = () => {
       <form onSubmit={editProfile}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
         <S.ImgWrap>
-          <S.UserImg
-            src={userImg}
-            alt='유저 프로필 이미지'
-            onClick={() => {
-              console.log(accountName);
-            }}
-          />
+          <S.UserImg src={userImg} alt='유저 프로필 이미지' />
           <S.ImgUploadLab htmlFor='userImg' />
           <S.ImgUploadInp
             type='file'

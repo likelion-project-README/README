@@ -1,5 +1,4 @@
 const addProductAPI = async (
-  token,
   productName,
   productPrice,
   productURL,
@@ -17,13 +16,12 @@ const addProductAPI = async (
     const res = await fetch('https://mandarin.api.weniv.co.kr/product', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
     });
     const json = await res.json();
-    // return json.product.id;
     return json;
   } catch (error) {
     console.log(error);

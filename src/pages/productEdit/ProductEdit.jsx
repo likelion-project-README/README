@@ -11,6 +11,7 @@ const ProductEdit = () => {
   const navigate = useNavigate();
   // 프로필 페이지에서 파라미터로 받아서 사용하기
   const productID = useParams().productId;
+  const accountName = useParams().id;
   const fileInputRef = useRef();
 
   const [btnActive, setBtnActive] = useState(false);
@@ -24,7 +25,7 @@ const ProductEdit = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const result = await getProductDetailAPI('63a45f9217ae666581efea86');
+        const result = await getProductDetailAPI(productID);
         setProductName(result.product.itemName);
         setProductImg(result.product.itemImage);
         setProductPrice(result.product.price);
@@ -97,15 +98,14 @@ const ProductEdit = () => {
     e.preventDefault();
     if (btnActive === true) {
       await editProductAPI(
-        '63a45f9217ae666581efea86',
+        productID,
         productName,
         productPrice,
         productURL,
         productImg,
       );
       alert('상품 수정이 완료되었습니다.'); // eslint-disable-line no-alert
-      // accountname 받아서 유저 프로필 페이지로 이동
-      // navigate('/profile/:id');
+      navigate(`/profile/${accountName}`);
     }
   };
 
