@@ -6,7 +6,7 @@ export const JoinSec = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  padding: auto 34px;
 `;
 
 export const JoinTit = styled.p`
@@ -17,38 +17,11 @@ export const JoinTit = styled.p`
   display: flex;
   margin: 54px 104px 40px;
 `;
-
 export const JoinForm = styled.form`
-  height: 112px;
-  margin-bottom: 30px;
-`;
-
-export const Password = styled.label`
-  width: 322px;
-  height: 48px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 0 34px 16px 34px;
 `;
 
-export const PasswordLab = styled.label`
-  margin-left: 2px;
-  font-weight: 500;
-  font-size: 12px;
-  color: var(--sub-text-color);
-`;
-
-export const PasswordInp = styled.input`
-  font-size: 14px;
-  line-height: 14px;
-  padding-bottom: 8px;
-  border: none;
-  border-bottom: 1px solid #dbdbdb;
-  text-overflow: ellipsis;
-  color: #000;
-  :focus {
-    outline: none;
-    border-bottom: 1px solid var(--main-color);
-  }
+export const div = styled.div`
+  margin: auto;
 `;

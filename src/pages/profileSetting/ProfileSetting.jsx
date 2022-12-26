@@ -43,9 +43,7 @@ const ProfileSetting = () => {
           <S.ImgUploadInp type='file' id='userImg' />
         </S.ImgWrap>
         <InputBox
-          // name={username}
-          // value={username}
-          // label={username}
+          label='사용자 이름'
           id='userName'
           placeholder='2~10자 이내여야 합니다.'
         />

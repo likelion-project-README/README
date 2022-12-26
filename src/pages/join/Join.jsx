@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as S from './Join.Style';
+
 import joinAPI from '../../api/joinAPI';
+import accountnameValidAPI from '../../api/accountnameValidAPI';
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
-import accountnameValidAPI from '../../api/accountnameValidAPI';
 
 const JoinPage = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [emailValid, setEmailValid] = useState(false);
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [accountname, setAccountname] = useState('');
+  const [intro, setIntro] = useState('');
+  const [image, setImage] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
 
   const [btnActive, setBtnActive] = useState('');
@@ -30,21 +35,23 @@ const JoinPage = () => {
   };
 
   // 이메일 검증(이메일 주소의 형식이 유효하지 않거나 이미 가입된 이메일일 경우)
-  const handleEmailValid = () => {
-    const reg =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-    if (!reg.test(email)) {
-      setEmailError('올바른 이메일 형식이 아닙니다.');
-      setEmailValid(false);
-    } else if (email.length === 0) {
-      setEmailError('입력해주세요.');
-      setEmailValid(false);
-    } else {
-      setEmailError('');
-      setEmailValid(true);
-    }
-  };
+  useEffect(() => {
+    const handleEmailValid = () => {
+      const reg =
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      if (email.length === 0) {
+        setEmailError('입력해주세요.');
+        setEmailValid(false);
+      } else if (!reg.test(email)) {
+        setEmailError('올바른 이메일 형식이 아닙니다.');
+        setEmailValid(false);
+      } else {
+        setEmailError('');
+        setEmailValid(true);
+      }
+    };
+    handleEmailValid();
+  }, [email]);
 
   // 계정 검증
   // const handleUserIdDuplicate = async (e) => {
@@ -57,10 +64,9 @@ const JoinPage = () => {
   //   }
   // };
 
+  // 비밀번호 검증
   useEffect(() => {
     const handlePasswordValid = () => {
-      // const passwordInputValue = e.target.value;
-      // setPassword(passwordInputValue);
       if (password.length < 6) {
         setPasswordValid(false);
         setPasswordError('비밀번호는 6자 이상이어야 합니다.');
@@ -72,29 +78,18 @@ const JoinPage = () => {
     handlePasswordValid();
   }, [password]);
 
-  // console.log(email, password);
-  // console.log(emailValid, passwordValid);
-  // console.log(emailError, passwordError);
-  // console.log(password.length);
-
   // 회원가입 버튼 활성화
-  const handleButtonActive = () => {
-    return emailValid && passwordValid
-      ? setBtnActive(false)
-      : setBtnActive(true);
-  };
-
-  // useEffect(() => {
-  //   if (email && password) {
-  //     setBtnActive(true);
-  //   } else {
-  //     setBtnActive(false);
-  //   }
-  // }, [email, password]);
+  useEffect(() => {
+    if (emailValid && passwordValid) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    joinAPI(email, password)
+    joinAPI(username, email, password, accountname, intro, image)
       .then((data) => {
         localStorage.setItem('token', data.user.token);
         localStorage.setItem('accountname', data.user.accountname);
@@ -109,14 +104,14 @@ const JoinPage = () => {
       });
   };
 
-  // const handleClick = () => {
-  //   navigate('/signUp/profileSetting', {
-  //     state: {
-  //       email,
-  //       password,
-  //     },
-  //   });
-  // };
+  const handleClick = () => {
+    navigate('/signUp/profileSetting', {
+      state: {
+        email,
+        password,
+      },
+    });
+  };
 
   return (
     <S.JoinSec>
@@ -128,8 +123,7 @@ const JoinPage = () => {
           id='email'
           type='email'
           required
-          onChange={handleEmailValid}
-          onBlur={handleButtonActive}
+          onChange={handleData}
           value={email}
           buttonColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
@@ -141,24 +135,25 @@ const JoinPage = () => {
           id='password'
           type='password'
           onChange={handleData}
-          onBlur={handleButtonActive}
           value={password}
           display={passwordValid ? null : 'yes'}
           buttonColor={passwordValid ? null : 'red'}
           message={passwordError}
         />
+        <S.div>
+          <Button
+            type='submit'
+            size='lg'
+            tit='다음'
+            onClick={handleClick}
+            isActive={btnActive}
+            disabled={emailValid && passwordValid ? null : 'disabled'}
+            message={passwordError}
+          >
+            <Link to='/signUp/profileSetting'></Link>
+          </Button>
+        </S.div>
       </S.JoinForm>
-      <Button
-        type='submit'
-        size='lg'
-        tit='다음'
-        // onClick={handleClick}
-        isActive={btnActive}
-        disabled={emailValid && passwordValid ? null : 'disabled'}
-        message={passwordError}
-      >
-        <Link to='/signUp/profileSetting'></Link>
-      </Button>
     </S.JoinSec>
   );
 };
