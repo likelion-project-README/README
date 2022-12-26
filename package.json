@@ -12,6 +12,7 @@
     "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.6",
+    "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.2",
     "web-vitals": "^2.1.4"

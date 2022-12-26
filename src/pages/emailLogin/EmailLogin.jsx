@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import * as S from './EmailLogin.Style';
+import { accountnameData, profileImageData } from '../../atoms/LoginData';
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
@@ -17,6 +19,8 @@ const EmailLoginPage = () => {
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [btnActive, setBtnActive] = useState(true);
+  const setAccountNameData = useSetRecoilState(accountnameData);
+  const setProfileImageData = useSetRecoilState(profileImageData);
 
   const handleData = (e) => {
     if (e.target.type === 'email') {
@@ -27,23 +31,42 @@ const EmailLoginPage = () => {
   };
 
   // 이메일 유효성 검사
-  const handleEmailValid = () => {
-    // const emailValue = e.target.value;
-    // setEmail(emailValue);
-    const reg =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  useEffect(() => {
+    const handleEmailValid = () => {
+      const reg =
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-    if (!reg.test(email)) {
-      setEmailError('올바른 이메일 형식이 아닙니다.');
-      setEmailValid(false);
-    } else if (email.length === 0) {
-      setEmailError('입력해주세요.');
-      setEmailValid(false);
-    } else {
-      setEmailError('');
-      setEmailValid(true);
-    }
-  };
+      if (email.length === 0) {
+        setEmailError('입력해주세요.');
+        setEmailValid(false);
+      } else if (!reg.test(email)) {
+        setEmailError('올바른 이메일 형식이 아닙니다.');
+        setEmailValid(false);
+      } else {
+        setEmailError('');
+        setEmailValid(true);
+      }
+    };
+    handleEmailValid();
+  }, [email]);
+
+  // const handleEmailValid = () => {
+  // const emailValue = e.target.value;
+  // setEmail(emailValue);
+  // const reg =
+  //   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+  // if (!reg.test(email)) {
+  //   setEmailError('올바른 이메일 형식이 아닙니다.');
+  //   setEmailValid(false);
+  // } else if (email.length === 0) {
+  //   setEmailError('입력해주세요.');
+  //   setEmailValid(false);
+  // } else {
+  //   setEmailError('');
+  //   setEmailValid(true);
+  // }
+  // };
 
   // 비밀번호 유효성 검사
   useEffect(() => {
@@ -78,8 +101,10 @@ const EmailLoginPage = () => {
     loginAPI(email, password)
       .then((data) => {
         localStorage.setItem('token', data.user.token);
-        localStorage.setItem('accountname', data.user.accountname);
-        localStorage.setItem('profileImg', data.user.image);
+        setAccountNameData(data.user.accountname);
+        setProfileImageData(data.user.profileImageData);
+        // localStorage.setItem('accountname', data.user.accountname);
+        // localStorage.setItem('profileImg', data.user.image);
       })
       .catch((error) => {
         console.log(error);
@@ -89,13 +114,14 @@ const EmailLoginPage = () => {
   return (
     <S.LoginSec>
       <S.LoginTit>로그인</S.LoginTit>
-      <form onSubmit={handleSubmit}>
+      <S.LoginForm onSubmit={handleSubmit}>
         <InputBox
           label='이메일'
           placeholder='이메일 주소를 입력해주세요'
           id='email'
           type='email'
-          onChange={handleEmailValid}
+          // onChange={handleEmailValid}
+          onChange={handleData}
           onBlur={handleButtonActive}
           value={email}
           buttonColor={emailValid ? null : 'red'}
@@ -114,17 +140,19 @@ const EmailLoginPage = () => {
           buttonColor={passwordValid ? null : 'red'}
           message={passwordError}
         />
-        <Button
-          className='loginBtn'
-          type='submit'
-          size='lg'
-          tit='로그인'
-          // onClick={handleClick}
-          isActive={btnActive}
-          disabled={emailValid && passwordValid ? null : 'disabled'}
-          message={passwordError}
-        />
-      </form>
+        <S.div>
+          <Button
+            className='loginBtn'
+            type='submit'
+            size='lg'
+            tit='로그인'
+            // onClick={handleClick}
+            isActive={btnActive}
+            disabled={emailValid && passwordValid ? null : 'disabled'}
+            message={passwordError}
+          />
+        </S.div>
+      </S.LoginForm>
       <S.SignUpTxt type='button'>
         <Link to='/signUp'>이메일로 회원가입</Link>
       </S.SignUpTxt>
