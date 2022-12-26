@@ -4,6 +4,7 @@ import * as S from './Join.Style';
 import joinAPI from '../../api/joinAPI';
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
+import accountnameValidAPI from '../../api/accountnameValidAPI';
 
 const JoinPage = () => {
   const navigate = useNavigate();
@@ -14,7 +15,11 @@ const JoinPage = () => {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
+
   const [btnActive, setBtnActive] = useState('');
+  // const [userId, setUserId] = useState('');
+  // const [userIdValid, setUserIdValid] = useState(true);
+  // const [userIdMsg, setUserIdMsg] = useState('');
 
   const handleData = (e) => {
     if (e.target.type === 'email') {
@@ -42,6 +47,15 @@ const JoinPage = () => {
   };
 
   // 계정 검증
+  // const handleUserIdDuplicate = async (e) => {
+  //   const userId = e.target.value;
+  //   setUserId(userId);
+  //   const userIdValid = await accountnameValidAPI(userId);
+  //   if (userIdValid.message === '이미 가입된 계정ID 입니다.') {
+  //     setValidId(false);
+  //     setUserIdMsg('*이미 사용 중인 ID입니다.');
+  //   }
+  // };
 
   useEffect(() => {
     const handlePasswordValid = () => {

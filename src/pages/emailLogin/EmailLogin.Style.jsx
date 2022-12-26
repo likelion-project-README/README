@@ -6,6 +6,7 @@ export const LoginSec = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: auto 34px;
 `;
 
 export const LoginTit = styled.p`
@@ -23,4 +24,13 @@ export const SignUpTxt = styled.p`
   text-align: center;
   margin-top: 20px;
   color: var(--sub-text-color);
+`;
+
+export const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const div = styled.div`
+  margin: auto;
 `;
