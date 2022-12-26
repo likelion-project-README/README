@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
 import uploadImgAPI from '../../api/uploadImgAPI';
@@ -8,23 +8,22 @@ import * as S from './AddProduct.Style';
 import logoProduct from '../../assets/logo-product.svg';
 
 const AddProduct = () => {
-  const token = localStorage.getItem('token');
   const navigate = useNavigate();
-
   const fileInputRef = useRef();
+  const accountName = useParams().id;
 
   const [btnActive, setBtnActive] = useState(false);
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productURL, setProductURL] = useState('');
-  const [imgSrc, setImgSrc] = useState(logoProduct);
+  const [productImg, setProductImg] = useState(logoProduct);
   const [validPrice, setValidPrice] = useState(true);
 
   // 이미지 업로드
   const uploadImg = async (e) => {
     const imgFile = e.target.files[0];
     const imgUrl = await uploadImgAPI(imgFile);
-    setImgSrc(imgUrl);
+    setProductImg(imgUrl);
   };
 
   // 상품명 공백으로 시작 방지
@@ -54,6 +53,7 @@ const AddProduct = () => {
   const handleProductPriceValid = (e) => {
     if (productPrice === '0') {
       setValidPrice(false);
+      setBtnActive(false);
     } else {
       setValidPrice(true);
     }
@@ -77,28 +77,29 @@ const AddProduct = () => {
       productName.length > 0 &&
       productPrice.length > 0 &&
       productURL.length > 0 &&
-      imgSrc !== logoProduct
+      productImg !== logoProduct
     ) {
       setBtnActive(true);
     }
-  }, [productName, productPrice, productURL, imgSrc]);
+  }, [productName, productPrice, productURL, productImg]);
 
   // 상품 등록 데이터 전송
   const addProduct = async (e) => {
     e.preventDefault();
-    const result = await addProductAPI(
-      token,
-      productName,
-      Number(productPrice.replaceAll(',', '')),
-      productURL,
-      imgSrc,
-    );
-    if (result.message === '필수 입력사항을 입력해주세요.') {
-      alert('상품 등록에 실패했습니다.'); // eslint-disable-line no-alert
-    } else {
-      alert('상품 등록이 완료되었습니다.'); // eslint-disable-line no-alert
-      // 유저 프로필 페이지로 이동
-      navigate('/profile/:id');
+    if (btnActive === true) {
+      try {
+        const result = await addProductAPI(
+          productName,
+          Number(productPrice.replaceAll(',', '')),
+          productURL,
+          productImg,
+        );
+        console.log(result);
+        // alert('상품 등록이 완료되었습니다.'); // eslint-disable-line no-alert
+        // navigate(`/profile/${accountName}`);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -109,7 +110,7 @@ const AddProduct = () => {
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
         <S.ImgWrap>
           <S.ImgUploadTit>이미지 등록</S.ImgUploadTit>
-          <S.ImgBox src={imgSrc} alt='유저 상품 이미지' />
+          <S.ImgBox src={productImg} alt='유저 상품 이미지' />
           <S.ImgUploadLab htmlFor='productImg' />
           <S.ImgUploadInp
             type='file'

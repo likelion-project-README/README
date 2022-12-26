@@ -1,17 +1,17 @@
-const editProfileAPI = async (token, userName, userId, userIntro, imgSrc) => {
+const editProfileAPI = async (userName, userId, userIntro, userImg) => {
   try {
     const data = {
       user: {
         username: userName,
         accountname: userId,
         intro: userIntro,
-        image: imgSrc,
+        image: userImg,
       },
     };
     await fetch(`https://mandarin.api.weniv.co.kr/user`, {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-type': 'application/json',
       },
       body: JSON.stringify(data),

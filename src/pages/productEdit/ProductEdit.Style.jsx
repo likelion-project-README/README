@@ -27,35 +27,24 @@ export const ImgUploadTit = styled.p`
   margin-bottom: 18px;
 `;
 
-export const ImgBox = styled.img.attrs({
-  alt: '유저 상품 이미지',
-  src: 'https://images.unsplash.com/photo-1606425271394-c3ca9aa1fc06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
-})`
+export const ImgBox = styled.img`
   width: 322px;
   height: 204px;
   border-radius: 10px;
-  object-fit: cover;
   border: 0.5px solid #dbdbdb;
+  object-fit: cover;
 `;
 
-export const ImgUploadBtn = styled.button`
+export const ImgUploadLab = styled.label`
+  display: inline-block;
   position: relative;
-  top: -46px;
-  left: 274px;
+  top: -48px;
+  left: 276px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   background: url(${sprite}) 0px 0px / 146px 132px;
-`;
-
-export const ImgUploadLab = styled.label`
-  /* ir */
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+  cursor: pointer;
 `;
 
 export const ImgUploadInp = styled.input`

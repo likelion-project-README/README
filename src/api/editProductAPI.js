@@ -1,4 +1,5 @@
-const addProductAPI = async (
+const editProductAPI = async (
+  productId,
   productName,
   productPrice,
   productURL,
@@ -13,20 +14,17 @@ const addProductAPI = async (
         itemImage: productImg,
       },
     };
-    const res = await fetch('https://mandarin.api.weniv.co.kr/product', {
-      method: 'POST',
+    await fetch(`https://mandarin.api.weniv.co.kr/product/${productId}`, {
+      method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
-    return json;
   } catch (error) {
     console.log(error);
-    return null;
   }
 };
 
-export default addProductAPI;
+export default editProductAPI;
