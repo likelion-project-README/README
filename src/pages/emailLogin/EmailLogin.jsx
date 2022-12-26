@@ -84,17 +84,24 @@ const EmailLoginPage = () => {
     handlePasswordValid();
   }, [password]);
 
-  // console.log(email, password);
+  console.log(email, password);
   console.log(emailValid, passwordValid);
-  // console.log(emailError, passwordError);
+  console.log(emailError, passwordError);
   console.log(password.length);
 
   // 로그인 버튼 활성화
-  const handleButtonActive = () => {
-    return emailValid && passwordValid
-      ? setBtnActive(false)
-      : setBtnActive(true);
-  };
+  useEffect(() => {
+    if (emailValid && passwordValid) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  });
+  // const handleButtonActive = () => {
+  //   return emailValid && passwordValid
+  //     ? setBtnActive(true)
+  //     : setBtnActive(false);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -122,7 +129,7 @@ const EmailLoginPage = () => {
           type='email'
           // onChange={handleEmailValid}
           onChange={handleData}
-          onBlur={handleButtonActive}
+          // onBlur={handleButtonActive}
           value={email}
           buttonColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
@@ -134,7 +141,6 @@ const EmailLoginPage = () => {
           id='password'
           type='password'
           onChange={handleData}
-          onBlur={handleButtonActive}
           value={password}
           display={passwordValid ? null : 'yes'}
           buttonColor={passwordValid ? null : 'red'}
@@ -146,7 +152,6 @@ const EmailLoginPage = () => {
             type='submit'
             size='lg'
             tit='로그인'
-            // onClick={handleClick}
             isActive={btnActive}
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}

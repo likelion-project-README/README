@@ -16,10 +16,10 @@ const JoinPage = () => {
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
 
+  const [btnActive, setBtnActive] = useState('');
   // const [userId, setUserId] = useState('');
   // const [userIdValid, setUserIdValid] = useState(true);
   // const [userIdMsg, setUserIdMsg] = useState('');
-  const [btnActive, setBtnActive] = useState('');
 
   const handleData = (e) => {
     if (e.target.type === 'email') {
