@@ -1,5 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import * as S from './PostModal.Style';
 import Alert from '../alert/Alert';
+import deleteProductsAPI from '../../api/deleteProductAPI';
+import deletePostAPI from '../../api/deletePostAPI';
+import deleteCommentAPI from '../../api/deleteCommentAPI';
 
 /**
  * 1. 프로필
@@ -12,9 +16,27 @@ import Alert from '../alert/Alert';
  */
 
 const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
+  const navigate = useNavigate();
   const clickOepnProduct = () => {
     setIsModalOpen(!isModalOpen);
     window.open(modalData.link, '_blank');
+  };
+  const clickDeleteProduct = () => {
+    deleteProductsAPI(modalData.id).then((req) => {
+      navigate(0);
+    });
+  };
+  const clickEditProduct = () => {
+    navigate(
+      `/profile/${modalData.author.accountname}/editProduct/${modalData.id}`,
+    );
+  };
+  const clickDeletePost = async () => {
+    deletePostAPI(modalData.id).then((req) => navigate(-1));
+  };
+  const clickDeleteComment = () => {
+    console.log(modalData);
+    // deleteCommentAPI(postId, commentId, token)
   };
   if (modalType === 'profile') {
     return (
@@ -32,8 +54,20 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>삭제</S.ModalTxt>
-          <S.ModalTxt>수정</S.ModalTxt>
+          <S.ModalTxt onClick={clickDeleteProduct}>삭제</S.ModalTxt>
+          <S.ModalTxt onClick={clickEditProduct}>수정</S.ModalTxt>
+          <S.ModalTxt onClick={clickOepnProduct}>
+            웹사이트에서 상품 보기
+          </S.ModalTxt>
+        </S.ModalOverlay>
+      </S.ModalWrap>
+    );
+  }
+  if (modalType === 'yourProduct') {
+    return (
+      <S.ModalWrap>
+        <S.ModalOverlay>
+          <S.ModalCancleBtn />
           <S.ModalTxt onClick={clickOepnProduct}>
             웹사이트에서 상품 보기
           </S.ModalTxt>
@@ -46,8 +80,7 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>삭제</S.ModalTxt>
-          <S.ModalTxt>수정</S.ModalTxt>
+          <S.ModalTxt onClick={clickDeletePost}>삭제</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );
@@ -57,7 +90,7 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>신고하기</S.ModalTxt>
+          <S.ModalTxt onClick={() => navigate(0)}>신고하기</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );
@@ -67,7 +100,7 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>삭제</S.ModalTxt>
+          <S.ModalTxt onClick={clickDeleteComment}>삭제</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );
@@ -77,7 +110,7 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>신고하기</S.ModalTxt>
+          <S.ModalTxt onClick={() => navigate(0)}>신고하기</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );

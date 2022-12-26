@@ -7,13 +7,19 @@ import * as S from './Product.Style';
 
 const Product = ({
   isModalOpen,
+  isMine,
   setIsModalOpen,
   setModalType,
   setModalData,
   data,
 }) => {
   const productHandle = () => {
-    setModalType('myProduct');
+    if (isMine) {
+      setModalType('myProduct');
+    } else {
+      setModalType('yourProduct');
+    }
+
     setModalData(data);
     setIsModalOpen(!isModalOpen);
   };
