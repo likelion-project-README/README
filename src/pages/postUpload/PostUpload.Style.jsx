@@ -83,6 +83,26 @@ export const DeleteImgBtn = styled.button`
   background: url(${sprite}) -122px -48px / 146px 132px;
 `;
 
+export const MultipleImgScrollCont = styled.div`
+  display: flex;
+  width: 304px;
+  padding: 10px 0;
+  gap: 8px;
+  overflow-x: scroll;
+`;
+
+export const MultipleUploadedImgCont = styled.div`
+  position: relative;
+`;
+
+export const MultipleUploadedImg = styled.img`
+  width: 168px;
+  height: 126px;
+  border: 0.5px solid var(--sub2-text-color);
+  border-radius: 10px;
+  object-fit: cover;
+`;
+
 export const AddFileLab = styled.label`
   display: block;
   position: fixed;

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import uploadImgAPI from '../../api/uploadImgAPI';
@@ -9,12 +9,20 @@ const PostUpload = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
-  const [imgSrc, setImgSrc] = useState('');
+  const [imgSrcArr, setImgSrcArr] = useState([]);
   const [textareaVal, setTextareaVal] = useState('');
   const [btnActive, setBtnActive] = useState(false);
 
   const textareaRef = useRef();
   const fileInputRef = useRef();
+
+  useEffect(() => {
+    if (textareaVal || imgSrcArr.length > 0) {
+      setBtnActive(true);
+    } else {
+      setBtnActive(false);
+    }
+  }, [textareaVal, imgSrcArr]);
 
   const handleChangeTextarea = useCallback(
     (e) => {
@@ -25,28 +33,30 @@ const PostUpload = () => {
     [textareaVal],
   );
 
-  const activeUploadBtn = () => {
-    return textareaVal || imgSrc ? setBtnActive(true) : setBtnActive(false);
+  const showImgPreview = async (e) => {
+    const attachedFile = e.target.files[0];
+    const attachedFiles = e.target.files;
+    const imgUrl = await uploadImgAPI(attachedFile);
+    if (imgSrcArr.length + attachedFiles.length < 4) {
+      setImgSrcArr([...imgSrcArr, imgUrl]);
+      console.log(imgSrcArr);
+    } else {
+      alert('이미지는 세 장까지 업로드 가능합니다');
+    }
   };
 
-  const uploadImg = async (e) => {
-    const imgFile = e.target.files[0];
-    const imgUrl = await uploadImgAPI(imgFile);
-    setImgSrc(imgUrl);
-    setBtnActive(true);
-  };
-
-  const deleteImg = () => {
-    setImgSrc(null);
-    fileInputRef.current.value = '';
-    if (!textareaVal) {
-      setBtnActive(false);
+  const deleteImg = (key) => {
+    if (imgSrcArr.length === 1) {
+      setImgSrcArr([]);
+      fileInputRef.current.value = '';
+    } else {
+      setImgSrcArr(imgSrcArr.filter((item) => item !== key));
     }
   };
 
   const uploadPost = async (e) => {
     e.preventDefault();
-    const postId = await uploadPostAPI(token, textareaVal, imgSrc);
+    const postId = await uploadPostAPI(token, textareaVal, imgSrcArr);
     if (postId) {
       navigate(`/post/${postId}`, { replace: true });
     }
@@ -66,16 +76,30 @@ const PostUpload = () => {
               placeholder='게시글 입력하기...'
               ref={textareaRef}
               onInput={handleChangeTextarea}
-              onKeyUp={activeUploadBtn}
             />
-            {imgSrc && (
-              <S.UploadedImgCont>
-                <S.UploadedImg src={imgSrc} alt='' />
-                <S.DeleteImgBtn type='button' onClick={deleteImg}>
-                  <span className='hidden'>이미지 업로드 취소</span>
-                </S.DeleteImgBtn>
-              </S.UploadedImgCont>
-            )}
+            {imgSrcArr &&
+              (imgSrcArr.length === 1 ? (
+                <S.UploadedImgCont>
+                  <S.UploadedImg src={imgSrcArr[0]} alt='' />
+                  <S.DeleteImgBtn type='button' onClick={deleteImg}>
+                    <span className='hidden'>이미지 업로드 취소</span>
+                  </S.DeleteImgBtn>
+                </S.UploadedImgCont>
+              ) : (
+                <S.MultipleImgScrollCont>
+                  {imgSrcArr.map((item) => (
+                    <S.MultipleUploadedImgCont key={item}>
+                      <S.MultipleUploadedImg src={item} alt='' />
+                      <S.DeleteImgBtn
+                        type='button'
+                        onClick={() => deleteImg(item)}
+                      >
+                        <span className='hidden'>이미지 업로드 취소</span>
+                      </S.DeleteImgBtn>
+                    </S.MultipleUploadedImgCont>
+                  ))}
+                </S.MultipleImgScrollCont>
+              ))}
           </S.ContentsArea>
         </S.UploadCont>
         <S.AddFileLab htmlFor='uploadImg'>
@@ -83,9 +107,10 @@ const PostUpload = () => {
             type='file'
             id='uploadImg'
             accept='image/*'
+            multiple
             className='hidden'
             ref={fileInputRef}
-            onChange={uploadImg}
+            onChange={showImgPreview}
           />
         </S.AddFileLab>
       </form>
