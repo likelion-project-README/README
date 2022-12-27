@@ -1,5 +1,4 @@
-const emailDuplicateAPI = async (email) => {
-  email.preventDefault();
+const emailDuplicateAPI = async (userEmail) => {
   const res = await fetch(`https://mandarin.api.weniv.co.kr/user/emailvalid`, {
     method: 'POST',
     headers: {
@@ -7,11 +6,11 @@ const emailDuplicateAPI = async (email) => {
     },
     body: JSON.stringify({
       user: {
-        email,
+        email: userEmail,
       },
     }),
   });
-  const json = res.json();
+  const json = await res.json();
   console.log(json);
   return json;
 };
