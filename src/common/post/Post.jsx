@@ -84,8 +84,8 @@ const Post = ({
         </S.MoreBtn>
       </S.UserInfo>
       <S.PostContents onClick={goToPostDetail}>
-        <S.PostTxt>{data.content}</S.PostTxt>
-        {imgSrcArr.length > 1 ? (
+        {!data.contents && <S.PostTxt>{data.content}</S.PostTxt>}
+        {imgSrcArr[0] && (
           <S.StyledSlider dots arrows={false}>
             {imgSrcArr.map((item) => (
               <S.PostImg
@@ -95,11 +95,6 @@ const Post = ({
               />
             ))}
           </S.StyledSlider>
-        ) : (
-          <S.PostImg
-            src={`https://mandarin.api.weniv.co.kr/${imgSrcArr[0]}`}
-            alt=''
-          />
         )}
         <S.ActionBtns>
           <div>
