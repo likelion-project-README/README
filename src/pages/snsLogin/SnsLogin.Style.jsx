@@ -90,15 +90,17 @@ export const FacebookImg = styled.div`
 `;
 
 export const LoginLink = styled.ul`
-  margin: 20px auto 82px;
+  margin: 20px auto;
   display: flex;
+  font-size: 12px;
+  line-height: 15px;
 `;
 
 export const EmailLink = styled(Link)`
   text-decoration: none;
-  margin: 20px auto 82px;
-  display: flex;
   color: var(--sub-text-color);
+  margin: 20px auto;
+  display: flex;
   ::after {
     content: '|';
     color: #c4c4c4;
@@ -111,5 +113,5 @@ export const EmailLink = styled(Link)`
 export const SignUpLink = styled(Link)`
   color: var(--sub-text-color);
   text-decoration: none;
-  margin: 20px auto 82px;
+  margin: 20px auto;
 `;
