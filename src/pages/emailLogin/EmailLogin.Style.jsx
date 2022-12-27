@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const LoginSec = styled.section`
   width: 390px;
@@ -27,10 +28,11 @@ export const div = styled.div`
   margin: auto;
 `;
 
-// export const SignUpPage = styled(Link)`
-//   color: var(--sub-text-color);
-//   font-size: 12px;
-//   line-height: 15px;
-//   text-align: center;
-//   margin-top: 20px;
-// `;
+export const StyledLink = styled(Link)`
+  color: var(--sub-text-color);
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  margin-top: 20px;
+`;

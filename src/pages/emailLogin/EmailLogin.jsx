@@ -3,7 +3,14 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './EmailLogin.Style';
-import { accountnameData, profileImageData } from '../../atoms/LoginData';
+import {
+  accountnameData,
+  emailData,
+  introData,
+  passwordData,
+  profileImageData,
+  usernameData,
+} from '../../atoms/LoginData';
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
@@ -13,13 +20,21 @@ const EmailLoginPage = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [accountname, setAccountname] = useState('');
+  const [intro, setIntro] = useState('');
+  const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
-  const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [btnActive, setBtnActive] = useState(true);
+  const setUsernameData = useSetRecoilState(usernameData);
+  const setEmailData = useSetRecoilState(emailData);
+  const setPasswordData = useSetRecoilState(passwordData);
   const setAccountNameData = useSetRecoilState(accountnameData);
+  const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
 
   const handleData = (e) => {
@@ -36,7 +51,7 @@ const EmailLoginPage = () => {
       const reg =
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
       if (email.length === 0) {
-        setEmailError('입력해주세요.');
+        // setEmailError('입력해주세요.');
         setEmailValid(false);
       } else if (!reg.test(email)) {
         setEmailError('올바른 이메일 형식이 아닙니다.');
@@ -49,38 +64,16 @@ const EmailLoginPage = () => {
     handleEmailValid();
   }, [email]);
 
-  // const handleEmailValid = () => {
-  // const emailValue = e.target.value;
-  // setEmail(emailValue);
-  // const reg =
-  //   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-  // if (!reg.test(email)) {
-  //   setEmailError('올바른 이메일 형식이 아닙니다.');
-  //   setEmailValid(false);
-  // } else if (email.length === 0) {
-  //   setEmailError('입력해주세요.');
-  //   setEmailValid(false);
-  // } else {
-  //   setEmailError('');
-  //   setEmailValid(true);
-  // }
-  // };
-
   // 비밀번호 유효성 검사
-  useEffect(() => {
-    const handlePasswordValid = () => {
-      // const passwordInputValue = e.target.value;
-      // setPassword(passwordInputValue);
-      if (password.length < 6) {
-        setPasswordValid(false);
-        setPasswordError('비밀번호는 6자 이상이어야 합니다.');
-      } else if (password.length >= 6) {
-        setPasswordValid(true);
-        setPasswordError('');
-      }
-    };
-    handlePasswordValid();
-  }, [password]);
+  const handlePasswordValid = () => {
+    if (password.length < 6) {
+      setPasswordValid(false);
+      setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+    } else if (password.length >= 6) {
+      setPasswordValid(true);
+      setPasswordError('');
+    }
+  };
 
   // 로그인 버튼 활성화
   useEffect(() => {
@@ -90,32 +83,27 @@ const EmailLoginPage = () => {
       setBtnActive(false);
     }
   });
-  // const handleButtonActive = () => {
-  //   return emailValid && passwordValid
-  //     ? setBtnActive(true)
-  //     : setBtnActive(false);
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginAPI(email, password)
-      .then((data) => {
-        localStorage.setItem('token', data.user.token);
-        setAccountNameData(data.user.accountname);
-        setProfileImageData(data.user.profileImageData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleClick = () => {
+    loginAPI(email, password).then((data) => {
+      localStorage.setItem('token', data.user.token);
+      setUsernameData(data.user.username);
+      setEmailData(data.user.email);
+      setPasswordData(data.user.password);
+      setAccountNameData(data.user.accountname);
+      setIntroData(data.user.intro);
+      setProfileImageData(data.user.image);
+    });
     navigate('/', {
       state: {
         email,
         password,
       },
     });
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   };
 
   return (
@@ -127,9 +115,9 @@ const EmailLoginPage = () => {
           placeholder='이메일 주소를 입력해주세요'
           id='email'
           type='email'
+          required
           // onChange={handleEmailValid}
           onChange={handleData}
-          // onBlur={handleButtonActive}
           value={email}
           buttonColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
@@ -140,7 +128,9 @@ const EmailLoginPage = () => {
           placeholder='비밀번호를 입력해주세요'
           id='password'
           type='password'
+          required
           onChange={handleData}
+          onBlur={handlePasswordValid}
           value={password}
           display={passwordValid ? null : 'yes'}
           buttonColor={passwordValid ? null : 'red'}
@@ -151,17 +141,13 @@ const EmailLoginPage = () => {
             type='submit'
             size='lg'
             tit='로그인'
-            onClick={handleClick}
             isActive={btnActive}
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
           />
         </S.div>
       </S.LoginForm>
-      {/* <Link to='/signUp'> */}
-      {/* <S.SignUpPage>이메일로 회원가입</S.SignUpPage> */}
-      {/* </Link> */}
-      {/* </S.SignUpTxt> */}
+      <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
     </S.LoginSec>
   );
 };
