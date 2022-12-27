@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './PostModal.Style';
 import Alert from '../alert/Alert';
 import deleteProductsAPI from '../../api/deleteProductAPI';
@@ -32,7 +32,15 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
     );
   };
   const clickDeletePost = async () => {
-    deletePostAPI(modalData.id).then((req) => navigate(-1));
+    console.log(window.location.pathname.split('/')[1]);
+
+    deletePostAPI(modalData.id).then((req) => {
+      if (window.location.pathname.split('/')[1] === 'profile') {
+        navigate(0);
+      } else {
+        navigate(-1);
+      }
+    });
   };
   const clickDeleteComment = () => {
     console.log(modalData);
