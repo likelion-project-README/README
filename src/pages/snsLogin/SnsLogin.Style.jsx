@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/logo-login.svg';
 import sprite from '../../assets/css_sprites.png';
@@ -29,7 +30,7 @@ export const SnsLoginWrapper = styled.div`
 
 export const KakaoBtn = styled.button`
   margin: 50px 34px 0;
-  height: 44px;
+  padding: 13px 87px;
   position: relative;
   border: #f2c94c solid 1px;
   border-radius: 44px;
@@ -49,7 +50,7 @@ export const KakaoImg = styled.div`
 
 export const GoogleBtn = styled.button`
   margin: 10px 34px 0;
-  height: 44px;
+  padding: 13px 87px;
   position: relative;
   border: var(--sub-text-color) solid 1px;
   border-radius: 44px;
@@ -69,8 +70,8 @@ export const GoogleImg = styled.div`
 
 export const FacebookBtn = styled.button`
   margin: 10px 34px 0;
+  padding: 13px 87px;
   width: 322px;
-  height: 44px;
   position: relative;
   border: #2d9cdb solid 1px;
   border-radius: 44px;
@@ -93,7 +94,10 @@ export const LoginLink = styled.ul`
   display: flex;
 `;
 
-export const Email = styled.p`
+export const EmailLink = styled(Link)`
+  text-decoration: none;
+  margin: 20px auto 82px;
+  display: flex;
   color: var(--sub-text-color);
   ::after {
     content: '|';
@@ -104,10 +108,8 @@ export const Email = styled.p`
   }
 `;
 
-export const SignUp = styled.p`
+export const SignUpLink = styled(Link)`
   color: var(--sub-text-color);
-`;
-
-const StyledLink = styled.link`
   text-decoration: none;
+  margin: 20px auto 82px;
 `;
