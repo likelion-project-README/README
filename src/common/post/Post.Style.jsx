@@ -13,6 +13,7 @@ export const ProfileImg = styled.img`
   height: 42px;
   margin-right: 12px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const UserName = styled.strong`
@@ -119,14 +120,14 @@ export const StyledSlider = styled(Slider)`
       margin-left: -7px;
     }
     button::before {
-      color: #ffffff;
+      color: var(--sub2-text-color);
       opacity: 1;
     }
 
     .slick-active {
       button::before {
         opacity: 1;
-        color: var(--main-color);
+        color: #ffffff;
       }
     }
   }

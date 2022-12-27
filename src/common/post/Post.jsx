@@ -86,7 +86,7 @@ const Post = ({
       <S.PostContents onClick={goToPostDetail}>
         {!data.contents && <S.PostTxt>{data.content}</S.PostTxt>}
         {imgSrcArr[0] && (
-          <S.StyledSlider dots arrows={false}>
+          <S.StyledSlider dots arrows={false} draggable>
             {imgSrcArr.map((item) => (
               <S.PostImg
                 src={`https://mandarin.api.weniv.co.kr/${item}`}
