@@ -11,7 +11,7 @@ export const CommentForm = styled.form`
   padding: 13px 16px 12px 16px;
 `;
 
-export const UserImg = styled.img.attrs`
+export const UserImg = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 50%;
