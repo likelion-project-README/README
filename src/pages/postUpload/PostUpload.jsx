@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import uploadPostAPI from '../../api/uploadPostAPI';
 import * as S from './PostUpload.Style';
 import uploadMultipleImgAPI from '../../api/uploadMultipleImgAPI';
+import { profileImageData } from '../../atoms/LoginData';
 
 const PostUpload = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+
+  const userProfileImg = useRecoilValue(profileImageData);
 
   const [imgPreviewUrls, setImgPreviewUrls] = useState([]);
   const [imgFiles, setImgFiles] = useState([]);
@@ -36,21 +40,17 @@ const PostUpload = () => {
 
   const showImgPreview = (e) => {
     const attachedFiles = [...e.target.files];
+    const imgPreviews = [...imgPreviewUrls];
 
-    const imgUrlList = [...imgPreviewUrls];
-    const imgFileList = [...imgFiles];
-
-    if (imgUrlList.length + attachedFiles.length <= 3) {
-      [...e.target.files].forEach((imgFile) => {
+    if (imgPreviews.length + attachedFiles.length <= 3) {
+      attachedFiles.forEach((imgFile) => {
         const imgUrl = URL.createObjectURL(imgFile);
-        imgUrlList.push(imgUrl);
-        imgFileList.push(imgFile);
+        setImgPreviewUrls((prev) => [...prev, imgUrl]);
+        setImgFiles((prev) => [...prev, imgFile]);
       });
-    } else if (imgUrlList.length + attachedFiles.length > 3) {
-      alert('이미지는 세 장까지 업로드 가능합니다');
+    } else if (imgPreviews.length + attachedFiles.length > 3) {
+      alert('이미지는 세 장까지 업로드 가능합니다'); // eslint-disable-line no-alert
     }
-    setImgPreviewUrls(imgUrlList);
-    setImgFiles(imgFileList);
   };
 
   const deleteImg = (id) => {
@@ -85,7 +85,7 @@ const PostUpload = () => {
           <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
         </S.TopBannerCont>
         <S.UploadCont>
-          <S.UserProfileImg src='' alt='' />
+          <S.UserProfileImg src={userProfileImg} alt='' />
           <S.ContentsArea>
             <S.Textarea
               placeholder='게시글 입력하기...'
