@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import profileImg from '../../assets/logo-profile.svg';
 import sprite from '../../assets/css_sprites.png';
 
@@ -225,17 +225,20 @@ export const PostImg = styled.a`
   background: url(${(props) => props.image}) no-repeat;
   background-size: cover;
   /* 이미지 받아와서 추가하기 */
-
   cursor: pointer;
-  ::after {
-    content: '';
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 20px;
-    height: 20px;
-    background: url(${sprite}) no-repeat -52px -36px / 146px 132px;
-  }
+  ${(props) =>
+    props.multi &&
+    css`
+      ::after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 20px;
+        height: 20px;
+        background: url(${sprite}) no-repeat -52px -36px / 146px 132px;
+      }
+    `}
 `;
 
 export const FooterWrap = styled.div`
