@@ -89,14 +89,17 @@ const Post = ({
           <S.StyledSlider dots arrows={false}>
             {imgSrcArr.map((item) => (
               <S.PostImg
-                src={`http://146.56.183.55:5050/${item}`}
+                src={`https://mandarin.api.weniv.co.kr/${item}`}
                 alt=''
                 key={item}
               />
             ))}
           </S.StyledSlider>
         ) : (
-          <S.PostImg src={`http://146.56.183.55:5050/${imgSrcArr[0]}`} alt='' />
+          <S.PostImg
+            src={`https://mandarin.api.weniv.co.kr/${imgSrcArr[0]}`}
+            alt=''
+          />
         )}
         <S.ActionBtns>
           <div>

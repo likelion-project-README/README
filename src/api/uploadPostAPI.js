@@ -6,7 +6,7 @@ const uploadPostAPI = async (token, textVal, filenameArr) => {
         image: filenameArr.join(','),
       },
     };
-    const res = await fetch('http://146.56.183.55:5050/post', {
+    const res = await fetch('https://mandarin.api.weniv.co.kr/post', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -15,7 +15,7 @@ const uploadPostAPI = async (token, textVal, filenameArr) => {
       body: JSON.stringify(data),
     });
     const json = await res.json();
-    return json.post;
+    return json;
   } catch (error) {
     console.log(error);
     return null;

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
-import uploadImgAPI from '../../api/uploadImgAPI';
 import uploadPostAPI from '../../api/uploadPostAPI';
 import * as S from './PostUpload.Style';
 import uploadMultipleImgAPI from '../../api/uploadMultipleImgAPI';
@@ -42,14 +41,14 @@ const PostUpload = () => {
     const imgFileList = [...imgFiles];
 
     if (imgUrlList.length + attachedFiles.length <= 3) {
-      console.log(attachedFiles);
       [...e.target.files].forEach((imgFile) => {
         const imgUrl = URL.createObjectURL(imgFile);
         imgUrlList.push(imgUrl);
         imgFileList.push(imgFile);
       });
+    } else if (imgUrlList.length + attachedFiles.length > 3) {
+      alert('이미지는 세 장까지 업로드 가능합니다');
     }
-    // + 3장 초과일 경우 경고메세지 코드 추가
     setImgPreviewUrls(imgUrlList);
     setImgFiles(imgFileList);
   };
@@ -70,14 +69,14 @@ const PostUpload = () => {
     const formData = new FormData();
     imgFiles.forEach((file) => formData.append('image', file));
     const filenameArr = await uploadMultipleImgAPI(formData);
-    console.log(filenameArr);
-
-    const { id } = await uploadPostAPI(token, textareaVal, filenameArr);
-    // if (id) {
-    //   navigate(`/post/${id}`, { replace: true });
-    // }
+    const {
+      post: { id },
+    } = await uploadPostAPI(token, textareaVal, filenameArr);
+    if (id) {
+      navigate(`/post/${id}`, { replace: true });
+    }
   };
-  console.log('렌더링');
+
   return (
     <S.PostUpload>
       <S.PostUploadTit>게시글 업로드 페이지</S.PostUploadTit>
