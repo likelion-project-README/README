@@ -30,6 +30,7 @@ const InputBox = ({
   message,
   onChange,
   onBlur,
+  onInput,
   value,
 }) => {
   return (
@@ -44,6 +45,7 @@ const InputBox = ({
           maxLength={max}
           onChange={onChange}
           onBlur={onBlur}
+          onInput={onInput}
           value={value}
           bottomColor={bottomColor}
         />
