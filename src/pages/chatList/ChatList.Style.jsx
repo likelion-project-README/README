@@ -37,6 +37,7 @@ export const ChatWrap = styled.li`
   width: 358px;
   height: 42px;
   display: flex;
+  cursor: pointer;
 `;
 
 export const UserImg = styled.img`

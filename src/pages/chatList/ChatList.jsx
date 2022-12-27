@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PostModal from '../../common/postModal/PostModal';
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
@@ -8,6 +9,8 @@ const ChatList = () => {
   // 모달창 상태값 + 모달타입 상태값
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
+  const navigate = useNavigate();
+
   return (
     <S.ChatListWrap>
       <S.ChatListTit>채팅 리스트 페이지</S.ChatListTit>
@@ -20,7 +23,7 @@ const ChatList = () => {
       />
       <S.ListCont>
         <S.List>
-          <S.ChatWrap>
+          <S.ChatWrap onClick={() => navigate('/chat/:id')}>
             <S.UserImg />
             <S.UnreadCircle />
             <S.UserInfo>

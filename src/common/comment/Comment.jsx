@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { profileImageData } from '../../atoms/LoginData';
 import leaveCommentAPI from '../../api/leaveCommentAPI';
 import getCommentListAPI from '../../api/getCommentListAPI';
 import * as S from './Comment.Style';
@@ -8,6 +10,8 @@ const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
 
   const inpRef = useRef();
   const [inpValue, setInpValue] = useState('');
+
+  const loginedProfileImg = useRecoilValue(profileImageData);
 
   const handleChange = (e) => {
     setInpValue(e.target.value);
@@ -26,7 +30,7 @@ const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
   return (
     <S.CommentCont>
       <S.CommentForm onSubmit={handleSubmit}>
-        <S.UserImg />
+        <S.UserImg src={loginedProfileImg} alt='유저 프로필 이미지' />
         <S.CommentLab htmlFor='comment' />
         <S.CommentInp
           placeholder='댓글을 입력해 주세요.'

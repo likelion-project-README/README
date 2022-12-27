@@ -1,9 +1,12 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { useNavigate, useMatch } from 'react-router-dom';
+import { accountnameData } from '../../atoms/LoginData';
 import * as S from './TabMenu.Style';
 
 const TabMenu = () => {
   const navigate = useNavigate();
+  const loginedAccountName = useRecoilValue(accountnameData);
 
   const home = useMatch('/');
   const chat = useMatch('/chat');
@@ -42,7 +45,7 @@ const TabMenu = () => {
         </S.TabMenuLi>
         <S.TabMenuLi
           onClick={() => {
-            navigate('/profile/:id');
+            navigate(`/profile/${loginedAccountName}`);
           }}
         >
           <S.IconImg
