@@ -6,31 +6,31 @@ const { persistAtom } = recoilPersist();
 
 export const usernameData = atom({
   key: 'username',
-  default: [],
+  default: '',
   effects_UNSTABLE: [persistAtom],
 });
 
 export const accountnameData = atom({
   key: 'accountname',
-  default: [],
+  default: '',
   effects_UNSTABLE: [persistAtom],
 });
 
 export const emailData = atom({
   key: 'email',
-  default: [],
+  default: '',
   effects_UNSTABLE: [persistAtom],
 });
 
 export const passwordData = atom({
   key: 'password',
-  default: [],
+  default: '',
   effects_UNSTABLE: [persistAtom],
 });
 
 export const introData = atom({
   key: 'intro',
-  default: [],
+  default: '',
   effects_UNSTABLE: [persistAtom],
 });
 
