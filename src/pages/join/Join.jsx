@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
+import * as S from './Join.Style';
 import {
   usernameData,
   emailData,
@@ -9,7 +10,6 @@ import {
   introData,
   profileImageData,
 } from '../../atoms/LoginData';
-import * as S from './Join.Style';
 
 import joinAPI from '../../api/joinAPI';
 import Button from '../../common/button/Button';
@@ -26,8 +26,9 @@ const JoinPage = () => {
   const [intro, setIntro] = useState('');
   const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
+  const [emaiDuplicate, setEmailDuplicate] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [btnActive, setBtnActive] = useState('');
 
@@ -46,103 +47,79 @@ const JoinPage = () => {
     }
   };
 
-  // 이메일 검증(이메일 주소의 형식이 유효하지 않거나 이미 가입된 이메일일 경우)
-  useEffect(() => {
-    const handleEmailValid = (res) => {
-      const reg =
-        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      if (email.length === 0) {
-        setEmailError('입력해주세요.');
-        setEmailValid(false);
-      } else if (!reg.test(email)) {
-        setEmailError('올바른 이메일 형식이 아닙니다.');
-        setEmailValid(false);
-      } else {
-        setEmailError('');
-        setEmailValid(true);
-      }
-    };
-    handleEmailValid();
-  }, [email]);
+  // onChange : 유저이메일 유효성 검사
+  const handleEmailValid = (e) => {
+    const testUserEmail = e.target.value;
+    setEmail(testUserEmail);
+    const regex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (regex.test(testUserEmail)) {
+      setEmail(testUserEmail);
+      setEmailValid(true);
+    } else {
+      setEmailValid(false);
+      setEmailError('올바른 이메일 형식이 아닙니다.');
+    }
+  };
 
-  // } else if (res.test !== null) {
-  //   setEmailError('이미 가입된 이메일 주소 입니다.');
-  //   setEmailValid(false);
-  // }
-  // console.log(email, password);
-  // console.log(emailValid, passwordValid);
+  // onBlur : 유저이메일 중복 검사
+  const handleEmailDuplicate = async (e) => {
+    const testUserEmail = e.target.value;
+    setEmail(testUserEmail);
+    const validMsg = await emailDuplicateAPI(testUserEmail);
+    if (validMsg.message === '이미 가입된 이메일 주소 입니다.') {
+      setEmailValid(false);
+      setEmailError('*이미 가입된 이메일 주소입니다.');
+      setEmailDuplicate(false);
+    } else if (validMsg.message === '사용 가능한 이메일 입니다.') {
+      setEmailDuplicate(true);
+    }
+  };
 
-  // const handleEmailDuplicate = async (e) => {
-  //   e.preventDefault();
-  //   await emailDuplicateAPI(email).then(res => {
-  //     if(res.data === email) {
-
-  //     }
-  //   })
-  //     await AuthActions.handleEmailDuplicate(email);
-  //     if (this.props.exists.get('email')) {
-  //       this.setError('이미 가입된 이메일 주소 입니다.');
-  //     } else {
-  //       this.setError(null);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-
-  //   await emailDuplicateAPI(email);
-  //   if (test.message === emailDuplicateAPI(email)) {
-  //     setEmailError('이미 가입된 이메일 주소 입니다.');
-  //     setEmailValid(false);
-  //   }
-  // };
-
-  // 비밀번호 검증
-  useEffect(() => {
-    const handlePasswordValid = () => {
-      if (password.length < 6) {
-        setPasswordValid(false);
-        setPasswordError('비밀번호는 6자 이상이어야 합니다.');
-      } else if (password.length >= 6) {
-        setPasswordValid(true);
-        setPasswordError('');
-      }
-    };
-    handlePasswordValid();
-  }, [password]);
+  // 비밀번호 유효성 검사
+  const handlePasswordValid = (e) => {
+    const testPassword = e.target.type;
+    if (password.length < 6) {
+      setPasswordValid(false);
+      setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+    } else if (password.length >= 6) {
+      setPasswordValid(true);
+      setPassword(testPassword);
+      setPasswordError('');
+    }
+  };
 
   // 회원가입 버튼 활성화
   useEffect(() => {
-    if (emailValid && passwordValid) {
+    if (emailValid && passwordValid && emaiDuplicate) {
       setBtnActive(true);
     } else {
       setBtnActive(false);
     }
-  });
+  }, [emailValid, passwordValid]);
+  console.log(emailValid, passwordValid);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    joinAPI(email, password, accountname, username, intro, image)
-      .then((data) => {
-        localStorage.setItem('token', data.user.token);
-        setUsernameData(data.user.username);
-        setEmailData(data.user.email);
-        setPasswordData(data.user.password);
-        setAccountNameData(data.user.accountname);
-        setIntroData(data.user.intro);
-        setProfileImageData(data.user.profileImageData);
-      })
-      .catch((error) => {
-        console.log(error);
+    if (btnActive === true) {
+      joinAPI(email, password, accountname, username, intro, image).then(
+        (data) => {
+          localStorage.setItem('token', data.user.token);
+          setUsernameData(data.user.username);
+          setEmailData(data.user.email);
+          setPasswordData(data.user.password);
+          setAccountNameData(data.user.accountname);
+          setIntroData(data.user.intro);
+          setProfileImageData(data.user.profileImageData);
+        },
+      );
+      navigate('/signUp/profileSetting', {
+        state: {
+          email,
+          password,
+        },
       });
-  };
-
-  const handleClick = () => {
-    navigate('/signUp/profileSetting', {
-      state: {
-        email,
-        password,
-      },
-    });
+    }
   };
 
   return (
@@ -155,7 +132,8 @@ const JoinPage = () => {
           id='email'
           type='email'
           required
-          onChange={handleData}
+          onChange={handleEmailValid}
+          onBlur={handleEmailDuplicate}
           value={email}
           buttonColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
@@ -166,7 +144,9 @@ const JoinPage = () => {
           placeholder='비밀번호를 입력해주세요'
           id='password'
           type='password'
+          required
           onChange={handleData}
+          onBlur={handlePasswordValid}
           value={password}
           display={passwordValid ? null : 'yes'}
           buttonColor={passwordValid ? null : 'red'}
@@ -177,7 +157,6 @@ const JoinPage = () => {
             type='submit'
             size='lg'
             tit='다음'
-            onClick={handleClick}
             isActive={btnActive}
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}

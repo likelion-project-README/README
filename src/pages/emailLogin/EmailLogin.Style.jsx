@@ -25,7 +25,7 @@ export const LoginForm = styled.form`
 `;
 
 export const div = styled.div`
-  margin: auto;
+  margin: 20px auto;
 `;
 
 export const StyledLink = styled(Link)`

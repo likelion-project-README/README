@@ -23,5 +23,5 @@ export const JoinForm = styled.form`
 `;
 
 export const div = styled.div`
-  margin: auto;
+  margin: 20px auto;
 `;
