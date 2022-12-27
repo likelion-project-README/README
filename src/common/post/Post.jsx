@@ -88,11 +88,15 @@ const Post = ({
         {imgSrcArr.length > 1 ? (
           <S.StyledSlider dots arrows={false}>
             {imgSrcArr.map((item) => (
-              <S.PostImg src={item} alt='' key={item} />
+              <S.PostImg
+                src={`http://146.56.183.55:5050/${item}`}
+                alt=''
+                key={item}
+              />
             ))}
           </S.StyledSlider>
         ) : (
-          <S.PostImg src={imgSrcArr[0]} alt='' />
+          <S.PostImg src={`http://146.56.183.55:5050/${imgSrcArr[0]}`} alt='' />
         )}
         <S.ActionBtns>
           <div>
