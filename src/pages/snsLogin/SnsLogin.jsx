@@ -22,12 +22,8 @@ const SnsLogin = () => {
         </S.FacebookBtn>
         {/* 이메일로그인 회원가입 링크 */}
         <S.LoginLink>
-          <S.Email>
-            <Link to='/login/emailLogin'>이메일로 로그인</Link>
-          </S.Email>
-          <S.SignUp>
-            <Link to='/signUp'>회원가입</Link>
-          </S.SignUp>
+          <S.EmailLink to='/login/emailLogin'>이메일로 로그인</S.EmailLink>
+          <S.SignUpLink to='/signUp'>회원가입</S.SignUpLink>
         </S.LoginLink>
       </S.SnsLoginWrapper>
     </S.SnsLoginSec>

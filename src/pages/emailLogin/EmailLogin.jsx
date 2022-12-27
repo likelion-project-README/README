@@ -101,9 +101,6 @@ const EmailLoginPage = () => {
         password,
       },
     });
-    // .catch((error) => {
-    //   console.log(error);
-    // });
   };
 
   return (
