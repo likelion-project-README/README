@@ -86,21 +86,25 @@ const EmailLoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginAPI(email, password).then((data) => {
-      localStorage.setItem('token', data.user.token);
-      setUsernameData(data.user.username);
-      setEmailData(data.user.email);
-      setPasswordData(data.user.password);
-      setAccountNameData(data.user.accountname);
-      setIntroData(data.user.intro);
-      setProfileImageData(data.user.image);
-    });
-    navigate('/', {
-      state: {
-        email,
-        password,
-      },
-    });
+    if (btnActive === true) {
+      loginAPI(email, password, accountname, username, intro, image).then(
+        (data) => {
+          localStorage.setItem('token', data.user.token);
+          setUsernameData(data.user.username);
+          setEmailData(data.user.email);
+          setPasswordData(data.user.password);
+          setAccountNameData(data.user.accountname);
+          setIntroData(data.user.intro);
+          setProfileImageData(data.user.image);
+        },
+      );
+      navigate('/', {
+        state: {
+          email,
+          password,
+        },
+      });
+    }
   };
 
   return (
@@ -113,7 +117,6 @@ const EmailLoginPage = () => {
           id='email'
           type='email'
           required
-          // onChange={handleEmailValid}
           onChange={handleData}
           value={email}
           buttonColor={emailValid ? null : 'red'}
