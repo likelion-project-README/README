@@ -1,28 +1,36 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import * as S from './PostModal.Style';
 import Alert from '../alert/Alert';
 import deleteProductsAPI from '../../api/deleteProductAPI';
 import deletePostAPI from '../../api/deletePostAPI';
 import deleteCommentAPI from '../../api/deleteCommentAPI';
+import * as L from '../../atoms/LoginData';
 
 /**
- * 1. 프로필
- * 2. 게시글
- * 3. 댓글
- * 4. 채팅방
+ * 음 로그아웃
  *
- * 사용시 modalType에 따라
- * profile, post, comment, chatRoom 입력
  */
 
-const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
+const PostModal = ({
+  modalType,
+  isModalOpen,
+  setIsModalOpen,
+  isAlertOpen,
+  setIsAlertOpen,
+  modalData,
+  commentId,
+}) => {
   const navigate = useNavigate();
+  const postId = useParams();
+
   const clickOepnProduct = () => {
     setIsModalOpen(!isModalOpen);
     window.open(modalData.link, '_blank');
   };
   const clickDeleteProduct = () => {
     deleteProductsAPI(modalData.id).then((req) => {
+      alert('상품이 삭제되었습니다.');
       navigate(0);
     });
   };
@@ -35,6 +43,7 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
     console.log(window.location.pathname.split('/')[1]);
 
     deletePostAPI(modalData.id).then((req) => {
+      alert('게시글이 삭제되었습니다.');
       if (window.location.pathname.split('/')[1] === 'profile') {
         navigate(0);
       } else {
@@ -42,17 +51,26 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       }
     });
   };
-  const clickDeleteComment = () => {
-    console.log(modalData);
-    // deleteCommentAPI(postId, commentId, token)
+  const clickDeleteComment = async () => {
+    // console.log(postId.id);
+    await deleteCommentAPI(postId.id, commentId, localStorage.getItem('token'));
+    alert('댓글이 삭제되었습니다.');
+    navigate(0);
   };
+
+  const clickLogOut = () => {
+    console.log(isAlertOpen);
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
+  };
+
   if (modalType === 'profile') {
     return (
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
           <S.ModalTxt>설정 및 개인정보</S.ModalTxt>
-          <S.ModalTxt>로그아웃</S.ModalTxt>
+          <S.ModalTxt onClick={clickLogOut}>로그아웃</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import Post from '../../common/post/Post';
 import Comment from '../../common/comment/Comment';
@@ -9,6 +9,7 @@ import getPostDetailAPI from '../../api/getPostDetailAPI';
 import getCommentListAPI from '../../api/getCommentListAPI';
 import * as S from './PostDetail.Style';
 import LoginAccountState from '../../atoms/LoginState';
+import { accountnameData } from '../../atoms/LoginData';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -23,8 +24,9 @@ const PostDetail = () => {
   const [postDetailData, setPostDetailData] = useState();
   const [commentDataArr, setCommentDataArr] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
-  const [accountState, setAccountState] = useRecoilState(LoginAccountState);
   const [isMine, setIsMine] = useState(false);
+  const loginedAccountName = useRecoilValue(accountnameData);
+  const [commentId, setCommentId] = useState('');
 
   // 아래 두개 이벤트 함수 일단보류
   const handleModalOpen = (e) => {
@@ -40,26 +42,31 @@ const PostDetail = () => {
   };
 
   // isMine ?
+  const chkIsMine = (accountName) => {
+    if (loginedAccountName === accountName) {
+      setIsMine(true);
+    } else {
+      setIsMine(false);
+    }
+  };
   // accountState,
 
-  const clickMoreBtn = (accountname) => {
-    console.log(accountState);
+  const clickMoreBtn = (data) => {
     setModalType('yourComment');
-    if (accountState === accountname) {
+    if (loginedAccountName === data.author.accountname) {
       setModalType('myComment');
     }
     setIsModalOpen(!isModalOpen);
+    setCommentId(data.id);
+    console.log(data);
   };
 
   useEffect(() => {
     const getPostDetail = async () => {
       const postData = await getPostDetailAPI(id, token);
       setPostDetailData(postData);
-
-      if (postData.author.accountname === accountState) {
-        console.log('htest');
-        setIsMine(true);
-      }
+      console.log(postData.author.accountname);
+      chkIsMine(postData.author.accountname);
     };
     getPostDetail();
     const getCommentList = async () => {
@@ -142,7 +149,7 @@ const PostDetail = () => {
                       <S.MoreBtn
                         type='button'
                         onClick={() => {
-                          clickMoreBtn(data.author.accountname);
+                          clickMoreBtn(data);
                         }}
                       >
                         <span className='hidden'>더보기 버튼</span>
@@ -170,6 +177,7 @@ const PostDetail = () => {
             modalData={postDetailData}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
+            commentId={commentId}
           />
         </div>
       ) : null}

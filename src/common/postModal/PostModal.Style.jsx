@@ -1,14 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-const modalFade = keyframes`
-  from {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translateZ(0);}
-`;
 const modalUp = keyframes`
   from{
     opacity: 0;
