@@ -11,8 +11,7 @@ const loginAPI = async (email, password) => {
       },
     }),
   });
-  const json = res.json();
-  console.log(json);
+  const json = await res.json();
   return json;
 };
 export default loginAPI;
