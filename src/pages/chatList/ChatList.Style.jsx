@@ -18,8 +18,7 @@ export const ChatListTit = styled.h2`
 
 export const ListCont = styled.div`
   padding: 24px 0;
-  /* overflow-y: scroll; */
-  overflow: scroll;
+  overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
@@ -40,11 +39,14 @@ export const ChatWrap = styled.li`
   cursor: pointer;
 `;
 
-export const UserImg = styled.img`
+export const UserImg = styled.img.attrs({
+  alt: '유저 프로필 이미지',
+})`
   width: 42px;
   height: 42px;
   border-radius: 50%;
   background-color: #dbdbdb;
+  object-fit: cover;
 `;
 
 export const UnreadCircle = styled.div`
