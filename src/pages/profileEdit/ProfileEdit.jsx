@@ -135,28 +135,17 @@ const ProfileEdit = () => {
           value={userName}
           onChange={handleUserName}
         />
-        {validId ? (
-          <InputBox
-            label='계정 ID'
-            id='userID'
-            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-            value={userId}
-            onChange={handleUserIdValid}
-            onBlur={handleUserIdDuplicate}
-          />
-        ) : (
-          <InputBox
-            label='계정 ID'
-            id='userID'
-            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-            value={userId}
-            onChange={handleUserIdValid}
-            onBlur={handleUserIdDuplicate}
-            bottomColor='red'
-            message={userIdMsg}
-            display='yes'
-          />
-        )}
+        <InputBox
+          label='계정 ID'
+          id='userID'
+          placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
+          value={userId}
+          onChange={handleUserIdValid}
+          onBlur={handleUserIdDuplicate}
+          bottomColor={validId ? null : 'red'}
+          message={userIdMsg}
+          display={validId ? null : 'yes'}
+        />
         <InputBox
           label='소개'
           id='userIntro'

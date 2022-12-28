@@ -45,6 +45,9 @@ export const SearchTxt = styled.p`
 export const FeedPage = styled.div`
   height: 760px;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const PostsContUl = styled.ul`

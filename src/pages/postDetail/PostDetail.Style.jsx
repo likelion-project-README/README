@@ -23,6 +23,9 @@ export const PostDetailTit = styled.h2`
 export const ScrollWrapper = styled.div`
   height: 760px;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const PostCont = styled.div`
