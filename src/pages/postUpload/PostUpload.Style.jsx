@@ -5,9 +5,12 @@ import sprite from '../../assets/css_sprites.png';
 export const PostUpload = styled.section`
   position: relative;
   width: 390px;
-  max-height: 100vh;
-  /* height: 820px; */
+  /* max-height: 100vh; */
+  height: 820px;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const PostUploadTit = styled.h2`
@@ -37,6 +40,7 @@ export const UserProfileImg = styled.img`
   width: 42px;
   height: 42px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const ContentsArea = styled.div`
@@ -89,6 +93,7 @@ export const MultipleImgScrollCont = styled.div`
   padding: 10px 0;
   gap: 8px;
   overflow-x: scroll;
+  /* 디자인 스크롤 추가 예정 */
 `;
 
 export const MultipleUploadedImgCont = styled.div`
@@ -105,8 +110,8 @@ export const MultipleUploadedImg = styled.img`
 
 export const AddFileLab = styled.label`
   display: block;
-  position: fixed;
-  /* position: absolute; */
+  /* position: fixed; */
+  position: absolute;
   left: 324px;
   bottom: 30px;
   width: 36px;

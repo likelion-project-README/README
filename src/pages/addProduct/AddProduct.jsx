@@ -94,9 +94,8 @@ const AddProduct = () => {
           productURL,
           productImg,
         );
-        console.log(result);
-        // alert('상품 등록이 완료되었습니다.'); // eslint-disable-line no-alert
-        // navigate(`/profile/${accountName}`);
+        alert('상품 등록이 완료되었습니다.'); // eslint-disable-line no-alert
+        navigate(`/profile/${accountName}`);
       } catch (error) {
         console.log(error);
       }
