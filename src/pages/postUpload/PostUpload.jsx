@@ -68,10 +68,10 @@ const PostUpload = () => {
     e.preventDefault();
     const formData = new FormData();
     imgFiles.forEach((file) => formData.append('image', file));
-    const filenameArr = await uploadMultipleImgAPI(formData);
+    const imgUrlArr = await uploadMultipleImgAPI(formData);
     const {
       post: { id },
-    } = await uploadPostAPI(token, textareaVal, filenameArr);
+    } = await uploadPostAPI(token, textareaVal, imgUrlArr);
     if (id) {
       navigate(`/post/${id}`, { replace: true });
     }
