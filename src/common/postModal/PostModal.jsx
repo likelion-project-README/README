@@ -19,7 +19,8 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
   const navigate = useNavigate();
   const clickOepnProduct = () => {
     setIsModalOpen(!isModalOpen);
-    window.open(modalData.link, '_blank');
+    // window.open(modalData.link, '_blank');
+    window.open('https://github.com/likelion-project-README/README', '_blank');
   };
   const clickDeleteProduct = () => {
     deleteProductsAPI(modalData.id).then((req) => {
@@ -128,7 +129,7 @@ const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>채팅방 나가기</S.ModalTxt>
+          <S.ModalTxt onClick={() => navigate(-1)}>채팅방 나가기</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );
