@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import likeAPI from '../../api/likeAPI';
 import unlikeAPI from '../../api/unlikeAPI';
@@ -16,14 +16,19 @@ const Post = ({
 }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
-  const isMatchProfile = useMatch('/profile/:id');
-  const isMatchHome = useMatch('/');
-  const isMatchPostDetail = useMatch(`/post/:id`);
 
   const imgSrcArr = data.image.split(',');
+  const [isSingleImg, setIsSingleImg] = useState(false);
+
+  useEffect(() => {
+    if (imgSrcArr.length === 1) {
+      setIsSingleImg(true);
+    }
+  }, [imgSrcArr]);
 
   const [isHearted, setIsHearted] = useState(data.hearted);
   const [heartCount, setHeartCount] = useState(data.heartCount);
+
   const clickToLike = async (e) => {
     e.stopPropagation();
     const postData = await likeAPI(data.id, token);
@@ -38,13 +43,9 @@ const Post = ({
     setHeartCount(postData.heartCount);
   };
 
-  const generateCreatedDate = () => {
-    const year = data.updatedAt.split('-')[0];
-    const month = data.updatedAt.split('-')[1];
-    const date = data.updatedAt.split('-')[2].slice(0, 2);
-
-    return `${year}년 ${month}월 ${date}일`;
-  };
+  const isMatchHome = useMatch('/');
+  const isMatchProfile = useMatch('/profile/:id');
+  const isMatchPostDetail = useMatch(`/post/:id`);
 
   const goToProfile = () => {
     if (isMatchHome || isMatchPostDetail) {
@@ -56,6 +57,14 @@ const Post = ({
     if (isMatchProfile || isMatchHome) {
       navigate(`/post/${data.id}`);
     }
+  };
+
+  const generateCreatedDate = () => {
+    const year = data.updatedAt.split('-')[0];
+    const month = data.updatedAt.split('-')[1];
+    const date = data.updatedAt.split('-')[2].slice(0, 2);
+
+    return `${year}년 ${month}월 ${date}일`;
   };
 
   const clickMoreBtn = (e) => {
@@ -73,18 +82,27 @@ const Post = ({
 
   return (
     <>
-      <S.UserInfo onClick={goToProfile}>
-        <S.ProfileImg src={data.author.image} alt='' />
-        <div>
-          <S.UserName>{data.author.username}</S.UserName>
-          <S.AccountName>{data.author.accountname}</S.AccountName>
-        </div>
+      <S.UserInfoCont>
+        <S.UserInfo onClick={goToProfile} isMatchProfile={isMatchProfile}>
+          <S.ProfileImg src={data.author.image} alt='사용자 프로필 이미지' />
+          <div>
+            <S.UserName>{data.author.username}</S.UserName>
+            <S.AccountName>{data.author.accountname}</S.AccountName>
+          </div>
+        </S.UserInfo>
         <S.MoreBtn type='button' onClick={clickMoreBtn}>
           <span className='hidden'>더보기</span>
         </S.MoreBtn>
-      </S.UserInfo>
-      <S.PostContents onClick={goToPostDetail}>
-        {!data.contents && <S.PostTxt>{data.content}</S.PostTxt>}
+      </S.UserInfoCont>
+      <S.PostContents>
+        {!data.contents && (
+          <S.PostTxt
+            onClick={goToPostDetail}
+            isMatchPostDetail={isMatchPostDetail}
+          >
+            {data.content}
+          </S.PostTxt>
+        )}
         {imgSrcArr[0] && (
           <S.StyledSlider dots arrows={false} draggable>
             {imgSrcArr.map((item) => (
@@ -92,6 +110,9 @@ const Post = ({
                 src={`https://mandarin.api.weniv.co.kr/${item}`}
                 alt=''
                 key={item}
+                onClick={goToPostDetail}
+                isMatchPostDetail={isMatchPostDetail}
+                isSingleImg={isSingleImg}
               />
             ))}
           </S.StyledSlider>
@@ -108,8 +129,12 @@ const Post = ({
             <S.CountNum>{heartCount}</S.CountNum>
           </div>
           <div>
-            <S.CommentBtn type='button'>
-              <span className='hidden'>댓글 보기</span>
+            <S.CommentBtn
+              type='button'
+              onClick={goToPostDetail}
+              isMatchPostDetail={isMatchPostDetail}
+            >
+              <span className='hidden'>댓글 보기 버튼</span>
             </S.CommentBtn>
             <S.CountNum>{commentCount || data.commentCount}</S.CountNum>
           </div>

@@ -2,10 +2,14 @@ import Slider from 'react-slick';
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
-export const UserInfo = styled.div`
+export const UserInfoCont = styled.div`
   display: flex;
   margin-bottom: 11px;
-  cursor: pointer;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  cursor: ${(props) => (props.isMatchProfile ? 'default' : 'pointer')};
 `;
 
 export const ProfileImg = styled.img`
@@ -49,7 +53,6 @@ export const PostContents = styled.div`
   gap: 16px;
   width: 304px;
   margin-left: auto;
-  cursor: pointer;
 `;
 
 export const PostTxt = styled.p`
@@ -57,6 +60,7 @@ export const PostTxt = styled.p`
   font-size: 14px;
   line-height: 17px;
   color: var(--main-text-color);
+  cursor: ${(props) => (props.isMatchPostDetail ? 'default' : 'pointer')};
 `;
 
 export const PostImgUl = styled.ul`
@@ -71,11 +75,14 @@ export const PostImg = styled.img`
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
   object-fit: cover;
+  cursor: ${(props) =>
+    props.isMatchPostDetail && props.isSingleImg ? 'default' : 'pointer'};
 `;
 
 export const ActionBtns = styled.div`
   display: flex;
   gap: 16px;
+  cursor: default;
 `;
 
 export const LikeBtn = styled.button`
@@ -91,6 +98,7 @@ export const CommentBtn = styled.button`
   width: 20px;
   height: 20px;
   background: url(${sprite}) no-repeat -62px -110px / 146px 132px;
+  cursor: ${(props) => (props.isMatchPostDetail ? 'default' : 'pointer')};
 `;
 
 export const CountNum = styled.span`
@@ -106,6 +114,7 @@ export const CreatedDate = styled.p`
   font-size: 10px;
   line-height: 12px;
   color: var(--sub-text-color);
+  cursor: default;
 `;
 
 export const StyledSlider = styled(Slider)`
