@@ -1,30 +1,50 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import InputBox from '../../common/inputBox/InputBox';
-import Button from '../../common/button/Button';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import * as S from './ProfileSetting.Style';
+import {
+  accountnameData,
+  emailData,
+  introData,
+  passwordData,
+  profileImageData,
+  usernameData,
+} from '../../atoms/LoginData';
+
+import joinAPI from '../../api/joinAPI';
 import uploadImgAPI from '../../api/uploadImgAPI';
 import accountnameValidAPI from '../../api/accountnameValidAPI';
-import joinAPI from '../../api/joinAPI';
+
+import InputBox from '../../common/inputBox/InputBox';
+import Button from '../../common/button/Button';
 import logoProfile from '../../assets/logo-profile.svg';
-import * as S from './ProfileSetting.Style';
 
 const ProfileSetting = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef();
 
-  const [btnActive, setBtnActive] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [userId, setUserId] = useState('');
-  const [userIntro, setUserIntro] = useState('');
-  const [userImg, setUserImg] = useState(logoProfile);
   const [validId, setValidId] = useState(true);
   const [userIdMsg, setUserIdMsg] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [accountname, setAccountname] = useState('');
+  const [intro, setIntro] = useState('');
+  const [image, setImage] = useState('');
+  const [btnActive, setBtnActive] = useState('');
+
+  const setUsernameData = useSetRecoilState(usernameData);
+  const setEmailData = useSetRecoilState(emailData);
+  const setPasswordData = useSetRecoilState(passwordData);
+  const setAccountNameData = useSetRecoilState(accountnameData);
+  const setIntroData = useSetRecoilState(introData);
+  const setProfileImageData = useSetRecoilState(profileImageData);
 
   // 이미지 업로드
   const uploadImg = async (e) => {
     const imgFile = e.target.files[0];
     const imgUrl = await uploadImgAPI(imgFile);
-    setUserImg(imgUrl);
+    setImage(imgUrl);
     setBtnActive(true);
   };
 
@@ -36,8 +56,8 @@ const ProfileSetting = () => {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
-      setUserName(NameVal);
-      // setBtnActive(true);
+      setUsername(NameVal);
+      setBtnActive(true);
     }
   };
 
@@ -46,9 +66,9 @@ const ProfileSetting = () => {
     const testUserId = e.target.value;
     const regex = /^[_A-Za-z0-9.]*$/;
     if (regex.test(testUserId)) {
-      setUserId(testUserId);
+      setAccountname(testUserId);
       setValidId(true);
-      // setBtnActive(true);
+      setBtnActive(true);
     } else {
       setValidId(false);
       setBtnActive(false);
@@ -59,7 +79,7 @@ const ProfileSetting = () => {
   // onBlur : 계정ID 중복 검사
   const handleUserIdDuplicate = async (e) => {
     const testUserId = e.target.value;
-    setUserId(testUserId);
+    setAccountname(testUserId);
     const validMsg = await accountnameValidAPI(testUserId);
     if (validMsg.message === '이미 가입된 계정ID 입니다.') {
       setValidId(false);
@@ -76,7 +96,7 @@ const ProfileSetting = () => {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
-      setUserIntro(IntroVal);
+      setIntro(IntroVal);
       // setBtnActive(true);
     }
   };
@@ -84,23 +104,46 @@ const ProfileSetting = () => {
   // 버튼 활성화
   useEffect(() => {
     if (
-      userName.length > 0 &&
+      username.length > 0 &&
       validId === true &&
-      userIntro.length > 0 &&
-      userImg !== logoProfile
+      intro.length > 0 &&
+      image !== logoProfile
     ) {
       setBtnActive(true);
     }
-  }, [userName, validId, userIntro, userImg]);
+  }, [username, validId, intro, image]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (btnActive === true) {
+      joinAPI(email, password, accountname, username, intro, image).then(
+        (data) => {
+          localStorage.setItem('token', data.user.token);
+          setUsernameData(data.user.username);
+          setEmailData(data.user.email);
+          setPasswordData(data.user.password);
+          setAccountNameData(data.user.accountname);
+          setIntroData(data.user.intro);
+          setProfileImageData(data.user.profileImageData);
+        },
+      );
+      navigate('/signUp/profileSetting', {
+        state: {
+          email,
+          password,
+        },
+      });
+    }
+  };
 
   return (
     <S.ProfileSettingWrap>
       <S.ProfileSettingTit>프로필 설정 페이지</S.ProfileSettingTit>
       <S.Title>프로필 설정</S.Title>
       <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
-      <form>
+      <form onSubmit={handleSubmit}>
         <S.ImgWrap>
-          <S.UserImg src={userImg} alt='유저 프로필 이미지' />
+          <S.UserImg src={image} alt='유저 프로필 이미지' />
           <S.ImgUploadLab htmlFor='userImg' />
           <S.ImgUploadInp
             type='file'
@@ -116,41 +159,39 @@ const ProfileSetting = () => {
           placeholder='2~10자 이내여야 합니다.'
           min='2'
           max='10'
-          value={userName}
+          value={username}
           onChange={handleUserName}
         />
-        {validId ? (
-          <InputBox
-            label='계정 ID'
-            id='userID'
-            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-            value={userId}
-            onChange={handleUserIdValid}
-            onBlur={handleUserIdDuplicate}
-          />
-        ) : (
-          <InputBox
-            label='계정 ID'
-            id='userID'
-            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-            value={userId}
-            onChange={handleUserIdValid}
-            onBlur={handleUserIdDuplicate}
-            bottomColor='red'
-            message={userIdMsg}
-            display='yes'
-          />
-        )}
+        <InputBox
+          label='계정 ID'
+          id='userID'
+          placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
+          value={accountname}
+          onChange={handleUserIdValid}
+          onBlur={handleUserIdDuplicate}
+          bottomColor={validId ? null : 'red'}
+          message={userIdMsg}
+          display={validId ? null : 'yes'}
+        />
         <InputBox
           label='소개'
           id='userIntro'
           placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
-          value={userIntro}
+          value={intro}
           onChange={handleUserIntro}
         />
       </form>
       <S.BtnWrap>
-        <Button size='lg' tit='README 시작하기' isActive={btnActive} />
+        <Button
+          type='submit'
+          size='lg'
+          tit='README 시작하기'
+          isActive={btnActive}
+          // disabled={emailValid && passwordValid ? null : 'disabled'}
+          // message={passwordError}
+        >
+          <Link to='/'></Link>
+        </Button>
       </S.BtnWrap>
     </S.ProfileSettingWrap>
   );

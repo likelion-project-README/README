@@ -1,6 +1,27 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 // 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
+
+const FadeIn = keyframes`
+from{
+  opacity: 0.7;
+}
+to{
+  opacity: 1;
+}
+
+`;
+
+const chatFadeIn = keyframes`
+from{
+  transform: translateX(20%);
+  opacity: 0.3;
+}
+to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+`;
 
 export const ChatRoom = styled.section`
   position: relative;
@@ -27,6 +48,7 @@ export const ChatRoomTit = styled.h2`
 export const TopBannerCont = styled.div`
   position: fixed;
   top: 0;
+  animation: ${FadeIn} 0.3s ease-in;
 `;
 
 export const ChatCont = styled.div`
@@ -40,6 +62,7 @@ export const ChatCont = styled.div`
   /* max-height: calc(100vh - 110px); */
   /* overflow-y: scroll; */
   padding: 20px 16px;
+  animation: ${chatFadeIn} 0.2s linear;
 `;
 
 export const YourMsgCont = styled.div`
@@ -119,6 +142,7 @@ export const ChatForm = styled.form`
   padding: 12px 16px;
   border-top: 0.5px solid var(--sub2-text-color);
   background-color: #ffffff;
+  animation: ${FadeIn} 0.3s linear;
 `;
 
 export const FileInpLab = styled.label`

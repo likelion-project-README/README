@@ -120,14 +120,14 @@ export const StyledSlider = styled(Slider)`
       margin-left: -7px;
     }
     button::before {
-      color: var(--sub2-text-color);
+      color: #ffffff;
       opacity: 1;
     }
 
     .slick-active {
       button::before {
         opacity: 1;
-        color: #ffffff;
+        color: var(--main-color);
       }
     }
   }
