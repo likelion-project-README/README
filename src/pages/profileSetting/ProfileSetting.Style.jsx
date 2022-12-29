@@ -32,6 +32,8 @@ export const Description = styled.p`
 
 export const ImgWrap = styled.div`
   margin: 30px 140px;
+  width: 110px;
+  height: 110px;
 `;
 
 export const UserImg = styled.img`
@@ -39,17 +41,7 @@ export const UserImg = styled.img`
   height: 110px;
   border: 0.5px solid #dbdbdb;
   border-radius: 50%;
-  background-size: 110px 110px;
-`;
-
-export const ImgUploadBtn = styled.button`
-  position: relative;
-  top: -40px;
-  left: 73px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: url(${sprite}) 0px 0px / 146px 132px;
+  object-fit: cover;
 `;
 
 export const ImgUploadLab = styled.label`
