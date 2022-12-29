@@ -10,6 +10,10 @@ const uploadImgAPI = async (imgFile) => {
       },
     );
     const json = await res.json();
+    if (json.message) {
+      // eslint-disable-next-line no-alert
+      alert(`${json.message}`);
+    }
     return `https://mandarin.api.weniv.co.kr/${json.filename}`;
   } catch (error) {
     console.log(error);

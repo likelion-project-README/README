@@ -15,6 +15,10 @@ const uploadPostAPI = async (token, textVal, filenameArr) => {
       body: JSON.stringify(data),
     });
     const json = await res.json();
+    if (!res.ok) {
+      // eslint-disable-next-line no-alert
+      alert(`${json.message}`);
+    }
     return json;
   } catch (error) {
     console.log(error);
