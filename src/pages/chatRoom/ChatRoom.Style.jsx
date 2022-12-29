@@ -69,12 +69,16 @@ export const YourMsgCont = styled.div`
   display: flex;
 `;
 
-export const YourMsgProfileImg = styled.img`
+export const YourMsgProfileImg = styled.img.attrs({
+  src: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  alt: '유저 프로필 이미지',
+})`
   width: 42px;
   height: 42px;
   margin-right: 12px;
   border-radius: 50%;
   border: 0.5px solid var(--sub2-text-color);
+  object-fit: cover;
 `;
 
 export const YourMsgTxt = styled.p`
@@ -169,5 +173,5 @@ export const SubmitBtn = styled.button`
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  color: #c4c4c4;
+  color: ${(p) => p.color || '#c4c4c4'};
 `;

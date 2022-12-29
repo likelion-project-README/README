@@ -39,6 +39,10 @@ export const CommentInp = styled.input`
   &::placeholder {
     color: #c4c4c4;
   }
+  &:focus {
+    outline: 2px solid var(--main-disabled-color);
+    border-radius: 4px;
+  }
 `;
 
 export const PostBtn = styled.button`

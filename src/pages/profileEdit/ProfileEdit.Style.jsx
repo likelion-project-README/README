@@ -39,6 +39,7 @@ export const ImgUploadLab = styled.label`
   height: 36px;
   border-radius: 50%;
   background: url(${sprite}) 0px 0px / 146px 132px;
+  cursor: pointer;
 `;
 
 export const ImgUploadInp = styled.input`
