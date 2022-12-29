@@ -57,7 +57,7 @@ const TopBanner = ({
             navigate(-1);
           }}
         />
-        <S.MoreBtn onClick={testHandle} data-moreBtn='true' />
+        <S.MoreBtn onClick={testHandle} data-morebtn='true' />
       </S.BannerCont>
     );
   }
@@ -118,7 +118,7 @@ const TopBanner = ({
           }}
         />
         <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
-        <S.MoreBtn onClick={testHandle} data-moreBtn='true' />
+        <S.MoreBtn onClick={testHandle} data-morebtn='true' />
       </S.BannerCont>
     );
   }

@@ -150,7 +150,7 @@ const PostDetail = () => {
                       </S.CommentUserName>
                       <S.MoreBtn
                         type='button'
-                        data-moreBtn='true'
+                        data-morebtn='true'
                         onClick={() => {
                           clickMoreBtn(data);
                         }}
