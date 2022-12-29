@@ -1,12 +1,15 @@
 const getFollowersPostsAPI = async (token) => {
   try {
-    const res = await fetch(`https://mandarin.api.weniv.co.kr/post/feed`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-type': 'application/json',
+    const res = await fetch(
+      `https://mandarin.api.weniv.co.kr/post/feed/?limit=Number&skip=Number`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
       },
-    });
+    );
     const json = await res.json();
     return json.posts;
   } catch (error) {
