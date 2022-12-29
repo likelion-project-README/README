@@ -11,7 +11,11 @@ const getCommentListAPI = async (postId, token) => {
       },
     );
     const json = await res.json();
-    return json?.comments?.reverse();
+    if (!res.ok) {
+      // eslint-disable-next-line no-alert
+      alert(`${json.message}`);
+    }
+    return json.comments.reverse();
   } catch (error) {
     console.log(error);
     return null;

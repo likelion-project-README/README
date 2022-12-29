@@ -8,6 +8,10 @@ const uploadMultipleImgAPI = async (formData) => {
       },
     );
     const json = await res.json();
+    if (json.message) {
+      // eslint-disable-next-line no-alert
+      alert(`${json.message}`);
+    }
     const imgUrlArr = json.map(
       (item) => `https://mandarin.api.weniv.co.kr/${item.filename}`,
     );

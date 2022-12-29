@@ -11,7 +11,11 @@ const likeAPI = async (postId, token) => {
       },
     );
     const json = await res.json();
-    return json?.post;
+    if (!res.ok) {
+      // eslint-disable-next-line no-alert
+      alert(`${json.message}`);
+    }
+    return json.post;
   } catch (error) {
     console.log(error);
     return null;
