@@ -27,7 +27,10 @@ const Profile = () => {
   const accountName = useParams().id;
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState('');
-  const test = useRecoilValue(accountnameData);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   const chkIsMine = () => {
     if (loginedAccountName === accountName) {
@@ -38,12 +41,11 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    console.log(test);
     chkIsMine();
   }, []);
 
   return (
-    <S.ProfileWrap>
+    <S.ProfileWrap onClick={handleModalClose}>
       <TopBanner
         type='top-basic-nav'
         tit='프로필'

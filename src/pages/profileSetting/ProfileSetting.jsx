@@ -30,7 +30,7 @@ const ProfileSetting = () => {
   const [username, setUsername] = useState('');
   const [accountname, setAccountname] = useState('');
   const [intro, setIntro] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(logoProfile);
   const [btnActive, setBtnActive] = useState('');
 
   const setUsernameData = useSetRecoilState(usernameData);
@@ -68,10 +68,10 @@ const ProfileSetting = () => {
     if (regex.test(testUserId)) {
       setAccountname(testUserId);
       setValidId(true);
-      setBtnActive(true);
+      // setBtnActive(true);
     } else {
       setValidId(false);
-      setBtnActive(false);
+      // setBtnActive(false);
       setUserIdMsg('*영문, 숫자, 밑줄, 마침표만 입력할 수 있습니다.');
     }
   };
@@ -113,7 +113,7 @@ const ProfileSetting = () => {
     }
   }, [username, validId, intro, image]);
 
-  const handleSubmit = (e) => {
+  const settingProfile = (e) => {
     e.preventDefault();
     if (btnActive === true) {
       joinAPI(email, password, accountname, username, intro, image).then(
@@ -141,7 +141,7 @@ const ProfileSetting = () => {
       <S.ProfileSettingTit>프로필 설정 페이지</S.ProfileSettingTit>
       <S.Title>프로필 설정</S.Title>
       <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={settingProfile}>
         <S.ImgWrap>
           <S.UserImg src={image} alt='유저 프로필 이미지' />
           <S.ImgUploadLab htmlFor='userImg' />
@@ -187,8 +187,10 @@ const ProfileSetting = () => {
           size='lg'
           tit='README 시작하기'
           isActive={btnActive}
-          // disabled={emailValid && passwordValid ? null : 'disabled'}
-          // message={passwordError}
+          message={userIdMsg}
+          disabled={
+            handleUserIdValid && handleUserIdDuplicate ? null : 'disabled'
+          }
         >
           <Link to='/'></Link>
         </Button>
