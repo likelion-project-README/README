@@ -55,6 +55,7 @@ export const CommentUserImg = styled.img`
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const CommentUserName = styled.strong`
@@ -66,6 +67,7 @@ export const CommentUserName = styled.strong`
   font-size: 14px;
   line-height: 18px;
   color: var(--main-text-color);
+  cursor: pointer;
 `;
 
 export const CommentCreatedTime = styled.span`

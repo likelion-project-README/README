@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import Post from '../../common/post/Post';
@@ -13,6 +13,7 @@ import LoginAccountState from '../../atoms/LoginState';
 const PostDetail = () => {
   const { id } = useParams();
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   // 모달창 온오프
   const modalRef = useRef();
@@ -78,8 +79,8 @@ const PostDetail = () => {
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
     const weeks = Math.floor(days / 7);
-    const months = Math.floor(weeks / 30);
-    const years = Math.floor(months / 365);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
 
     if (seconds < 60) {
       return '방금 전';
@@ -97,9 +98,13 @@ const PostDetail = () => {
       return `${weeks}주 전`;
     }
     if (months < 12) {
-      return `${months}달 전`;
+      return `${months}개월 전`;
     }
     return `${years}년 전`;
+  };
+
+  const goToProfile = (accountname) => {
+    navigate(`/profile/${accountname}`);
   };
 
   return (
@@ -131,8 +136,14 @@ const PostDetail = () => {
                 {commentDataArr?.map((data) => (
                   <li key={data.id}>
                     <S.CommentUserInfo>
-                      <S.CommentUserImg src={data.author.image} alt='' />
-                      <S.CommentUserName>
+                      <S.CommentUserImg
+                        src={data.author.image}
+                        alt=''
+                        onClick={() => goToProfile(data.author.accountname)}
+                      />
+                      <S.CommentUserName
+                        onClick={() => goToProfile(data.author.accountname)}
+                      >
                         {data.author.username}
                         <S.CommentCreatedTime>
                           &middot;
