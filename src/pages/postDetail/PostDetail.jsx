@@ -119,7 +119,6 @@ const PostDetail = () => {
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           setModalType={setModalType}
-          ref={modalRef}
         />
         {postDetailData && (
           <S.ScrollWrapper>

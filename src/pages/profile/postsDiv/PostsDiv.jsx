@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import loadPostsAPI from '../../../api/loadPostsAPI';
 import Post from '../../../common/post/Post';
 import * as S from './PostsDiv.Style';
 
-/**
- * 필요한 것
- * isMine
- * isModalOpen
- * setIsModalOpen
- * setModalType
- * setModalData
- *
- */
 const PostsDiv = ({
   accountName,
   isMine,
@@ -23,6 +15,7 @@ const PostsDiv = ({
   const [isList, setIsList] = useState(true);
   // 사용자 게시물 유무 확인 및 데이터
   const [isPostLoad, setIsPostLoad] = useState(null);
+  const navigate = useNavigate();
 
   const loadPost = async () => {
     await loadPostsAPI(accountName).then((data) => {
@@ -64,8 +57,7 @@ const PostsDiv = ({
                   image={item.image.split(',')[0]}
                   multi={item.image.split(',').length > 1 && true}
                   onClick={() => {
-                    console.log(item.image.split(',').length > 1 && true);
-                    // navigate(`/post/${item.id}`)
+                    navigate(`/post/${item.id}`);
                   }}
                 />
               ))}
