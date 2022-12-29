@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import sprite from '../../../assets/css_sprites.png';
 
-// 프로필 페이지 프로필 부분
 export const ProfileDiv = styled.div`
   width: 100%;
   height: 314px;

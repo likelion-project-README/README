@@ -11,19 +11,12 @@ import ProductDiv from './productDiv/ProductDiv';
 import PostsDiv from './postsDiv/PostsDiv';
 import Alert from '../../common/alert/Alert';
 
-// 로딩중 화면 및, 기능 구현 필요
 const Profile = () => {
-  console.log('화면 렌더링');
-  // 내 프로필 여부
   const [isMine, setIsMine] = useState(null);
-  // 모달창 상태값 + 모달타입 상태값
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  // 모달창데이터
   const [modalData, setModalData] = useState(null);
-  // 로그인된 accountname
   const loginedAccountName = useRecoilValue(accountnameData);
-  // 현재 프로필페이지 id확인
   const accountName = useParams().id;
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState('');
@@ -54,7 +47,6 @@ const Profile = () => {
         setModalType={setModalType}
       />
       <ProfileDiv isMine={isMine} accountName={accountName} />
-      {/* 판매중인 상품 있으면 페이지로드 없으면 넘어감 */}
       <ProductDiv
         accountName={accountName}
         isModalOpen={isModalOpen}

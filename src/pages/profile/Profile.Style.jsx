@@ -1,9 +1,5 @@
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import profileImg from '../../assets/logo-profile.svg';
-import sprite from '../../assets/css_sprites.png';
 
-// 전체 프로필 페이지 wrapper
 export const ProfileWrap = styled.div`
   width: 390px;
   height: 820px;

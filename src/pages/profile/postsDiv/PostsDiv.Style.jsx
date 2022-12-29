@@ -31,8 +31,6 @@ export const AlbumBtn = styled.button`
   background-position: ${(props) => (!props.isList ? 'none' : '-26px -36px')};
 `;
 
-// Posts 리스트형
-
 export const PostWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,14 +42,16 @@ export const PostWrap = styled.div`
   }
 `;
 
-// Posts 앨범형
-
 export const ListWrap = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
   padding: 16px;
   padding-bottom: 76px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const PostImg = styled.a`
@@ -60,7 +60,7 @@ export const PostImg = styled.a`
   height: 114px;
   background: url(${(props) => props.image}) no-repeat;
   background-size: cover;
-  /* 이미지 받아와서 추가하기 */
+
   cursor: pointer;
   ${(props) =>
     props.multi &&

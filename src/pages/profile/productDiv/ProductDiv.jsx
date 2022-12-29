@@ -3,10 +3,6 @@ import loadProductsAPI from '../../../api/loadProductsAPI';
 import Product from '../../../common/product/Product';
 import * as S from './ProductDiv.Style';
 
-// 모달창 처리를 어떻게 할까... ?
-// 방법1. state 사용하기
-// 방법2. useRef 사용해보기
-
 const ProductDiv = ({
   accountName,
   isModalOpen,
@@ -15,7 +11,6 @@ const ProductDiv = ({
   setModalType,
   setModalData,
 }) => {
-  // 사용자 판매상품 유무 확인 및 데이터
   const [isProductLoad, setIsProductLoad] = useState(null);
 
   const loadProduct = async () => {

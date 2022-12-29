@@ -1,7 +1,7 @@
 const loadProductsAPI = async (accountName) => {
   try {
     const res = await fetch(
-      `https://mandarin.api.weniv.co.kr/product/${accountName}`,
+      `https://mandarin.api.weniv.co.kr/product/${accountName}/?limit=Number&skip=Number`,
       {
         method: 'GET',
         headers: {

@@ -13,7 +13,7 @@ const PostsDiv = ({
   setModalType,
 }) => {
   const [isList, setIsList] = useState(true);
-  // 사용자 게시물 유무 확인 및 데이터
+
   const [isPostLoad, setIsPostLoad] = useState(null);
   const navigate = useNavigate();
 
