@@ -16,12 +16,11 @@ const PostDetail = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
-  // 모달창 온오프
   const modalRef = useRef();
   const backgroundRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
-  // 게시글 상세, 댓글 목록, 댓글 카운트 표시
+
   const [postDetailData, setPostDetailData] = useState();
   const [commentDataArr, setCommentDataArr] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
@@ -30,12 +29,6 @@ const PostDetail = () => {
   const [commentId, setCommentId] = useState('');
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState('');
-
-  const handleModalOpen = (e) => {
-    e.stopPropagation();
-    setIsModalOpen(!isModalOpen);
-    console.log(modalRef.current);
-  };
 
   const handleModalClose = (e) => {
     if (!e.target.dataset.morebtn) {
@@ -66,7 +59,6 @@ const PostDetail = () => {
     const getPostDetail = async () => {
       const postData = await getPostDetailAPI(id, token);
       setPostDetailData(postData);
-      console.log(postData.author.accountname);
       chkIsMine(postData.author.accountname);
     };
     getPostDetail();

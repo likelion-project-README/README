@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// 프로필 페이지 판매중인 상품 부분
 export const ProductDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,7 +11,6 @@ export const ProductDiv = styled.div`
   padding-bottom: 14px;
 `;
 
-// overflow 스크롤 통해 확인 가능
 export const ProductCaro = styled.div`
   display: flex;
   padding: 0px 16px;

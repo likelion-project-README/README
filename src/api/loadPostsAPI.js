@@ -1,7 +1,7 @@
 const loadPostsAPI = async (accountName) => {
   try {
     const res = await fetch(
-      `https://mandarin.api.weniv.co.kr/post/${accountName}/userpost`,
+      `https://mandarin.api.weniv.co.kr/post/${accountName}/userpost/?limit=Number&skip=Number`,
       {
         method: 'GET',
         headers: {
