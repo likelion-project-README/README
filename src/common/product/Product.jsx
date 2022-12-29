@@ -13,7 +13,8 @@ const Product = ({
   setModalData,
   data,
 }) => {
-  const productHandle = () => {
+  const productHandle = (e) => {
+    e.stopPropagation();
     if (isMine) {
       setModalType('myProduct');
     } else {

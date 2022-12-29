@@ -119,7 +119,6 @@ const PostDetail = () => {
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           setModalType={setModalType}
-          ref={modalRef}
         />
         {postDetailData && (
           <S.ScrollWrapper>
@@ -150,7 +149,7 @@ const PostDetail = () => {
                       </S.CommentUserName>
                       <S.MoreBtn
                         type='button'
-                        data-moreBtn='true'
+                        data-morebtn='true'
                         onClick={() => {
                           clickMoreBtn(data);
                         }}

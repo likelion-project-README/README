@@ -36,7 +36,8 @@ const TopBanner = ({
   setSearchVal,
 }) => {
   const navigate = useNavigate();
-  const testHandle = () => {
+  const testHandle = (e) => {
+    e.stopPropagation();
     if (type === 'top-basic-nav') {
       setModalType('profile');
     }
@@ -57,7 +58,9 @@ const TopBanner = ({
             navigate(-1);
           }}
         />
-        <S.MoreBtn onClick={testHandle} data-moreBtn='true' />
+        <S.MoreBtn type='button' onClick={testHandle} data-morebtn='true'>
+          <span className='hidden'>더보기</span>
+        </S.MoreBtn>
       </S.BannerCont>
     );
   }
@@ -118,7 +121,7 @@ const TopBanner = ({
           }}
         />
         <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
-        <S.MoreBtn onClick={testHandle} data-moreBtn='true' />
+        <S.MoreBtn type='button' onClick={testHandle} data-morebtn='true' />
       </S.BannerCont>
     );
   }
