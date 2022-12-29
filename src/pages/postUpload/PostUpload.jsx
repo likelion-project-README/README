@@ -94,24 +94,24 @@ const PostUpload = () => {
             />
             {imgPreviewUrls &&
               (imgPreviewUrls.length === 1 ? (
-                <S.UploadedImgCont>
-                  <S.UploadedImg src={imgPreviewUrls[0]} alt='' />
+                <S.SingleImgCont>
+                  <S.SingleImg src={imgPreviewUrls[0]} alt='' />
                   <S.DeleteImgBtn type='button' onClick={deleteImg}>
                     <span className='hidden'>이미지 업로드 취소</span>
                   </S.DeleteImgBtn>
-                </S.UploadedImgCont>
+                </S.SingleImgCont>
               ) : (
                 <S.MultipleImgScrollCont>
                   {imgPreviewUrls.map((item, index) => (
-                    <S.MultipleUploadedImgCont key={item} id={index}>
-                      <S.MultipleUploadedImg src={item} alt='' />
+                    <S.MultipleImgCont key={item} id={index}>
+                      <S.MultipleImg src={item} alt='' />
                       <S.DeleteImgBtn
                         type='button'
                         onClick={() => deleteImg(index)}
                       >
                         <span className='hidden'>이미지 업로드 취소</span>
                       </S.DeleteImgBtn>
-                    </S.MultipleUploadedImgCont>
+                    </S.MultipleImgCont>
                   ))}
                 </S.MultipleImgScrollCont>
               ))}

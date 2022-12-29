@@ -22,6 +22,9 @@ export const ProductName = styled.p`
   line-height: 18px;
   margin-left: 2px;
   margin-bottom: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 export const ProductPrice = styled.p`

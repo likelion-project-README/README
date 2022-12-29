@@ -1,16 +1,119 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import * as S from './Alert.Style';
+import * as L from '../../atoms/LoginData';
+import deleteProductsAPI from '../../api/deleteProductAPI';
+import deletePostAPI from '../../api/deletePostAPI';
+import deleteCommentAPI from '../../api/deleteCommentAPI';
 
-const Alert = ({ message, buttonText }) => {
+/**
+ * alert 종류
+ * 1. 로그아웃
+ * 2. 게시글 삭제
+ * 3. 상품 삭제
+ * 4. 댓글 삭제
+ *
+ * 방법1. type만 받아서 Alert 컴포넌트 내에서 if문으로 리턴처리
+ * 방법2. message, btnTxt, type 다 받아서 Alert.jsx 파일을 최소화
+ * 방법1로 가자
+ */
+
+const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
+  const navigate = useNavigate();
+  const resetUsernameData = useSetRecoilState(L.accountnameData);
+  const resetAccountnameData = useSetRecoilState(L.accountnameData);
+  const resetEmailData = useSetRecoilState(L.emailData);
+  const resetPasswordData = useSetRecoilState(L.passwordData);
+  const resetProfileImageData = useSetRecoilState(L.profileImageData);
+  const resetIntroData = useSetRecoilState(L.introData);
+  const [message, setMessage] = useState('');
+  const [btnTxt, setBtnTxt] = useState('');
+  const params = useParams();
+
+  const logOut = () => {
+    // 토큰 삭제
+    // recoil-persist 삭제
+    // atom reset
+    resetUsernameData('');
+    resetAccountnameData('');
+    resetEmailData('');
+    resetPasswordData('');
+    resetProfileImageData('');
+    resetIntroData('');
+    localStorage.removeItem('token');
+    localStorage.removeItem('recoil-persist');
+  };
+  useEffect(() => {
+    if (alertType === 'logout') {
+      setMessage('로그아웃하시겠습니까?');
+      setBtnTxt('로그아웃');
+    }
+
+    if (alertType === 'deletePost') {
+      setMessage('게시글을 삭제하시겠습니까?');
+      setBtnTxt('삭제');
+    }
+    if (alertType === 'deleteProduct') {
+      setMessage('상품을 삭제하시겠습니까?');
+      setBtnTxt('삭제');
+    }
+    if (alertType === 'deleteComment') {
+      setMessage('댓글을 삭제하시겠습니까?');
+      setBtnTxt('삭제');
+    }
+  }, []);
+  const clickConfirm = async () => {
+    if (alertType === 'logout') {
+      setIsAlertOpen(false);
+      await logOut();
+      alert('로그아웃되었습니다.');
+      navigate('../../../login');
+    }
+    if (alertType === 'deletePost') {
+      deletePostAPI(modalData.id).then((req) => {
+        alert('게시글이 삭제되었습니다.');
+        if (window.location.pathname.split('/')[1] === 'profile') {
+          navigate(0);
+        } else {
+          navigate(-1);
+        }
+      });
+    }
+    if (alertType === 'deleteProduct') {
+      deleteProductsAPI(modalData.id).then((req) => {
+        alert('상품이 삭제되었습니다.');
+        navigate(0);
+      });
+    }
+    if (alertType === 'deleteComment') {
+      await deleteCommentAPI(
+        params.id,
+        commentId.id,
+        localStorage.getItem('token'),
+      ).then(() => {
+        alert('댓글이 삭제되었습니다.');
+        navigate(0);
+      });
+    }
+  };
   return (
     <S.AlertCont>
-      <S.AlertTxt>{message}</S.AlertTxt>
-      <S.BtnWrap>
-        <S.Btn color='var(--main-text-color)' border='0.5px solid #dbdbdb'>
-          취소
-        </S.Btn>
-        <S.Btn color='var(--main-color)'>{buttonText}</S.Btn>
-      </S.BtnWrap>
+      <S.AlertOverlay>
+        <S.AlertTxt>{message}</S.AlertTxt>
+        <S.BtnWrap>
+          <S.Btn
+            color='var(--main-text-color)'
+            border='0.5px solid #dbdbdb'
+            onClick={() => setIsAlertOpen(false)}
+          >
+            취소
+          </S.Btn>
+          <S.Btn color='var(--main-color)' onClick={clickConfirm}>
+            {btnTxt}
+          </S.Btn>
+        </S.BtnWrap>
+      </S.AlertOverlay>
     </S.AlertCont>
   );
 };

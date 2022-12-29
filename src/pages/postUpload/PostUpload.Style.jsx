@@ -8,7 +8,7 @@ export const PostUpload = styled.section`
   /* max-height: 100vh; */
   height: 820px;
   overflow-y: scroll;
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
 `;
@@ -61,9 +61,13 @@ export const Textarea = styled.textarea`
   &::placeholder {
     color: #c4c4c4;
   }
+  &:focus {
+    outline: 2px solid var(--main-disabled-color);
+    border-radius: 4px;
+  }
 `;
 
-export const UploadedImgCont = styled.div`
+export const SingleImgCont = styled.div`
   position: relative;
   width: 304px;
   height: 228px;
@@ -72,9 +76,35 @@ export const UploadedImgCont = styled.div`
   overflow: hidden;
 `;
 
-export const UploadedImg = styled.img`
+export const SingleImg = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
+`;
+
+export const MultipleImgScrollCont = styled.ul`
+  display: flex;
+  width: 304px;
+  gap: 8px;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--sub2-text-color);
+    border-radius: 6px;
+  }
+`;
+
+export const MultipleImgCont = styled.li`
+  position: relative;
+`;
+
+export const MultipleImg = styled.img`
+  width: 168px;
+  height: 126px;
+  border: 0.5px solid var(--sub2-text-color);
+  border-radius: 10px;
   object-fit: cover;
 `;
 
@@ -87,27 +117,6 @@ export const DeleteImgBtn = styled.button`
   background: url(${sprite}) -122px -48px / 146px 132px;
 `;
 
-export const MultipleImgScrollCont = styled.div`
-  display: flex;
-  width: 304px;
-  padding: 10px 0;
-  gap: 8px;
-  overflow-x: scroll;
-  /* 디자인 스크롤 추가 예정 */
-`;
-
-export const MultipleUploadedImgCont = styled.div`
-  position: relative;
-`;
-
-export const MultipleUploadedImg = styled.img`
-  width: 168px;
-  height: 126px;
-  border: 0.5px solid var(--sub2-text-color);
-  border-radius: 10px;
-  object-fit: cover;
-`;
-
 export const AddFileLab = styled.label`
   display: block;
   /* position: fixed; */
@@ -116,6 +125,6 @@ export const AddFileLab = styled.label`
   bottom: 30px;
   width: 36px;
   height: 36px;
-  background: url(${sprite}) -36px -0px / 146px 132px;
+  background: url(${sprite}) -0px -0px / 146px 132px;
   cursor: pointer;
 `;

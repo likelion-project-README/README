@@ -9,6 +9,7 @@ export const ProductDiv = styled.div`
   padding: 20px 0px 20px 0px;
   background-color: white;
   margin-bottom: 6px;
+  padding-bottom: 14px;
 `;
 
 // overflow 스크롤 통해 확인 가능
@@ -17,9 +18,14 @@ export const ProductCaro = styled.div`
   padding: 0px 16px;
   overflow-x: scroll;
   overflow-y: hidden;
-  ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+  &::-webkit-scrollbar {
+    height: 6px;
   }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--sub2-text-color);
+    border-radius: 6px;
+  }
+
   gap: 10px;
 `;
 export const ProductSpan = styled.span`
