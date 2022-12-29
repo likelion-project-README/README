@@ -7,12 +7,14 @@ import Button from '../../common/button/Button';
 import getFollowersPostsAPI from '../../api/getFollowersPostsAPI';
 import logoHome from '../../assets/logo-home.svg';
 import * as S from './Home.Style';
+import PostModal from '../../common/postModal/PostModal';
 
 const Home = () => {
   const token = localStorage.getItem('token');
-
   const [feedData, setFeedData] = useState([]);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [modalData, setModalData] = useState('');
   useEffect(() => {
     const getFollowersPosts = async () => {
       const followersPosts = await getFollowersPostsAPI(token);
@@ -30,7 +32,14 @@ const Home = () => {
           <S.PostsContUl>
             {feedData.map((item) => (
               <li key={item.id}>
-                <Post data={item} />
+                <Post
+                  key={item.id}
+                  data={item}
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                  setModalType={setModalType}
+                  setModalData={setModalData}
+                />
               </li>
             ))}
           </S.PostsContUl>
@@ -48,6 +57,14 @@ const Home = () => {
       )}
       <S.TabMenuCont>
         <TabMenu />
+        {isModalOpen ? (
+          <PostModal
+            modalType={modalType}
+            modalData={modalData}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        ) : null}
       </S.TabMenuCont>
     </S.Home>
   );
