@@ -173,5 +173,5 @@ export const SubmitBtn = styled.button`
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  color: ${(p) => p.color || '#c4c4c4'};
+  color: ${(props) => (props.isBtnActive ? 'var(--main-color)' : '#c4c4c4')};
 `;
