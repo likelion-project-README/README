@@ -104,7 +104,7 @@ const Post = ({
           </S.PostTxt>
         )}
         {imgSrcArr[0] && (
-          <S.StyledSlider dots arrows={false} draggable>
+          <S.StyledSlider dots draggable>
             {imgSrcArr.map((item) => (
               <S.PostImg
                 src={item}
