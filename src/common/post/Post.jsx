@@ -16,8 +16,10 @@ const Post = ({
 }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
-
-  const imgSrcArr = data.image.split(',');
+  const imgSrcArr =
+    typeof data.image === 'string' && data.image.substr(0, 4) === 'http'
+      ? data.image.split(',')
+      : '';
   const [isSingleImg, setIsSingleImg] = useState(false);
 
   useEffect(() => {
