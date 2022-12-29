@@ -140,4 +140,29 @@ export const StyledSlider = styled(Slider)`
       }
     }
   }
+  .slick-prev,
+  .slick-next {
+    position: absolute;
+    width: 40px;
+    height: 228px;
+    z-index: 10;
+  }
+  .slick-prev {
+    left: 0;
+  }
+  .slick-next {
+    right: 0;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px;
+  }
+  .slick-prev:focus:before,
+  .slick-next:focus:before {
+    opacity: 0.75;
+  }
+  .slick-prev:hover:before,
+  .slick-next:hover:before {
+    opacity: 1;
+  }
 `;
