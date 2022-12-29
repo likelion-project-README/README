@@ -26,8 +26,8 @@ const JoinPage = () => {
   const [intro, setIntro] = useState('');
   const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [emailValid, setEmailValid] = useState(false);
-  const [emaiDuplicate, setEmailDuplicate] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
+  const [emailDuplicate, setEmailDuplicate] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [btnActive, setBtnActive] = useState('');
@@ -47,72 +47,152 @@ const JoinPage = () => {
     }
   };
 
-  // onChange : 유저이메일 유효성 검사
-  const handleEmailValid = (e) => {
-    const testUserEmail = e.target.value;
-    setEmail(testUserEmail);
-    const regex =
+  const emailValidator = (e) => {
+    const emailCurrentValue = e.target.value;
+    setEmail(e.target.value);
+    const emailReg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (regex.test(testUserEmail)) {
-      setEmail(testUserEmail);
-      setEmailValid(true);
-    } else {
+    if (emailCurrentValue === '') {
       setEmailValid(false);
-      setEmailError('올바른 이메일 형식이 아닙니다.');
+    } else if (!emailReg.test(emailCurrentValue)) {
+      setEmailValid(false);
+      setEmailError('* 올바른 이메일 형식이 아닙니다');
+    } else {
+      setEmailValid(true);
+      setEmailError('');
     }
   };
 
-  // onBlur : 유저이메일 중복 검사
-  const handleEmailDuplicate = async (e) => {
-    const testUserEmail = e.target.value;
-    setEmail(testUserEmail);
-    const validMsg = await emailDuplicateAPI(testUserEmail);
-    if (validMsg.message === '이미 가입된 이메일 주소 입니다.') {
-      setEmailValid(false);
-      setEmailError('*이미 가입된 이메일 주소입니다.');
-      setEmailDuplicate(false);
-    } else if (validMsg.message === '사용 가능한 이메일 입니다.') {
-      setEmailDuplicate(true);
-    }
-  };
+  // 유저이메일 중복검사
+  // useEffect(() => {
+  // const handleEmailDuplicate = (e) => {
+  //   const testUserEmail = e.target.value;
+  //   setEmail(testUserEmail);
+  //   const validMsg = emailDuplicateAPI(testUserEmail);
+  //   if (validMsg.message === '이미 가입된 이메일 주소 입니다.') {
+  //     setEmailValid(false);
+  //     setEmailError('*이미 가입된 이메일 주소입니다.');
+  //     setEmailDuplicate(false);
+  //   } else if (validMsg.message === '사용 가능한 이메일 입니다.') {
+  //     setEmailDuplicate(true);
+  //   }
+  // };
+  //   handleEmailDuplicate();
+  // }, []);
+
+  // useEffect(() => {
+  //   const emailValidator = async () => {
+  //     const data = await postEmailValid({
+  //       user: {
+  //         email,
+  //       },
+  //     });
+  //     // console.log(data);
+  //     const emailReg =
+  //       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  //     const regResult = emailReg.test(email);
+  // setEmailError(`* ${data.message}`);
+  //     if (!regResult) {
+  //       setEmailValid(false);
+  //       setEmailError('* 올바른 이메일 형식이 아닙니다');
+  //     } else if (data.message === '사용 가능한 이메일 입니다.' && regResult) {
+  //       setEmailValid(true);
+  //     } else {
+  //       setEmailValid(false);
+  //     }
+  //   };
+  //   emailValidator();
+  // }, [email]);
+
+  // onChange : 유저이메일 유효성 검사
+  // useEffect(() => {
+  //   const handleEmailValid = () => {
+  //     const data = setEmailValid(email);
+  //     // console.log(data);
+  //     const regex =
+  //       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  //     const regResult = regex.test(email);
+  //     setEmailError(`* ${data.message}`);
+  //     if (email.length === 0) {
+  //       setEmailValid(false);
+  //     } else if (!regResult) {
+  //       setEmailValid(false);
+  //       setEmailError('올바른 이메일 형식이 아닙니다.');
+  //     } else if (data.message === '사용 가능한 이메일 입니다' && regResult) {
+  //       setEmailValid(true);
+  //     } else {
+  //       setEmailValid(true);
+  //     }
+  //   const testUserEmail = e.target.value;
+  //   setEmail(testUserEmail);
+  //   const regex =
+  //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  //   if (email.length === 0) {
+  //     // setEmailError('입력해주세요.');
+  //     setEmailValid(false);
+  //   } else if (!regex.test(email)) {
+  //     setEmailError('올바른 이메일 형식이 아닙니다.');
+  //     setEmailValid(false);
+  //   } else {
+  //     setEmailError('');
+  //     setEmailValid(true);
+  //   }
+  //   if (regex.test(testUserEmail)) {
+  //     setEmail(testUserEmail);
+  //     setEmailValid(true);
+  //   } else {
+  //     setEmailValid(false);
+  //     setEmailError('올바른 이메일 형식이 아닙니다.');
+  //   }
+  //   };
+  //   handleEmailValid();
+  // }, [email]);
 
   // 비밀번호 유효성 검사
-  const handlePasswordValid = (e) => {
-    const testPassword = e.target.type;
-    if (password.length < 6) {
-      setPasswordValid(false);
-      setPasswordError('비밀번호는 6자 이상이어야 합니다.');
-    } else if (password.length >= 6) {
-      setPasswordValid(true);
-      setPassword(testPassword);
-      setPasswordError('');
-    }
-  };
+  useEffect(() => {
+    const handlePasswordValid = () => {
+      // const testPassword = e.target.type;
+      if (password.length < 6) {
+        setPasswordValid(false);
+        setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+      } else if (password.length >= 6) {
+        setPasswordValid(true);
+        // setPassword(testPassword);
+        setPasswordError('');
+      }
+    };
+    handlePasswordValid();
+  }, [password]);
 
   // 회원가입 버튼 활성화
   useEffect(() => {
-    if (emailValid && passwordValid && emaiDuplicate) {
+    if (emailValid && passwordValid && !emailDuplicate) {
       setBtnActive(true);
     } else {
       setBtnActive(false);
     }
-  }, [emailValid, passwordValid]);
-  console.log(emailValid, passwordValid);
+  }, [emailValid, passwordValid, emailDuplicate]);
+  console.log(emailValid, passwordValid, emailDuplicate);
+  console.log(email, password);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (btnActive === true) {
-      joinAPI(email, password, accountname, username, intro, image).then(
-        (data) => {
-          localStorage.setItem('token', data.user.token);
-          setUsernameData(data.user.username);
-          setEmailData(data.user.email);
-          setPasswordData(data.user.password);
-          setAccountNameData(data.user.accountname);
-          setIntroData(data.user.intro);
-          setProfileImageData(data.user.profileImageData);
-        },
+      const data = await joinAPI(
+        email,
+        password,
+        accountname,
+        username,
+        intro,
+        image,
       );
+      localStorage.setItem('token', data.user.token);
+      setUsernameData(data.user.username);
+      setEmailData(data.user.email);
+      setPasswordData(data.user.password);
+      setAccountNameData(data.user.accountname);
+      setIntroData(data.user.intro);
+      setProfileImageData(data.user.profileImageData);
       navigate('/signUp/profileSetting', {
         state: {
           email,
@@ -132,10 +212,9 @@ const JoinPage = () => {
           id='email'
           type='email'
           required
-          onChange={handleEmailValid}
-          onBlur={handleEmailDuplicate}
+          onChange={emailValidator}
           value={email}
-          buttonColor={emailValid ? null : 'red'}
+          bottomColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
           message={emailError}
         />
@@ -146,10 +225,9 @@ const JoinPage = () => {
           type='password'
           required
           onChange={handleData}
-          onBlur={handlePasswordValid}
           value={password}
           display={passwordValid ? null : 'yes'}
-          buttonColor={passwordValid ? null : 'red'}
+          bottomColor={passwordValid ? null : 'red'}
           message={passwordError}
         />
         <S.div>

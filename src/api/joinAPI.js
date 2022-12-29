@@ -13,12 +13,12 @@ const joinAPI = async (
     },
     body: JSON.stringify({
       user: {
-        username: 'username',
-        email: 'email',
-        password: 'password',
-        accountname: 'accountname',
-        intro: 'intro',
-        image: '..src/assets/logo-profile.svg',
+        username,
+        email,
+        password,
+        accountname,
+        intro,
+        image,
       },
     }),
   });
