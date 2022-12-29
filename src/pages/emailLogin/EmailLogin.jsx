@@ -21,10 +21,10 @@ const EmailLoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [accountname, setAccountname] = useState('');
-  const [intro, setIntro] = useState('');
-  const [image, setImage] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [accountname, setAccountname] = useState('');
+  // const [intro, setIntro] = useState('');
+  // const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [passwordError, setPasswordError] = useState('');

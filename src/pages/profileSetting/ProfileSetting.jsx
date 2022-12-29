@@ -129,7 +129,7 @@ const ProfileSetting = () => {
           setProfileImageData(data.user.profileImageData);
         },
       );
-      navigate('/signUp/profileSetting', {
+      navigate('/', {
         state: {
           email,
           password,
