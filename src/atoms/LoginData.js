@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+import logoProfile from '../assets/logo-profile.svg';
 
 // 로컬스토리지 저장
 const { persistAtom } = recoilPersist();
@@ -36,6 +37,6 @@ export const introData = atom({
 
 export const profileImageData = atom({
   key: 'image',
-  default: '..src/assets/logo-profile.svg',
+  default: logoProfile,
   effects_UNSTABLE: [persistAtom],
 });
