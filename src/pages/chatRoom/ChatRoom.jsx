@@ -9,6 +9,16 @@ const ChatRoom = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
 
+  const [isBtnActive, setIsBtnActive] = useState(false);
+  const handleChangeInp = (e) => {
+    const text = e.target.value;
+    if (text && text.trim() !== '') {
+      setIsBtnActive(true);
+    } else {
+      setIsBtnActive(false);
+    }
+  };
+
   return (
     <>
       <S.ChatRoom>
@@ -67,8 +77,15 @@ const ChatRoom = () => {
               className='hidden'
             />
           </S.FileInpLab>
-          <S.TxtInp type='text' placeholder='메시지 입력하기...' id='txtInp' />
-          <S.SubmitBtn type='button'>전송</S.SubmitBtn>
+          <S.TxtInp
+            type='text'
+            placeholder='메시지 입력하기...'
+            id='txtInp'
+            onChange={handleChangeInp}
+          />
+          <S.SubmitBtn type='button' isBtnActive={isBtnActive}>
+            전송
+          </S.SubmitBtn>
         </S.ChatForm>
       </S.ChatRoom>
       {isModalOpen ? (
