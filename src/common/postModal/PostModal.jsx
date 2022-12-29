@@ -16,50 +16,39 @@ const PostModal = ({
   modalType,
   isModalOpen,
   setIsModalOpen,
-  isAlertOpen,
   setIsAlertOpen,
   modalData,
-  commentId,
+  setAlertType,
 }) => {
   const navigate = useNavigate();
-  const postId = useParams();
 
   const clickOepnProduct = () => {
     setIsModalOpen(!isModalOpen);
     window.open(modalData.link, '_blank');
-  };
-  const clickDeleteProduct = () => {
-    deleteProductsAPI(modalData.id).then((req) => {
-      alert('상품이 삭제되었습니다.');
-      navigate(0);
-    });
   };
   const clickEditProduct = () => {
     navigate(
       `/profile/${modalData.author.accountname}/editProduct/${modalData.id}`,
     );
   };
+  const clickDeleteProduct = () => {
+    setAlertType('deleteProduct');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
+  };
   const clickDeletePost = async () => {
-    console.log(window.location.pathname.split('/')[1]);
-
-    deletePostAPI(modalData.id).then((req) => {
-      alert('게시글이 삭제되었습니다.');
-      if (window.location.pathname.split('/')[1] === 'profile') {
-        navigate(0);
-      } else {
-        navigate(-1);
-      }
-    });
+    setAlertType('deletePost');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
   };
   const clickDeleteComment = async () => {
-    // console.log(postId.id);
-    await deleteCommentAPI(postId.id, commentId, localStorage.getItem('token'));
-    alert('댓글이 삭제되었습니다.');
-    navigate(0);
+    setAlertType('deleteComment');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
   };
 
   const clickLogOut = () => {
-    console.log(isAlertOpen);
+    setAlertType('logout');
     setIsAlertOpen(true);
     setIsModalOpen(false);
   };

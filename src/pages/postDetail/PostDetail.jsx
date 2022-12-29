@@ -8,8 +8,8 @@ import PostModal from '../../common/postModal/PostModal';
 import getPostDetailAPI from '../../api/getPostDetailAPI';
 import getCommentListAPI from '../../api/getCommentListAPI';
 import * as S from './PostDetail.Style';
-import LoginAccountState from '../../atoms/LoginState';
 import { accountnameData } from '../../atoms/LoginData';
+import Alert from '../../common/alert/Alert';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -27,8 +27,9 @@ const PostDetail = () => {
   const [isMine, setIsMine] = useState(false);
   const loginedAccountName = useRecoilValue(accountnameData);
   const [commentId, setCommentId] = useState('');
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState('');
 
-  // 아래 두개 이벤트 함수 일단보류
   const handleModalOpen = (e) => {
     e.stopPropagation();
     setIsModalOpen(!isModalOpen);
@@ -36,7 +37,7 @@ const PostDetail = () => {
   };
 
   const handleModalClose = (e) => {
-    if (e.target !== modalRef.current) {
+    if (!e.target.dataset.morebtn) {
       setIsModalOpen(false);
     }
   };
@@ -57,8 +58,7 @@ const PostDetail = () => {
       setModalType('myComment');
     }
     setIsModalOpen(!isModalOpen);
-    setCommentId(data.id);
-    console.log(data);
+    setCommentId(data);
   };
 
   useEffect(() => {
@@ -111,13 +111,15 @@ const PostDetail = () => {
 
   return (
     <>
-      <S.PostDetail ref={backgroundRef}>
+      <S.PostDetail ref={backgroundRef} onClick={handleModalClose}>
         <S.PostDetailTit>게시글 상세 페이지</S.PostDetailTit>
         <TopBanner
           type='top-basic-nav'
           tit='프로필'
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          setModalType={setModalType}
+          ref={modalRef}
         />
         {postDetailData && (
           <S.ScrollWrapper>
@@ -148,6 +150,7 @@ const PostDetail = () => {
                       </S.CommentUserName>
                       <S.MoreBtn
                         type='button'
+                        data-moreBtn='true'
                         onClick={() => {
                           clickMoreBtn(data);
                         }}
@@ -178,8 +181,19 @@ const PostDetail = () => {
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
             commentId={commentId}
+            isAlertOpen={isAlertOpen}
+            setIsAlertOpen={setIsAlertOpen}
+            setAlertType={setAlertType}
           />
         </div>
+      ) : null}
+      {isAlertOpen ? (
+        <Alert
+          alertType={alertType}
+          setIsAlertOpen={setIsAlertOpen}
+          modalData={postDetailData}
+          commentId={commentId}
+        />
       ) : null}
     </>
   );

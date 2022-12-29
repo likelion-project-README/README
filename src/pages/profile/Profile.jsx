@@ -79,14 +79,15 @@ const Profile = () => {
             isAlertOpen={isAlertOpen}
             setIsModalOpen={setIsModalOpen}
             setIsAlertOpen={setIsAlertOpen}
+            setAlertType={setAlertType}
           />
         ) : null}
       </S.FooterWrap>
       {isAlertOpen ? (
         <Alert
-          message='로그아웃하시겠습니까?'
-          buttonText='로그아웃'
+          alertType={alertType}
           setIsAlertOpen={setIsAlertOpen}
+          modalData={modalData}
         />
       ) : null}
     </S.ProfileWrap>
