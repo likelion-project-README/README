@@ -65,15 +65,18 @@ const EmailLoginPage = () => {
   }, [email]);
 
   // 비밀번호 유효성 검사
-  const handlePasswordValid = () => {
-    if (password.length < 6) {
-      setPasswordValid(false);
-      setPasswordError('비밀번호는 6자 이상이어야 합니다.');
-    } else if (password.length >= 6) {
-      setPasswordValid(true);
-      setPasswordError('');
-    }
-  };
+  useEffect(() => {
+    const handlePasswordValid = () => {
+      if (password.length < 6) {
+        setPasswordValid(false);
+        setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+      } else if (password.length >= 6) {
+        setPasswordValid(true);
+        setPasswordError('');
+      }
+    };
+    handlePasswordValid();
+  }, [password]);
 
   // 로그인 버튼 활성화
   useEffect(() => {
@@ -125,7 +128,7 @@ const EmailLoginPage = () => {
           required
           onChange={handleData}
           value={email}
-          buttonColor={emailValid ? null : 'red'}
+          bottomColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
           message={emailError}
         />
@@ -136,10 +139,10 @@ const EmailLoginPage = () => {
           type='password'
           required
           onChange={handleData}
-          onBlur={handlePasswordValid}
+          // onBlur={handlePasswordValid}
           value={password}
           display={passwordValid ? null : 'yes'}
-          buttonColor={passwordValid ? null : 'red'}
+          bottomColor={passwordValid ? null : 'red'}
           message={passwordError}
         />
         <S.div>
