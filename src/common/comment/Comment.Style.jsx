@@ -50,5 +50,5 @@ export const PostBtn = styled.button`
   height: 18px;
   margin-left: auto;
   font-size: 14px;
-  color: ${(props) => (props.inpValue ? 'var(--main-color)' : '#c4c4c4')};
+  color: ${(props) => (props.isBtnActive ? 'var(--main-color)' : '#c4c4c4')};
 `;

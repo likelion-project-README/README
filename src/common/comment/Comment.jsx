@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { profileImageData } from '../../atoms/LoginData';
 import leaveCommentAPI from '../../api/leaveCommentAPI';
@@ -10,12 +10,21 @@ const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
 
   const inpRef = useRef();
   const [inpValue, setInpValue] = useState('');
+  const [isBtnActive, setIsBtnActive] = useState(false);
 
   const loginedProfileImg = useRecoilValue(profileImageData);
 
   const handleChange = (e) => {
     setInpValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (inpValue.trim() === '') {
+      setIsBtnActive(false);
+    } else if (inpValue !== '') {
+      setIsBtnActive(true);
+    }
+  }, [inpValue]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +49,7 @@ const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {
           value={inpValue}
           ref={inpRef}
         />
-        <S.PostBtn inpValue={inpValue}>게시</S.PostBtn>
+        <S.PostBtn isBtnActive={isBtnActive}>게시</S.PostBtn>
       </S.CommentForm>
     </S.CommentCont>
   );
