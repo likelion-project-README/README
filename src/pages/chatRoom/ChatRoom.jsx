@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
 import PostModal from '../../common/postModal/PostModal';
-import defaultProfile from '../../assets/logo-profile.svg';
 import * as S from './ChatRoom.Style';
 
 const ChatRoom = () => {
@@ -26,7 +25,7 @@ const ChatRoom = () => {
         <S.TopBannerCont>
           <TopBanner
             type='top-chat-nav'
-            tit='숨참고 딥다이브'
+            tit='숨참고딥다이브'
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
             setModalType={setModalType}
@@ -35,7 +34,7 @@ const ChatRoom = () => {
         <S.ChatCont>
           {/* 상대 메세지 - 텍스트 */}
           <S.YourMsgCont>
-            <S.YourMsgProfileImg src={defaultProfile} alt='' />
+            <S.YourMsgProfileImg />
             <S.YourMsgTxt>안녕하세요!</S.YourMsgTxt>
             <S.CreatedTime>12:39</S.CreatedTime>
           </S.YourMsgCont>
@@ -45,7 +44,7 @@ const ChatRoom = () => {
             <S.CreatedTime>12:50</S.CreatedTime>
           </S.MyMsgCont>
           <S.YourMsgCont>
-            <S.YourMsgProfileImg src={defaultProfile} alt='' />
+            <S.YourMsgProfileImg />
             <S.YourMsgTxt>모던 자바스크립트 팔렸나요?</S.YourMsgTxt>
             <S.CreatedTime>12:55</S.CreatedTime>
           </S.YourMsgCont>

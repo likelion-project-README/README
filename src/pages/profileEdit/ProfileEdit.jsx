@@ -6,6 +6,7 @@ import loadProfileAPI from '../../api/loadProfileAPI';
 import accountnameValidAPI from '../../api/accountnameValidAPI';
 import uploadImgAPI from '../../api/uploadImgAPI';
 import editProfileAPI from '../../api/editProfileAPI';
+import logoProfile from '../../assets/logo-profile.svg';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
@@ -28,7 +29,9 @@ const ProfileEdit = () => {
       setUserName(result.profile.username);
       setUserId(result.profile.accountname);
       setUserIntro(result.profile.intro);
-      if (result.profile.image) {
+      if (result.profile.image === 'http://146.56.183.55:5050/Ellipse.png') {
+        setUserImg(logoProfile);
+      } else {
         setUserImg(result.profile.image);
       }
     };
