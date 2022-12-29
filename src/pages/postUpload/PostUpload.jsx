@@ -89,9 +89,10 @@ const PostUpload = () => {
           <S.ContentsArea>
             <S.Textarea
               placeholder='게시글 입력하기...'
+              value={textareaVal}
               ref={textareaRef}
               onInput={handleChangeTextarea}
-            />
+            ></S.Textarea>
             {imgPreviewUrls &&
               (imgPreviewUrls.length === 1 ? (
                 <S.SingleImgCont>
