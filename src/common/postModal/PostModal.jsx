@@ -1,59 +1,66 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import * as S from './PostModal.Style';
 import Alert from '../alert/Alert';
 import deleteProductsAPI from '../../api/deleteProductAPI';
 import deletePostAPI from '../../api/deletePostAPI';
 import deleteCommentAPI from '../../api/deleteCommentAPI';
+import * as L from '../../atoms/LoginData';
 
 /**
- * 1. 프로필
- * 2. 게시글
- * 3. 댓글
- * 4. 채팅방
+ * 음 로그아웃
  *
- * 사용시 modalType에 따라
- * profile, post, comment, chatRoom 입력
  */
 
-const PostModal = ({ modalType, isModalOpen, setIsModalOpen, modalData }) => {
+const PostModal = ({
+  modalType,
+  isModalOpen,
+  setIsModalOpen,
+  setIsAlertOpen,
+  modalData,
+  setAlertType,
+}) => {
   const navigate = useNavigate();
+
   const clickOepnProduct = () => {
     setIsModalOpen(!isModalOpen);
     // window.open(modalData.link, '_blank');
     window.open('https://github.com/likelion-project-README/README', '_blank');
-  };
-  const clickDeleteProduct = () => {
-    deleteProductsAPI(modalData.id).then((req) => {
-      navigate(0);
-    });
   };
   const clickEditProduct = () => {
     navigate(
       `/profile/${modalData.author.accountname}/editProduct/${modalData.id}`,
     );
   };
+  const clickDeleteProduct = () => {
+    setAlertType('deleteProduct');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
+  };
   const clickDeletePost = async () => {
-    console.log(window.location.pathname.split('/')[1]);
+    setAlertType('deletePost');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
+  };
+  const clickDeleteComment = async () => {
+    setAlertType('deleteComment');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
+  };
 
-    deletePostAPI(modalData.id).then((req) => {
-      if (window.location.pathname.split('/')[1] === 'profile') {
-        navigate(0);
-      } else {
-        navigate(-1);
-      }
-    });
+  const clickLogOut = () => {
+    setAlertType('logout');
+    setIsAlertOpen(true);
+    setIsModalOpen(false);
   };
-  const clickDeleteComment = () => {
-    console.log(modalData);
-    // deleteCommentAPI(postId, commentId, token)
-  };
+
   if (modalType === 'profile') {
     return (
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
           <S.ModalTxt>설정 및 개인정보</S.ModalTxt>
-          <S.ModalTxt>로그아웃</S.ModalTxt>
+          <S.ModalTxt onClick={clickLogOut}>로그아웃</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );

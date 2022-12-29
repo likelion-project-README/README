@@ -3,10 +3,22 @@ import styled from 'styled-components';
 export const AlertCont = styled.article`
   width: 252px;
   height: 110px;
-  border-radius: 10px;
+  top: 50%;
+  left: 195px;
+  transform: translate(-50%, -50%);
   text-align: center;
+  position: absolute;
 `;
-
+export const AlertOverlay = styled.div`
+  width: 252px;
+  height: 110px;
+  top: 0;
+  border-radius: 10px;
+  background-color: white;
+  position: absolute;
+  z-index: 10;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.0975));
+`;
 export const AlertTxt = styled.p`
   font-weight: 500;
   font-size: 16px;

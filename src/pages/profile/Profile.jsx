@@ -9,6 +9,7 @@ import { accountnameData } from '../../atoms/LoginData';
 import ProfileDiv from './profileDiv/ProfileDiv';
 import ProductDiv from './productDiv/ProductDiv';
 import PostsDiv from './postsDiv/PostsDiv';
+import Alert from '../../common/alert/Alert';
 
 // 로딩중 화면 및, 기능 구현 필요
 const Profile = () => {
@@ -24,6 +25,9 @@ const Profile = () => {
   const loginedAccountName = useRecoilValue(accountnameData);
   // 현재 프로필페이지 id확인
   const accountName = useParams().id;
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState('');
+  const test = useRecoilValue(accountnameData);
 
   const chkIsMine = () => {
     if (loginedAccountName === accountName) {
@@ -34,6 +38,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    console.log(test);
     chkIsMine();
   }, []);
 
@@ -71,10 +76,20 @@ const Profile = () => {
             modalType={modalType}
             modalData={modalData}
             isModalOpen={isModalOpen}
+            isAlertOpen={isAlertOpen}
             setIsModalOpen={setIsModalOpen}
+            setIsAlertOpen={setIsAlertOpen}
+            setAlertType={setAlertType}
           />
         ) : null}
       </S.FooterWrap>
+      {isAlertOpen ? (
+        <Alert
+          alertType={alertType}
+          setIsAlertOpen={setIsAlertOpen}
+          modalData={modalData}
+        />
+      ) : null}
     </S.ProfileWrap>
   );
 };
