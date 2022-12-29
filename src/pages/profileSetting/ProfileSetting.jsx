@@ -97,7 +97,7 @@ const ProfileSetting = () => {
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setIntro(IntroVal);
-      // setBtnActive(true);
+      setBtnActive(true);
     }
   };
 
@@ -110,6 +110,8 @@ const ProfileSetting = () => {
       image !== logoProfile
     ) {
       setBtnActive(true);
+    } else {
+      setBtnActive(false);
     }
   }, [username, validId, intro, image]);
 
@@ -165,6 +167,7 @@ const ProfileSetting = () => {
         <InputBox
           label='계정 ID'
           id='userID'
+          type='userID'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           value={accountname}
           onChange={handleUserIdValid}
@@ -188,9 +191,7 @@ const ProfileSetting = () => {
           tit='README 시작하기'
           isActive={btnActive}
           message={userIdMsg}
-          disabled={
-            handleUserIdValid && handleUserIdDuplicate ? null : 'disabled'
-          }
+          disabled={validId ? null : 'disabled'}
         >
           <Link to='/'></Link>
         </Button>
