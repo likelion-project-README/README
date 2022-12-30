@@ -27,6 +27,9 @@ export const SearchedUserUl = styled.ul`
   height: 712px;
   padding: 20px 16px;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const SearchedUser = styled.div`
