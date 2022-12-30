@@ -47,4 +47,5 @@ export const ModalTxt = styled.button`
   line-height: 18px;
   text-align: left;
   padding: 16px 24px;
+  z-index: 20;
 `;

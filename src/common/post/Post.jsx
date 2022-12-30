@@ -16,6 +16,7 @@ const Post = ({
 }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+
   const imgSrcArr =
     typeof data.image === 'string' && data.image.substr(0, 4) === 'http'
       ? data.image.split(',')
@@ -55,7 +56,8 @@ const Post = ({
     }
   };
 
-  const goToPostDetail = () => {
+  const goToPostDetail = (e) => {
+    e.stopPropagation();
     if (isMatchProfile || isMatchHome) {
       navigate(`/post/${data.id}`);
     }

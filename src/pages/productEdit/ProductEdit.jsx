@@ -9,7 +9,6 @@ import * as S from './ProductEdit.Style';
 
 const ProductEdit = () => {
   const navigate = useNavigate();
-  // 프로필 페이지에서 파라미터로 받아서 사용하기
   const productID = useParams().productId;
   const accountName = useParams().id;
   const fileInputRef = useRef();
@@ -96,7 +95,7 @@ const ProductEdit = () => {
   // 상품 수정 데이터 전송
   const editProduct = async (e) => {
     e.preventDefault();
-    if (btnActive === true) {
+    if (btnActive) {
       await editProductAPI(
         productID,
         productName,
@@ -135,28 +134,17 @@ const ProductEdit = () => {
           max='15'
           onChange={handleProductName}
         />
-        {validPrice ? (
-          <InputBox
-            label='가격'
-            id='productPrice'
-            placeholder='숫자만 입력 가능합니다.'
-            value={productPrice}
-            onChange={handleProductPrice}
-            onBlur={handleProductPriceValid}
-          />
-        ) : (
-          <InputBox
-            label='가격'
-            id='productPrice'
-            placeholder='숫자만 입력 가능합니다.'
-            value={productPrice}
-            onChange={handleProductPrice}
-            onBlur={handleProductPriceValid}
-            bottomColor='red'
-            message='가격은 1원 이상이어야 합니다.'
-            display='yes'
-          />
-        )}
+        <InputBox
+          label='가격'
+          id='productPrice'
+          placeholder='숫자만 입력 가능합니다.'
+          value={productPrice}
+          onChange={handleProductPrice}
+          onBlur={handleProductPriceValid}
+          bottomColor={validPrice ? null : 'red'}
+          message='가격은 1원 이상이어야 합니다.'
+          display={validPrice ? null : 'yes'}
+        />
         <InputBox
           label='판매 링크'
           id='productURL'

@@ -38,45 +38,48 @@ const Profile = () => {
   }, []);
 
   return (
-    <S.ProfileWrap onClick={handleModalClose}>
-      <TopBanner
-        type='top-basic-nav'
-        tit='프로필'
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        setModalType={setModalType}
-      />
-      <ProfileDiv isMine={isMine} accountName={accountName} />
-      <ProductDiv
-        accountName={accountName}
-        isModalOpen={isModalOpen}
-        isMine={isMine}
-        setIsModalOpen={setIsModalOpen}
-        setModalType={setModalType}
-        setModalData={setModalData}
-      />
-      <PostsDiv
-        accountName={accountName}
-        isMine={isMine}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        setModalData={setModalData}
-        setModalType={setModalType}
-      />
-      <S.FooterWrap>
-        <TabMenu />
-        {isModalOpen ? (
-          <PostModal
-            modalType={modalType}
-            modalData={modalData}
-            isModalOpen={isModalOpen}
-            isAlertOpen={isAlertOpen}
-            setIsModalOpen={setIsModalOpen}
-            setIsAlertOpen={setIsAlertOpen}
-            setAlertType={setAlertType}
-          />
-        ) : null}
-      </S.FooterWrap>
+    <>
+      <S.ProfileWrap onClick={handleModalClose}>
+        <TopBanner
+          type='top-basic-nav'
+          tit='프로필'
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          setModalType={setModalType}
+        />
+        <ProfileDiv isMine={isMine} accountName={accountName} />
+        <ProductDiv
+          accountName={accountName}
+          isModalOpen={isModalOpen}
+          isMine={isMine}
+          setIsModalOpen={setIsModalOpen}
+          setModalType={setModalType}
+          setModalData={setModalData}
+        />
+        <PostsDiv
+          accountName={accountName}
+          isMine={isMine}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          setModalData={setModalData}
+          setModalType={setModalType}
+        />
+        <S.FooterWrap>
+          <TabMenu />
+        </S.FooterWrap>
+      </S.ProfileWrap>
+      {/* 모달은 밖에 */}
+      {isModalOpen ? (
+        <PostModal
+          modalType={modalType}
+          modalData={modalData}
+          isModalOpen={isModalOpen}
+          isAlertOpen={isAlertOpen}
+          setIsModalOpen={setIsModalOpen}
+          setIsAlertOpen={setIsAlertOpen}
+          setAlertType={setAlertType}
+        />
+      ) : null}
       {isAlertOpen ? (
         <Alert
           alertType={alertType}
@@ -84,7 +87,7 @@ const Profile = () => {
           modalData={modalData}
         />
       ) : null}
-    </S.ProfileWrap>
+    </>
   );
 };
 
