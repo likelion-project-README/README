@@ -23,7 +23,6 @@ const joinAPI = async (
     }),
   });
   const json = await res.json();
-  console.log(json);
-  return true;
+  return json;
 };
 export default joinAPI;
