@@ -72,7 +72,6 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
     }
     if (alertType === 'deletePost') {
       deletePostAPI(modalData.id).then((req) => {
-        alert('게시글이 삭제되었습니다.');
         if (window.location.pathname.split('/')[1] === 'profile') {
           navigate(0);
         } else {
@@ -82,7 +81,6 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
     }
     if (alertType === 'deleteProduct') {
       deleteProductsAPI(modalData.id).then((req) => {
-        alert('상품이 삭제되었습니다.');
         navigate(0);
       });
     }
@@ -92,7 +90,6 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
         commentId.id,
         localStorage.getItem('token'),
       ).then(() => {
-        alert('댓글이 삭제되었습니다.');
         navigate(0);
       });
     }
@@ -105,7 +102,9 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
           <S.Btn
             color='var(--main-text-color)'
             border='0.5px solid #dbdbdb'
-            onClick={() => setIsAlertOpen(false)}
+            onClick={(e) => {
+              setIsAlertOpen(false);
+            }}
           >
             취소
           </S.Btn>

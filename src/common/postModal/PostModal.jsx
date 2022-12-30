@@ -27,7 +27,7 @@ const PostModal = ({
     // window.open(modalData.link, '_blank');
     window.open('https://github.com/likelion-project-README/README', '_blank');
   };
-  const clickEditProduct = () => {
+  const clickEditProduct = (e) => {
     navigate(
       `/profile/${modalData.author.accountname}/editProduct/${modalData.id}`,
     );
