@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+// import { useSetRecoilState } from 'recoil';
 import * as S from './Join.Style';
-import {
-  usernameData,
-  emailData,
-  passwordData,
-  accountnameData,
-  introData,
-  profileImageData,
-} from '../../atoms/LoginData';
+// import {
+//   usernameData,
+//   emailData,
+//   passwordData,
+//   accountnameData,
+//   introData,
+//   profileImageData,
+// } from '../../atoms/LoginData';
 
-import joinAPI from '../../api/joinAPI';
 import Button from '../../common/button/Button';
 import InputBox from '../../common/inputBox/InputBox';
 import emailDuplicateAPI from '../../api/emailDuplicateAPI';
@@ -21,31 +20,31 @@ const JoinPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [accountname, setAccountname] = useState('');
-  const [intro, setIntro] = useState('');
-  const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(true);
   const [emailDuplicate, setEmailDuplicate] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
   const [btnActive, setBtnActive] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [accountname, setAccountname] = useState('');
+  // const [intro, setIntro] = useState('');
+  // const [image, setImage] = useState('');
 
-  const setUsernameData = useSetRecoilState(usernameData);
-  const setEmailData = useSetRecoilState(emailData);
-  const setPasswordData = useSetRecoilState(passwordData);
-  const setAccountNameData = useSetRecoilState(accountnameData);
-  const setIntroData = useSetRecoilState(introData);
-  const setProfileImageData = useSetRecoilState(profileImageData);
+  // const setUsernameData = useSetRecoilState(usernameData);
+  // const setEmailData = useSetRecoilState(emailData);
+  // const setPasswordData = useSetRecoilState(passwordData);
+  // const setAccountNameData = useSetRecoilState(accountnameData);
+  // const setIntroData = useSetRecoilState(introData);
+  // const setProfileImageData = useSetRecoilState(profileImageData);
 
-  const handleData = (e) => {
-    if (e.target.type === 'email') {
-      setEmail(e.target.value);
-    } else if (e.target.type === 'password') {
-      setPassword(e.target.value);
-    }
-  };
+  // const handleData = (e) => {
+  //   if (e.target.type === 'email') {
+  //     setEmail(e.target.value);
+  //   } else if (e.target.type === 'password') {
+  //     setPassword(e.target.value);
+  //   }
+  // };
 
   const emailValidator = (e) => {
     const emailCurrentValue = e.target.value;
@@ -64,19 +63,32 @@ const JoinPage = () => {
   };
 
   // 유저이메일 중복검사
+
+  const handleEmailDuplicate = async (e) => {
+    const testUserEmail = e.target.value;
+    setEmail(testUserEmail);
+    const validMsg = emailDuplicateAPI(testUserEmail);
+    if (validMsg.message === '이미 가입된 이메일 주소 입니다.') {
+      setEmailValid(false);
+      setEmailDuplicate(false);
+      setEmailError('*이미 가입된 이메일 주소입니다.');
+    } else if (validMsg.message === '사용 가능한 이메일 입니다.') {
+      setEmailDuplicate(true);
+    }
+  };
   // useEffect(() => {
-  // const handleEmailDuplicate = (e) => {
-  //   const testUserEmail = e.target.value;
-  //   setEmail(testUserEmail);
-  //   const validMsg = emailDuplicateAPI(testUserEmail);
-  //   if (validMsg.message === '이미 가입된 이메일 주소 입니다.') {
-  //     setEmailValid(false);
-  //     setEmailError('*이미 가입된 이메일 주소입니다.');
-  //     setEmailDuplicate(false);
-  //   } else if (validMsg.message === '사용 가능한 이메일 입니다.') {
-  //     setEmailDuplicate(true);
-  //   }
-  // };
+  //   const handleEmailDuplicate = (e) => {
+  //     // const testUserEmail = e.target.value;
+  //     // setEmail(testUserEmail);
+  //     const validMsg = emailDuplicateAPI(email);
+  //     if (validMsg.message === '이미 가입된 이메일 주소 입니다.') {
+  //       setEmailValid(false);
+  //       setEmailError('*이미 가입된 이메일 주소입니다.');
+  //       setEmailDuplicate(false);
+  //     } else if (validMsg.message === '사용 가능한 이메일 입니다.') {
+  //       setEmailDuplicate(true);
+  //     }
+  //   };
   //   handleEmailDuplicate();
   // }, []);
 
@@ -237,6 +249,7 @@ const JoinPage = () => {
           type='email'
           required
           onChange={emailValidator}
+          onBlur={handleEmailDuplicate}
           value={email}
           bottomColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
@@ -257,7 +270,6 @@ const JoinPage = () => {
         <S.div>
           <Button
             onClick={goToProfileSetting}
-            // type='submit'
             size='lg'
             tit='다음'
             isActive={btnActive}
