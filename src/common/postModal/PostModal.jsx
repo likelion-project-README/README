@@ -32,6 +32,9 @@ const PostModal = ({
       `/profile/${modalData.author.accountname}/editProduct/${modalData.id}`,
     );
   };
+  const clickEditPost = (e) => {
+    navigate(`/post/${modalData.id}/editPost`);
+  };
   const clickDeleteProduct = () => {
     setAlertType('deleteProduct');
     setIsAlertOpen(true);
@@ -97,6 +100,7 @@ const PostModal = ({
         <S.ModalOverlay>
           <S.ModalCancleBtn />
           <S.ModalTxt onClick={clickDeletePost}>삭제</S.ModalTxt>
+          <S.ModalTxt onClick={clickEditPost}>수정</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
     );

@@ -12,6 +12,7 @@ import ChatRoom from './pages/chatRoom/ChatRoom';
 import ProfileSetting from './pages/profileSetting/ProfileSetting';
 import PostUpload from './pages/postUpload/PostUpload';
 import PostDetail from './pages/postDetail/PostDetail';
+import PostEdit from './pages/postEdit/PostEdit';
 import ProductEdit from './pages/productEdit/ProductEdit';
 import AddProduct from './pages/addProduct/AddProduct';
 import FollowerList from './pages/followerList/FollowerList';
@@ -56,6 +57,7 @@ const App = () => {
             <Route path='upload' element={<PostUpload />} />
             {/*  */}
             <Route path=':id' element={<PostDetail />} />
+            <Route path=':id/editPost' element={<PostEdit />} />
             {/*  */}
             <Route path='*' element={<Page404 />} />
           </Route>
