@@ -50,14 +50,15 @@ const PostsDiv = ({
         <S.ListWrap>
           {isPostLoad &&
             isPostLoad
-              .filter((item) => item.image !== '')
+              .filter((item) => item.image !== '' && item.image !== undefined)
               .map((item) => (
                 <S.PostImg
                   key={item.id}
-                  image={item.image.split(',')[0]}
-                  multi={item.image.split(',').length > 1 && true}
+                  image={item.image?.split(',')[0]}
+                  multi={item.image?.split(',').length > 1 && true}
                   onClick={() => {
                     navigate(`/post/${item.id}`);
+                    console.log(item.image);
                   }}
                 />
               ))}
