@@ -26,10 +26,10 @@ const EmailLoginPage = () => {
   // const [intro, setIntro] = useState('');
   // const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [emailValid, setEmailValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(true);
   const [passwordError, setPasswordError] = useState('');
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [btnActive, setBtnActive] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
+  const [btnActive, setBtnActive] = useState('');
   const setUsernameData = useSetRecoilState(usernameData);
   const setEmailData = useSetRecoilState(emailData);
   const setPasswordData = useSetRecoilState(passwordData);
@@ -37,46 +37,44 @@ const EmailLoginPage = () => {
   const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
 
-  const handleData = (e) => {
-    if (e.target.type === 'email') {
-      setEmail(e.target.value);
-    } else if (e.target.type === 'password') {
-      setPassword(e.target.value);
+  // const handleData = (e) => {
+  //   if (e.target.type === 'email') {
+  //     setEmail(e.target.value);
+  //   } else if (e.target.type === 'password') {
+  //     setPassword(e.target.value);
+  //   }
+  // };
+
+  // 이메일 유효성 검사
+  const emailValidator = (e) => {
+    const emailCurrentValue = e.target.value;
+    setEmail(e.target.value);
+    const emailReg =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (emailCurrentValue === '') {
+      setEmailValid(false);
+    } else if (!emailReg.test(emailCurrentValue)) {
+      setEmailValid(false);
+      setEmailError('* 올바른 이메일 형식이 아닙니다');
+    } else {
+      setEmailValid(true);
+      setEmailError('');
     }
   };
 
-  // 이메일 유효성 검사
-  useEffect(() => {
-    const handleEmailValid = () => {
-      const reg =
-        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      if (email.length === 0) {
-        // setEmailError('입력해주세요.');
-        setEmailValid(false);
-      } else if (!reg.test(email)) {
-        setEmailError('올바른 이메일 형식이 아닙니다.');
-        setEmailValid(false);
-      } else {
-        setEmailError('');
-        setEmailValid(true);
-      }
-    };
-    handleEmailValid();
-  }, [email]);
-
   // 비밀번호 유효성 검사
-  useEffect(() => {
-    const handlePasswordValid = () => {
-      if (password.length < 6) {
-        setPasswordValid(false);
-        setPasswordError('비밀번호는 6자 이상이어야 합니다.');
-      } else if (password.length >= 6) {
-        setPasswordValid(true);
-        setPasswordError('');
-      }
-    };
-    handlePasswordValid();
-  }, [password]);
+  const handlePasswordValid = (e) => {
+    const passwordCurrentValue = e.target.value;
+    setPassword(e.target.value);
+    if (passwordCurrentValue.length < 6) {
+      setPasswordValid(false);
+      setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+    } else if (passwordCurrentValue.length >= 6) {
+      setPasswordValid(true);
+      // setPassword(testPassword);
+      setPasswordError('');
+    }
+  };
 
   // 로그인 버튼 활성화
   useEffect(() => {
@@ -85,28 +83,25 @@ const EmailLoginPage = () => {
     } else {
       setBtnActive(false);
     }
-  });
+  }, [emailValid, passwordValid]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (btnActive === true) {
       const data = await loginAPI(email, password);
-      localStorage.setItem('token', data.user.token);
+
+      const userToken = data.user.token;
+      localStorage.setItem('token', userToken.toString());
       setUsernameData(data.user.username);
       setEmailData(data.user.email);
       setPasswordData(data.user.password);
       setAccountNameData(data.user.accountname);
       setIntroData(data.user.intro);
       setProfileImageData(data.user.image);
-      // loginAPI(email, password).then((data) => {
-      //   localStorage.setItem('token', data.user.token);
-      //   setUsernameData(data.user.username);
-      //   setEmailData(data.user.email);
-      //   setPasswordData(data.user.password);
-      //   setAccountNameData(data.user.accountname);
-      //   setIntroData(data.user.intro);
-      //   setProfileImageData(data.user.image);
-      // });
+    }
+  };
+  const goToHome = () => {
+    if (btnActive) {
       navigate('/', {
         state: {
           email,
@@ -126,7 +121,7 @@ const EmailLoginPage = () => {
           id='email'
           type='email'
           required
-          onChange={handleData}
+          onChange={emailValidator}
           value={email}
           bottomColor={emailValid ? null : 'red'}
           display={emailValid ? null : 'yes'}
@@ -138,8 +133,7 @@ const EmailLoginPage = () => {
           id='password'
           type='password'
           required
-          onChange={handleData}
-          // onBlur={handlePasswordValid}
+          onChange={handlePasswordValid}
           value={password}
           display={passwordValid ? null : 'yes'}
           bottomColor={passwordValid ? null : 'red'}
@@ -150,6 +144,7 @@ const EmailLoginPage = () => {
             type='submit'
             size='lg'
             tit='로그인'
+            onClick={goToHome}
             isActive={btnActive}
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
