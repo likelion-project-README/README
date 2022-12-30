@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './ProfileSetting.Style';
 import {
@@ -10,7 +10,7 @@ import {
   profileImageData,
   usernameData,
 } from '../../atoms/LoginData';
-
+import emailLoginAPI from '../../api/emailLoginAPI';
 import joinAPI from '../../api/joinAPI';
 import uploadImgAPI from '../../api/uploadImgAPI';
 import accountnameValidAPI from '../../api/accountnameValidAPI';
@@ -22,11 +22,12 @@ import logoProfile from '../../assets/logo-profile.svg';
 const ProfileSetting = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef();
+  const location = useLocation();
+  const userEmail = location.state.email;
+  const userPassword = location.state.password;
 
   const [validId, setValidId] = useState(true);
   const [userIdMsg, setUserIdMsg] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [accountname, setAccountname] = useState('');
   const [intro, setIntro] = useState('');
@@ -35,7 +36,6 @@ const ProfileSetting = () => {
 
   const setUsernameData = useSetRecoilState(usernameData);
   const setEmailData = useSetRecoilState(emailData);
-  const setPasswordData = useSetRecoilState(passwordData);
   const setAccountNameData = useSetRecoilState(accountnameData);
   const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
@@ -103,44 +103,38 @@ const ProfileSetting = () => {
 
   // 버튼 활성화
   useEffect(() => {
-    if (
-      username.length > 0 &&
-      validId === true &&
-      intro.length > 0 &&
-      image !== logoProfile
-    ) {
+    if (username.length > 0 && validId) {
       setBtnActive(true);
     } else {
       setBtnActive(false);
     }
-  }, [username, validId, intro, image]);
+  }, [username, validId]);
 
   const settingProfile = async (e) => {
     e.preventDefault();
     if (btnActive) {
-      await joinAPI(email, password, accountname, username, intro, image);
-      // .then(
-      //   (data) => {
-      //     localStorage.setItem('token', data.user.token);
-      //     setUsernameData(data.user.username);
-      //     setEmailData(data.user.email);
-      //     setPasswordData(data.user.password);
-      //     setAccountNameData(data.user.accountname);
-      //     setIntroData(data.user.intro);
-      //     setProfileImageData(data.user.profileImageData);
-      //   },
-      // );
-    }
-  };
+      try {
+        await joinAPI(
+          username,
+          userEmail,
+          userPassword,
+          accountname,
+          intro,
+          image,
+        );
 
-  const goToHome = () => {
-    if (btnActive) {
-      navigate('/', {
-        state: {
-          email,
-          password,
-        },
-      });
+        const loginedUserData = await emailLoginAPI(userEmail, userPassword);
+        localStorage.setItem('token', loginedUserData.user.token);
+        setUsernameData(loginedUserData.user.username);
+        setEmailData(loginedUserData.user.email);
+        setAccountNameData(loginedUserData.user.accountname);
+        setIntroData(loginedUserData.user.intro);
+        setProfileImageData(loginedUserData.user.image);
+
+        navigate('/', { replace: true });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -151,7 +145,11 @@ const ProfileSetting = () => {
       <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
       <form onSubmit={settingProfile}>
         <S.ImgWrap>
-          <S.UserImg src={image} alt='유저 프로필 이미지' />
+          <S.UserImg
+            src={image}
+            alt='유저 프로필 이미지'
+            onClick={() => console.log(userEmail)}
+          />
           <S.ImgUploadLab htmlFor='userImg' />
           <S.ImgUploadInp
             type='file'
@@ -189,20 +187,17 @@ const ProfileSetting = () => {
           value={intro}
           onChange={handleUserIntro}
         />
+        <S.BtnWrap>
+          <Button
+            type='submit'
+            size='lg'
+            tit='README 시작하기'
+            isActive={btnActive}
+            message={userIdMsg}
+            disabled={validId ? null : 'disabled'}
+          />
+        </S.BtnWrap>
       </form>
-      <S.BtnWrap>
-        <Button
-          type='submit'
-          size='lg'
-          tit='README 시작하기'
-          onClick={goToHome}
-          isActive={btnActive}
-          message={userIdMsg}
-          disabled={validId ? null : 'disabled'}
-        >
-          <Link to='/'></Link>
-        </Button>
-      </S.BtnWrap>
     </S.ProfileSettingWrap>
   );
 };

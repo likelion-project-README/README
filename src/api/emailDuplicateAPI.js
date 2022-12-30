@@ -11,7 +11,6 @@ const emailDuplicateAPI = async (userEmail) => {
     }),
   });
   const json = await res.json();
-  console.log(json);
   return json;
 };
 
