@@ -122,9 +122,9 @@ const ProfileSetting = () => {
           intro,
           image,
         );
-
         const loginedUserData = await emailLoginAPI(userEmail, userPassword);
-        localStorage.setItem('token', loginedUserData.user.token);
+        const userToken = loginedUserData.user.token;
+        localStorage.setItem('token', userToken.toString());
         setUsernameData(loginedUserData.user.username);
         setEmailData(loginedUserData.user.email);
         setAccountNameData(loginedUserData.user.accountname);
@@ -145,11 +145,7 @@ const ProfileSetting = () => {
       <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
       <form onSubmit={settingProfile}>
         <S.ImgWrap>
-          <S.UserImg
-            src={image}
-            alt='유저 프로필 이미지'
-            onClick={() => console.log(userEmail)}
-          />
+          <S.UserImg src={image} alt='유저 프로필 이미지' />
           <S.ImgUploadLab htmlFor='userImg' />
           <S.ImgUploadInp
             type='file'
