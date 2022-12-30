@@ -86,7 +86,7 @@ const AddProduct = () => {
   // 상품 등록 데이터 전송
   const addProduct = async (e) => {
     e.preventDefault();
-    if (btnActive === true) {
+    if (btnActive) {
       try {
         const result = await addProductAPI(
           productName,
@@ -128,28 +128,17 @@ const AddProduct = () => {
           max='15'
           onChange={handleProductName}
         />
-        {validPrice ? (
-          <InputBox
-            label='가격'
-            id='productPrice'
-            placeholder='숫자만 입력 가능합니다.'
-            value={productPrice}
-            onChange={handleProductPrice}
-            onBlur={handleProductPriceValid}
-          />
-        ) : (
-          <InputBox
-            label='가격'
-            id='productPrice'
-            placeholder='숫자만 입력 가능합니다.'
-            value={productPrice}
-            onChange={handleProductPrice}
-            onBlur={handleProductPriceValid}
-            bottomColor='red'
-            message='가격은 1원 이상이어야 합니다.'
-            display='yes'
-          />
-        )}
+        <InputBox
+          label='가격'
+          id='productPrice'
+          placeholder='숫자만 입력 가능합니다.'
+          value={productPrice}
+          onChange={handleProductPrice}
+          onBlur={handleProductPriceValid}
+          bottomColor={validPrice ? null : 'red'}
+          message='가격은 1원 이상이어야 합니다.'
+          display={validPrice ? null : 'yes'}
+        />
         <InputBox
           label='판매 링크'
           id='productURL'

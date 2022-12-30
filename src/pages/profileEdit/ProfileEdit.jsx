@@ -7,6 +7,12 @@ import accountnameValidAPI from '../../api/accountnameValidAPI';
 import uploadImgAPI from '../../api/uploadImgAPI';
 import editProfileAPI from '../../api/editProfileAPI';
 import logoProfile from '../../assets/logo-profile.svg';
+import {
+  usernameData,
+  accountnameData,
+  introData,
+  profileImageData,
+} from '../../atoms/LoginData';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
@@ -106,7 +112,7 @@ const ProfileEdit = () => {
   // 프로필 수정 데이터 전송
   const editProfile = async (e) => {
     e.preventDefault();
-    if (btnActive === true) {
+    if (btnActive) {
       await editProfileAPI(userName, userId, userIntro, userImg);
       alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
       navigate(`/profile/${accountName}`);
