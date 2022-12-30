@@ -62,7 +62,7 @@ const PostModal = ({
       <S.ModalWrap>
         <S.ModalOverlay>
           <S.ModalCancleBtn />
-          <S.ModalTxt>설정 및 개인정보</S.ModalTxt>
+          <S.ModalTxt onClick={() => navigate(0)}>설정 및 개인정보</S.ModalTxt>
           <S.ModalTxt onClick={clickLogOut}>로그아웃</S.ModalTxt>
         </S.ModalOverlay>
       </S.ModalWrap>
