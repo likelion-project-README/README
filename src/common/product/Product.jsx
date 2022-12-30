@@ -13,6 +13,11 @@ const Product = ({
   setModalData,
   data,
 }) => {
+  const handleProductPrice = (price) => {
+    const formatValue = price.toLocaleString('ko-KR');
+    return `${formatValue}원`;
+  };
+
   const productHandle = (e) => {
     e.stopPropagation();
     if (isMine) {
@@ -20,7 +25,6 @@ const Product = ({
     } else {
       setModalType('yourProduct');
     }
-
     setModalData(data);
     setIsModalOpen(!isModalOpen);
   };
@@ -28,7 +32,9 @@ const Product = ({
     <S.ProductWrapper onClick={productHandle}>
       <S.ProductImage imageURL={data.itemImage} />
       <S.ProductName>{data.itemName || '애월읍 노지 감귤'}</S.ProductName>
-      <S.ProductPrice>{data.price || '35,000원'}</S.ProductPrice>
+      <S.ProductPrice>
+        {handleProductPrice(data.price) || '35,000원'}
+      </S.ProductPrice>
     </S.ProductWrapper>
   );
 };

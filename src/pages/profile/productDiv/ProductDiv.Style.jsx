@@ -5,10 +5,9 @@ export const ProductDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 208px;
-  padding: 20px 0px 20px 0px;
+  padding: 20px 0px 8px 0px;
   background-color: white;
   margin-bottom: 6px;
-  padding-bottom: 14px;
 `;
 
 export const ProductCaro = styled.div`
@@ -18,6 +17,10 @@ export const ProductCaro = styled.div`
   overflow-y: hidden;
   &::-webkit-scrollbar {
     height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    margin-left: 16px;
+    margin-right: 16px;
   }
   &::-webkit-scrollbar-thumb {
     background-color: var(--sub2-text-color);
