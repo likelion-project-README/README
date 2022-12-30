@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ProductWrapper = styled.article`
   width: 140px;
-  height: 132px;
+  height: 138px;
   background-color: #fff;
   cursor: pointer;
 `;
