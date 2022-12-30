@@ -63,4 +63,5 @@ export const TabMenuCont = styled.div`
   /* position: fixed; */
   bottom: 0px;
   background-color: #ffffff;
+  z-index: 20;
 `;

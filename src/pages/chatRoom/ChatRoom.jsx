@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
 import PostModal from '../../common/postModal/PostModal';
 import * as S from './ChatRoom.Style';
@@ -8,10 +8,11 @@ const ChatRoom = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
 
+  const fileInpRef = useRef();
   const [isBtnActive, setIsBtnActive] = useState(false);
   const handleChangeInp = (e) => {
     const text = e.target.value;
-    if (text && text.trim() !== '') {
+    if ((text && text.trim() !== '') || fileInpRef.current.value) {
       setIsBtnActive(true);
     } else {
       setIsBtnActive(false);
@@ -74,6 +75,10 @@ const ChatRoom = () => {
               id='fileInp'
               accept='image/*'
               className='hidden'
+              ref={fileInpRef}
+              onChange={(e) => {
+                setIsBtnActive(e.target.value);
+              }}
             />
           </S.FileInpLab>
           <S.TxtInp

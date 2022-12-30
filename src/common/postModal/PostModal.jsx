@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import * as S from './PostModal.Style';
 import Alert from '../alert/Alert';
@@ -21,6 +21,8 @@ const PostModal = ({
   setAlertType,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const prevUrl = location.pathname.split('/')[1];
 
   const clickOepnProduct = () => {
     setIsModalOpen(!isModalOpen);
@@ -33,7 +35,7 @@ const PostModal = ({
     );
   };
   const clickEditPost = (e) => {
-    navigate(`/post/${modalData.id}/editPost`);
+    navigate(`/post/${modalData.id}/editPost`, { state: { prevUrl } });
   };
   const clickDeleteProduct = () => {
     setAlertType('deleteProduct');
