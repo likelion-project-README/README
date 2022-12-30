@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import getPostDetailAPI from '../../api/getPostDetailAPI';
@@ -8,10 +8,12 @@ import editPostAPI from '../../api/editPostAPI';
 import { profileImageData } from '../../atoms/LoginData';
 import * as S from './PostEdit.Style';
 
-const PostUpload = () => {
+const PostEdit = () => {
   const token = localStorage.getItem('token');
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const previousUrl = location.state.prevUrl;
 
   const userProfileImg = useRecoilValue(profileImageData);
 
@@ -108,7 +110,11 @@ const PostUpload = () => {
       const imgUrlArr = await uploadMultipleImgAPI(formData);
       await editPostAPI(id, token, textareaVal, imgUrlArr);
 
-      navigate(`/post/${id}`, { replace: true });
+      if (previousUrl === 'post') {
+        navigate(-1, { replace: true });
+      } else if (previousUrl === 'profile') {
+        navigate(`/post/${id}`, { replace: true });
+      }
     } else {
       // eslint-disable-next-line no-alert
       alert('내용 또는 이미지를 입력해주세요.');
@@ -172,4 +178,4 @@ const PostUpload = () => {
   );
 };
 
-export default PostUpload;
+export default PostEdit;
