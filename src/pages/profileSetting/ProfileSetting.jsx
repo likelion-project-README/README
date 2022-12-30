@@ -115,20 +115,26 @@ const ProfileSetting = () => {
     }
   }, [username, validId, intro, image]);
 
-  const settingProfile = (e) => {
+  const settingProfile = async (e) => {
     e.preventDefault();
-    if (btnActive === true) {
-      joinAPI(email, password, accountname, username, intro, image).then(
-        (data) => {
-          localStorage.setItem('token', data.user.token);
-          setUsernameData(data.user.username);
-          setEmailData(data.user.email);
-          setPasswordData(data.user.password);
-          setAccountNameData(data.user.accountname);
-          setIntroData(data.user.intro);
-          setProfileImageData(data.user.profileImageData);
-        },
-      );
+    if (btnActive) {
+      await joinAPI(email, password, accountname, username, intro, image);
+      // .then(
+      //   (data) => {
+      //     localStorage.setItem('token', data.user.token);
+      //     setUsernameData(data.user.username);
+      //     setEmailData(data.user.email);
+      //     setPasswordData(data.user.password);
+      //     setAccountNameData(data.user.accountname);
+      //     setIntroData(data.user.intro);
+      //     setProfileImageData(data.user.profileImageData);
+      //   },
+      // );
+    }
+  };
+
+  const goToHome = () => {
+    if (btnActive) {
       navigate('/', {
         state: {
           email,
@@ -189,6 +195,7 @@ const ProfileSetting = () => {
           type='submit'
           size='lg'
           tit='README 시작하기'
+          onClick={goToHome}
           isActive={btnActive}
           message={userIdMsg}
           disabled={validId ? null : 'disabled'}
