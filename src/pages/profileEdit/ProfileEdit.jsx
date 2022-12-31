@@ -114,8 +114,9 @@ const ProfileEdit = () => {
     e.preventDefault();
     if (btnActive) {
       await editProfileAPI(userName, userId, userIntro, userImg);
+      // console.log(accountName);
       alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
-      navigate(`/profile/${accountName}`);
+      navigate(`/profile/${userId}`);
     }
   };
 
