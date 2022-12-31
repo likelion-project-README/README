@@ -29,7 +29,7 @@ const EmailLoginPage = () => {
   const [emailValid, setEmailValid] = useState(true);
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
-  const [btnActive, setBtnActive] = useState('');
+  const [btnActive, setBtnActive] = useState(true);
   const setUsernameData = useSetRecoilState(usernameData);
   const setEmailData = useSetRecoilState(emailData);
   const setPasswordData = useSetRecoilState(passwordData);
@@ -90,18 +90,15 @@ const EmailLoginPage = () => {
     if (btnActive === true) {
       const data = await loginAPI(email, password);
 
-      const userToken = data.user.token;
-      localStorage.setItem('token', userToken.toString());
+      // const userToken = data.user.token;
+      localStorage.setItem('token', data.user.token);
       setUsernameData(data.user.username);
       setEmailData(data.user.email);
       setPasswordData(data.user.password);
       setAccountNameData(data.user.accountname);
       setIntroData(data.user.intro);
       setProfileImageData(data.user.image);
-    }
-  };
-  const goToHome = () => {
-    if (btnActive) {
+      // console.log(data);
       navigate('/', {
         state: {
           email,
@@ -144,7 +141,6 @@ const EmailLoginPage = () => {
             type='submit'
             size='lg'
             tit='로그인'
-            onClick={goToHome}
             isActive={btnActive}
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
