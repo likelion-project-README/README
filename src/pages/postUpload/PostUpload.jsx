@@ -49,7 +49,7 @@ const PostUpload = () => {
         setImgFiles((prev) => [...prev, imgFile]);
       });
     } else if (imgPreviews.length + attachedFiles.length > 3) {
-      alert('이미지는 세 장까지 업로드 가능합니다'); // eslint-disable-line no-alert
+      // alert('이미지는 세 장까지 업로드 가능합니다'); // eslint-disable-line no-alert
     }
   };
 
