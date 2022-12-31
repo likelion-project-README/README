@@ -67,7 +67,7 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
     if (alertType === 'logout') {
       setIsAlertOpen(false);
       await logOut();
-      alert('로그아웃되었습니다.');
+      alert('로그아웃되었습니다.'); // eslint-disable-line no-alert
       navigate('../../../login');
     }
     if (alertType === 'deletePost') {

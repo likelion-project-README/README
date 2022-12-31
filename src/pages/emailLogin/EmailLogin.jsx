@@ -26,10 +26,12 @@ const EmailLoginPage = () => {
   // const [intro, setIntro] = useState('');
   // const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [emailValid, setEmailValid] = useState(true);
+  const [emailValid, setEmailValid] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  const [passwordValid, setPasswordValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(false);
   const [btnActive, setBtnActive] = useState(true);
+  const [isEmailRed, setIsEmailRed] = useState(false);
+  const [isPasswordRed, setIsPasswordRed] = useState(false);
   const setUsernameData = useSetRecoilState(usernameData);
   const setEmailData = useSetRecoilState(emailData);
   const setPasswordData = useSetRecoilState(passwordData);
@@ -54,9 +56,11 @@ const EmailLoginPage = () => {
     if (emailCurrentValue === '') {
       setEmailValid(false);
     } else if (!emailReg.test(emailCurrentValue)) {
+      setIsEmailRed(true);
       setEmailValid(false);
       setEmailError('* 올바른 이메일 형식이 아닙니다');
     } else {
+      setIsEmailRed(false);
       setEmailValid(true);
       setEmailError('');
     }
@@ -69,10 +73,12 @@ const EmailLoginPage = () => {
     if (passwordCurrentValue.length < 6) {
       setPasswordValid(false);
       setPasswordError('비밀번호는 6자 이상이어야 합니다.');
+      setIsPasswordRed(true);
     } else if (passwordCurrentValue.length >= 6) {
       setPasswordValid(true);
       // setPassword(testPassword);
       setPasswordError('');
+      setIsPasswordRed(false);
     }
   };
 
@@ -90,21 +96,26 @@ const EmailLoginPage = () => {
     if (btnActive === true) {
       const data = await loginAPI(email, password);
 
-      // const userToken = data.user.token;
-      localStorage.setItem('token', data.user.token);
-      setUsernameData(data.user.username);
-      setEmailData(data.user.email);
-      setPasswordData(data.user.password);
-      setAccountNameData(data.user.accountname);
-      setIntroData(data.user.intro);
-      setProfileImageData(data.user.image);
-      // console.log(data);
-      navigate('/', {
-        state: {
-          email,
-          password,
-        },
-      });
+      if (data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
+        setIsPasswordRed(true);
+        setPasswordError('이메일 또는 비밀번호가 일치하지 않습니다.');
+      } else {
+        // const userToken = data.user.token;
+        localStorage.setItem('token', data.user.token);
+        setUsernameData(data.user.username);
+        setEmailData(data.user.email);
+        setPasswordData(data.user.password);
+        setAccountNameData(data.user.accountname);
+        setIntroData(data.user.intro);
+        setProfileImageData(data.user.image);
+        console.log(data.message);
+        navigate('/', {
+          state: {
+            email,
+            password,
+          },
+        });
+      }
     }
   };
 
@@ -120,8 +131,8 @@ const EmailLoginPage = () => {
           required
           onChange={emailValidator}
           value={email}
-          bottomColor={emailValid ? null : 'red'}
-          display={emailValid ? null : 'yes'}
+          bottomColor={isEmailRed ? 'red' : null}
+          display={isEmailRed ? 'yes' : null}
           message={emailError}
         />
         <InputBox
@@ -132,8 +143,8 @@ const EmailLoginPage = () => {
           required
           onChange={handlePasswordValid}
           value={password}
-          display={passwordValid ? null : 'yes'}
-          bottomColor={passwordValid ? null : 'red'}
+          bottomColor={isPasswordRed ? 'red' : 'yes'}
+          display={isPasswordRed ? 'yes' : null}
           message={passwordError}
         />
         <S.div>
