@@ -26,7 +26,7 @@ const App = () => {
       <RecoilRoot>
         <Routes>
           {/* 메인페이지  */}
-          <Route path='/' element={<SplashPage />} />
+          <Route path='/' element={<Home />} />
           {/* 로그인 */}
           <Route path='/login/*' element={<Outlet />}>
             <Route path='' element={<SnsLogin />} />
