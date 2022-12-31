@@ -27,7 +27,7 @@ const ProductEdit = () => {
         const result = await getProductDetailAPI(productID);
         setProductName(result.product.itemName);
         setProductImg(result.product.itemImage);
-        setProductPrice(result.product.price);
+        setProductPrice(result.product.price.toLocaleString('ko-KR'));
         setProductURL(result.product.link);
       } catch (error) {
         console.log(error);
