@@ -52,7 +52,7 @@ const ProfileEdit = () => {
     const regex = /^[\s]+/;
     if (regex.test(NameVal)) {
       e.preventDefault();
-      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else if (NameVal.length === 0) {
       setUserName(NameVal);
       setBtnActive(false);
@@ -99,7 +99,7 @@ const ProfileEdit = () => {
     const regex = /^[\s]+/;
     if (regex.test(IntroVal)) {
       e.preventDefault();
-      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else if (IntroVal.length === 0) {
       setUserIntro(IntroVal);
       setBtnActive(false);
@@ -115,7 +115,7 @@ const ProfileEdit = () => {
     if (btnActive) {
       await editProfileAPI(userName, userId, userIntro, userImg);
       // console.log(accountName);
-      alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
+      // alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
       navigate(`/profile/${userId}`);
     }
   };

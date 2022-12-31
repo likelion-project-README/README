@@ -54,7 +54,7 @@ const ProfileSetting = () => {
     const regex = /^[\s]+/;
     if (regex.test(NameVal)) {
       e.preventDefault();
-      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setUsername(NameVal);
       setBtnActive(true);
@@ -94,7 +94,7 @@ const ProfileSetting = () => {
     const regex = /^[\s]+/;
     if (regex.test(IntroVal)) {
       e.preventDefault();
-      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setIntro(IntroVal);
       setBtnActive(true);
