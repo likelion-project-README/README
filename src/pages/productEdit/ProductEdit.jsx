@@ -27,7 +27,7 @@ const ProductEdit = () => {
         const result = await getProductDetailAPI(productID);
         setProductName(result.product.itemName);
         setProductImg(result.product.itemImage);
-        setProductPrice(result.product.price);
+        setProductPrice(result.product.price.toLocaleString('ko-KR'));
         setProductURL(result.product.link);
       } catch (error) {
         console.log(error);
@@ -51,7 +51,10 @@ const ProductEdit = () => {
     if (regex.test(NameVal)) {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
-    } else {
+    } else if (NameVal.length === 0) {
+      setProductName(NameVal);
+      setBtnActive(false);
+    } else if (NameVal.length > 0) {
       setProductName(NameVal);
       setBtnActive(true);
     }
@@ -63,17 +66,12 @@ const ProductEdit = () => {
     const formatValue = priceVal.toLocaleString('ko-KR');
     if (formatValue === 'NaN') {
       e.preventDefault();
-    } else {
+    } else if (formatValue === '0') {
       setProductPrice(formatValue);
-    }
-  };
-
-  // 상품가격 1원 이상만 입력 가능
-  const handleProductPriceValid = (e) => {
-    if (productPrice === '0') {
       setValidPrice(false);
       setBtnActive(false);
     } else {
+      setProductPrice(formatValue);
       setValidPrice(true);
       setBtnActive(true);
     }
@@ -86,7 +84,10 @@ const ProductEdit = () => {
     if (regex.test(URLVal)) {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
-    } else {
+    } else if (URLVal.length === 0) {
+      setProductURL(URLVal);
+      setBtnActive(false);
+    } else if (URLVal.length > 0) {
       setProductURL(URLVal);
       setBtnActive(true);
     }
@@ -96,15 +97,19 @@ const ProductEdit = () => {
   const editProduct = async (e) => {
     e.preventDefault();
     if (btnActive) {
-      await editProductAPI(
-        productID,
-        productName,
-        productPrice,
-        productURL,
-        productImg,
-      );
-      alert('상품 수정이 완료되었습니다.'); // eslint-disable-line no-alert
-      navigate(`/profile/${accountName}`);
+      try {
+        await editProductAPI(
+          productID,
+          productName,
+          Number(productPrice.replaceAll(',', '')),
+          productURL,
+          productImg,
+        );
+        alert('상품 수정이 완료되었습니다.'); // eslint-disable-line no-alert
+        navigate(`/profile/${accountName}`);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -140,7 +145,6 @@ const ProductEdit = () => {
           placeholder='숫자만 입력 가능합니다.'
           value={productPrice}
           onChange={handleProductPrice}
-          onBlur={handleProductPriceValid}
           bottomColor={validPrice ? null : 'red'}
           message='가격은 1원 이상이어야 합니다.'
           display={validPrice ? null : 'yes'}
