@@ -7,12 +7,6 @@ import accountnameValidAPI from '../../api/accountnameValidAPI';
 import uploadImgAPI from '../../api/uploadImgAPI';
 import editProfileAPI from '../../api/editProfileAPI';
 import logoProfile from '../../assets/logo-profile.svg';
-import {
-  usernameData,
-  accountnameData,
-  introData,
-  profileImageData,
-} from '../../atoms/LoginData';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
@@ -59,13 +53,16 @@ const ProfileEdit = () => {
     if (regex.test(NameVal)) {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
-    } else {
+    } else if (NameVal.length === 0) {
+      setUserName(NameVal);
+      setBtnActive(false);
+    } else if (NameVal.length > 0) {
       setUserName(NameVal);
       setBtnActive(true);
     }
   };
 
-  // onChange : 계정ID 유효성 검사
+  // onInput : 계정ID 유효성 검사
   const handleUserIdValid = (e) => {
     const testUserId = e.target.value;
     const regex = /^[_A-Za-z0-9.]*$/;
@@ -80,7 +77,7 @@ const ProfileEdit = () => {
     }
   };
 
-  // onBlur : 계정ID 중복 검사
+  // onChange : 계정ID 중복 검사
   const handleUserIdDuplicate = async (e) => {
     const testUserId = e.target.value;
     setUserId(testUserId);
@@ -103,7 +100,10 @@ const ProfileEdit = () => {
     if (regex.test(IntroVal)) {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
-    } else {
+    } else if (IntroVal.length === 0) {
+      setUserIntro(IntroVal);
+      setBtnActive(false);
+    } else if (IntroVal.length > 0) {
       setUserIntro(IntroVal);
       setBtnActive(true);
     }
@@ -149,8 +149,8 @@ const ProfileEdit = () => {
           id='userID'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           value={userId}
-          onChange={handleUserIdValid}
-          onBlur={handleUserIdDuplicate}
+          onInput={handleUserIdValid}
+          onChange={handleUserIdDuplicate}
           bottomColor={validId ? null : 'red'}
           message={userIdMsg}
           display={validId ? null : 'yes'}
