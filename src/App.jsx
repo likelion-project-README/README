@@ -18,6 +18,7 @@ import AddProduct from './pages/addProduct/AddProduct';
 import FollowerList from './pages/followerList/FollowerList';
 import FollowingList from './pages/followingList/FollowingList';
 import ProfileEdit from './pages/profileEdit/ProfileEdit';
+import SplashPage from './pages/splash/Splash';
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
       <RecoilRoot>
         <Routes>
           {/* 메인페이지  */}
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<SplashPage />} />
           {/* 로그인 */}
           <Route path='/login/*' element={<Outlet />}>
             <Route path='' element={<SnsLogin />} />
