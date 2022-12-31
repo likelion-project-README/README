@@ -18,6 +18,7 @@ export const SplashPageWrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  display: ${(props) => props.display};
 `;
 
 export const LogoImg = styled.div`
