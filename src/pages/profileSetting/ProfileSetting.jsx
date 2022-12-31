@@ -61,7 +61,7 @@ const ProfileSetting = () => {
     }
   };
 
-  // onChange : 계정ID 유효성 검사
+  // onInput : 계정ID 유효성 검사
   const handleUserIdValid = (e) => {
     const testUserId = e.target.value;
     const regex = /^[_A-Za-z0-9.]*$/;
@@ -76,7 +76,7 @@ const ProfileSetting = () => {
     }
   };
 
-  // onBlur : 계정ID 중복 검사
+  // onChange : 계정ID 중복 검사
   const handleUserIdDuplicate = async (e) => {
     const testUserId = e.target.value;
     setAccountname(testUserId);
@@ -170,8 +170,8 @@ const ProfileSetting = () => {
           type='userID'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           value={accountname}
-          onChange={handleUserIdValid}
-          onBlur={handleUserIdDuplicate}
+          onInput={handleUserIdValid}
+          onChange={handleUserIdDuplicate}
           bottomColor={validId ? null : 'red'}
           message={userIdMsg}
           display={validId ? null : 'yes'}
