@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import SnsLogin from '../snsLogin/SnsLogin';
 import * as S from './Splash.Style';
 
 const SplashPage = () => {
-  const [display, setDisplay] = useState('flex');
+  const [showUp, setShowUp] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowUp(false);
+    }, 1500);
+    return () => {
+      clearTimeout(timer);
+    };
+  });
 
-  setTimeout(() => {
-    setDisplay('none');
-  }, 1500);
+  const navigate = useNavigate();
 
-  return (
-    <S.SplashPageWrapper display={display}>
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (token) {
+      navigate('/home');
+    }
+  }, []);
+
+  return showUp ? (
+    <S.SplashPageWrapper>
       <S.LogoImg />
     </S.SplashPageWrapper>
+  ) : (
+    <SnsLogin />
   );
 };
 
