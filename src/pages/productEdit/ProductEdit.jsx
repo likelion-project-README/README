@@ -51,7 +51,10 @@ const ProductEdit = () => {
     if (regex.test(NameVal)) {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
-    } else {
+    } else if (NameVal.length === 0) {
+      setProductName(NameVal);
+      setBtnActive(false);
+    } else if (NameVal.length > 0) {
       setProductName(NameVal);
       setBtnActive(true);
     }
@@ -86,7 +89,10 @@ const ProductEdit = () => {
     if (regex.test(URLVal)) {
       e.preventDefault();
       alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
-    } else {
+    } else if (URLVal.length === 0) {
+      setProductURL(URLVal);
+      setBtnActive(false);
+    } else if (URLVal.length > 0) {
       setProductURL(URLVal);
       setBtnActive(true);
     }
