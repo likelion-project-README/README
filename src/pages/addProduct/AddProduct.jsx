@@ -44,17 +44,12 @@ const AddProduct = () => {
     const formatValue = priceVal.toLocaleString('ko-KR');
     if (formatValue === 'NaN') {
       e.preventDefault();
-    } else {
+    } else if (formatValue === '0') {
       setProductPrice(formatValue);
-    }
-  };
-
-  // 상품가격 1원 이상만 입력 가능
-  const handleProductPriceValid = (e) => {
-    if (productPrice === '0') {
       setValidPrice(false);
       setBtnActive(false);
     } else {
+      setProductPrice(formatValue);
       setValidPrice(true);
     }
   };
@@ -75,7 +70,7 @@ const AddProduct = () => {
   useEffect(() => {
     if (
       productName.length > 0 &&
-      productPrice.length > 0 &&
+      productPrice !== '0' &&
       productURL.length > 0 &&
       productImg !== logoProduct
     ) {
@@ -134,7 +129,6 @@ const AddProduct = () => {
           placeholder='숫자만 입력 가능합니다.'
           value={productPrice}
           onChange={handleProductPrice}
-          onBlur={handleProductPriceValid}
           bottomColor={validPrice ? null : 'red'}
           message='가격은 1원 이상이어야 합니다.'
           display={validPrice ? null : 'yes'}
