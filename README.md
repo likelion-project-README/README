@@ -15,6 +15,76 @@
 ## 1. 개발 환경
 
 ## 2. 프로젝트 구조
+```
+├── README.md
+├── .eslintrc.js
+├── .gitignore
+├── .prettierrc.json
+├── package-lock.json
+├── package.json
+│
+├── public
+│     └── index.html
+│
+└── src
+			├── App.jsx
+			├── index.jsx
+			│
+			├── api
+			│     ├── accountnameValidAPI.js
+			│     └── addProductAPI.js
+			│
+			├── asset
+			│     ├── fonts
+			│     ├── css_sprites.png
+			│     ├── logo-404.svg
+			│     └── logo-home.svg
+			│
+			├── atoms
+			│     ├── LoginData.js
+			│     ├── LoginState.js
+			│     └── ModalState.js
+			│
+			├── common
+			│     ├── alert
+			│			│		  ├── Alert.jsx
+			│			│		  └── Alert.Style.jsx
+			│     ├── button
+			│     ├── comment
+			│     ├── inputBox
+			│     ├── post
+			│     ├── postModal
+			│     ├── product
+			│     ├── tabMenu
+			│     ├── topBanner
+			│     └── userBanner
+			│
+			├── pages
+			│     ├── addProduct
+			│			│		  ├── AddProduct.jsx
+			│			│		  └── AddProduct.Style.jsx
+			│     ├── chatList
+			│     ├── chatRoom
+			│     ├── emailLogin
+			│     ├── followerList
+			│     ├── followingList
+			│     ├── home
+			│     ├── join
+			│     ├── page404
+			│     ├── postDetail
+			│     ├── postEdit
+			│     ├── postUpload
+			│     ├── productEdit
+			│     ├── profile
+			│     ├── profileEdit
+			│     ├── profileSetting
+			│     ├── search
+			│     ├── snsLogin
+			│     └── splash
+			│
+		  └── styles
+			      └── Globalstyled.jsx
+```
 
 ## 3. 역할 분담
 
