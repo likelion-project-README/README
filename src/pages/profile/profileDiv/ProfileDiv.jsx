@@ -18,21 +18,25 @@ import Button from '../../../common/button/Button';
 const ProfileDiv = ({ accountName, isMine }) => {
   const [isProfile, setIsProfile] = useState(null);
   const [isFollow, setIsFollow] = useState(false);
+  const [followers, setFollowers] = useState(0);
   const navigate = useNavigate();
   const loadProfile = async () => {
     await loadProfileAPI(accountName).then((data) => {
       if (data.profile) {
         setIsProfile(data.profile);
+        setFollowers(data.profile.followerCount);
         setIsFollow(data.profile.isfollow);
       }
     });
   };
-  const clickFollow = () => {
+  const clickFollow = async () => {
     if (isFollow) {
       unfollowAPI(accountName);
+      setFollowers(followers - 1);
       setIsFollow(false);
     } else {
       followAPI(accountName);
+      setFollowers(followers + 1);
       setIsFollow(true);
     }
   };
@@ -44,7 +48,7 @@ const ProfileDiv = ({ accountName, isMine }) => {
       <S.ProfileDiv>
         <S.FollowNPicDiv>
           <S.FollowersLink to={`${window.location.pathname}/followers`}>
-            {isProfile.followerCount || 0}
+            {followers || 0}
             <S.FollowSpan>followers</S.FollowSpan>
           </S.FollowersLink>
           {isProfile.image === 'http://146.56.183.55:5050/Ellipse.png' ? (
