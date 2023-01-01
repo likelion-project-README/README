@@ -6,7 +6,6 @@ import {
   accountnameData,
   emailData,
   introData,
-  passwordData,
   profileImageData,
   usernameData,
 } from '../../atoms/LoginData';
@@ -26,13 +25,14 @@ const ProfileSetting = () => {
   const userEmail = location.state.email;
   const userPassword = location.state.password;
 
-  const [validId, setValidId] = useState(true);
+  const [validId, setValidId] = useState(false);
   const [userIdMsg, setUserIdMsg] = useState('');
   const [username, setUsername] = useState('');
   const [accountname, setAccountname] = useState('');
   const [intro, setIntro] = useState('');
   const [image, setImage] = useState(logoProfile);
   const [btnActive, setBtnActive] = useState('');
+  const [isIdRed, setIsIdRed] = useState(false);
 
   const setUsernameData = useSetRecoilState(usernameData);
   const setEmailData = useSetRecoilState(emailData);
@@ -45,7 +45,6 @@ const ProfileSetting = () => {
     const imgFile = e.target.files[0];
     const imgUrl = await uploadImgAPI(imgFile);
     setImage(imgUrl);
-    setBtnActive(true);
   };
 
   // 사용자 이름 공백으로 시작 방지
@@ -57,7 +56,6 @@ const ProfileSetting = () => {
       // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setUsername(NameVal);
-      setBtnActive(true);
     }
   };
 
@@ -67,11 +65,9 @@ const ProfileSetting = () => {
     const regex = /^[_A-Za-z0-9.]*$/;
     if (regex.test(testUserId)) {
       setAccountname(testUserId);
-      setValidId(true);
-      // setBtnActive(true);
+      setIsIdRed(false);
     } else {
-      setValidId(false);
-      // setBtnActive(false);
+      setIsIdRed(true);
       setUserIdMsg('*영문, 숫자, 밑줄, 마침표만 입력할 수 있습니다.');
     }
   };
@@ -82,9 +78,12 @@ const ProfileSetting = () => {
     setAccountname(testUserId);
     const validMsg = await accountnameValidAPI(testUserId);
     if (validMsg.message === '이미 가입된 계정ID 입니다.') {
+      setIsIdRed(true);
       setValidId(false);
-      setBtnActive(false);
       setUserIdMsg('*이미 사용 중인 ID입니다.');
+    } else {
+      setIsIdRed(false);
+      setValidId(true);
     }
   };
 
@@ -172,9 +171,9 @@ const ProfileSetting = () => {
           value={accountname}
           onInput={handleUserIdValid}
           onChange={handleUserIdDuplicate}
-          bottomColor={validId ? null : 'red'}
+          bottomColor={isIdRed ? 'red' : null}
+          display={isIdRed ? 'yes' : null}
           message={userIdMsg}
-          display={validId ? null : 'yes'}
         />
         <InputBox
           label='소개'
@@ -189,8 +188,6 @@ const ProfileSetting = () => {
             size='lg'
             tit='README 시작하기'
             isActive={btnActive}
-            message={userIdMsg}
-            disabled={validId ? null : 'disabled'}
           />
         </S.BtnWrap>
       </form>
