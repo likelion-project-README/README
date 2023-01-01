@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import followAPI from '../../api/followAPI';
 import unfollowAPI from '../../api/unfollowAPI';
+import { accountnameData } from '../../atoms/LoginData';
 import Button from '../button/Button';
 import * as S from './UserBanner.Style';
 
@@ -14,6 +16,7 @@ btntxt - btn-cancel, btn-follow, btn-null
 const UserBanner = ({ data }) => {
   const URL = window.location.origin;
   const [isFollow, setIsFollow] = useState(data.isfollow);
+  const loginedAccount = useRecoilValue(accountnameData);
   const clickFollow = () => {
     if (isFollow) {
       unfollowAPI(data.accountname);
@@ -36,7 +39,7 @@ const UserBanner = ({ data }) => {
         </S.UserNickName>
         <S.UserId>@ {data.accountname || '애월읍 위니브 감귤농장'}</S.UserId>
       </S.UserInfo>
-      {isFollow === true && (
+      {loginedAccount !== data.accountname && isFollow === true && (
         <Button
           size='xs'
           tit='취소'
@@ -45,7 +48,7 @@ const UserBanner = ({ data }) => {
           onClick={clickFollow}
         />
       )}
-      {isFollow === false && (
+      {loginedAccount !== data.accountname && isFollow === false && (
         <Button
           size='xs'
           tit='팔로우'
