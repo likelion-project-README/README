@@ -24,69 +24,70 @@
 ├── package.json
 │
 ├── public
-│     └── index.html
+│    └── index.html
 │
 └── src
-			├── App.jsx
-			├── index.jsx
-			│
-			├── api
-			│     ├── accountnameValidAPI.js
-			│     └── addProductAPI.js
-			│
-			├── asset
-			│     ├── fonts
-			│     ├── css_sprites.png
-			│     ├── logo-404.svg
-			│     └── logo-home.svg
-			│
-			├── atoms
-			│     ├── LoginData.js
-			│     ├── LoginState.js
-			│     └── ModalState.js
-			│
-			├── common
-			│     ├── alert
-			│			│		  ├── Alert.jsx
-			│			│		  └── Alert.Style.jsx
-			│     ├── button
-			│     ├── comment
-			│     ├── inputBox
-			│     ├── post
-			│     ├── postModal
-			│     ├── product
-			│     ├── tabMenu
-			│     ├── topBanner
-			│     └── userBanner
-			│
-			├── pages
-			│     ├── addProduct
-			│			│		  ├── AddProduct.jsx
-			│			│		  └── AddProduct.Style.jsx
-			│     ├── chatList
-			│     ├── chatRoom
-			│     ├── emailLogin
-			│     ├── followerList
-			│     ├── followingList
-			│     ├── home
-			│     ├── join
-			│     ├── page404
-			│     ├── postDetail
-			│     ├── postEdit
-			│     ├── postUpload
-			│     ├── productEdit
-			│     ├── profile
-			│     ├── profileEdit
-			│     ├── profileSetting
-			│     ├── search
-			│     ├── snsLogin
-			│     └── splash
-			│
-		  └── styles
-			      └── Globalstyled.jsx
+     ├── App.jsx
+     ├── index.jsx
+     │
+     ├── api
+     │     ├── accountnameValidAPI.js
+     │     └── addProductAPI.js
+     │
+     ├── asset
+     │     ├── fonts
+     │     ├── css_sprites.png
+     │     ├── logo-404.svg
+     │     └── logo-home.svg
+     │
+     ├── atoms
+     │     ├── LoginData.js
+     │     ├── LoginState.js
+     │     └── ModalState.js
+     │
+     ├── common
+     │     ├── alert
+     │     │     ├── Alert.jsx
+     │     │     └── Alert.Style.jsx
+     │     ├── button
+     │     ├── comment
+     │     ├── inputBox
+     │     ├── post
+     │     ├── postModal
+     │     ├── product
+     │     ├── tabMenu
+     │     ├── topBanner
+     │     └── userBanner
+     │
+     ├── pages
+     │     ├── addProduct
+     │	   │	  ├── AddProduct.jsx
+     │	   │      └── AddProduct.Style.jsx
+     │     ├── chatList
+     │     ├── chatRoom
+     │     ├── emailLogin
+     │     ├── followerList
+     │     ├── followingList
+     │     ├── home
+     │     ├── join
+     │     ├── page404
+     │     ├── postDetail
+     │     ├── postEdit
+     │     ├── postUpload
+     │     ├── productEdit
+     │     ├── profile
+     │     ├── profileEdit
+     │     ├── profileSetting
+     │     ├── search
+     │     ├── snsLogin
+     │     └── splash
+     │
+     └── styles
+     	   └── Globalstyled.jsx
 ```
 
 ## 3. 역할 분담
+
 
 ## 4. 개발 기간 및 작업 관리
 
