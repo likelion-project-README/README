@@ -8,7 +8,7 @@ const editProfileAPI = async (userName, userId, userIntro, userImg) => {
         image: userImg,
       },
     };
-    await fetch(`https://mandarin.api.weniv.co.kr/user`, {
+    const res = await fetch(`https://mandarin.api.weniv.co.kr/user`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -16,8 +16,15 @@ const editProfileAPI = async (userName, userId, userIntro, userImg) => {
       },
       body: JSON.stringify(data),
     });
+    const json = await res.json();
+    // if (!res.ok) {
+    //   // eslint-disable-next-line no-alert
+    //   alert(`${json.message}`);
+    // }
+    return json.user;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
 
