@@ -33,17 +33,22 @@
      ├── api
      │     ├── accountnameValidAPI.js
      │     └── addProductAPI.js
+     │          .
+     │          .
+     │          .
      │
      ├── asset
      │     ├── fonts
      │     ├── css_sprites.png
      │     ├── logo-404.svg
      │     └── logo-home.svg
+     │          .
+     │          .
+     │          .
      │
      ├── atoms
      │     ├── LoginData.js
-     │     ├── LoginState.js
-     │     └── ModalState.js
+     │     └── LoginState.js
      │
      ├── common
      │     ├── alert
@@ -61,8 +66,8 @@
      │
      ├── pages
      │     ├── addProduct
-     │	   │	  ├── AddProduct.jsx
-     │	   │      └── AddProduct.Style.jsx
+     │	 │	  ├── AddProduct.jsx
+     │	 │     └── AddProduct.Style.jsx
      │     ├── chatList
      │     ├── chatRoom
      │     ├── emailLogin
