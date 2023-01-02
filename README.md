@@ -15,7 +15,23 @@
 | :------: |  :------: | :------: | :------: |
 | [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @yeon1615](https://github.com/yeon1615) | [<img src="https://avatars.githubusercontent.com/u/112460466?v=4" height=150 width=150> <br/> @Cheorizzang](https://github.com/Cheorizzang) | [<img src="https://avatars.githubusercontent.com/u/112460506?v=4" height=150 width=150> <br/> @heejiyang](https://github.com/heejiyang) | [<img src="https://avatars.githubusercontent.com/u/76766459?v=4" height=150 width=150> <br/> @journey-ji](https://github.com/journey-ji) |
 
-## 1. 개발 환경
+## 1. 개발 환경 및 배포 URL
+
+### 개발환경
+
+- Front : HTML, React, styled-components, Recoil
+- Back-end : 제공된 API 활용
+- 버전 및 이슈관리 : Github, Github Issues, Github Project
+- 협업 툴 : Discord, notion
+- 서비스 배포 환경 : Netlify
+- 디자인 : Figma
+
+
+### 배포 URL
+
+- URL : 
+- 테스트용 ID & PW :
+
 
 ## 2. 프로젝트 구조
 ```
