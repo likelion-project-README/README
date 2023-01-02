@@ -66,8 +66,8 @@
      │
      ├── pages
      │     ├── addProduct
-     │	 │	  ├── AddProduct.jsx
-     │	 │     └── AddProduct.Style.jsx
+     │     │     ├── AddProduct.jsx
+     │     │     └── AddProduct.Style.jsx
      │     ├── chatList
      │     ├── chatRoom
      │     ├── emailLogin
