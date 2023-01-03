@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
 export const TabMenuCont = styled.div`
-  width: 390px;
-  height: 60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   border-top: 0.5px solid var(--sub2-text-color);
 `;
 
 export const TabMenuUl = styled.ul`
-  display: flex;
-  gap: 14px;
-  justify-content: space-around;
-  padding: 0 6px 0 6px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 auto;
+  max-width: 800px;
 `;
 
 export const TabMenuLi = styled.li`
