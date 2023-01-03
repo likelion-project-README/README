@@ -4,7 +4,7 @@ const Btn = styled.button`
   width: ${(props) => {
     switch (props.size) {
       case 'lg':
-        return '322px';
+        return '100%';
       case 'md':
         return '120px';
       case 'sm':
@@ -15,6 +15,7 @@ const Btn = styled.button`
         return '120px';
     }
   }};
+
   height: ${(props) => {
     switch (props.size) {
       case 'lg':
