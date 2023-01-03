@@ -42,7 +42,6 @@ export const MoreBtn = styled.button`
   height: 18px;
   margin-top: 4px;
   margin-left: auto;
-  /* margin-right: 2px; */
   background: url(${sprite}) no-repeat -104.5px -110px / 146px 132px;
 `;
 
@@ -51,8 +50,7 @@ export const PostContents = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 304px;
-  margin-left: auto;
+  padding-left: 54px;
 `;
 
 export const PostTxt = styled.p`
@@ -118,6 +116,8 @@ export const CreatedDate = styled.p`
 `;
 
 export const StyledSlider = styled(Slider)`
+  width: 304px;
+  margin: 0 auto;
   .slick-list {
     position: relative;
     width: 304px;
