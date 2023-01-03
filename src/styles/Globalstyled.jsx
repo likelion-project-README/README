@@ -73,8 +73,12 @@ const GlobalStyled = createGlobalStyle`
   margin: 0 auto;
 }
 
+.min-width {
+  min-width: 390px;
+}
+
  .wrapper-contents {
-  margin: 48px 0 62px;
+  max-height: calc(100vh - 60px);
 }
 `;
 
