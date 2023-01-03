@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
-export const ProfileEditWrap = styled.section`
-  width: 390px;
-  height: 820px;
-`;
-
 export const ProfileEditTit = styled.h2`
   /* ir */
   position: absolute;
@@ -17,7 +12,8 @@ export const ProfileEditTit = styled.h2`
 `;
 
 export const ImgWrap = styled.div`
-  margin: 30px 140px;
+  /* margin: 30px 140px; */
+  margin: 30px auto;
   width: 110px;
   height: 110px;
 `;
