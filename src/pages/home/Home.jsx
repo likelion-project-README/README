@@ -24,7 +24,7 @@ const Home = () => {
   }, []);
 
   return (
-    <S.Home>
+    <S.Home className='max-width min-width wrapper-contents'>
       <S.HomeTit>리드미 피드</S.HomeTit>
       <TopBanner type='top-main-nav' tit='READEME' />
       {feedData?.length > 0 ? (
