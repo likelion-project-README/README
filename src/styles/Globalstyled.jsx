@@ -71,7 +71,7 @@ const GlobalStyled = createGlobalStyle`
   .max-width {
     max-width: 800px;
     margin: 0 auto;
-}
+  }
 
   .min-width {
     min-width: 390px;
