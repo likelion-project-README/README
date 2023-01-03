@@ -4,19 +4,19 @@ import * as S from './SnsLogin.Style';
 
 const SnsLogin = () => {
   return (
-    <S.SnsLoginSec>
+    <S.SnsLoginSec className='min-width'>
       <S.LogoImg />
       {/* SNS로그인 버튼 */}
-      <S.SnsLoginWrapper>
-        <S.KakaoBtn className='min-width'>
+      <S.SnsLoginWrapper className='min-width'>
+        <S.KakaoBtn>
           <S.KakaoImg />
           카카오톡 계정으로 로그인
         </S.KakaoBtn>
-        <S.GoogleBtn className='min-width'>
+        <S.GoogleBtn>
           <S.GoogleImg />
           구글 계정으로 로그인
         </S.GoogleBtn>
-        <S.FacebookBtn className='min-width'>
+        <S.FacebookBtn>
           <S.FacebookImg />
           페이스북 계정으로 로그인
         </S.FacebookBtn>
