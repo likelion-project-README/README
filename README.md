@@ -6,6 +6,8 @@
 - Test ID :
 - Test PW : 
 
+<br>
+
 ## 프로젝트 소개
 
 - README는 책을 좋아하는 사람들이 자신의 책 취향을 공유하고, 다 읽은 책을 판매할 수 있는 SNS입니다.
@@ -14,11 +16,15 @@
 - 다양한 유저들을 팔로우하며 마음에 드는 게시글에 좋아요를 누르거나 댓글을 작성할 수 있습니다.
 - 유저 간 채팅 기능을 활용해 책 거래 및 소통의 편의성을 증진시킬 예정입니다.
 
+<br>
+
 ## 팀원 구성
 
 | **고지연** | **김민제** | **양희지** | **지창언** |
 | :------: |  :------: | :------: | :------: |
 | [<img src="https://avatars.githubusercontent.com/u/106502312?v=4" height=150 width=150> <br/> @yeon1615](https://github.com/yeon1615) | [<img src="https://avatars.githubusercontent.com/u/112460466?v=4" height=150 width=150> <br/> @Cheorizzang](https://github.com/Cheorizzang) | [<img src="https://avatars.githubusercontent.com/u/112460506?v=4" height=150 width=150> <br/> @heejiyang](https://github.com/heejiyang) | [<img src="https://avatars.githubusercontent.com/u/76766459?v=4" height=150 width=150> <br/> @journey-ji](https://github.com/journey-ji) |
+
+<br>
 
 ## 1. 개발 환경
 
@@ -28,6 +34,8 @@
 - 협업 툴 : Discord, notion
 - 서비스 배포 환경 : Netlify
 - 디자인 : Figma
+
+<br>
 
 ## 2. 프로젝트 구조
 
@@ -103,39 +111,43 @@
      	   └── Globalstyled.jsx
 ```
 
+<br>
+
 ## 3. 역할 분담
 
 ### 고지연
 
-- UI
+- **UI**
     - 페이지 : 홈, 검색, 게시글 작성, 게시글 수정, 게시글 상세, 채팅방
     - 공통 컴포넌트 : 게시글 템플릿, 버튼
-- 기능
+- **기능**
     - 유저 검색, 게시글 등록 및 수정, 게시글 상세 확인, 댓글 등록, 팔로워 게시글 불러오기, 좋아요 기능
     
 ### 김민제
 
-- UI
+- **UI**
     - 페이지 : 프로필 설정, 프로필 수정, 팔로잉&팔로워 리스트, 상품 등록, 상품 수정, 채팅 목록, 404 페이지
     - 공통 컴포넌트 : 탭메뉴, InputBox, Alert 모달, 댓글
-- 기능
+- **기능**
     - 프로필 설정 및 수정 페이지 유저 아이디 유효성 및 중복 검사, 상품 등록 및 수정
 
 ### 양희지
 
-- UI
+- **UI**
     - 페이지 : splash 페이지, sns 로그인 페이지, 로그인, 회원가입
     - 공통 컴포넌트 : 상품 카드, 사용자 배너
-- 기능
+- **기능**
     - splash 페이지, sns 로그인 페이지, 로그인 유효성 및 중복 검사 , 회원가입 유효성 및 중복 검사, 이메일 검증, 프로필 설정
 
 ### 지창언
 
-- UI
+- **UI**
     - 페이지 : 사용자 프로필 페이지
     - 공통 컴포넌트 : 탑배너, 하단 모달창
-- 기능
+- **기능**
     - 팔로우 & 언팔로우, 로그아웃, 하단 모달창, 댓글 삭제, 게시글 삭제, 상품 삭제, 사용자 게시글 앨범형 이미지, 탑 배너 뒤로가기 버튼, Alert 모달
+    
+<br>
 
 ## 4. 개발 기간 및 작업 관리
 
@@ -149,6 +161,8 @@
 
 - GitHub Projects와 Issues를 사용하여 진행 상황을 공유했습니다.
 - 주간회의를 진행하며 작업 순서와 방향성에 대한 고민을 나누고 GitHub Wiki에 회의 내용을 기록했습니다.
+
+<br>
 
 ## 5. 페이지 기능
 
