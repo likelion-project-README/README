@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 export const CommentCont = styled.div`
-  width: 390px;
-  height: 61px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 0.5px solid var(--sub2-text-color);
 `;
 
 export const CommentForm = styled.form`
