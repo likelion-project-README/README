@@ -12,13 +12,28 @@ const fadeInOut = keyframes`
   }
 `;
 
+// export const SplashPageWrapper = styled.section`
+//   width: 390px;
+//   height: 820px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   &.wrapper-splash {
+//     position: fixed;
+//     padding: 82px;
+//     flex-direction: column;
+//     justify-content: space-around;
+//   }
+// `;
 export const SplashPageWrapper = styled.section`
-  width: 390px;
-  height: 820px;
+  width: 100vw;
+  height: 100vh;
+  padding: 82px;
   display: flex;
-  justify-content: center;
+  position: fixed;
   align-items: center;
-  display: ${(props) => props.display};
+  justify-content: center;
+  max-height: calc(100vh - 60px);
 `;
 
 export const LogoImg = styled.div`

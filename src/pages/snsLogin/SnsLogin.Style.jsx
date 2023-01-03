@@ -4,8 +4,8 @@ import logo from '../../assets/logo-login.svg';
 import sprite from '../../assets/css_sprites.png';
 
 export const SnsLoginSec = styled.section`
-  width: 390px;
-  height: 820px;
+  width: 100vw;
+  height: 100vh;
   background-color: var(--main-color);
   display: flex;
   justify-content: center;
@@ -15,28 +15,34 @@ export const LogoImg = styled.div`
   width: 218px;
   height: 275px;
   position: fixed;
-  margin-top: 176px;
+  margin-top: 180px;
   background: url(${logo});
 `;
 
 export const SnsLoginWrapper = styled.div`
-  height: 319px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 526px;
-  border-radius: 20px;
+  height: 320px;
+  width: 100%;
+  bottom: 0;
+  border-radius: 20px 20px 0 0;
+  padding: 50px 34px;
   background-color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
 `;
 
 export const KakaoBtn = styled.button`
-  margin: 50px 34px 0;
-  padding: 13px 87px;
   position: relative;
-  border: #f2c94c solid 1px;
+  width: 320px;
+  padding: 0 14px;
+  margin-bottom: 10px;
   border-radius: 44px;
   color: var(--sub-text-color);
   font-size: 14px;
-  line-height: 18px;
+  line-height: 42px;
+  border: #f2c94c solid 1px;
 `;
 
 export const KakaoImg = styled.div`
@@ -49,14 +55,15 @@ export const KakaoImg = styled.div`
 `;
 
 export const GoogleBtn = styled.button`
-  margin: 10px 34px 0;
-  padding: 13px 87px;
   position: relative;
-  border: var(--sub-text-color) solid 1px;
+  width: 320px;
+  padding: 0 14px;
+  margin-bottom: 10px;
   border-radius: 44px;
   color: var(--sub-text-color);
   font-size: 14px;
-  line-height: 18px;
+  line-height: 42px;
+  border: var(--sub-text-color) solid 1px;
 `;
 
 export const GoogleImg = styled.div`
@@ -69,15 +76,15 @@ export const GoogleImg = styled.div`
 `;
 
 export const FacebookBtn = styled.button`
-  margin: 10px 34px 0;
-  padding: 13px 87px;
-  width: 322px;
   position: relative;
-  border: #2d9cdb solid 1px;
+  width: 320px;
+  padding: 0 14px;
+  margin-bottom: 10px;
   border-radius: 44px;
   color: var(--sub-text-color);
   font-size: 14px;
-  line-height: 18px;
+  line-height: 42px;
+  border: #2d9cdb solid 1px;
 `;
 
 export const FacebookImg = styled.div`
