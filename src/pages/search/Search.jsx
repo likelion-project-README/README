@@ -28,7 +28,7 @@ const Search = () => {
   }, [searchVal]);
 
   return (
-    <S.Search>
+    <S.Search className='max-width min-width wrapper-contents'>
       <S.SearchTit>사용자 검색 페이지</S.SearchTit>
       <TopBanner type='top-search-nav' setSearchVal={setSearchVal} />
       {searchVal && (

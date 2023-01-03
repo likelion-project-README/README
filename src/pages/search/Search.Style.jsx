@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 export const Search = styled.section`
   position: relative;
-  width: 390px;
-  height: 820px;
-  /* max-height: calc(100vh - 60px); */
-  /* overflow-y: scroll; */
 `;
 
 export const SearchTit = styled.h2`
@@ -24,7 +19,6 @@ export const SearchedUserUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 712px;
   padding: 20px 16px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -77,8 +71,7 @@ export const UserBannerLink = styled(Link)`
 `;
 
 export const TabMenuCont = styled.div`
-  position: absolute;
-  /* position: fixed; */
+  position: fixed;
   bottom: 0px;
   background-color: #ffffff;
 `;
