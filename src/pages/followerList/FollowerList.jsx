@@ -20,7 +20,7 @@ const FollowerList = () => {
   }, []);
   console.log(isFollwer);
   return (
-    <S.FollowerListWrap>
+    <S.FollowerListWrap className='max-width min-width wrapper-contents'>
       <S.FollowerListTit>팔로워 리스트 페이지</S.FollowerListTit>
       <TopBanner type='top-follow-nav' tit='Followers' />
       <S.ListCont>

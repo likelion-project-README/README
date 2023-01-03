@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 export const FollowerListWrap = styled.section`
   position: relative;
-  width: 390px;
-  height: 820px;
 `;
 
 export const FollowerListTit = styled.h2`
@@ -17,17 +15,18 @@ export const FollowerListTit = styled.h2`
 `;
 
 export const ListCont = styled.div`
-  padding: 24px 0;
+  display: flex;
   /* overflow-y: scroll; */
   overflow: scroll;
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
-  height: 712px;
+  /* height: 712px; */
 `;
 
 export const List = styled.ul`
-  margin: 0 16px;
+  padding: 20px 0;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   gap: 16px;
