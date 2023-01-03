@@ -1,13 +1,8 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
-// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 export const PostEdit = styled.section`
   position: relative;
-  width: 390px;
-  /* max-height: 100vh; */
-  height: 820px;
-  overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
@@ -23,17 +18,15 @@ export const PostEditTit = styled.h2`
   overflow: hidden;
 `;
 
-export const TopBannerCont = styled.div`
-  position: fixed;
-  top: 0;
-  z-index: 10;
+export const Form = styled.form`
+  height: 100vh;
+  position: relative;
 `;
 
 export const UploadCont = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 48px;
   padding: 20px 16px;
+  gap: 13px;
 `;
 
 export const UserProfileImg = styled.img`
@@ -50,8 +43,9 @@ export const ContentsArea = styled.div`
 `;
 
 export const Textarea = styled.textarea`
-  width: 304px;
-  margin-top: 12px;
+  max-width: 712px;
+  width: calc(100vw - 86px);
+  min-width: 304px;
   border: none;
   font-weight: 400;
   font-size: 14px;
@@ -84,8 +78,9 @@ export const SingleImg = styled.img`
 
 export const MultipleImgScrollCont = styled.ul`
   display: flex;
-  width: 304px;
   gap: 8px;
+  width: calc(100vw - 86px);
+  min-width: 304px;
   overflow-x: scroll;
   &::-webkit-scrollbar {
     height: 6px;
@@ -119,9 +114,8 @@ export const DeleteImgBtn = styled.button`
 
 export const AddFileLab = styled.label`
   display: block;
-  /* position: fixed; */
   position: absolute;
-  left: 324px;
+  right: 30px;
   bottom: 30px;
   width: 36px;
   height: 36px;
