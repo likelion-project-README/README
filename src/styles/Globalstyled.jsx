@@ -78,6 +78,7 @@ const GlobalStyled = createGlobalStyle`
   }
 
   .wrapper-contents {
+    margin-top: 48px;
     max-height: calc(100vh - 60px);
   }
 `;

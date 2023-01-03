@@ -7,7 +7,6 @@ export const ProfileDiv = styled.div`
   height: 314px;
   display: flex;
   flex-direction: column;
-  margin-top: 48px;
   margin-bottom: 6px;
   background-color: white;
 `;

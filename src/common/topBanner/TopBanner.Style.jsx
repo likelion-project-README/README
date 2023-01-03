@@ -6,6 +6,7 @@ const BannerCont = styled.div`
   position: fixed;
   left: 0;
   right: 0;
+  top: 0px;
   height: 48px;
   margin: 0 auto;
   background-color: white;
