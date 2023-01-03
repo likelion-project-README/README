@@ -51,11 +51,7 @@
      ├── index.jsx
      │
      ├── api
-     │     ├── accountnameValidAPI.js
-     │     └── addProductAPI.js
-     │          .
-     │          .
-     │          .
+     │     └── mandarinAPI.js
      │
      ├── asset
      │     ├── fonts
