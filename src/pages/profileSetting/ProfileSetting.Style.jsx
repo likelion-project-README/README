@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
-export const ProfileSettingWrap = styled.section`
-  width: 390px;
-  height: 820px;
-`;
-
 export const ProfileSettingTit = styled.h2`
   /* ir */
   position: absolute;
@@ -16,11 +11,11 @@ export const ProfileSettingTit = styled.h2`
   overflow: hidden;
 `;
 
-export const Title = styled.strong`
-  display: inline-block;
+export const Title = styled.p`
   font-weight: 500;
   font-size: 24px;
-  margin: 30px 137px 12px 137px;
+  text-align: center;
+  margin: 80px auto 12px auto;
   color: var(--main-text-color);
 `;
 
@@ -31,7 +26,7 @@ export const Description = styled.p`
 `;
 
 export const ImgWrap = styled.div`
-  margin: 30px 140px;
+  margin: 30px auto;
   width: 110px;
   height: 110px;
 `;
@@ -66,5 +61,5 @@ export const ImgUploadInp = styled.input`
 `;
 
 export const BtnWrap = styled.div`
-  margin: 30px 34px;
+  margin: 40px 34px;
 `;
