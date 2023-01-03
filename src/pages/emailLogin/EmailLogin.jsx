@@ -120,7 +120,7 @@ const EmailLoginPage = () => {
   };
 
   return (
-    <S.LoginSec>
+    <section className='wrapper-contents max-width min-width'>
       <S.LoginTit>로그인</S.LoginTit>
       <S.LoginForm onSubmit={handleSubmit}>
         <InputBox
@@ -147,7 +147,7 @@ const EmailLoginPage = () => {
           display={isPasswordRed ? 'yes' : null}
           message={passwordError}
         />
-        <S.div>
+        <S.ButtonWrap className='max-width min-width'>
           <Button
             type='submit'
             size='lg'
@@ -156,10 +156,10 @@ const EmailLoginPage = () => {
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
           />
-        </S.div>
+        </S.ButtonWrap>
+        <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
       </S.LoginForm>
-      <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
-    </S.LoginSec>
+    </section>
   );
 };
 

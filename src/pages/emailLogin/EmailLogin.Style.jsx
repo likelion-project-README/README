@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const LoginSec = styled.section`
-  width: 390px;
-  height: 820px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: auto 34px;
-`;
+// export const LoginSec = styled.section`
+//   width: 390px;
+//   height: 820px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: auto 34px;
+// `;
 
 export const LoginTit = styled.p`
-  color: #000;
+  color: var(--main-text-color);
   font-weight: 700;
   font-size: 24px;
-  line-height: 29px;
-  display: flex;
-  margin: 55px 161px 40px 163px;
+  text-align: center;
+  /* line-height: 29px; */
+  align-items: center;
+  margin: 80px auto 40px;
 `;
 
 export const LoginForm = styled.form`
@@ -24,8 +25,8 @@ export const LoginForm = styled.form`
   flex-direction: column;
 `;
 
-export const div = styled.div`
-  margin: 20px auto;
+export const ButtonWrap = styled.div`
+  margin: 40px auto;
 `;
 
 export const StyledLink = styled(Link)`
