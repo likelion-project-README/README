@@ -182,7 +182,7 @@ const JoinPage = () => {
           bottomColor={passwordValid ? null : 'red'}
           message={passwordError}
         />
-        <S.ButtonWrap className='max-width min-width wrapper-contents'>
+        <S.ButtonWrap>
           <Button
             onClick={goToProfileSetting}
             size='lg'
