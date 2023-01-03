@@ -67,6 +67,15 @@ const GlobalStyled = createGlobalStyle`
     word-break: initial;
     word-wrap: initial;
   }
+
+  .max-width {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+ .wrapper-contents {
+  margin: 48px 0 62px;
+}
 `;
 
 export default GlobalStyled;
