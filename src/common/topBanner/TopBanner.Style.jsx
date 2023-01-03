@@ -16,6 +16,7 @@ const BannerCont = styled.div`
   align-items: center;
   border-bottom: 0.5px solid #dbdbdb;
   padding: 0 16px;
+  z-index: 20;
 `;
 const BackBtn = styled.button`
   width: 22px;
@@ -24,6 +25,7 @@ const BackBtn = styled.button`
   margin: 13px 10px 13px 0px;
   cursor: pointer;
 `;
+
 const MoreBtn = styled.button`
   width: 24px;
   height: 24px;
@@ -36,7 +38,6 @@ const SearchInp = styled.input.attrs({
   placeholder: '계정 검색',
 })`
   display: block;
-  width: 316px;
   height: 32px;
   border-radius: 32px;
   margin: 8px 0px;
@@ -45,6 +46,7 @@ const SearchInp = styled.input.attrs({
   opacity: 0.4;
   padding: 0px 16px;
   font-size: 14px;
+  flex-grow: 1;
 `;
 
 const SearchBtn = styled(Link)`
