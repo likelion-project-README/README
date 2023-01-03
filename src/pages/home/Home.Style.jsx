@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Home = styled.section`
   position: relative;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 export const HomeTit = styled.h2`
@@ -18,7 +22,8 @@ export const NoPostsPage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 109px);
+  margin-bottom: 61px;
   text-align: center;
 `;
 
@@ -49,11 +54,4 @@ export const PostsContUl = styled.ul`
   gap: 30px;
   padding: 20px 16px;
   margin-bottom: 61px;
-`;
-
-export const TabMenuCont = styled.div`
-  position: fixed;
-  bottom: 0px;
-  background-color: #ffffff;
-  z-index: 20;
 `;

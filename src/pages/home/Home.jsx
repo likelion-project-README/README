@@ -55,17 +55,15 @@ const Home = () => {
           </div>
         </S.NoPostsPage>
       )}
-      <S.TabMenuCont>
-        <TabMenu />
-        {isModalOpen ? (
-          <PostModal
-            modalType={modalType}
-            modalData={modalData}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />
-        ) : null}
-      </S.TabMenuCont>
+      <TabMenu />
+      {isModalOpen ? (
+        <PostModal
+          modalType={modalType}
+          modalData={modalData}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      ) : null}
     </S.Home>
   );
 };

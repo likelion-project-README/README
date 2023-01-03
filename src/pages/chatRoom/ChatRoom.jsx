@@ -23,13 +23,15 @@ const ChatRoom = () => {
     <>
       <S.ChatRoom className='min-width wrapper-contents'>
         <S.ChatRoomTit>채팅방 페이지</S.ChatRoomTit>
-        <TopBanner
-          type='top-chat-nav'
-          tit='숨참고딥다이브'
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          setModalType={setModalType}
-        />
+        <S.TopBannerCont>
+          <TopBanner
+            type='top-chat-nav'
+            tit='숨참고딥다이브'
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            setModalType={setModalType}
+          />
+        </S.TopBannerCont>
         <S.ChatCont>
           {/* 상대 메세지 - 텍스트 */}
           <S.YourMsgCont>
