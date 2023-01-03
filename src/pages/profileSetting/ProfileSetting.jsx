@@ -140,7 +140,7 @@ const ProfileSetting = () => {
   };
 
   return (
-    <S.ProfileSettingWrap>
+    <section className='max-width min-width wrapper-contents'>
       <S.ProfileSettingTit>프로필 설정 페이지</S.ProfileSettingTit>
       <S.Title>프로필 설정</S.Title>
       <S.Description>나중에 언제든지 변경할 수 있습니다.</S.Description>
@@ -193,7 +193,7 @@ const ProfileSetting = () => {
           />
         </S.BtnWrap>
       </form>
-    </S.ProfileSettingWrap>
+    </section>
   );
 };
 
