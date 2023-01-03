@@ -43,6 +43,10 @@ export const ChatRoomTit = styled.h2`
 export const TopBannerCont = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  height: 47px;
+  background-color: white;
   animation: ${FadeIn} 0.3s ease-in;
 `;
 
@@ -51,9 +55,11 @@ export const ChatCont = styled.div`
   flex-direction: column;
   justify-content: end;
   gap: 10px;
-  height: 820px;
-  padding: 20px 16px;
+  min-height: calc(100vh - 109px);
+  margin-bottom: 61px;
+  padding: 20px 16px 0 16px;
   animation: ${chatFadeIn} 0.2s linear;
+  overflow: scroll;
 `;
 
 export const YourMsgCont = styled.div`
