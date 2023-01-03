@@ -4,7 +4,7 @@ import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
 import UserBanner from '../../common/userBanner/UserBanner';
 import * as S from './FollowerList.Style';
-import loadFollowerListAPI from '../../api/loadFollowerListAPI';
+import { loadFollowerListAPI } from '../../api/mandarinAPI';
 
 const FollowerList = () => {
   const [isFollwer, setIsFollower] = useState(null);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
-import searchUserAPI from '../../api/searchUserAPI';
+import { searchUserAPI } from '../../api/mandarinAPI';
 import * as S from './Search.Style';
 
 const Search = () => {

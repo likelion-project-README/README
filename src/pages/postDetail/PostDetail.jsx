@@ -5,8 +5,8 @@ import TopBanner from '../../common/topBanner/TopBanner';
 import Post from '../../common/post/Post';
 import Comment from '../../common/comment/Comment';
 import PostModal from '../../common/postModal/PostModal';
-import getPostDetailAPI from '../../api/getPostDetailAPI';
-import getCommentListAPI from '../../api/getCommentListAPI';
+import { getPostDetailAPI, getCommentListAPI } from '../../api/mandarinAPI';
+
 import * as S from './PostDetail.Style';
 import { accountnameData } from '../../atoms/LoginData';
 import Alert from '../../common/alert/Alert';

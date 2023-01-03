@@ -9,10 +9,12 @@ import {
   profileImageData,
   usernameData,
 } from '../../atoms/LoginData';
-import emailLoginAPI from '../../api/emailLoginAPI';
-import joinAPI from '../../api/joinAPI';
-import uploadImgAPI from '../../api/uploadImgAPI';
-import accountnameValidAPI from '../../api/accountnameValidAPI';
+import {
+  emailLoginAPI,
+  joinAPI,
+  uploadImgAPI,
+  accountnameValidAPI,
+} from '../../api/mandarinAPI';
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';

@@ -1,11 +1,6 @@
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import * as S from './PostModal.Style';
-import Alert from '../alert/Alert';
-import deleteProductsAPI from '../../api/deleteProductAPI';
-import deletePostAPI from '../../api/deletePostAPI';
-import deleteCommentAPI from '../../api/deleteCommentAPI';
-import * as L from '../../atoms/LoginData';
 
 /**
  * 음 로그아웃

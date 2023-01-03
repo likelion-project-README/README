@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import loadPostsAPI from '../../../api/loadPostsAPI';
+import { loadPostsAPI } from '../../../api/mandarinAPI';
 import Post from '../../../common/post/Post';
 import * as S from './PostsDiv.Style';
 

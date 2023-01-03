@@ -2,9 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
-import getPostDetailAPI from '../../api/getPostDetailAPI';
-import uploadMultipleImgAPI from '../../api/uploadMultipleImgAPI';
-import editPostAPI from '../../api/editPostAPI';
+import {
+  editPostAPI,
+  uploadMultipleImgAPI,
+  getPostDetailAPI,
+} from '../../api/mandarinAPI';
 import { profileImageData } from '../../atoms/LoginData';
 import * as S from './PostEdit.Style';
 

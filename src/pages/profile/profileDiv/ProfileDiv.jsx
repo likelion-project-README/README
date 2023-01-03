@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import followAPI from '../../../api/followAPI';
-import loadProfileAPI from '../../../api/loadProfileAPI';
-import unfollowAPI from '../../../api/unfollowAPI';
 import * as S from './ProfileDiv.Style';
 import profileImg from '../../../assets/logo-profile.svg';
 import Button from '../../../common/button/Button';
+import {
+  followAPI,
+  unfollowAPI,
+  loadProfileAPI,
+} from '../../../api/mandarinAPI';
 
 /**
  * 필요한 props

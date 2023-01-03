@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { profileImageData } from '../../atoms/LoginData';
-import leaveCommentAPI from '../../api/leaveCommentAPI';
-import getCommentListAPI from '../../api/getCommentListAPI';
+import { getCommentListAPI, leaveCommentAPI } from '../../api/mandarinAPI';
 import * as S from './Comment.Style';
 
 const Comment = ({ postId, setCommentDataArr, setCommentCount }) => {

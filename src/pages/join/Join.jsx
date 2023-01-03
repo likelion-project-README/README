@@ -13,7 +13,7 @@ import * as S from './Join.Style';
 
 import Button from '../../common/button/Button';
 import InputBox from '../../common/inputBox/InputBox';
-import emailDuplicateAPI from '../../api/emailDuplicateAPI';
+import { emailDuplicateAPI } from '../../api/mandarinAPI';
 
 const JoinPage = () => {
   const navigate = useNavigate();

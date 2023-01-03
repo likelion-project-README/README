@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import loadProductsAPI from '../../../api/loadProductsAPI';
+import { loadProductsAPI } from '../../../api/mandarinAPI';
 import Product from '../../../common/product/Product';
 import * as S from './ProductDiv.Style';
 

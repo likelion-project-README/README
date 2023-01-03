@@ -3,9 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './Alert.Style';
 import * as L from '../../atoms/LoginData';
-import deleteProductsAPI from '../../api/deleteProductAPI';
-import deletePostAPI from '../../api/deletePostAPI';
-import deleteCommentAPI from '../../api/deleteCommentAPI';
+import {
+  deleteCommentAPI,
+  deletePostAPI,
+  deleteProductsAPI,
+} from '../../api/mandarinAPI';
 
 /**
  * alert 종류

@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
-import uploadImgAPI from '../../api/uploadImgAPI';
-import getProductDetailAPI from '../../api/getProductDetailAPI';
-import editProductAPI from '../../api/editProductAPI';
+import {
+  uploadImgAPI,
+  getProductDetailAPI,
+  editProductAPI,
+} from '../../api/mandarinAPI';
 import * as S from './ProductEdit.Style';
 
 const ProductEdit = () => {

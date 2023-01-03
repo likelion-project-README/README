@@ -14,7 +14,7 @@ import {
 
 import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
-import loginAPI from '../../api/emailLoginAPI';
+import { emailLoginAPI } from '../../api/mandarinAPI';
 
 const EmailLoginPage = () => {
   const navigate = useNavigate();
@@ -94,7 +94,7 @@ const EmailLoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (btnActive === true) {
-      const data = await loginAPI(email, password);
+      const data = await emailLoginAPI(email, password);
 
       if (data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
         setIsPasswordRed(true);
