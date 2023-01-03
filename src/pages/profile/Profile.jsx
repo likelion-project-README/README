@@ -39,7 +39,10 @@ const Profile = () => {
 
   return (
     <>
-      <S.ProfileWrap onClick={handleModalClose}>
+      <S.ProfileWrap
+        onClick={handleModalClose}
+        className='max-width min-width wrapper-contents'
+      >
         <TopBanner
           type='top-basic-nav'
           tit='프로필'
