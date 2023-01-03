@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
-import uploadImgAPI from '../../api/uploadImgAPI';
-import addProductAPI from '../../api/addProductAPI';
+import { addProductAPI, uploadImgAPI } from '../../api/mandarinAPI';
 import * as S from './AddProduct.Style';
 import logoProduct from '../../assets/logo-product.svg';
 

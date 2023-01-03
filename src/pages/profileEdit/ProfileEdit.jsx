@@ -3,10 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
-import loadProfileAPI from '../../api/loadProfileAPI';
-import accountnameValidAPI from '../../api/accountnameValidAPI';
-import uploadImgAPI from '../../api/uploadImgAPI';
-import editProfileAPI from '../../api/editProfileAPI';
+import {
+  loadProfileAPI,
+  uploadImgAPI,
+  editProfileAPI,
+  accountnameValidAPI,
+} from '../../api/mandarinAPI';
 import logoProfile from '../../assets/logo-profile.svg';
 import {
   usernameData,

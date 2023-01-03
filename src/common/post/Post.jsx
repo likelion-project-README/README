@@ -1,8 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 import { useEffect, useState } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
-import likeAPI from '../../api/likeAPI';
-import unlikeAPI from '../../api/unlikeAPI';
+import { likeAPI, unlikeAPI } from '../../api/mandarinAPI';
 import * as S from './Post.Style';
 
 const Post = ({

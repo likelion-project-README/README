@@ -2,9 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
-import uploadPostAPI from '../../api/uploadPostAPI';
+import { uploadPostAPI, uploadMultipleImgAPI } from '../../api/mandarinAPI';
 import * as S from './PostUpload.Style';
-import uploadMultipleImgAPI from '../../api/uploadMultipleImgAPI';
 import { profileImageData } from '../../atoms/LoginData';
 
 const PostUpload = () => {

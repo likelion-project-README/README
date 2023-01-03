@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import followAPI from '../../api/followAPI';
-import unfollowAPI from '../../api/unfollowAPI';
+import { followAPI, unfollowAPI } from '../../api/mandarinAPI';
 import { accountnameData } from '../../atoms/LoginData';
 import Button from '../button/Button';
 import * as S from './UserBanner.Style';

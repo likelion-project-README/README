@@ -4,7 +4,7 @@ import TopBanner from '../../common/topBanner/TopBanner';
 import TabMenu from '../../common/tabMenu/TabMenu';
 import Post from '../../common/post/Post';
 import Button from '../../common/button/Button';
-import getFollowersPostsAPI from '../../api/getFollowersPostsAPI';
+import { getFollowersPostsAPI } from '../../api/mandarinAPI';
 import logoHome from '../../assets/logo-home.svg';
 import * as S from './Home.Style';
 import PostModal from '../../common/postModal/PostModal';
