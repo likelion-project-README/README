@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import logo from '../../assets/logo-404.svg';
 
 export const PageWrap = styled.section`
-  width: 390px;
-  height: 820px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   background-color: var(--main-color);
 `;
@@ -23,7 +25,7 @@ export const LogoImg = styled.div`
   background: url(${logo});
   width: 202px;
   height: 187px;
-  margin: 212px 0 20px 0;
+  margin-bottom: 20px;
 `;
 
 export const Message = styled.p`
