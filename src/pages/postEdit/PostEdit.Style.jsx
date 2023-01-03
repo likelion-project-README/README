@@ -19,8 +19,9 @@ export const PostEditTit = styled.h2`
 `;
 
 export const Form = styled.form`
-  height: 100vh;
+  height: calc(100vh - 48px);
   position: relative;
+  margin-top: 48px;
 `;
 
 export const UploadCont = styled.div`
