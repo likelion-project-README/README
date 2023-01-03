@@ -18,7 +18,7 @@ const FollowingList = () => {
     loadFollowing();
   }, []);
   return (
-    <S.FollowingListWrap>
+    <S.FollowingListWrap className='max-width min-width wrapper-contents'>
       <S.FollowingListTit>팔로잉 리스트 페이지</S.FollowingListTit>
       <TopBanner type='top-follow-nav' tit='Followings' />
       <S.ListCont>
