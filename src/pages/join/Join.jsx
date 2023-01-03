@@ -154,7 +154,7 @@ const JoinPage = () => {
   };
 
   return (
-    <S.JoinSec>
+    <section className='wrapper-contents max-width min--width'>
       <S.JoinTit>이메일로 회원가입</S.JoinTit>
       <S.JoinForm>
         <InputBox
@@ -182,7 +182,7 @@ const JoinPage = () => {
           bottomColor={passwordValid ? null : 'red'}
           message={passwordError}
         />
-        <S.div>
+        <S.ButtonWrap className='max-width min-width wrapper-contents'>
           <Button
             onClick={goToProfileSetting}
             size='lg'
@@ -191,9 +191,9 @@ const JoinPage = () => {
             disabled={emailValid && passwordValid ? null : 'disabled'}
             message={passwordError}
           />
-        </S.div>
+        </S.ButtonWrap>
       </S.JoinForm>
-    </S.JoinSec>
+    </section>
   );
 };
 

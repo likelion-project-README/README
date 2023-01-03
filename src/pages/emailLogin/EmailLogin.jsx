@@ -147,7 +147,7 @@ const EmailLoginPage = () => {
           display={isPasswordRed ? 'yes' : null}
           message={passwordError}
         />
-        <S.ButtonWrap className='max-width min-width'>
+        <S.ButtonWrap className='max-width min-width wrapper-contents'>
           <Button
             type='submit'
             size='lg'
