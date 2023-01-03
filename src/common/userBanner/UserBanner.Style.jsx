@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 export const UserBannerWrapper = styled.div`
   width: 100vw;
+  /* padding-right: 16px; */
+  margin: 0 auto;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +21,7 @@ export const UserImg = styled.img`
 export const UserInfo = styled(Link)`
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
+  /* padding: 5px 0; */
   margin-left: 12px;
   margin-right: auto;
   gap: 6px;
