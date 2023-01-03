@@ -116,12 +116,12 @@ const ProductEdit = () => {
   };
 
   return (
-    <S.ProductEditWrap>
+    <S.ProductEditWrap className='max-width min-width wrapper-contents'>
       <S.ProductEditTit>상품 수정 페이지</S.ProductEditTit>
       <form onSubmit={editProduct}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
+        <S.ImgUploadTit>이미지 등록</S.ImgUploadTit>
         <S.ImgWrap>
-          <S.ImgUploadTit>이미지 등록</S.ImgUploadTit>
           <S.ImgBox src={productImg} alt='유저 상품 이미지' />
           <S.ImgUploadLab htmlFor='productImg' />
           <S.ImgUploadInp
