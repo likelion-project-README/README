@@ -77,12 +77,10 @@ const PostUpload = () => {
   };
 
   return (
-    <S.PostUpload>
+    <S.PostUpload className='max-width min-width'>
       <S.PostUploadTit>게시글 업로드 페이지</S.PostUploadTit>
-      <form onSubmit={uploadPost}>
-        <S.TopBannerCont>
-          <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
-        </S.TopBannerCont>
+      <S.Form onSubmit={uploadPost}>
+        <TopBanner type='top-upload-nav' tit='업로드' isActive={btnActive} />
         <S.UploadCont>
           <S.UserProfileImg src={userProfileImg} alt='' />
           <S.ContentsArea>
@@ -128,7 +126,7 @@ const PostUpload = () => {
             onChange={showImgPreview}
           />
         </S.AddFileLab>
-      </form>
+      </S.Form>
     </S.PostUpload>
   );
 };

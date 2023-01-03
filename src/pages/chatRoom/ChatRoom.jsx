@@ -21,17 +21,15 @@ const ChatRoom = () => {
 
   return (
     <>
-      <S.ChatRoom>
+      <S.ChatRoom className='min-width wrapper-contents'>
         <S.ChatRoomTit>채팅방 페이지</S.ChatRoomTit>
-        <S.TopBannerCont>
-          <TopBanner
-            type='top-chat-nav'
-            tit='숨참고딥다이브'
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-            setModalType={setModalType}
-          />
-        </S.TopBannerCont>
+        <TopBanner
+          type='top-chat-nav'
+          tit='숨참고딥다이브'
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          setModalType={setModalType}
+        />
         <S.ChatCont>
           {/* 상대 메세지 - 텍스트 */}
           <S.YourMsgCont>
@@ -67,7 +65,7 @@ const ChatRoom = () => {
             <S.CreatedTime>12:39</S.CreatedTime>
           </S.YourMsgCont> */}
         </S.ChatCont>
-        <S.ChatForm action=''>
+        <S.ChatForm action='' className='min-width'>
           <S.FileInpLab htmlFor='fileInp'>
             <input
               type='file'

@@ -1,13 +1,8 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
-// 주석처리된 코드는 추후 반응형 작업 시 수정 예정입니다
 
 export const PostDetail = styled.section`
   position: relative;
-  width: 390px;
-  height: 820px;
-  /* max-height: calc(100vh - 61px); */
-  /* overflow-y: scroll; */
 `;
 
 export const PostDetailTit = styled.h2`
@@ -21,7 +16,6 @@ export const PostDetailTit = styled.h2`
 `;
 
 export const ScrollWrapper = styled.div`
-  height: 760px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -94,8 +88,7 @@ export const CommentContents = styled.div`
 `;
 
 export const CommentInpWrapper = styled.div`
-  position: absolute;
-  /* position: fixed; */
+  position: fixed;
   bottom: 0px;
   border-top: 1px solid var(--sub2-text-color);
   background-color: white;
