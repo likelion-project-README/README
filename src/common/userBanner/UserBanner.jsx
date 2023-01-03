@@ -26,7 +26,7 @@ const UserBanner = ({ data }) => {
     }
   };
   return (
-    <S.UserBannerWrapper>
+    <S.UserBannerWrapper className='max-width min-width'>
       <S.UserImg src={data.image} />
       <S.UserInfo
         // 이거 상위 경로로 한번에 보내고싶은데 방법없나 ?

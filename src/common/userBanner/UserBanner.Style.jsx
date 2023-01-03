@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const UserBannerWrapper = styled.div`
-  max-width: 358px;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
