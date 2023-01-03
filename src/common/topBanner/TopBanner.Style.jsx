@@ -16,7 +16,7 @@ const BannerCont = styled.div`
   align-items: center;
   border-bottom: 0.5px solid #dbdbdb;
   padding: 0 16px;
-  z-index: 20;
+  z-index: 100;
 `;
 const BackBtn = styled.button`
   width: 22px;
