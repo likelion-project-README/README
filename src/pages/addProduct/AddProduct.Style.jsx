@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
 export const AddProductWrap = styled.section`
-  width: 390px;
-  height: 820px;
+  padding-top: 40px;
 `;
 
 export const AddProductTit = styled.h2`
@@ -17,14 +16,14 @@ export const AddProductTit = styled.h2`
 `;
 
 export const ImgWrap = styled.div`
-  margin: 30px 34px;
-  height: 236px;
+  max-width: 322px;
+  margin: 0 auto;
 `;
 
 export const ImgUploadTit = styled.p`
   font-size: 12px;
   color: var(--sub-text-color);
-  margin-bottom: 18px;
+  margin: 0 0 18px 34px;
 `;
 
 export const ImgBox = styled.img`

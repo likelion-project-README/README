@@ -97,12 +97,12 @@ const AddProduct = () => {
   };
 
   return (
-    <S.AddProductWrap>
+    <S.AddProductWrap className='max-width min-width wrapper-contents'>
       <S.AddProductTit>상품 등록 페이지</S.AddProductTit>
       <form onSubmit={addProduct}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
+        <S.ImgUploadTit>이미지 등록</S.ImgUploadTit>
         <S.ImgWrap>
-          <S.ImgUploadTit>이미지 등록</S.ImgUploadTit>
           <S.ImgBox src={productImg} alt='유저 상품 이미지' />
           <S.ImgUploadLab htmlFor='productImg' />
           <S.ImgUploadInp

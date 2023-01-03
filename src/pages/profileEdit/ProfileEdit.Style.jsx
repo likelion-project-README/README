@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
 export const ProfileEditWrap = styled.section`
-  /* height: calc(100vh - 48px); */
-  margin-top: 100px;
+  padding-top: 40px;
 `;
 
 export const ProfileEditTit = styled.h2`
@@ -17,8 +16,7 @@ export const ProfileEditTit = styled.h2`
 `;
 
 export const ImgWrap = styled.div`
-  /* margin: 30px 140px; */
-  margin: 30px auto;
+  margin: 0 auto 30px;
   width: 110px;
   height: 110px;
 `;
