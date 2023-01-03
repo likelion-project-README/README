@@ -51,7 +51,7 @@ const TopBanner = ({
   };
   if (type === 'top-basic-nav') {
     return (
-      <S.BannerCont>
+      <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
           onClick={() => {
@@ -66,7 +66,7 @@ const TopBanner = ({
   }
   if (type === 'top-search-nav') {
     return (
-      <S.BannerCont>
+      <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
           onClick={() => {
@@ -79,7 +79,7 @@ const TopBanner = ({
   }
   if (type === 'top-main-nav') {
     return (
-      <S.BannerCont>
+      <S.BannerCont className='max-width min-width'>
         <S.TitleDiv fontSize='18px'>{tit}</S.TitleDiv>
         <S.SearchBtn to='/search' />
       </S.BannerCont>
@@ -87,7 +87,7 @@ const TopBanner = ({
   }
   if (type === 'top-upload-nav') {
     return (
-      <S.BannerCont>
+      <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
           onClick={() => {
@@ -100,7 +100,7 @@ const TopBanner = ({
   }
   if (type === 'top-follow-nav') {
     return (
-      <S.BannerCont>
+      <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
           onClick={() => {
@@ -113,7 +113,7 @@ const TopBanner = ({
   }
   if (type === 'top-chat-nav') {
     return (
-      <S.BannerCont>
+      <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
           onClick={() => {

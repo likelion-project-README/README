@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
 
 export const ProfileWrap = styled.div`
-  width: 390px;
-  height: 820px;
   display: flex;
   flex-direction: column;
   background-color: #d4d4d4;
@@ -15,7 +13,8 @@ export const ProfileWrap = styled.div`
 export const FooterWrap = styled.div`
   background-color: white;
   position: fixed;
-  width: 390px;
+  width: 100%;
   height: 60px;
-  top: 760px;
+  bottom: 0;
+  margin: 0 auto;
 `;

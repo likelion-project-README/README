@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import imgSprite from '../../assets/css_sprites.png';
 
 const BannerCont = styled.div`
-  width: 390px;
+  position: fixed;
+  left: 0;
+  right: 0;
   height: 48px;
+  margin: 0 auto;
   background-color: white;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.5px solid #dbdbdb;

@@ -16,12 +16,23 @@ export const ModalWrap = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  width: 390px;
-  animation: ${modalUp} 0.5s;
 `;
+
+export const ModalBg = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+`;
+
 export const ModalOverlay = styled.div`
+  width: 100%;
+  left: 0;
+  right: 0;
   position: absolute;
-  width: 390px;
   background-color: white;
   bottom: 0;
   z-index: 10;
@@ -29,6 +40,8 @@ export const ModalOverlay = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.0975));
+
+  animation: ${modalUp} 0.5s;
 `;
 export const ModalCancleBtn = styled.div`
   width: 50px;

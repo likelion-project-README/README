@@ -97,25 +97,27 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
     }
   };
   return (
-    <S.AlertCont>
-      <S.AlertOverlay>
-        <S.AlertTxt>{message}</S.AlertTxt>
-        <S.BtnWrap>
-          <S.Btn
-            color='var(--main-text-color)'
-            border='0.5px solid #dbdbdb'
-            onClick={(e) => {
-              setIsAlertOpen(false);
-            }}
-          >
-            취소
-          </S.Btn>
-          <S.Btn color='var(--main-color)' onClick={clickConfirm}>
-            {btnTxt}
-          </S.Btn>
-        </S.BtnWrap>
-      </S.AlertOverlay>
-    </S.AlertCont>
+    <S.AlertBg onClick={() => setIsAlertOpen(false)}>
+      <S.AlertCont>
+        <S.AlertOverlay>
+          <S.AlertTxt>{message}</S.AlertTxt>
+          <S.BtnWrap>
+            <S.Btn
+              color='var(--main-text-color)'
+              border='0.5px solid #dbdbdb'
+              onClick={(e) => {
+                setIsAlertOpen(false);
+              }}
+            >
+              취소
+            </S.Btn>
+            <S.Btn color='var(--main-color)' onClick={clickConfirm}>
+              {btnTxt}
+            </S.Btn>
+          </S.BtnWrap>
+        </S.AlertOverlay>
+      </S.AlertCont>
+    </S.AlertBg>
   );
 };
 

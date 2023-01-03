@@ -44,13 +44,34 @@ export const PostWrap = styled.div`
 
 export const ListWrap = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 114px);
   gap: 8px;
   padding: 16px;
   padding-bottom: 76px;
   overflow-y: scroll;
+  margin: 0 auto;
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
+  }
+
+  @media screen and (max-width: 740px) {
+    grid-template-columns: repeat(5, 114px);
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 620px) {
+    grid-template-columns: repeat(4, 114px);
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(3, 114px);
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 380px) {
+    grid-template-columns: repeat(2, 114px);
+    margin: 0 auto;
   }
 `;
 
