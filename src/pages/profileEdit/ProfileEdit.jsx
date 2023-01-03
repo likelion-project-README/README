@@ -155,7 +155,7 @@ const ProfileEdit = () => {
   };
 
   return (
-    <section className='max-width min-width wrapper-contents'>
+    <S.ProfileEditWrap className='max-width min-width wrapper-contents'>
       <S.ProfileEditTit>프로필 수정 페이지</S.ProfileEditTit>
       <form onSubmit={editProfile}>
         <TopBanner type='top-upload-nav' tit='저장' isActive={btnActive} />
@@ -198,7 +198,7 @@ const ProfileEdit = () => {
           onChange={handleUserIntro}
         />
       </form>
-    </section>
+    </S.ProfileEditWrap>
   );
 };
 

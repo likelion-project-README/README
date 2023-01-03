@@ -7,6 +7,8 @@ export const TabMenuCont = styled.div`
   left: 0;
   right: 0;
   border-top: 0.5px solid var(--sub2-text-color);
+  background-color: #fff;
+  z-index: 30;
 `;
 
 export const TabMenuUl = styled.ul`

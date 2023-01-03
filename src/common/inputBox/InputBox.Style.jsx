@@ -7,7 +7,6 @@ export const Box = styled.div`
   flex-direction: column;
   gap: 10px;
   margin: 0 34px 16px 34px;
-  background-color: #fff;
 `;
 
 export const BoxTit = styled.label`

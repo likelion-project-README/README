@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import sprite from '../../assets/css_sprites.png';
 
+export const ProfileEditWrap = styled.section`
+  /* height: calc(100vh - 48px); */
+  margin-top: 100px;
+`;
+
 export const ProfileEditTit = styled.h2`
   /* ir */
   position: absolute;
