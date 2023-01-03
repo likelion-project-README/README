@@ -108,7 +108,11 @@ const PostDetail = () => {
 
   return (
     <>
-      <S.PostDetail ref={backgroundRef} onClick={handleModalClose}>
+      <S.PostDetail
+        className='max-width min-width wrapper-contents'
+        ref={backgroundRef}
+        onClick={handleModalClose}
+      >
         <S.PostDetailTit>게시글 상세 페이지</S.PostDetailTit>
         <TopBanner
           type='top-basic-nav'
