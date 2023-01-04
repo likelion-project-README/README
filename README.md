@@ -438,5 +438,11 @@
     - Performance 점수가 대체적으로 미흡한 문제
     
     ![KakaoTalk_Photo_2023-01-04-16-55-30](https://user-images.githubusercontent.com/112460466/210591134-09bf8efd-3c34-4b99-a3d7-895ca99e1457.png)
+    
+<br>
+
+## 10. 프로젝트 후기
+
+추가 예정
 
 
