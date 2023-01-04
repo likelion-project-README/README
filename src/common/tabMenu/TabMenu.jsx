@@ -8,7 +8,7 @@ const TabMenu = () => {
   const navigate = useNavigate();
   const loginedAccountName = useRecoilValue(accountnameData);
 
-  const home = useMatch('/');
+  const home = useMatch('/home');
   const chat = useMatch('/chat');
   const profile = useMatch('/profile/:id');
 
@@ -17,7 +17,7 @@ const TabMenu = () => {
       <S.TabMenuUl>
         <S.TabMenuLi
           onClick={() => {
-            navigate('/');
+            navigate('/home');
           }}
         >
           <S.IconImg

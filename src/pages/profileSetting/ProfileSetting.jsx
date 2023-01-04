@@ -132,7 +132,7 @@ const ProfileSetting = () => {
         setIntroData(loginedUserData.user.intro);
         setProfileImageData(loginedUserData.user.image);
 
-        navigate('/', { replace: true });
+        navigate('/home', { replace: true });
       } catch (error) {
         console.log(error);
       }

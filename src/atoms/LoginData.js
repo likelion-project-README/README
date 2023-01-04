@@ -40,3 +40,9 @@ export const profileImageData = atom({
   default: logoProfile,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const isLogin = atom({
+  key: 'isLogin',
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});

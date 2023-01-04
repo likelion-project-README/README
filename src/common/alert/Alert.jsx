@@ -70,7 +70,7 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
       setIsAlertOpen(false);
       await logOut();
       // alert('로그아웃되었습니다.'); // eslint-disable-line no-alert
-      navigate('/login');
+      navigate('/');
     }
     if (alertType === 'deletePost') {
       deletePostAPI(modalData.id).then((req) => {

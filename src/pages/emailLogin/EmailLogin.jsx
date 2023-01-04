@@ -7,6 +7,7 @@ import {
   accountnameData,
   emailData,
   introData,
+  isLogin,
   passwordData,
   profileImageData,
   usernameData,
@@ -38,6 +39,7 @@ const EmailLoginPage = () => {
   const setAccountNameData = useSetRecoilState(accountnameData);
   const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
+  const setIsLoginState = useSetRecoilState(isLogin);
 
   // const handleData = (e) => {
   //   if (e.target.type === 'email') {
@@ -108,8 +110,9 @@ const EmailLoginPage = () => {
         setAccountNameData(data.user.accountname);
         setIntroData(data.user.intro);
         setProfileImageData(data.user.image);
+        setIsLoginState(true);
         console.log(data.message);
-        navigate('/', {
+        navigate('/home', {
           state: {
             email,
             password,

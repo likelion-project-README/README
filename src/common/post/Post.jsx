@@ -45,7 +45,7 @@ const Post = ({
     setHeartCount(postData.heartCount);
   };
 
-  const isMatchHome = useMatch('/');
+  const isMatchHome = useMatch('/home');
   const isMatchProfile = useMatch('/profile/:id');
   const isMatchPostDetail = useMatch(`/post/:id`);
 
