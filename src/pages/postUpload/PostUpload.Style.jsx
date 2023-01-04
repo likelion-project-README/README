@@ -19,9 +19,10 @@ export const PostUploadTit = styled.h2`
 `;
 
 export const Form = styled.form`
-  height: calc(100vh - 48px);
+  min-height: calc(100vh - 96px);
   position: relative;
   margin-top: 48px;
+  overflow-x: hidden;
 `;
 
 export const UploadCont = styled.div`
@@ -117,7 +118,7 @@ export const AddFileLab = styled.label`
   display: block;
   position: absolute;
   right: 30px;
-  bottom: 30px;
+  bottom: 0px;
   width: 36px;
   height: 36px;
   background: url(${sprite}) -0px -0px / 146px 132px;
