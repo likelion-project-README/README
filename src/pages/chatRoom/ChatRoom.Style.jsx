@@ -28,6 +28,7 @@ export const ChatRoom = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   background-color: #f2f2f2;
+  overflow: hidden;
 `;
 
 export const ChatRoomTit = styled.h2`
