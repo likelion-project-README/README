@@ -5,12 +5,8 @@ import { useSetRecoilState } from 'recoil';
 import * as S from './EmailLogin.Style';
 import {
   accountnameData,
-  emailData,
-  introData,
   isLogin,
-  passwordData,
   profileImageData,
-  usernameData,
 } from '../../atoms/LoginData';
 
 import InputBox from '../../common/inputBox/InputBox';
@@ -29,11 +25,7 @@ const EmailLoginPage = () => {
   const [btnActive, setBtnActive] = useState(true);
   const [isEmailRed, setIsEmailRed] = useState(false);
   const [isPasswordRed, setIsPasswordRed] = useState(false);
-  const setUsernameData = useSetRecoilState(usernameData);
-  const setEmailData = useSetRecoilState(emailData);
-  const setPasswordData = useSetRecoilState(passwordData);
   const setAccountNameData = useSetRecoilState(accountnameData);
-  const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
   const setIsLoginState = useSetRecoilState(isLogin);
 
@@ -90,13 +82,8 @@ const EmailLoginPage = () => {
         setIsPasswordRed(true);
         setPasswordError('이메일 또는 비밀번호가 일치하지 않습니다.');
       } else {
-        // const userToken = data.user.token;
         localStorage.setItem('token', data.user.token);
-        setUsernameData(data.user.username);
-        setEmailData(data.user.email);
-        setPasswordData(data.user.password);
         setAccountNameData(data.user.accountname);
-        setIntroData(data.user.intro);
         setProfileImageData(data.user.image);
         setIsLoginState(true);
         navigate('/home', {

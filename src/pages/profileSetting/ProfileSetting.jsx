@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './ProfileSetting.Style';
-import {
-  accountnameData,
-  emailData,
-  introData,
-  profileImageData,
-  usernameData,
-} from '../../atoms/LoginData';
+import { accountnameData, profileImageData } from '../../atoms/LoginData';
 import {
   emailLoginAPI,
   joinAPI,
@@ -36,10 +30,7 @@ const ProfileSetting = () => {
   const [btnActive, setBtnActive] = useState('');
   const [isIdRed, setIsIdRed] = useState(false);
 
-  const setUsernameData = useSetRecoilState(usernameData);
-  const setEmailData = useSetRecoilState(emailData);
   const setAccountNameData = useSetRecoilState(accountnameData);
-  const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
 
   // 이미지 업로드
@@ -126,10 +117,7 @@ const ProfileSetting = () => {
         const loginedUserData = await emailLoginAPI(userEmail, userPassword);
         const userToken = loginedUserData.user.token;
         localStorage.setItem('token', userToken.toString());
-        setUsernameData(loginedUserData.user.username);
-        setEmailData(loginedUserData.user.email);
         setAccountNameData(loginedUserData.user.accountname);
-        setIntroData(loginedUserData.user.intro);
         setProfileImageData(loginedUserData.user.image);
 
         navigate('/home', { replace: true });
