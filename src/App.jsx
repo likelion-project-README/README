@@ -36,7 +36,6 @@ const App = () => {
         </Route>
       </Route>
       <Route element={<PrivateRoutesRev authorization={isLoginState} />}>
-        <Route path='/' element={<SnsLogin />} />
         <Route path='/home' element={<Home />} />
         <Route path='/search' element={<Search />} />
         <Route path='/profile/*'>
