@@ -111,8 +111,12 @@
      │     ├── snsLogin
      │     └── splash
      │
+     ├── routes
+     │     ├── privateRoutes.jsx
+     │     └── privateRoutesRev.jsx
+     │     
      └── styles
-     	   └── Globalstyled.jsx
+           └── Globalstyled.jsx
 ```
 
 <br>
