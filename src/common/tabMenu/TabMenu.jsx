@@ -46,6 +46,7 @@ const TabMenu = () => {
         <S.TabMenuLi
           onClick={() => {
             navigate(`/profile/${loginedAccountName}`);
+            window.location.reload();
           }}
         >
           <S.IconImg
