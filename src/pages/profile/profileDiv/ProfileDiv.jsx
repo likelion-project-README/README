@@ -44,7 +44,7 @@ const ProfileDiv = ({ accountName, isMine }) => {
   };
   useEffect(() => {
     loadProfile();
-  }, []);
+  }, [accountName]);
   if (isProfile) {
     return (
       <S.ProfileDiv>

@@ -24,7 +24,7 @@ const PostsDiv = ({
   };
   useEffect(() => {
     loadPost();
-  }, []);
+  }, [accountName]);
   return (
     <S.PostsDiv>
       <S.PostBtns>
