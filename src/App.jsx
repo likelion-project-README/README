@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { Routes, Route } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import { isLogin } from './atoms/LoginData';
 import Home from './pages/home/Home';
 import SnsLogin from './pages/snsLogin/SnsLogin';
@@ -25,15 +25,11 @@ import PrivateRoutesRev from './routes/privateRoutesRev';
 
 const App = () => {
   const isLoginState = useRecoilValue(isLogin);
-  console.log(isLoginState);
   return (
     <Routes>
       <Route path='/' element={<SplashPage />} />
       <Route element={<PrivateRoutes authorization={isLoginState} />}>
-        {/* <Route path='/login/*'> */}
-        {/* <Route path='/snsLogin' element={<SnsLogin />} /> */}
         <Route path='/emailLogin' element={<EmailLogin />} />
-        {/* </Route> */}
         <Route path='/join/*'>
           <Route index element={<JoinPage />} />
           <Route path='profileSetting' element={<ProfileSetting />} />

@@ -18,7 +18,6 @@ const FollowerList = () => {
   useEffect(() => {
     loadFollowers();
   }, []);
-  console.log(isFollwer);
   return (
     <S.FollowerListWrap className='max-width min-width wrapper-contents'>
       <S.FollowerListTit>팔로워 리스트 페이지</S.FollowerListTit>
