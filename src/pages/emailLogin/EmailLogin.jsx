@@ -134,7 +134,7 @@ const EmailLoginPage = () => {
             message={passwordError}
           />
         </S.ButtonWrap>
-        <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
+        <S.StyledLink to='/join'>이메일로 회원가입</S.StyledLink>
       </S.LoginForm>
     </section>
   );

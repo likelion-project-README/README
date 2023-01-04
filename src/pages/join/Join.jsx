@@ -72,7 +72,7 @@ const JoinPage = () => {
 
   const goToProfileSetting = () => {
     if (btnActive) {
-      navigate('/signUp/profileSetting', {
+      navigate('/join/profileSetting', {
         state: {
           email,
           password,
