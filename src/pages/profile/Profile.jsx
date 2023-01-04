@@ -18,6 +18,7 @@ const Profile = () => {
   const [modalData, setModalData] = useState(null);
   const loginedAccountName = useRecoilValue(accountnameData);
   const accountName = useParams().id;
+  const [test, setTest] = useState(useParams().id);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertType, setAlertType] = useState('');
 
@@ -35,7 +36,13 @@ const Profile = () => {
 
   useEffect(() => {
     chkIsMine();
-  }, []);
+  }, [test]);
+
+  useEffect(() => {
+    if (test !== accountName) {
+      setTest(accountName);
+    }
+  });
 
   return (
     <>
@@ -50,9 +57,9 @@ const Profile = () => {
           setIsModalOpen={setIsModalOpen}
           setModalType={setModalType}
         />
-        <ProfileDiv isMine={isMine} accountName={accountName} />
+        <ProfileDiv isMine={isMine} accountName={test} />
         <ProductDiv
-          accountName={accountName}
+          accountName={test}
           isModalOpen={isModalOpen}
           isMine={isMine}
           setIsModalOpen={setIsModalOpen}
@@ -60,7 +67,7 @@ const Profile = () => {
           setModalData={setModalData}
         />
         <PostsDiv
-          accountName={accountName}
+          accountName={test}
           isMine={isMine}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
