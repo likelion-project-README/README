@@ -58,7 +58,6 @@ const PostsDiv = ({
                   multi={item.image?.split(',').length > 1 && true}
                   onClick={() => {
                     navigate(`/post/${item.id}`);
-                    console.log(item.image);
                   }}
                 />
               ))}

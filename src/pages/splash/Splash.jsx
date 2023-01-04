@@ -18,8 +18,6 @@ const SplashPage = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
-  // 이런건 콘솔찍어보면서하면 편햐
-  // console.log(token); // 토큰 콘솔찍어서 로그인할 때 토큰이 들어와있는지부터 먼저 확인해  navigate 되기전에 토큰이 들어와있어야하잖아!
   useEffect(() => {
     if (token) {
       navigate('/home');

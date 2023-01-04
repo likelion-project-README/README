@@ -12,19 +12,6 @@ const fadeInOut = keyframes`
   }
 `;
 
-// export const SplashPageWrapper = styled.section`
-//   width: 390px;
-//   height: 820px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   &.wrapper-splash {
-//     position: fixed;
-//     padding: 82px;
-//     flex-direction: column;
-//     justify-content: space-around;
-//   }
-// `;
 export const SplashPageWrapper = styled.section`
   width: 100vw;
   height: 100vh;

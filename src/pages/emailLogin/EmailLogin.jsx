@@ -22,10 +22,6 @@ const EmailLoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [accountname, setAccountname] = useState('');
-  // const [intro, setIntro] = useState('');
-  // const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [passwordError, setPasswordError] = useState('');
@@ -40,14 +36,6 @@ const EmailLoginPage = () => {
   const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
   const setIsLoginState = useSetRecoilState(isLogin);
-
-  // const handleData = (e) => {
-  //   if (e.target.type === 'email') {
-  //     setEmail(e.target.value);
-  //   } else if (e.target.type === 'password') {
-  //     setPassword(e.target.value);
-  //   }
-  // };
 
   // 이메일 유효성 검사
   const emailValidator = (e) => {
@@ -111,7 +99,6 @@ const EmailLoginPage = () => {
         setIntroData(data.user.intro);
         setProfileImageData(data.user.image);
         setIsLoginState(true);
-        console.log(data.message);
         navigate('/home', {
           state: {
             email,
