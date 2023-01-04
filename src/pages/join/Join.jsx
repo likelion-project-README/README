@@ -154,7 +154,7 @@ const JoinPage = () => {
   };
 
   return (
-    <section className='wrapper-contents max-width min--width'>
+    <section className='wrapper-contents max-width min-width'>
       <S.JoinTit>이메일로 회원가입</S.JoinTit>
       <S.JoinForm>
         <InputBox
