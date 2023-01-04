@@ -17,12 +17,14 @@ const ProductDiv = ({
     await loadProductsAPI(accountName).then((data) => {
       if (data.data > 0) {
         setIsProductLoad(data.product);
+      } else {
+        setIsProductLoad(null);
       }
     });
   };
   useEffect(() => {
     loadProduct();
-  }, []);
+  }, [accountName]);
   if (isProductLoad !== null) {
     return (
       <S.ProductDiv>

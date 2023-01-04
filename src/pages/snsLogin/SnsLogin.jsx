@@ -6,7 +6,6 @@ const SnsLogin = () => {
   return (
     <S.SnsLoginSec className='min-width'>
       <S.LogoImg />
-      {/* SNS로그인 버튼 */}
       <S.SnsLoginWrapper className='min-width'>
         <S.KakaoBtn>
           <S.KakaoImg />
@@ -20,10 +19,9 @@ const SnsLogin = () => {
           <S.FacebookImg />
           페이스북 계정으로 로그인
         </S.FacebookBtn>
-        {/* 이메일로그인 회원가입 링크 */}
         <S.LoginLink>
-          <S.EmailLink to='/login/emailLogin'>이메일로 로그인</S.EmailLink>
-          <S.SignUpLink to='/signUp'>회원가입</S.SignUpLink>
+          <S.EmailLink to='/emailLogin'>이메일로 로그인</S.EmailLink>
+          <S.SignUpLink to='/join'>회원가입</S.SignUpLink>
         </S.LoginLink>
       </S.SnsLoginWrapper>
     </S.SnsLoginSec>

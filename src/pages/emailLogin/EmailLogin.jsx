@@ -5,11 +5,8 @@ import { useSetRecoilState } from 'recoil';
 import * as S from './EmailLogin.Style';
 import {
   accountnameData,
-  emailData,
-  introData,
-  passwordData,
+  isLogin,
   profileImageData,
-  usernameData,
 } from '../../atoms/LoginData';
 
 import InputBox from '../../common/inputBox/InputBox';
@@ -21,10 +18,6 @@ const EmailLoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [accountname, setAccountname] = useState('');
-  // const [intro, setIntro] = useState('');
-  // const [image, setImage] = useState('');
   const [emailError, setEmailError] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [passwordError, setPasswordError] = useState('');
@@ -32,20 +25,9 @@ const EmailLoginPage = () => {
   const [btnActive, setBtnActive] = useState(true);
   const [isEmailRed, setIsEmailRed] = useState(false);
   const [isPasswordRed, setIsPasswordRed] = useState(false);
-  const setUsernameData = useSetRecoilState(usernameData);
-  const setEmailData = useSetRecoilState(emailData);
-  const setPasswordData = useSetRecoilState(passwordData);
   const setAccountNameData = useSetRecoilState(accountnameData);
-  const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
-
-  // const handleData = (e) => {
-  //   if (e.target.type === 'email') {
-  //     setEmail(e.target.value);
-  //   } else if (e.target.type === 'password') {
-  //     setPassword(e.target.value);
-  //   }
-  // };
+  const setIsLoginState = useSetRecoilState(isLogin);
 
   // 이메일 유효성 검사
   const emailValidator = (e) => {
@@ -100,16 +82,11 @@ const EmailLoginPage = () => {
         setIsPasswordRed(true);
         setPasswordError('이메일 또는 비밀번호가 일치하지 않습니다.');
       } else {
-        // const userToken = data.user.token;
         localStorage.setItem('token', data.user.token);
-        setUsernameData(data.user.username);
-        setEmailData(data.user.email);
-        setPasswordData(data.user.password);
         setAccountNameData(data.user.accountname);
-        setIntroData(data.user.intro);
         setProfileImageData(data.user.image);
-        console.log(data.message);
-        navigate('/', {
+        setIsLoginState(true);
+        navigate('/home', {
           state: {
             email,
             password,
@@ -157,7 +134,7 @@ const EmailLoginPage = () => {
             message={passwordError}
           />
         </S.ButtonWrap>
-        <S.StyledLink to='/signUp'>이메일로 회원가입</S.StyledLink>
+        <S.StyledLink to='/join'>이메일로 회원가입</S.StyledLink>
       </S.LoginForm>
     </section>
   );

@@ -18,12 +18,11 @@ const SplashPage = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
-
   useEffect(() => {
     if (token) {
-      navigate('/');
+      navigate('/home');
     }
-  }, []);
+  }, [token]);
 
   return showUp ? (
     <S.SplashPageWrapper className='wrapper-splash'>

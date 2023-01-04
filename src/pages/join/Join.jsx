@@ -1,15 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useSetRecoilState } from 'recoil';
 import * as S from './Join.Style';
-// import {
-//   usernameData,
-//   emailData,
-//   passwordData,
-//   accountnameData,
-//   introData,
-//   profileImageData,
-// } from '../../atoms/LoginData';
 
 import Button from '../../common/button/Button';
 import InputBox from '../../common/inputBox/InputBox';
@@ -26,25 +17,6 @@ const JoinPage = () => {
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
   const [btnActive, setBtnActive] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [accountname, setAccountname] = useState('');
-  // const [intro, setIntro] = useState('');
-  // const [image, setImage] = useState('');
-
-  // const setUsernameData = useSetRecoilState(usernameData);
-  // const setEmailData = useSetRecoilState(emailData);
-  // const setPasswordData = useSetRecoilState(passwordData);
-  // const setAccountNameData = useSetRecoilState(accountnameData);
-  // const setIntroData = useSetRecoilState(introData);
-  // const setProfileImageData = useSetRecoilState(profileImageData);
-
-  // const handleData = (e) => {
-  //   if (e.target.type === 'email') {
-  //     setEmail(e.target.value);
-  //   } else if (e.target.type === 'password') {
-  //     setPassword(e.target.value);
-  //   }
-  // };
 
   const emailValidator = (e) => {
     const emailCurrentValue = e.target.value;
@@ -85,24 +57,9 @@ const JoinPage = () => {
       setPasswordError('비밀번호는 6자 이상이어야 합니다.');
     } else if (passwordCurrentValue.length >= 6) {
       setPasswordValid(true);
-      // setPassword(testPassword);
       setPasswordError('');
     }
   };
-  // useEffect(() => {
-  //   const handlePasswordValid = () => {
-  //     // const testPassword = e.target.type;
-  //     if (password.length < 6) {
-  //       setPasswordValid(false);
-  //       setPasswordError('비밀번호는 6자 이상이어야 합니다.');
-  //     } else if (password.length >= 6) {
-  //       setPasswordValid(true);
-  //       // setPassword(testPassword);
-  //       setPasswordError('');
-  //     }
-  //   };
-  //   handlePasswordValid();
-  // }, [password]);
 
   // 회원가입 버튼 활성화
   useEffect(() => {
@@ -112,39 +69,10 @@ const JoinPage = () => {
       setBtnActive(false);
     }
   }, [emailValid, passwordValid, emailDuplicate]);
-  console.log(emailValid, passwordValid, emailDuplicate);
-  console.log(email, password);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (btnActive === true) {
-  //     const data = await joinAPI(
-  //       email,
-  //       password,
-  //       accountname,
-  //       username,
-  //       intro,
-  //       image,
-  //     );
-  //     localStorage.setItem('token', data.user.token);
-  //     setUsernameData(data.user.username);
-  //     setEmailData(data.user.email);
-  //     setPasswordData(data.user.password);
-  //     setAccountNameData(data.user.accountname);
-  //     setIntroData(data.user.intro);
-  //     setProfileImageData(data.user.profileImageData);
-  //     // navigate('/signUp/profileSetting', {
-  //     //   state: {
-  //     //     email,
-  //     //     password,
-  //     //   },
-  //     // });
-  //   }
-  // };
 
   const goToProfileSetting = () => {
     if (btnActive) {
-      navigate('/signUp/profileSetting', {
+      navigate('/join/profileSetting', {
         state: {
           email,
           password,

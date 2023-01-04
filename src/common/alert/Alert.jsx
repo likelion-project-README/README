@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useResetRecoilState } from 'recoil';
 import * as S from './Alert.Style';
 import * as L from '../../atoms/LoginData';
 import {
@@ -23,26 +23,17 @@ import {
 
 const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
   const navigate = useNavigate();
-  const resetUsernameData = useSetRecoilState(L.accountnameData);
-  const resetAccountnameData = useSetRecoilState(L.accountnameData);
-  const resetEmailData = useSetRecoilState(L.emailData);
-  const resetPasswordData = useSetRecoilState(L.passwordData);
-  const resetProfileImageData = useSetRecoilState(L.profileImageData);
-  const resetIntroData = useSetRecoilState(L.introData);
+  const resetAccountnameData = useResetRecoilState(L.accountnameData);
+  const resetProfileImageData = useResetRecoilState(L.profileImageData);
+  const resetIsLoginData = useResetRecoilState(L.isLogin);
   const [message, setMessage] = useState('');
   const [btnTxt, setBtnTxt] = useState('');
   const params = useParams();
 
   const logOut = () => {
-    // 토큰 삭제
-    // recoil-persist 삭제
-    // atom reset
-    resetUsernameData('');
-    resetAccountnameData('');
-    resetEmailData('');
-    resetPasswordData('');
-    resetProfileImageData('');
-    resetIntroData('');
+    resetAccountnameData();
+    resetProfileImageData();
+    resetIsLoginData();
     localStorage.removeItem('token');
     localStorage.removeItem('recoil-persist');
   };
@@ -68,9 +59,9 @@ const Alert = ({ setIsAlertOpen, alertType, modalData, commentId }) => {
   const clickConfirm = async () => {
     if (alertType === 'logout') {
       setIsAlertOpen(false);
-      await logOut();
+      logOut();
       // alert('로그아웃되었습니다.'); // eslint-disable-line no-alert
-      navigate('/login');
+      navigate('/');
     }
     if (alertType === 'deletePost') {
       deletePostAPI(modalData.id).then((req) => {

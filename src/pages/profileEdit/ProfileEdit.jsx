@@ -10,12 +10,7 @@ import {
   accountnameValidAPI,
 } from '../../api/mandarinAPI';
 import logoProfile from '../../assets/logo-profile.svg';
-import {
-  usernameData,
-  accountnameData,
-  introData,
-  profileImageData,
-} from '../../atoms/LoginData';
+import { accountnameData, profileImageData } from '../../atoms/LoginData';
 import * as S from './ProfileEdit.Style';
 
 const ProfileEdit = () => {
@@ -33,8 +28,6 @@ const ProfileEdit = () => {
 
   const setEditedProfileImg = useSetRecoilState(profileImageData);
   const setEditedAccoutName = useSetRecoilState(accountnameData);
-  const setEditedUserName = useSetRecoilState(usernameData);
-  const setEditedIntro = useSetRecoilState(introData);
 
   // 기존 프로필 정보 불러오기
   useEffect(() => {
@@ -137,16 +130,14 @@ const ProfileEdit = () => {
     if (btnActive) {
       const convertedUserImg = await urlToFileObject(userImg);
       const uerImg = await uploadImgAPI(convertedUserImg);
-      const updatedUserData = await editProfileAPI(
+      const editedUserData = await editProfileAPI(
         userName,
         userId,
         userIntro,
         uerImg,
       );
-      setEditedProfileImg(updatedUserData.image);
-      setEditedAccoutName(updatedUserData.accountname);
-      setEditedUserName(updatedUserData.username);
-      setEditedIntro(updatedUserData.intro);
+      setEditedProfileImg(editedUserData.image);
+      setEditedAccoutName(editedUserData.accountname);
       // alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
       if (validId) {
         navigate(`/profile/${userId}`);

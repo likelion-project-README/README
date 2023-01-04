@@ -4,10 +4,8 @@ import { useSetRecoilState } from 'recoil';
 import * as S from './ProfileSetting.Style';
 import {
   accountnameData,
-  emailData,
-  introData,
   profileImageData,
-  usernameData,
+  isLogin,
 } from '../../atoms/LoginData';
 import {
   emailLoginAPI,
@@ -36,11 +34,9 @@ const ProfileSetting = () => {
   const [btnActive, setBtnActive] = useState('');
   const [isIdRed, setIsIdRed] = useState(false);
 
-  const setUsernameData = useSetRecoilState(usernameData);
-  const setEmailData = useSetRecoilState(emailData);
   const setAccountNameData = useSetRecoilState(accountnameData);
-  const setIntroData = useSetRecoilState(introData);
   const setProfileImageData = useSetRecoilState(profileImageData);
+  const setIsLoginState = useSetRecoilState(isLogin);
 
   // 이미지 업로드
   const uploadImg = async (e) => {
@@ -126,13 +122,10 @@ const ProfileSetting = () => {
         const loginedUserData = await emailLoginAPI(userEmail, userPassword);
         const userToken = loginedUserData.user.token;
         localStorage.setItem('token', userToken.toString());
-        setUsernameData(loginedUserData.user.username);
-        setEmailData(loginedUserData.user.email);
         setAccountNameData(loginedUserData.user.accountname);
-        setIntroData(loginedUserData.user.intro);
         setProfileImageData(loginedUserData.user.image);
-
-        navigate('/', { replace: true });
+        setIsLoginState(true);
+        navigate('/home', { replace: true });
       } catch (error) {
         console.log(error);
       }

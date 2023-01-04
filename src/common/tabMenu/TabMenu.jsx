@@ -1,27 +1,30 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { useNavigate, useMatch } from 'react-router-dom';
+import { useNavigate, useMatch, useParams } from 'react-router-dom';
 import { accountnameData } from '../../atoms/LoginData';
 import * as S from './TabMenu.Style';
 
 const TabMenu = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const loginedAccountName = useRecoilValue(accountnameData);
 
-  const home = useMatch('/');
-  const chat = useMatch('/chat');
-  const profile = useMatch('/profile/:id');
+  const isMatchHome = useMatch('/home');
+  const isMatchChat = useMatch('/chat');
+  const isMatchProfile = useMatch('/profile/:id');
 
   return (
     <S.TabMenuCont>
       <S.TabMenuUl>
         <S.TabMenuLi
           onClick={() => {
-            navigate('/');
+            navigate('/home');
           }}
         >
           <S.IconImg
-            backgroundPosition={home === null ? '-98px 0px' : '-98px -24px'}
+            backgroundPosition={
+              isMatchHome === null ? '-98px 0px' : '-98px -24px'
+            }
           />
           <S.IconTit>홈</S.IconTit>
         </S.TabMenuLi>
@@ -31,7 +34,9 @@ const TabMenu = () => {
           }}
         >
           <S.IconImg
-            backgroundPosition={chat === null ? '-24px -86px' : '-98px -48px'}
+            backgroundPosition={
+              isMatchChat === null ? '-24px -86px' : '-98px -48px'
+            }
           />
           <S.IconTit>채팅</S.IconTit>
         </S.TabMenuLi>
@@ -53,7 +58,7 @@ const TabMenu = () => {
         >
           <S.IconImg
             backgroundPosition={
-              profile === null ? '-48px -86px' : '-72px -86px'
+              isMatchProfile === null ? '-48px -86px' : '-72px -86px'
             }
           />
           <S.IconTit>프로필</S.IconTit>
