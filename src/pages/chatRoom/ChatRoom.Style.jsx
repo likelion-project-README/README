@@ -59,7 +59,6 @@ export const ChatCont = styled.div`
   margin-bottom: 61px;
   padding: 20px 16px 0 16px;
   animation: ${chatFadeIn} 0.2s linear;
-  overflow: scroll;
 `;
 
 export const YourMsgCont = styled.div`
