@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './ProfileSetting.Style';
-import { accountnameData, profileImageData } from '../../atoms/LoginData';
+import {
+  accountnameData,
+  profileImageData,
+  isLogin,
+} from '../../atoms/LoginData';
 import {
   emailLoginAPI,
   joinAPI,
@@ -32,6 +36,7 @@ const ProfileSetting = () => {
 
   const setAccountNameData = useSetRecoilState(accountnameData);
   const setProfileImageData = useSetRecoilState(profileImageData);
+  const setIsLoginState = useSetRecoilState(isLogin);
 
   // 이미지 업로드
   const uploadImg = async (e) => {
@@ -119,7 +124,7 @@ const ProfileSetting = () => {
         localStorage.setItem('token', userToken.toString());
         setAccountNameData(loginedUserData.user.accountname);
         setProfileImageData(loginedUserData.user.image);
-
+        setIsLoginState(true);
         navigate('/home', { replace: true });
       } catch (error) {
         console.log(error);
