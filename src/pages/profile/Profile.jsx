@@ -40,7 +40,6 @@ const Profile = () => {
 
   useEffect(() => {
     if (test !== accountName) {
-      console.log('다른페이지');
       setTest(accountName);
     }
   });
