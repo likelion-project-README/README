@@ -210,7 +210,254 @@
 
 ## 6. 신경 쓴 부분
 
-추가 예정
+### 접근제한 설정
+    
+- React Router의 개인 경로는 사용자가 경로를 방문할 수 있는 권한이 필요합니다. 이때 사용자가 특정 페이지에 대한 권한이 없으면 액세스할 수 없습니다.
+    
+    <code>PrivateRoutes</code>라는 구성 요소를 만든 후 이를 사용해 사용자 권한 및 인증 상태를 확인합니다. 
+    
+    로그인 해야 접근 가능한 페이지와 로그인을 하지 않은 경우 접근 가능한 페이지를 구분하기 위해 Private Router를 사용했습니다.
+    
+    - **routes**
+        
+        authorization(인증)이 true일 경우 PrivateRoutes가 실행됩니다. 인증이 이루어지지 않은 경우에는 PrivateRoutesRev가 실행됩니다.
+        
+        여기서 authorization는 리소스에 액세스할 수 있는 권한을 부여하는 프로세스, 즉 권한이 있는 유저인지 확인하는 절차입니다.
+        
+        PrivateRoutes와 PrivateRoutesRev일 때 실행되는 Route는 App.jsx에 정리되어 있습니다.
+        
+        - privateRoutes.jsx
+        
+        ```jsx
+        import { Navigate, Outlet } from 'react-router-dom';
+        
+        const PrivateRoutes = ({ authorization }) => {
+          return authorization ? <Navigate to='/' /> : <Outlet />;
+        };
+        
+        export default PrivateRoutes;
+        ```
+        
+        - privateRoutesRev.jsx
+        
+        ```jsx
+        import { Navigate, Outlet } from 'react-router-dom';
+        
+        const PrivateRoutesRev = ({ authorization }) => {
+          return authorization ? <Outlet /> : <Navigate to='/' />;
+        };
+        
+        export default PrivateRoutesRev;
+        ```
+        
+    - **App.jsx**
+        - 로그인 여부에 상관없이 접속 가능한 페이지
+        
+        ```jsx
+        <Route path='/' element={<SplashPage />} />
+        ```
+        
+        - 로그인을 하지 않은 경우에만 접근 가능한 페이지
+        
+        ```jsx
+        <Route element={<PrivateRoutes authorization={isLoginState} />}>
+          <Route path='/emailLogin' element={<EmailLogin />} />
+          <Route path='/join/*'>
+            <Route index element={<JoinPage />} />
+            <Route path='profileSetting' element={<ProfileSetting />} />
+          </Route>
+        </Route>
+        ```
+        
+        - 로그인을 해야만 접근 가능한 페이지
+        
+        ```jsx
+        <Route element={<PrivateRoutesRev authorization={isLoginState} />}>
+          <Route path='/home' element={<Home />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/profile/*'>
+            <Route path=':id' element={<Profile />} />
+            <Route path=':id/editProfile' element={<ProfileEdit />} />
+            <Route path=':id/followings' element={<FollowingList />} />
+            <Route path=':id/followers' element={<FollowerList />} />
+            <Route path=':id/addProduct' element={<AddProduct />} />
+            <Route path=':id/editProduct/:productId' element={<ProductEdit />} />
+            <Route path='*' element={<Page404 />} />
+          </Route>
+          <Route path='/post/*'>
+            <Route path='upload' element={<PostUpload />} />
+            <Route path=':id' element={<PostDetail />} />
+            <Route path=':id/editPost' element={<PostEdit />} />
+            <Route path='*' element={<Page404 />} />
+          </Route>
+          <Route path='/chat' element={<ChatList />} />
+          <Route path='/chat/:id' element={<ChatRoom />} />
+          <Route path='/*' element={<Page404 />} />
+        </Route>
+        ```
+        
+    - **isLogin**
+        
+        
+        - LoginData.js : 로컬스토리지에 로그인 상태 저장(isLogin)
+        
+        ```jsx
+        import { atom } from 'recoil';
+        import { recoilPersist } from 'recoil-persist';
+        import logoProfile from '../assets/logo-profile.svg';
+        
+        // 로컬스토리지 저장
+        const { persistAtom } = recoilPersist();
+        
+        export const isLogin = atom({
+          key: 'isLogin',
+          default: false,
+          effects_UNSTABLE: [persistAtom],
+        });
+        ```
+        
+        - emailLogin.jsx : 로그인 form 제출시 isLogin을 true로 변경 후 home 페이지로 이동
+        
+        ```jsx
+        // LoginData.jsx
+        const { persistAtom } = recoilPersist();
+        export const isLogin = atom({
+          key: 'isLogin',
+          default: false,
+          effects_UNSTABLE: [persistAtom],
+        });
+        
+        // emailLogin.jsx
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            if (btnActive === true) {
+              const data = await emailLoginAPI(email, password);
+        
+              if (data.message === '이메일 또는 비밀번호가 일치하지 않습니다.') {
+                setIsPasswordRed(true);
+                setPasswordError('이메일 또는 비밀번호가 일치하지 않습니다.');
+              } else {
+                localStorage.setItem('token', data.user.token);
+                setUsernameData(data.user.username);
+                setEmailData(data.user.email);
+                setPasswordData(data.user.password);
+                setAccountNameData(data.user.accountname);
+                setIntroData(data.user.intro);
+                setProfileImageData(data.user.image);
+                setIsLoginState(true);
+                navigate('/home', {
+                  state: {
+                    email,
+                    password,
+                  },
+                });
+              }
+            }
+          };
+        ```
+ 
+ 
+### Recoil을 통한 상태관리 및 유지
+
+- 새로고침시에도 상태를 유지하기 위해 Recoil-persist 라이브러리를 사용해 로컬스토리지에 저장하고 받아오는 방식을 채택했습니다.
+    
+    - LoginData.js
+    
+    ```jsx
+    import { atom } from 'recoil';
+    import { recoilPersist } from 'recoil-persist';
+    import logoProfile from '../assets/logo-profile.svg';
+    
+    const { persistAtom } = recoilPersist();
+    
+    export const accountnameData = atom({
+      key: 'accountname',
+      default: '',
+      effects_UNSTABLE: [persistAtom],
+    });
+    
+    export const profileImageData = atom({
+      key: 'image',
+      default: logoProfile,
+      effects_UNSTABLE: [persistAtom],
+    });
+    
+    ```
+    
+    이메일 로그인, 회원가입을 통한 로그인 시 유저의 계정명과 프로필 이미지가 atom에 저장됩니다.
+    
+    - EmailLogin.jsx
+    
+    ```jsx
+    import { useSetRecoilState } from 'recoil';
+    import { accountnameData, profileImageData, isLogin } from '../../atoms/LoginData';
+    
+    **const setAccountNameData = useSetRecoilState(accountnameData);
+    const setProfileImageData = useSetRecoilState(profileImageData);**
+    	
+    const handleSubmit = async (e) => {
+    	**const data = await emailLoginAPI(email, password);**
+    	localStorage.setItem('token', data.user.token);
+    	**setAccountNameData(data.user.accountname);
+    	setProfileImageData(data.user.image);**
+    	setIsLoginState(true);
+    	}
+    };
+    
+    ```
+    
+    - Comment.jsx
+    
+    ```jsx
+    import { useRecoilValue } from 'recoil';
+    import { profileImageData } from '../../atoms/LoginData';
+    
+    const Comment = () => {
+      **const loginedProfileImg = useRecoilValue(profileImageData);**
+    	(중략)
+    	return (
+    	    <S.CommentCont className='max-width min-width'>
+    	      <S.CommentForm onSubmit={handleSubmit}>
+    	        **<S.UserImg src={loginedProfileImg} alt='유저 프로필 이미지' />**
+    	        <S.CommentLab htmlFor='comment' />
+    	        <S.CommentInp
+    	          placeholder='댓글을 입력해 주세요.'
+    	          onChange={handleChange}
+    	          required
+    	          id='comment'
+    	          value={inpValue}
+    	          ref={inpRef}
+    	        />
+    	        <S.PostBtn isBtnActive={isBtnActive}>게시</S.PostBtn>
+    	      </S.CommentForm>
+    	    </S.CommentCont>
+    	  );
+    }
+    ```
+    
+    프로필 수정 페이지에서 계정명과 프로필 이미지를 수정할 경우 변경된 값을 다시 atom의 value로 설정해 해당 atom을 구독하고 있는 컴포넌트에서도 변경된 값을 반영하도록 했습니다.
+    
+    - ProfileEdit.jsx
+    
+    ```jsx
+    import { accountnameData, profileImageData } from '../../atoms/LoginData';
+    
+    **const setEditedProfileImg = useSetRecoilState(profileImageData);
+    const setEditedAccoutName = useSetRecoilState(accountnameData);**
+    
+    const editProfile = async (e) => {
+          const editedUserData = await editProfileAPI(
+            userName,
+            userId,
+            userIntro,
+            uerImg,
+          );
+          **setEditedProfileImg(editedUserData.image);
+          setEditedAccoutName(editedUserData.accountname);**
+        }
+      };
+    ```
+       
 
 <br>
 
@@ -425,7 +672,178 @@
 
 ## 8. 트러블 슈팅
 
-추가 예정
+### 탭메뉴 프로필 버튼 이슈
+    
+- 타 계정 프로필페이지에서 탭메뉴의 프로필버튼(내 프로필)을 클릭 시 정상적인 페이지 렌더링이 이루어지지 않음
+    
+    - **의도했던 기능 :** 탭 메뉴의 프로필버튼 클릭시 useNaviate를 통해 URL을 변경시켜주고, 그에 맞는 페이지를 렌더링하는 기능
+    
+    - **발생한 현상(트러블) :** 탭 메뉴의 프로필버튼 클릭시, 브라우저상의 URL은 변하지만 페이지가 렌더링되지 않는 현상 발생
+    
+    ![0104-4.PNG](README%20%E1%84%8E%E1%85%A9%E1%84%8B%E1%85%A1%E1%86%AB%20e35bfe6e24b04d17b47ebbf0cd934dd3/0104-4.png)
+    
+    - **트러블 해소과정 1** : console.log를 통한 디버깅으로 URL이 변하는 것은 useParams 를 통해 실시간으로 받아올 수 있는것이 확인되었다. (URL의 다른부분은 동일했고, id params만 변경되는 구조이기에 useParams 사용)
+    ![tabButton](https://www.notion.so/likelion/README e35bfe6e24b04d17b47ebbf0cd934dd3#bf2adb6cb05b4efe816aa5503dc5d065)
+    
+    - **트러블 해소과정 2 :** 현재페이지의 id Params를 저장하는 const 변수값 하나와, 다른 프로필페이지로 이동시에 이를 확인할 수 있도록 하기위해 useState로 상태값을 따로 관리해주었다.
+        
+        상태값의 경우, 이전 페이지와 현재 페이지의 id 값이 다르다면 현재 페이지의 id값을 상태저장하도록 하였다.
+        
+    
+    - **트러블 해소과정 3 :** 기존의 const 변수에 저장되어 각각의 컴포넌트로 내려준 id params 를 state값으로 변경하여 내려줌. 따라서 state값이 변경되면 하위 컴포넌트들이 리렌더링 되어 트러블해결이 가능해짐.
+    
+    ```jsx
+    const Profile = () => {
+    
+    	{/*---------------- 중략 ---------------*/}
+      const [modalData, setModalData] = useState(null);
+      const loginedAccountName = useRecoilValue(accountnameData);
+      **const accountName = useParams().id;
+      const [test, setTest] = useState(useParams().id);**
+      const [isAlertOpen, setIsAlertOpen] = useState(false);
+      const [alertType, setAlertType] = useState('');
+    
+    	{/*---------------- 중략 ---------------*/}
+    
+      useEffect(() => {
+        chkIsMine();
+      }, [test]);
+    
+      **useEffect(() => {
+        if (test !== accountName) {
+          setTest(accountName);
+        }
+      });**
+    
+      return (
+        <>
+          <S.ProfileWrap
+            onClick={handleModalClose}
+            className='max-width min-width wrapper-contents'
+          >
+            <ProfileDiv isMine={isMine} accountName={**test**} />
+            <ProductDiv
+              accountName={**test**}
+              isModalOpen={isModalOpen}
+              isMine={isMine}
+              setIsModalOpen={setIsModalOpen}
+              setModalType={setModalType}
+              setModalData={setModalData}
+            />
+    			{/*---------------- 중략 ---------------*/}
+    			</S.ProfileWrap>
+        </>
+      );
+    };
+    ```
+    
+    **트러블 원인** 
+    
+    정확히 알지는 못하였으나, useNavigate 를 통해 URL 변경시, 이전 페이지와 이후 페이지가 params 값만 다르고 그 외의 경로는 같다면, Route가 element 요소 전체를 새로 렌더링하지는 않아서 생기는 것 같다.
+    
+    ![0104-3.PNG](README%20%E1%84%8E%E1%85%A9%E1%84%8B%E1%85%A1%E1%86%AB%20e35bfe6e24b04d17b47ebbf0cd934dd3/0104-3.png)
+    
+### 프로필 수정 이슈
+    
+- 프로필 수정 페이지에서 accountname 수정 후 내 프로필 화면으로 진입하면 url의 파라미터도 제대로 수정되고 수정된 유저정보도 제대로 뜨지만 해당 계정이 내 계정임을 인식하지 못하고 삭제, 수정버튼이 아니라 팔로우버튼이 뜨는 문제가 발생했습니다.
+    
+    ![editProfile.gif](README%20%E1%84%8E%E1%85%A9%E1%84%8B%E1%85%A1%E1%86%AB%20e35bfe6e24b04d17b47ebbf0cd934dd3/editProfile.gif)
+    
+    **프로필 페이지에서 내 프로필과 타 유저 프로필을 구분하는 코드**
+    
+    ```jsx
+    const [isMine, setIsMine] = useState(null);
+    const loginedAccountName = useRecoilValue(accountnameData);
+    const accountName = useParams().id; 
+    
+    const chkIsMine = () => {
+        if (loginedAccountName === accountName) {
+          setIsMine(true);
+        } else {
+          setIsMine(false);
+        }
+      };
+    
+    useEffect(() => {
+        chkIsMine();
+    }, []);
+    
+    ```
+    
+    1. 프로필 페이지의 url에 파라미터로 들어가있는 계정 ID를 useParams로 받아와 accountName 변수에 저장합니다.
+    2. 로그인 시 해당 유저의 계정 ID를 저장한 아톰(accountnameData)의 값을 읽어와loginedAccountName 변수에 저장합니다.
+    3. 로그인 한 유저의 계정 ID(loginedAccountName)과 해당 프로필 페이지 주소의 계정 ID(accountName)이 일치할 경우 isMine값을 true로 설정해 내 프로필에 맞는 컴포넌트를 보여줍니다. (프로필 수정, 상품등록 버튼)
+    4. 일치하지 않을 경우엔 inMine이 false가 되어 타 유저 프로필 컴포넌트를 보여줍니다. (팔로우 버튼)
+    
+    **문제코드** 
+    
+    ```jsx
+    const [userName, setUserName] = useState('');
+    const [userId, setUserId] = useState('');
+    const [userIntro, setUserIntro] = useState('');
+    const [userImg, setUserImg] = useState('');
+    
+    // onChange : 계정ID 중복 검사
+    const handleUserIdDuplicate = async (e) => {
+      const testUserId = e.target.value;
+      setUserId(testUserId);
+      const validMsg = await accountnameValidAPI(testUserId);
+      if (validMsg.message === '이미 가입된 계정ID 입니다.') {
+        setValidId(false);
+        setUserIdMsg('*이미 사용 중인 ID입니다.');
+      }
+      // 유저 자신의 아이디는 중복 검사 제외
+      if (testUserId === accountName) {
+        setValidId(true);
+        setBtnActive(true);
+      }
+    };
+    
+    // 프로필 수정
+    const editProfile = async (e) => {
+        e.preventDefault();
+        if (btnActive) {
+          await editProfileAPI(userName, userId, userIntro, userImg);
+          navigate(`/profile/${userId}`);
+        }
+      };
+    ```
+    
+    - **코드 설명** : 프로필 수정 페이지에서 유저가 input창에 입력한 아이디 값이 유효성 검사 및 중복검사를 통과하면 setUserId 함수를 통해 곧바로 userId 값이 변경됩니다. 프로필 수정 API를 사용해 프로필이 수정된 후 navigate 함수로 변경된 userId에 따른 새로운 프로필 페이지로 이동되게 했습니다.
+    - **문제** : 하지만 예상과 달리 내 프로필 페이지로 인식하지 못하고 팔로우 버튼을 띄우는 문제가 발생했습니다.
+    - **문제 원인** : 변경된 계정 계정 ID를 기존 atom에 다시 설정해주지 않아 프로필 페이지에서 loginedAccountName(로그인 시 저장한 계정 ID atom value)과 accountName(현재 프로필 페이지의 파라미터)가 일치하지 않게 되었기 때문이었습니다.
+    
+    **해결 코드**
+    
+    ```jsx
+    import { accountnameData, profileImageData } from '../../atoms/LoginData';
+    
+    const setEditedProfileImg = useSetRecoilState(profileImageData);
+    const setEditedAccoutName = useSetRecoilState(accountnameData);
+    
+    //프로필 수정
+    const editProfile = async (e) => {
+        e.preventDefault();
+        if (btnActive) {
+          const convertedUserImg = await urlToFileObject(userImg);
+          const uerImg = await uploadImgAPI(convertedUserImg);
+          const updatedUserData = await editProfileAPI(
+            userName,
+            userId,
+            userIntro,
+            uerImg,
+          );
+          **setEditedProfileImg(updatedUserData.image);
+          setEditedAccoutName(updatedUserData.accountname);**
+          if (validId) {
+            navigate(`/profile/${userId}`);
+          }
+        }
+      };
+    ```
+    
+    - **해결** : 수정된 계정 ID를 다시 atom에 저장해 다른 컴포넌트에서도 해당 계정 ID를 공유할 수 있도록 변경하여 해결했습니다.
+
 
 <br>
 
@@ -443,6 +861,25 @@
 
 ## 10. 프로젝트 후기
 
-추가 예정
+### 🍊 고지연
+
+깃헙을 통한 협업에 익숙해지는 것, 서로 감정 상하지 않고 무사히 마무리하는 것이 1차적인 목표였어서 항상 이부분을 명심하면서 작업했습니다.
+각자 페이지를 작업하고 합치는 과정에서 마주친 버그들이 몇 있었는데, 시간에 쫓기느라 해결하기에 급급해서 제대로 트러블슈팅 과정을 기록하지 못한 게 살짝 아쉬운 부분으로 남습니다. 그래도 2022년 한 해 동안 가장 치열하게 살았던 한 달인 것 같습니다. 조원들 모두에게 고생했다고 전하고 싶습니다🧡
+
+### 👻 김민제
+
+여러모로 많은 것들을 배울 수 있었던 한 달 이었습니다. 혼자서는 할 수 없었던 일이라는 것을 너무 잘 알기에 팀원들에게 정말 감사하다는 말 전하고 싶습니다. 개인적으로 아쉬웠던 부분은 기한 내에 기능을 구현하는 데에만 집중하면서 트러블 슈팅이나 새로 배웠던 것들을 체계적으로 기록하지 못했다는 점입니다. 이렇게 느낀 바가 있으니 이후의 제가 잘 정리하면서 개발할 거라 믿습니다… 하하 다들 수고하셨습니다!!!!
+
+### 😎 양희지
+
+팀프로젝트 시작에 앞서 초기 설정을 진행하며 프로젝트 초기에 진행되는 체계적인 설계의 중요성을 느꼈습니다. 이후에 프로젝트를 하게 된다면 조금 더 발전된 모습으로 진행하고 팀프로젝트에 있어 주어진 역할에 최선을 다하고 싶습니다.
+정규 수업 직후에 프로젝트를 진행하면서 배운 내용을 직접 구현하는 과정이 어색했지만 어떤 부분이 부족한지 알 수 있었습니다. 스스로 최대한 노력해보고 이슈가 발생하면 팀원들과 해결해나가면서 협업의 장점을 체감할 수 있었습니다.
+’멋쟁이 사자처럼’이라는 같은 목표를 가진 집단에서 좋은 프로젝트에 함께 할 수 있어서 소중한 경험이었습니다.
+
+함께 고생한 조원들 모두 고생하셨습니다! 앞으로도 화이팅해서 함께 목표 이뤄가고 싶습니다.
+
+### 🐬 지창언
+
+컨벤션을 정하는 것부터 Readme 파일 작성까지 전 과정을 진행하려니 처음 생각보다 많은 에너지를 썼어요. 좋은 의미로 많이 썼다기보다, 제 능력을 십분 발휘하지 못해서 아쉬움이 남는 쪽입니다. 개발한다고 개발만 해서는 안 된다는 것을 몸소 느껴보는 기간이었던 것 같습니다. 이번 기회로 프로젝트를 진행하면서, 제가 잘하는 점과 부족한 점을 확실하게 알고 가는 건 정말 좋습니다. 기술적인 부분에 있어서는 리액트의 컴포넌트화가 주는 장점을 알았습니다. 조금 느린 개발이 되었을지라도 코드 가독성 부분에 있어서 좋았고, 오류가 발생해도 전체가 아닌 오류가 난 컴포넌트와 근접한 컴포넌트만 살펴보면 수정할 수 있는 부분이 너무 편했습니다. 모두 고생 참 많으셨고 리팩토링을 통해 더 나은 프로젝트 완성까지 화이팅입니다.
 
 
