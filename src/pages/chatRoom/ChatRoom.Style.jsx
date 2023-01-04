@@ -28,6 +28,7 @@ export const ChatRoom = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   background-color: #f2f2f2;
+  overflow: hidden;
 `;
 
 export const ChatRoomTit = styled.h2`
@@ -59,7 +60,6 @@ export const ChatCont = styled.div`
   margin-bottom: 61px;
   padding: 20px 16px 0 16px;
   animation: ${chatFadeIn} 0.2s linear;
-  overflow: scroll;
 `;
 
 export const YourMsgCont = styled.div`

@@ -16,7 +16,7 @@ export const LoginForm = styled.form`
 `;
 
 export const ButtonWrap = styled.div`
-  margin: 40px 34px;
+  margin: 24px 34px 30px;
 `;
 
 export const StyledLink = styled(Link)`
@@ -25,5 +25,4 @@ export const StyledLink = styled(Link)`
   font-size: 12px;
   line-height: 15px;
   text-align: center;
-  margin-top: 20px;
 `;

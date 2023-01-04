@@ -16,5 +16,5 @@ export const JoinForm = styled.form`
 `;
 
 export const ButtonWrap = styled.div`
-  margin: 40px 34px;
+  margin: 24px 34px;
 `;
