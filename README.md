@@ -1,6 +1,6 @@
 # 📖 책 취향 공유 서비스앱 README
 
-![readme_mockup](https://user-images.githubusercontent.com/112460466/210376494-5216ae05-6fb5-47c3-830d-5d01e66d6a75.png)
+![readme_mockup2](https://user-images.githubusercontent.com/112460466/210706312-6a44b60d-a42e-4210-b334-9e5983f70fb3.png)
 
 - 배포 URL : https://ohmycode-readme.netlify.app
 - Test ID : readme@test.com
