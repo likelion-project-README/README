@@ -6,7 +6,7 @@ import Button from '../../common/button/Button';
 import InputBox from '../../common/inputBox/InputBox';
 import { emailDuplicateAPI } from '../../api/mandarinAPI';
 
-const JoinPage = () => {
+const Join = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -125,4 +125,4 @@ const JoinPage = () => {
   );
 };
 
-export default JoinPage;
+export default Join;
