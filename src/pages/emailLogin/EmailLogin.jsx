@@ -13,7 +13,7 @@ import InputBox from '../../common/inputBox/InputBox';
 import Button from '../../common/button/Button';
 import { emailLoginAPI } from '../../api/mandarinAPI';
 
-const EmailLoginPage = () => {
+const EmailLogin = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -140,4 +140,4 @@ const EmailLoginPage = () => {
   );
 };
 
-export default EmailLoginPage;
+export default EmailLogin;

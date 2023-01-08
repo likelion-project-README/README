@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SnsLogin from '../snsLogin/SnsLogin';
 import * as S from './Splash.Style';
 
-const SplashPage = () => {
+const Splash = () => {
   const [showUp, setShowUp] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,4 +33,4 @@ const SplashPage = () => {
   );
 };
 
-export default SplashPage;
+export default Splash;
