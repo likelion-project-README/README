@@ -7,12 +7,10 @@ import GlobalStyled from './styles/Globalstyled';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <RecoilRoot>
-        <GlobalStyled />
-        <App />
-      </RecoilRoot>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <RecoilRoot>
+      <GlobalStyled />
+      <App />
+    </RecoilRoot>
+  </BrowserRouter>,
 );
