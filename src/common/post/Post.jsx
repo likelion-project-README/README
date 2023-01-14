@@ -1,7 +1,9 @@
 /* eslint no-underscore-dangle: 0 */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { likeAPI, unlikeAPI } from '../../api/mandarinAPI';
+import useIsImgLoaded from '../../hooks/useIsImgLoaded';
+import defaultProfile from '../../assets/logo-profile.svg';
 import * as S from './Post.Style';
 
 const Post = ({
@@ -16,10 +18,13 @@ const Post = ({
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
+  const [elementRef, isLoaded] = useIsImgLoaded();
+
   const imgSrcArr =
     typeof data.image === 'string' && data.image.substr(0, 4) === 'http'
       ? data.image.split(',')
       : '';
+
   const [isSingleImg, setIsSingleImg] = useState(false);
 
   useEffect(() => {
@@ -87,7 +92,13 @@ const Post = ({
     <>
       <S.UserInfoCont>
         <S.UserInfo onClick={goToProfile} isMatchProfile={isMatchProfile}>
-          <S.ProfileImg src={data.author.image} alt='사용자 프로필 이미지' />
+          <S.ProfileImg
+            ref={elementRef}
+            src={isLoaded ? data.author.image : defaultProfile}
+            alt='사용자 프로필 이미지'
+            width='42px'
+            height='42px'
+          />
           <div>
             <S.UserName>{data.author.username}</S.UserName>
             <S.AccountName>{data.author.accountname}</S.AccountName>
@@ -107,18 +118,23 @@ const Post = ({
           </S.PostTxt>
         )}
         {imgSrcArr[0] && (
-          <S.StyledSlider dots draggable>
-            {imgSrcArr.map((item) => (
-              <S.PostImg
-                src={item}
-                alt=''
-                key={item}
-                onClick={goToPostDetail}
-                isMatchPostDetail={isMatchPostDetail}
-                isSingleImg={isSingleImg}
-              />
-            ))}
-          </S.StyledSlider>
+          <div ref={elementRef}>
+            <S.StyledSlider dots draggable lazyLoad='ondemand'>
+              {imgSrcArr.map((item, index) => (
+                <S.PostImg
+                  alt=''
+                  src={isLoaded ? item : ''}
+                  width='304px'
+                  height='228px'
+                  loading={index === 0 ? 'eager' : 'auto'}
+                  key={item}
+                  onClick={goToPostDetail}
+                  isMatchPostDetail={isMatchPostDetail}
+                  isSingleImg={isSingleImg}
+                />
+              ))}
+            </S.StyledSlider>
+          </div>
         )}
         <S.ActionBtns>
           <div>
