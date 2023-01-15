@@ -41,7 +41,7 @@ const PostUpload = () => {
   const compressImg = async (imgFile) => {
     try {
       const options = {
-        maxSizeMB: 0.5,
+        maxSizeMB: 1,
         maxWidthOrHeight: 608,
       };
       const compressedFile = await imageCompression(imgFile, options);
