@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 import { useSetRecoilState } from 'recoil';
 import TopBanner from '../../common/topBanner/TopBanner';
 import InputBox from '../../common/inputBox/InputBox';
@@ -45,10 +46,26 @@ const ProfileEdit = () => {
     getProfile();
   }, []);
 
+  //  이미지 압축
+  const compressImg = async (imgFile) => {
+    try {
+      const options = {
+        maxSizeMB: 0.5,
+        maxWidthOrHeight: 220,
+      };
+      const compressedFile = await imageCompression(imgFile, options);
+      return compressedFile;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   // 이미지 업로드
   const uploadImg = async (e) => {
     const imgFile = e.target.files[0];
-    const imgUrl = URL.createObjectURL(imgFile);
+    const compressedImg = await compressImg(imgFile);
+    const imgUrl = URL.createObjectURL(compressedImg);
     setUserImg(imgUrl);
     setBtnActive(true);
   };

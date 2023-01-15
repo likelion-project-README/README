@@ -73,6 +73,7 @@ export const PostImg = styled.img`
   border: 0.5px solid #dbdbdb;
   border-radius: 10px;
   object-fit: cover;
+  overflow: hidden;
   cursor: ${(props) =>
     props.isMatchPostDetail && props.isSingleImg ? 'default' : 'pointer'};
 `;
@@ -152,6 +153,12 @@ export const StyledSlider = styled(Slider)`
   }
   .slick-next {
     right: 0;
+  }
+  .slick-prev:before {
+    content: '←';
+  }
+  .slick-next:before {
+    content: '→';
   }
   .slick-prev:before,
   .slick-next:before {

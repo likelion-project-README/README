@@ -2,25 +2,34 @@ import { createGlobalStyle } from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import reset from 'styled-reset';
+import PretendardRegularSub from '../assets/fonts/Pretendard-Regular.subset.woff';
+import PretendardMediumSub from '../assets/fonts/Pretendard-Medium.subset.woff';
+import PretendardBoldSub from '../assets/fonts/Pretendard-Bold.subset.woff';
+import PretendardRegularSub2 from '../assets/fonts/Pretendard-Regular.subset.woff2';
+import PretendardMediumSub2 from '../assets/fonts/Pretendard-Medium.subset.woff2';
+import PretendardBoldSub2 from '../assets/fonts/Pretendard-Bold.subset.woff2';
 
 const GlobalStyled = createGlobalStyle`
   @font-face {
     font-family: 'Pretendard-Regular';
-    src: url('../assets/fonts/Pretendard-Regular.woff') format('woff');
+    src: url(${PretendardRegularSub2}) format('woff2'),
+         url(${PretendardRegularSub}) format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Pretendard-Medium';
-    src: url('../assets/fonts/Pretendard-Medium.woff') format('woff');
+    src: url(${PretendardMediumSub2}) format('woff2'),
+         url(${PretendardMediumSub}) format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Pretendard-Bold';
-    src: url('../assets/fonts/Pretendard-Bold.woff') format('woff');
+    src: url(${PretendardBoldSub2}) format('woff2'),
+         url(${PretendardBoldSub}) format('woff');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

@@ -2,10 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { isLogin } from './atoms/LoginData';
 import Home from './pages/home/Home';
-import SnsLogin from './pages/snsLogin/SnsLogin';
 import EmailLogin from './pages/emailLogin/EmailLogin';
 import Page404 from './pages/page404/Page404';
-import JoinPage from './pages/join/Join';
+import Join from './pages/join/Join';
 import Search from './pages/search/Search';
 import Profile from './pages/profile/Profile';
 import ChatList from './pages/chatList/ChatList';
@@ -19,7 +18,7 @@ import AddProduct from './pages/addProduct/AddProduct';
 import FollowerList from './pages/followerList/FollowerList';
 import FollowingList from './pages/followingList/FollowingList';
 import ProfileEdit from './pages/profileEdit/ProfileEdit';
-import SplashPage from './pages/splash/Splash';
+import Splash from './pages/splash/Splash';
 import PrivateRoutes from './routes/privateRoutes';
 import PrivateRoutesRev from './routes/privateRoutesRev';
 
@@ -27,15 +26,15 @@ const App = () => {
   const isLoginState = useRecoilValue(isLogin);
   return (
     <Routes>
-      <Route path='/' element={<SplashPage />} />
-      <Route element={<PrivateRoutes authorization={isLoginState} />}>
+      <Route path='/' element={<Splash />} />
+      <Route element={<PrivateRoutesRev authorization={isLoginState} />}>
         <Route path='/emailLogin' element={<EmailLogin />} />
         <Route path='/join/*'>
-          <Route index element={<JoinPage />} />
+          <Route index element={<Join />} />
           <Route path='profileSetting' element={<ProfileSetting />} />
         </Route>
       </Route>
-      <Route element={<PrivateRoutesRev authorization={isLoginState} />}>
+      <Route element={<PrivateRoutes authorization={isLoginState} />}>
         <Route path='/home' element={<Home />} />
         <Route path='/search' element={<Search />} />
         <Route path='/profile/*'>

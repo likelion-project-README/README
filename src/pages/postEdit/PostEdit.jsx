@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import imageCompression from 'browser-image-compression';
 import TopBanner from '../../common/topBanner/TopBanner';
 import {
   editPostAPI,
@@ -56,15 +57,30 @@ const PostEdit = () => {
     [textareaVal],
   );
 
+  const compressImg = async (imgFile) => {
+    try {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 608,
+      };
+      const compressedFile = await imageCompression(imgFile, options);
+      return compressedFile;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   const showImgPreview = (e) => {
     const attachedFiles = [...e.target.files];
     const imgPreviews = [...imgPreviewUrls];
 
     if (imgPreviews.length + attachedFiles.length <= 3) {
-      attachedFiles.forEach((imgFile) => {
-        const imgUrl = URL.createObjectURL(imgFile);
+      attachedFiles.forEach(async (imgFile) => {
+        const compressedImg = await compressImg(imgFile);
+        const imgUrl = URL.createObjectURL(compressedImg);
         setImgPreviewUrls((prev) => [...prev, imgUrl]);
-        setImgFiles((prev) => [...prev, imgFile]);
+        setImgFiles((prev) => [...prev, compressedImg]);
       });
     } else if (imgPreviews.length + attachedFiles.length > 3) {
       // alert('이미지는 세 장까지 업로드 가능합니다'); // eslint-disable-line no-alert
@@ -107,7 +123,7 @@ const PostEdit = () => {
 
       const formData = new FormData();
       const imgFileArr = await convertImgUrlToFile();
-      imgFileArr.forEach((file) => formData.append('image', file));
+      imgFileArr.forEach((file) => formData.append('image', file, file.name));
 
       const imgUrlArr = await uploadMultipleImgAPI(formData);
       await editPostAPI(id, token, textareaVal, imgUrlArr);
