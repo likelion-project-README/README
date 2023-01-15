@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 import { useSetRecoilState } from 'recoil';
 import * as S from './ProfileSetting.Style';
 import {
@@ -38,10 +39,26 @@ const ProfileSetting = () => {
   const setProfileImageData = useSetRecoilState(profileImageData);
   const setIsLoginState = useSetRecoilState(isLogin);
 
+  //  이미지 압축
+  const compressImg = async (imgFile) => {
+    try {
+      const options = {
+        maxSizeMB: 0.5,
+        maxWidthOrHeight: 220,
+      };
+      const compressedFile = await imageCompression(imgFile, options);
+      return compressedFile;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   // 이미지 업로드
   const uploadImg = async (e) => {
     const imgFile = e.target.files[0];
-    const imgUrl = await uploadImgAPI(imgFile);
+    const compressedImg = await compressImg(imgFile);
+    const imgUrl = await uploadImgAPI(compressedImg);
     setImage(imgUrl);
   };
 
