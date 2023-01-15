@@ -54,13 +54,17 @@ const TopBanner = ({
       <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
+          aria-label='뒤로가기'
           onClick={() => {
             navigate(-1);
           }}
         />
-        <S.MoreBtn type='button' onClick={testHandle} data-morebtn='true'>
-          <span className='hidden'>더보기</span>
-        </S.MoreBtn>
+        <S.MoreBtn
+          type='button'
+          onClick={testHandle}
+          data-morebtn='true'
+          aria-label='더보기'
+        ></S.MoreBtn>
       </S.BannerCont>
     );
   }
@@ -69,6 +73,7 @@ const TopBanner = ({
       <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
+          aria-label='뒤로가기'
           onClick={() => {
             navigate(-1);
           }}
@@ -81,7 +86,7 @@ const TopBanner = ({
     return (
       <S.BannerCont className='max-width min-width'>
         <S.TitleDiv fontSize='18px'>{tit}</S.TitleDiv>
-        <S.SearchBtn to='/search' />
+        <S.SearchBtn to='/search' aria-label='유저 검색하기' />
       </S.BannerCont>
     );
   }
@@ -90,6 +95,7 @@ const TopBanner = ({
       <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
+          aria-label='뒤로가기'
           onClick={() => {
             navigate(-1);
           }}
@@ -103,6 +109,7 @@ const TopBanner = ({
       <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
+          aria-label='뒤로가기'
           onClick={() => {
             navigate(-1);
           }}
@@ -116,12 +123,18 @@ const TopBanner = ({
       <S.BannerCont className='max-width min-width'>
         <S.BackBtn
           type='button'
+          aria-label='뒤로가기'
           onClick={() => {
             navigate(-1);
           }}
         />
         <S.TitleDiv fontSize='14px'>{tit}</S.TitleDiv>
-        <S.MoreBtn type='button' onClick={testHandle} data-morebtn='true' />
+        <S.MoreBtn
+          type='button'
+          onClick={testHandle}
+          data-morebtn='true'
+          aria-label='더보기'
+        />
       </S.BannerCont>
     );
   }
