@@ -120,13 +120,12 @@ const Post = ({
         {imgSrcArr[0] && (
           <div ref={elementRef}>
             <S.StyledSlider dots draggable lazyLoad='ondemand'>
-              {imgSrcArr.map((item, index) => (
+              {imgSrcArr.map((item) => (
                 <S.PostImg
                   alt=''
                   src={isLoaded ? item : ''}
                   width='304px'
                   height='228px'
-                  loading={index === 0 ? 'eager' : 'auto'}
                   key={item}
                   onClick={goToPostDetail}
                   isMatchPostDetail={isMatchPostDetail}
