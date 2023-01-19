@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import * as S from './EmailLogin.Style';
 import {
@@ -58,7 +57,6 @@ const EmailLogin = () => {
       setIsPasswordRed(true);
     } else if (passwordCurrentValue.length >= 6) {
       setPasswordValid(true);
-      // setPassword(testPassword);
       setPasswordError('');
       setIsPasswordRed(false);
     }

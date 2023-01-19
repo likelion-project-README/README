@@ -63,12 +63,12 @@ const ProfileSetting = () => {
   };
 
   // 사용자 이름 공백으로 시작 방지
-  const handleUserName = (e) => {
+  const handleUserNameValid = (e) => {
     const NameVal = e.target.value;
     const regex = /^[\s]+/;
     if (regex.test(NameVal)) {
       e.preventDefault();
-      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setUsername(NameVal);
     }
@@ -103,12 +103,12 @@ const ProfileSetting = () => {
   };
 
   // 소개 공백으로 시작 방지
-  const handleUserIntro = (e) => {
+  const handleUserIntroValid = (e) => {
     const IntroVal = e.target.value;
     const regex = /^[\s]+/;
     if (regex.test(IntroVal)) {
       e.preventDefault();
-      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setIntro(IntroVal);
       setBtnActive(true);
@@ -173,7 +173,7 @@ const ProfileSetting = () => {
           min='2'
           max='10'
           value={username}
-          onChange={handleUserName}
+          onChange={handleUserNameValid}
         />
         <InputBox
           label='계정 ID'
@@ -192,7 +192,7 @@ const ProfileSetting = () => {
           id='userIntro'
           placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
           value={intro}
-          onChange={handleUserIntro}
+          onChange={handleUserIntroValid}
         />
         <S.BtnWrap>
           <Button

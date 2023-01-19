@@ -26,19 +26,19 @@ const AddProduct = () => {
   };
 
   // 상품명 공백으로 시작 방지
-  const handleProductName = (e) => {
+  const handleProductNameValid = (e) => {
     const NameVal = e.target.value;
     const regex = /^[\s]+/;
     if (regex.test(NameVal)) {
       e.preventDefault();
-      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setProductName(NameVal);
     }
   };
 
   // 상품가격 원단위로 변환
-  const handleProductPrice = (e) => {
+  const handleProductPriceValid = (e) => {
     const priceVal = Number(e.target.value.replaceAll(',', ''));
     const formatValue = priceVal.toLocaleString('ko-KR');
     if (formatValue === 'NaN') {
@@ -54,12 +54,12 @@ const AddProduct = () => {
   };
 
   // 판매링크 공백으로 시작 방지
-  const handleProductURL = (e) => {
+  const handleProductURLValid = (e) => {
     const URLVal = e.target.value;
     const regex = /^[\s]+/;
     if (regex.test(URLVal)) {
       e.preventDefault();
-      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else {
       setProductURL(URLVal);
     }
@@ -88,7 +88,7 @@ const AddProduct = () => {
           productURL,
           productImg,
         );
-        // alert('상품 등록이 완료되었습니다.'); // eslint-disable-line no-alert
+        alert('상품 등록이 완료되었습니다.'); // eslint-disable-line no-alert
         navigate(`/profile/${accountName}`);
       } catch (error) {
         console.log(error);
@@ -120,14 +120,14 @@ const AddProduct = () => {
           value={productName}
           min='2'
           max='15'
-          onChange={handleProductName}
+          onChange={handleProductNameValid}
         />
         <InputBox
           label='가격'
           id='productPrice'
           placeholder='숫자만 입력 가능합니다.'
           value={productPrice}
-          onChange={handleProductPrice}
+          onChange={handleProductPriceValid}
           bottomColor={validPrice ? null : 'red'}
           message='가격은 1원 이상이어야 합니다.'
           display={validPrice ? null : 'yes'}
@@ -137,7 +137,7 @@ const AddProduct = () => {
           id='productURL'
           placeholder='URL을 입력해 주세요.'
           value={productURL}
-          onChange={handleProductURL}
+          onChange={handleProductURLValid}
         />
       </form>
     </S.AddProductWrap>

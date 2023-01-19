@@ -71,12 +71,12 @@ const ProfileEdit = () => {
   };
 
   // 사용자 이름 공백으로 시작 방지
-  const handleUserName = (e) => {
+  const handleUserNameValid = (e) => {
     const NameVal = e.target.value;
     const regex = /^[\s]+/;
     if (regex.test(NameVal)) {
       e.preventDefault();
-      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else if (NameVal.length === 0) {
       setUserName(NameVal);
       setBtnActive(false);
@@ -118,12 +118,12 @@ const ProfileEdit = () => {
   };
 
   // 소개 공백으로 시작 방지
-  const handleUserIntro = (e) => {
+  const handleUserIntroValid = (e) => {
     const IntroVal = e.target.value;
     const regex = /^[\s]+/;
     if (regex.test(IntroVal)) {
       e.preventDefault();
-      // alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
+      alert('공백으로 시작할 수 없습니다.'); // eslint-disable-line no-alert
     } else if (IntroVal.length === 0) {
       setUserIntro(IntroVal);
       setBtnActive(false);
@@ -155,7 +155,7 @@ const ProfileEdit = () => {
       );
       setEditedProfileImg(editedUserData.image);
       setEditedAccoutName(editedUserData.accountname);
-      // alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
+      alert('프로필 수정이 완료되었습니다.'); // eslint-disable-line no-alert
       if (validId) {
         navigate(`/profile/${userId}`);
       }
@@ -185,7 +185,7 @@ const ProfileEdit = () => {
           min='2'
           max='10'
           value={userName}
-          onChange={handleUserName}
+          onChange={handleUserNameValid}
         />
         <InputBox
           label='계정 ID'
@@ -203,7 +203,7 @@ const ProfileEdit = () => {
           id='userIntro'
           placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
           value={userIntro}
-          onChange={handleUserIntro}
+          onChange={handleUserIntroValid}
         />
       </form>
     </S.ProfileEditWrap>

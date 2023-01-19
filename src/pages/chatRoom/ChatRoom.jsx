@@ -49,23 +49,6 @@ const ChatRoom = () => {
             <S.YourMsgTxt>모던 자바스크립트 팔렸나요?</S.YourMsgTxt>
             <S.CreatedTime>12:55</S.CreatedTime>
           </S.YourMsgCont>
-          {/* 내 메세지 - 이미지 */}
-          {/* <S.MyMsgCont>
-            <S.MyMsgImg
-              src='https://cdn.pixabay.com/photo/2022/12/02/14/13/desert-7630943__340.jpg'
-              alt=''
-            />
-            <S.CreatedTime>12:51</S.CreatedTime>
-          </S.MyMsgCont> */}
-          {/* 상대 메세지 - 이미지 */}
-          {/* <S.YourMsgCont>
-            <S.YourMsgProfileImg src='' alt='' />
-            <S.YourMsgImg
-              src='https://cdn.pixabay.com/photo/2022/12/02/14/13/desert-7630943__340.jpg'
-              alt=''
-            />
-            <S.CreatedTime>12:39</S.CreatedTime>
-          </S.YourMsgCont> */}
         </S.ChatCont>
         <S.ChatForm action='' className='min-width'>
           <S.FileInpLab htmlFor='fileInp'>
