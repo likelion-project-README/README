@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as S from './InputBox.Style';
 
 /* InputBox 사용 명세

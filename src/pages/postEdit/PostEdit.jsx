@@ -83,7 +83,7 @@ const PostEdit = () => {
         setImgFiles((prev) => [...prev, compressedImg]);
       });
     } else if (imgPreviews.length + attachedFiles.length > 3) {
-      // alert('이미지는 세 장까지 업로드 가능합니다'); // eslint-disable-line no-alert
+      alert('이미지는 세 장까지 업로드 가능합니다'); // eslint-disable-line no-alert
     }
   };
 
@@ -135,7 +135,7 @@ const PostEdit = () => {
       }
     } else {
       // eslint-disable-next-line no-alert
-      // alert('내용 또는 이미지를 입력해주세요.');
+      alert('내용 또는 이미지를 입력해주세요.');
     }
   };
 
